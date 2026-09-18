@@ -1,0 +1,171 @@
+#!/usr/bin/env bash
+#
+# rec_files — скачивает файлы из публичной папки Яндекс.Диска по шаблону имени,
+# переименовывает в соответствии с номером задания (папки) и сохраняет
+# в каталог, из которого вызван скрипт (плоско, расширение сохраняется).
+#
+# Использование:
+#   ./rec_files <ref> <pattern> [<prefix>]
+#
+#   <ref>     публичная ссылка Яндекс.Диска или публичный ключ
+#   <pattern> шаблон файла, напр. "var04" (любое расширение) или "var04.js" (только .js)
+#   <prefix>  префикс целевого имени, по умолчанию "task"
+#
+# Именование (по имени папки, содержащей файл):
+#   "Задание №N"         -> <prefix>N.<ext>        (напр. task1.js)
+#   "...Итоговое задание" -> <prefix>_itog.<ext>    (напр. task_itog.js)
+#   любая другая папка    -> <prefix>_<папка>.<ext>
+
+set -uo pipefail
+
+API_ROOT="https://cloud-api.yandex.net/v1/disk/public/resources"
+API_DOWNLOAD="$API_ROOT/download"
+
+REF="${1:-}"
+PATTERN="${2:-}"
+PREFIX="${3:-task}"
+OUT_DIR="$(pwd)"
+
+if [[ -z "$REF" || -z "$PATTERN" ]]; then
+    echo "Usage: ./rec_files <ref> <pattern> [<prefix>]" >&2
+    exit 1
+fi
+
+command -v curl >/dev/null 2>&1 || { echo "ERROR: 'curl' не найден" >&2; exit 1; }
+if command -v python3 >/dev/null 2>&1; then
+    JSON_PARSER=python
+elif command -v jq >/dev/null 2>&1; then
+    JSON_PARSER=jq
+else
+    echo "ERROR: не найден 'python3' или 'jq' (нужен для разбора JSON)" >&2
+    exit 1
+fi
+
+# Расширение из шаблона, если указано
+PAT_EXT=""
+if [[ "$PATTERN" == *.* ]]; then
+    PAT_EXT="${PATTERN##*.}"
+fi
+
+emit_items() {
+    if [[ "$JSON_PARSER" == python ]]; then
+        python3 -c '
+import sys, json
+d = json.load(sys.stdin)
+for it in (d.get("_embedded") or {}).get("items") or []:
+    print(it.get("type") + "\t" + it.get("name") + "\t" + it.get("path"))
+'
+    else
+        jq -r '._embedded.items[]? | [.type, .name, .path] | @tsv'
+    fi
+}
+
+json_total() {
+    if [[ "$JSON_PARSER" == python ]]; then
+        python3 -c 'import sys, json; d = json.load(sys.stdin); print((d.get("_embedded") or {}).get("total") or 0)'
+    else
+        jq -r '._embedded.total // 0'
+    fi
+}
+
+json_root_type() {
+    if [[ "$JSON_PARSER" == python ]]; then
+        python3 -c 'import sys, json; print(json.load(sys.stdin).get("type") or "")'
+    else
+        jq -r '.type // ""'
+    fi
+}
+
+json_href() {
+    if [[ "$JSON_PARSER" == python ]]; then
+        python3 -c 'import sys, json; print(json.load(sys.stdin)["href"])'
+    else
+        jq -r '.href'
+    fi
+}
+
+api_list() {
+    local path="$1" offset=0 total=1 limit=100 json
+    while (( offset < total )); do
+        json="$(curl -sG --fail --max-time 60 "$API_ROOT" \
+            --data-urlencode "public_key=$REF" \
+            --data-urlencode "path=$path" \
+            --data-urlencode "limit=$limit" \
+            --data-urlencode "offset=$offset")" || { echo "ERROR: лист не получен: $path" >&2; return 1; }
+        total="$(printf '%s' "$json" | json_total)"
+        printf '%s' "$json" | emit_items
+        offset=$((offset + limit))
+    done
+}
+
+api_href() {
+    local path="$1" json
+    json="$(curl -sG --fail --max-time 60 "$API_DOWNLOAD" \
+        --data-urlencode "public_key=$REF" \
+        --data-urlencode "path=$path")" || { echo "ERROR: ссылка не получена: $path" >&2; return 1; }
+    printf '%s' "$json" | json_href
+}
+
+target_name() {
+    local folder="$1" num
+    if [[ "$folder" =~ [Зз]адание[^0-9]*([0-9]+) ]]; then
+        num="${BASH_REMATCH[1]}"
+        echo "${PREFIX}${num}"
+    elif printf '%s' "$folder" | grep -qi 'итог'; then
+        echo "${PREFIX}_itog"
+    else
+        echo "${PREFIX}_${folder}"
+    fi
+}
+
+process_file() {
+    local fname="$1" fpath="$2" folder="$3" ext target href bytes
+    if [[ -n "$PAT_EXT" ]]; then
+        [[ "$fname" == "$PATTERN" ]] || return 0
+        ext=".$PAT_EXT"
+    elif [[ "$fname" == "$PATTERN" ]]; then
+        ext=""
+    elif [[ "$fname" == "$PATTERN".* ]]; then
+        ext="${fname#"$PATTERN"}"
+    else
+        return 0
+    fi
+
+    target="$(target_name "$folder")${ext}"
+    if [[ -e "$OUT_DIR/$target" ]]; then
+        echo "WARN: $OUT_DIR/$target уже существует, перезапись"
+    fi
+    echo -n "  $fpath -> $target: "
+    href="$(api_href "$fpath")" || { echo "не удалось получить ссылку"; return 1; }
+    if curl -sL --fail --max-time 180 -o "$OUT_DIR/$target" "$href"; then
+        bytes="$(wc -c < "$OUT_DIR/$target")"
+        echo "сохранено ($bytes байт)"
+    else
+        echo "ошибка загрузки"
+        rm -f "$OUT_DIR/$target"
+        return 1
+    fi
+}
+
+walk_dir() {
+    local path="$1" folder="$2" ftype fname fpath
+    while IFS=$'\t' read -r ftype fname fpath || [[ -n "$ftype" ]]; do
+        if [[ "$ftype" == "dir" ]]; then
+            walk_dir "$fpath" "$fname"
+        elif [[ "$ftype" == "file" ]]; then
+            process_file "$fname" "$fpath" "$folder"
+        fi
+    done < <(api_list "$path")
+}
+
+root_type="$(curl -sG --fail --max-time 60 "$API_ROOT" --data-urlencode "public_key=$REF" | json_root_type)" || {
+    echo "ERROR: не удалось получить корневой ресурс (проверьте ссылку)" >&2; exit 1; }
+
+echo "Сохранение в: $OUT_DIR"
+if [[ "$root_type" == "file" ]]; then
+    root_name="$(basename "$REF" | sed 's/%[0-9A-Fa-f]\{2\}/ /g')"
+    process_file "$root_name" "/" ""
+else
+    walk_dir "/" ""
+fi
+echo "Готово."
