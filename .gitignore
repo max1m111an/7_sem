@@ -144,3 +144,11 @@ vite.config.ts.timestamp-*
 
 # markdown
 !README.md
+
+__pycache__
+
+# ide cache
+.zed
+.vs
+.vscode
+.ide
