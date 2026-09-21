@@ -1,3 +1,8 @@
-# PIS
+# 7 semester
+## PIS
 
-SPbSUAI 7 semester PIS course - Designing Information Systems
+Designing Information Systems
+
+## PMO
+
+Applied optimization methods
