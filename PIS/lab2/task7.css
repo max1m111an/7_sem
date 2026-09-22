@@ -29,7 +29,11 @@ body {
    достаточно длинная) и убедитесь, что шапка остаётся на месте. */
 
 .top-bar {
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: darkorange;
 }
 
 /* --- Средний уровень --- */
@@ -38,7 +42,9 @@ body {
    .card — добавьте position: relative (без сдвигов) — она станет
    точкой отсчёта для .badge внутри неё. */
 
-
+.card {
+    position: relative;
+}
 
 /* TODO 3: Бейджик
    .badge — сделайте position: absolute, top: -12px,
@@ -47,7 +53,11 @@ body {
    карточки, слегка выступая за её край. */
 
 .badge {
-
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background-color: darkslategray;
+    padding: 8px;
 }
 
 /* --- Сложный уровень --- */
@@ -59,7 +69,9 @@ body {
    под ним никто не «подвинулся». */
 
 .shifted {
-
+    position: relative;
+    top: 35px;
+    left: 40px;
 }
 
 /* --- Задача уровня "предскажи результат" --- */
@@ -71,3 +83,4 @@ body {
    x-position: relative. Как изменится расположение .badge? Откройте
    в браузере, проверьте, опишите в комментарии ниже, что произошло
    и почему — после проверки верните .card обратно как было. */
+/* .card  */

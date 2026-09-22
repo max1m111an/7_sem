@@ -29,7 +29,9 @@
 /* TODO 1: Состояние hover
    .btn:hover — при наведении сделайте background-color заметно
    темнее текущего. */
-
+.btn:hover {
+  background-color: darkgoldenrod;
+}
 
 
 /* --- Средний уровень --- */
@@ -38,7 +40,9 @@
    input:focus — когда поле в фокусе, добавьте border: 2px solid
    firebrick (у input уже есть свой border по умолчанию — просто
    перезапишите его). */
-
+input:focus {
+  border: 2px solid firebrick;
+}
 
 
 /* --- Сложный уровень --- */
@@ -46,7 +50,9 @@
 /* TODO 3: Чередование строк (зебра)
    .list li:nth-child(even) — сделайте чётным строкам списка
    background-color: forestgreen. */
-
+.list li:nth-child(even) {
+  background-color: forestgreen;
+}
 
 
 /* --- Задача уровня "псевдоэлемент" --- */
@@ -55,3 +61,7 @@
    .required::after — вставьте после текста content: " *" красным
    цветом (color: red). Не забудьте, что content обязателен, без
    него ничего не появится. */
+.required::after {
+  content: " *";
+  color: red;
+}

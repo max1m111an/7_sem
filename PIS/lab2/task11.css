@@ -35,7 +35,9 @@
    (repeat(3, 1fr)) и gap: 12px. */
 
 .gallery {
-
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
 /* --- Средний уровень --- */
@@ -46,7 +48,11 @@
    (grid-template-columns: 1fr). Проверьте через DevTools (режим
    мобильного устройства) или сужением окна браузера. */
 
-
+@media (max-width: 560px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* --- Сложный уровень --- */
 
@@ -54,6 +60,12 @@
    Добавьте @media (max-width: 440px) — внутри переопределите .menu
    так, чтобы на самом узком экране flex-direction стал column
    (пункты меню друг под другом вместо ряда). */
+
+@media (max-width: 440px) {
+  .menu {
+    flex-direction: column;
+  }
+}
 
 
 

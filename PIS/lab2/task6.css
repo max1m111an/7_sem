@@ -26,7 +26,8 @@
    одинаковым промежутком между ними. */
 
 .row {
-
+    display: flex;
+    gap: 18px;
 }
 
 /* --- Средний уровень --- */
@@ -37,7 +38,10 @@
    и по вертикали, двумя свойствами выравнивания. */
 
 .centered {
-
+    display: flex;
+    height: 240px;
+    align-items: center;
+    justify-content: center;
 }
 
 /* --- Сложный уровень --- */
@@ -48,7 +52,9 @@
    карточками. */
 
 .column {
-
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 /* --- Задача уровня "предскажи результат" --- */
@@ -58,3 +64,9 @@
    flex-direction: row. В комментарии опишите своими словами, чем это
    визуально будет отличаться от gap: 18px из TODO 1 — откройте
    в браузере и проверьте, совпал ли ваш прогноз. */
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

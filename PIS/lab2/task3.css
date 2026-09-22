@@ -9,6 +9,10 @@
 /* TODO 1: Селектор по тегу
    Селектор по тегу h1 — сделайте цвет текста darkorange
    и размер шрифта 28px */
+h1 {
+  color: darkorange;
+  font-size: 28px;
+}
 
 
 
@@ -17,6 +21,10 @@
 /* TODO 2: Селектор по классу
    Селектор по классу .highlight — сделайте фон (background-color)
    darkcyan и текст жирным (font-weight: bold) */
+.highlight {
+  background-color: darkcyan;
+  font-weight: bold;
+}
 
 
 
@@ -25,6 +33,9 @@
    размер шрифта 20px. Обратите внимание в браузере: свойства
    из TODO 2 и TODO 3 применяются к .highlight одновременно —
    CSS их складывает */
+p {
+  font-size: 20px;
+}
 
 
 
@@ -33,7 +44,10 @@
 /* TODO 4: Селектор по id
    Селектор по id #main-banner — сделайте текст внутри по центру
    (text-align: center) и добавьте background-color: cadetblue */
-
+#main-banner {
+  text-align: center;
+  background-color: cadetblue;
+}
 
 
 /* --- Задача уровня "найди ошибку" --- */
@@ -43,6 +57,6 @@
    к одному элементу на странице. Найдите ошибку и исправьте её так,
    чтобы текст класса highlight стал ещё и синим (color: blue). */
 
-highlight {
+.highlight {
   color: blue;
 }

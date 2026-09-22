@@ -1,11 +1,9 @@
 <!--
   ЛАБОРАТОРНАЯ РАБОТА №2
-  ЗАДАНИЕ №11: Адаптивность (media queries)
+  ЗАДАНИЕ №8: CSS Grid
   Вариант 04
 
   HTML готов, весь TODO — в var04.css.
-  Проверяйте через DevTools (F12 → иконка телефона/планшета вверху
-  слева) или просто сужайте окно браузера.
 -->
 
 <!DOCTYPE html>
@@ -13,8 +11,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Важная строка! Добавляем всегда в своём проекте -->
-    <title>Адаптивность — вариант 04</title>
-    <link rel="stylesheet" href="task11.css">
+    <title>CSS Grid — вариант 04</title>
+    <link rel="stylesheet" href="task8.css">
   </head>
   <body>
 
@@ -22,13 +20,16 @@
       <div class="tile">1</div>
       <div class="tile">2</div>
       <div class="tile">3</div>
+      <div class="tile">4</div>
+      <div class="tile">5</div>
+      <div class="tile">6</div>
     </div>
 
-    <nav class="menu">
-      <a href="#">Главная</a>
-      <a href="#">О нас</a>
-      <a href="#">Контакты</a>
-    </nav>
+    <div class="uneven">
+      <div class="tile">узкая</div>
+      <div class="tile">широкая</div>
+      <div class="tile">узкая</div>
+    </div>
 
   </body>
 </html>

@@ -31,7 +31,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Важная строка! Добавляем всегда в своём проекте -->
     <title>GameZone — вариант 04</title>
-    <link rel="stylesheet" href="var04.css">
+    <link rel="stylesheet" href="task_itog.css">
   </head>
   <body>
 
@@ -81,6 +81,13 @@
           <!-- Добавьте сюда форму: 4 текстовых поля разных типов
                (текст, email, пароль, телефон) и две radio-группы —
                на 3 варианта и на 2 варианта. -->
+               <input type="text" name="name" placeholder="Ваше имя" required>
+               <input type="email" name="email" placeholder="Ваш email" required>
+               <input type="password" name="password" placeholder="Ваш пароль" required>
+               <input type="tel" name="phone" placeholder="Ваш телефон" required>
+               <input type="radio" name="gender" value="male"> Мужской
+               <input type="radio" name="gender" value="female"> Женский
+               <input type="radio" name="gender" value="other"> Другое
 
           <button type="submit" class="btn">Отправить заявку</button>
 
