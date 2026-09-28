@@ -1,0 +1,3044 @@
+age,annual_income,employment_type,education,loan_amount,credit_score,num_open_accounts,delinquency_30d
+<\ 30 30\ -\ 40 40\ -\ 50 50\ -\ 60 60\ -\ 70 ≥\ 70,continuous,Salaried Self-Employed Unemployed,Bachelors HS Masters PhD,continuous,continuous,continuous,No Yes
+,,,,,,,
+40 - 50,57272.0,Self-Employed,Masters,8516,730.0,10,No
+50 - 60,45786.0,Salaried,Masters,13760,677.0,7,No
+60 - 70,42359.0,Salaried,Bachelors,2569,624.0,2,No
+60 - 70,50709.0,Self-Employed,Masters,13204,698.0,3,No
+30 - 40,46272.0,Salaried,HS,7700,532.0,7,No
+60 - 70,80366.0,Self-Employed,Masters,6238,715.0,5,No
+≥ 70,53841.0,Salaried,HS,10011,646.0,1,Yes
+30 - 40,24441.0,Salaried,HS,6946,850.0,5,Yes
+≥ 70,49362.0,Self-Employed,Bachelors,3292,616.0,2,No
+30 - 40,32341.0,Unemployed,HS,3148,735.0,3,No
+≥ 70,39734.0,Salaried,Masters,2651,675.0,4,No
+60 - 70,38451.0,Self-Employed,HS,8772,695.0,5,No
+60 - 70,28075.0,Salaried,Masters,6575,477.0,3,No
+≥ 70,63107.0,Self-Employed,Bachelors,3040,621.0,7,Yes
+40 - 50,18492.0,Salaried,Masters,10850,759.0,6,No
+50 - 60,26620.0,Salaried,Bachelors,4314,723.0,8,No
+< 30,28609.0,Salaried,HS,4532,711.0,5,No
+50 - 60,33870.0,Salaried,Masters,3155,850.0,3,No
+40 - 50,58887.0,Salaried,HS,4850,643.0,6,No
+60 - 70,52112.0,Salaried,HS,6697,775.0,8,No
+40 - 50,28606.0,Salaried,Bachelors,9088,762.0,9,No
+30 - 40,27634.0,Unemployed,PhD,20147,530.0,8,No
+60 - 70,36467.0,Self-Employed,Bachelors,6196,750.0,6,No
+30 - 40,69036.0,Salaried,Masters,6604,722.0,3,No
+40 - 50,37705.0,Salaried,Masters,5182,668.0,8,No
+40 - 50,108704.0,Salaried,Masters,8709,674.0,5,No
+≥ 70,53738.0,Salaried,Bachelors,12586,850.0,5,No
+40 - 50,69502.0,Self-Employed,HS,8202,776.0,3,No
+40 - 50,36583.0,Salaried,Bachelors,8065,740.0,9,No
+30 - 40,15943.0,Salaried,Bachelors,3569,688.0,4,No
+40 - 50,51575.0,Salaried,HS,4201,741.0,3,No
+40 - 50,64788.0,Salaried,Masters,10760,764.0,3,No
+30 - 40,19333.0,Salaried,Bachelors,9301,813.0,1,No
+30 - 40,51824.0,Salaried,HS,8389,646.0,7,No
+60 - 70,29757.0,Salaried,Masters,7985,686.0,2,No
+50 - 60,25402.0,Salaried,Bachelors,19665,630.0,5,No
+40 - 50,53669.0,Salaried,Bachelors,8637,723.0,4,Yes
+50 - 60,72048.0,Unemployed,PhD,21123,682.0,4,No
+< 30,54817.0,Salaried,HS,10513,648.0,4,No
+60 - 70,35753.0,Self-Employed,Bachelors,3632,629.0,7,No
+< 30,24611.0,Unemployed,HS,13789,670.0,3,Yes
+< 30,74508.0,Salaried,Bachelors,12741,726.0,10,No
+60 - 70,37757.0,Self-Employed,Bachelors,9874,826.0,5,No
+60 - 70,77633.0,Salaried,Bachelors,5627,626.0,7,No
+30 - 40,94516.0,Self-Employed,HS,23939,734.0,7,No
+50 - 60,29613.0,Self-Employed,Bachelors,6040,670.0,3,No
+50 - 60,40581.0,Salaried,Bachelors,4561,627.0,2,Yes
+40 - 50,56620.0,Salaried,HS,6704,647.0,6,Yes
+40 - 50,49487.0,Unemployed,HS,5727,740.0,7,No
+40 - 50,63941.0,Salaried,Masters,4001,688.0,9,No
+< 30,50277.0,Salaried,Bachelors,5228,651.0,2,Yes
+≥ 70,44536.0,Salaried,Bachelors,10562,719.0,6,No
+60 - 70,64179.0,Unemployed,Masters,22984,566.0,3,No
+40 - 50,19723.0,Salaried,PhD,13189,646.0,5,Yes
+30 - 40,30504.0,Salaried,Masters,8647,704.0,3,No
+30 - 40,115289.0,Self-Employed,Bachelors,7160,759.0,6,No
+< 30,38700.0,Salaried,Masters,11388,647.0,3,No
+30 - 40,89596.0,Salaried,Masters,10978,548.0,4,No
+50 - 60,63288.0,Salaried,HS,1999,628.0,4,No
+40 - 50,38817.0,Salaried,Bachelors,4933,803.0,6,No
+40 - 50,28303.0,Salaried,Bachelors,10141,719.0,6,No
+50 - 60,18396.0,Salaried,Bachelors,6119,558.0,6,No
+60 - 70,33387.0,Self-Employed,HS,20495,546.0,2,No
+50 - 60,54364.0,Salaried,Masters,13499,842.0,7,No
+40 - 50,49666.0,Salaried,HS,9405,691.0,9,No
+40 - 50,88524.0,Self-Employed,Bachelors,7600,641.0,6,No
+50 - 60,50650.0,Salaried,HS,5589,698.0,8,No
+50 - 60,35552.0,Salaried,HS,3579,776.0,3,No
+50 - 60,25401.0,Salaried,Masters,25097,837.0,4,No
+50 - 60,24393.0,Salaried,HS,10437,678.0,6,No
+50 - 60,49969.0,Salaried,Bachelors,6869,648.0,3,No
+< 30,37282.0,Salaried,Masters,3357,589.0,6,No
+50 - 60,53991.0,Salaried,Masters,20247,619.0,2,No
+50 - 60,34376.0,Unemployed,Masters,6221,696.0,9,No
+30 - 40,60695.0,Self-Employed,Bachelors,9641,811.0,0,No
+50 - 60,24922.0,Self-Employed,Bachelors,9997,668.0,5,Yes
+30 - 40,32113.0,Salaried,HS,9981,591.0,0,Yes
+< 30,100661.0,Salaried,Masters,5474,732.0,7,No
+40 - 50,96932.0,Salaried,Masters,14971,791.0,4,No
+40 - 50,70169.0,Salaried,Masters,9219,564.0,1,No
+30 - 40,83123.0,Unemployed,HS,7781,740.0,7,No
+50 - 60,44149.0,Salaried,PhD,13536,693.0,3,No
+60 - 70,64820.0,Salaried,HS,6040,708.0,5,Yes
+30 - 40,52546.0,Salaried,HS,20160,678.0,5,No
+60 - 70,39593.0,Salaried,HS,8297,780.0,6,No
+60 - 70,54961.0,Salaried,PhD,25147,574.0,4,No
+≥ 70,36791.0,Salaried,Bachelors,9600,802.0,4,No
+60 - 70,72312.0,Self-Employed,Bachelors,11374,727.0,5,No
+< 30,52580.0,Salaried,Bachelors,4731,725.0,7,No
+30 - 40,53975.0,Salaried,HS,14877,517.0,4,No
+30 - 40,35206.0,Unemployed,PhD,7438,605.0,9,No
+40 - 50,63527.0,Unemployed,HS,6261,730.0,2,No
+40 - 50,95330.0,Salaried,Masters,17243,704.0,6,No
+30 - 40,48317.0,Salaried,Masters,15197,634.0,3,Yes
+40 - 50,25752.0,Salaried,Masters,5994,755.0,3,No
+40 - 50,44454.0,Self-Employed,HS,6367,796.0,6,No
+60 - 70,78077.0,Self-Employed,Bachelors,7040,666.0,6,Yes
+50 - 60,39169.0,Salaried,Bachelors,9380,635.0,3,No
+< 30,43361.0,Salaried,Masters,23180,658.0,5,No
+60 - 70,32021.0,Salaried,Masters,32264,661.0,8,No
+30 - 40,38855.0,Self-Employed,Masters,4595,622.0,5,No
+< 30,34156.0,Salaried,PhD,13793,781.0,4,No
+30 - 40,35620.0,Salaried,Bachelors,5433,729.0,3,Yes
+50 - 60,26716.0,Unemployed,HS,5101,632.0,9,No
+40 - 50,56930.0,Salaried,Masters,10554,670.0,6,No
+< 30,48225.0,Unemployed,HS,12957,603.0,1,No
+≥ 70,11950.0,Salaried,HS,5501,768.0,7,No
+30 - 40,47198.0,Self-Employed,Bachelors,3476,850.0,6,No
+30 - 40,70275.0,Salaried,Masters,12849,623.0,4,No
+50 - 60,11581.0,Salaried,Bachelors,4078,520.0,2,No
+30 - 40,88841.0,Self-Employed,Masters,15262,720.0,8,No
+60 - 70,13144.0,Salaried,Bachelors,6129,639.0,2,No
+60 - 70,65322.0,Unemployed,Bachelors,3630,763.0,4,No
+60 - 70,28990.0,Salaried,PhD,7473,662.0,7,No
+40 - 50,25246.0,Salaried,HS,5781,683.0,4,No
+50 - 60,57377.0,Salaried,Bachelors,8657,701.0,7,No
+< 30,43444.0,Salaried,Masters,7310,659.0,5,Yes
+40 - 50,36088.0,Self-Employed,Bachelors,4029,658.0,10,No
+60 - 70,39021.0,Salaried,Bachelors,20579,569.0,8,No
+50 - 60,55217.0,Self-Employed,Masters,30306,736.0,7,No
+50 - 60,21317.0,Salaried,Bachelors,7320,678.0,7,No
+< 30,23625.0,Self-Employed,Bachelors,5388,666.0,4,No
+50 - 60,31935.0,Salaried,HS,13575,654.0,7,No
+30 - 40,56491.0,Salaried,HS,6045,610.0,8,No
+30 - 40,99377.0,Salaried,HS,6942,630.0,5,Yes
+30 - 40,62080.0,Self-Employed,Masters,17092,744.0,2,Yes
+40 - 50,24462.0,Salaried,HS,6726,539.0,5,No
+< 30,38963.0,Salaried,Masters,5772,676.0,8,No
+60 - 70,65901.0,Salaried,Masters,8179,569.0,5,No
+≥ 70,52323.0,Self-Employed,PhD,1505,636.0,4,No
+40 - 50,18519.0,Salaried,PhD,3916,699.0,5,Yes
+50 - 60,26341.0,Salaried,Bachelors,16489,561.0,2,Yes
+< 30,81851.0,Self-Employed,HS,4707,725.0,2,No
+60 - 70,16917.0,Unemployed,HS,18847,561.0,4,Yes
+< 30,29833.0,Salaried,Masters,6398,701.0,3,No
+40 - 50,18101.0,Salaried,Bachelors,20485,670.0,7,No
+≥ 70,77331.0,Salaried,HS,2740,584.0,7,No
+40 - 50,33707.0,Salaried,Bachelors,4514,628.0,8,No
+60 - 70,21649.0,Self-Employed,Bachelors,15254,606.0,7,No
+≥ 70,37231.0,Salaried,Masters,2586,691.0,4,No
+50 - 60,48577.0,Salaried,Bachelors,8903,579.0,2,No
+50 - 60,65315.0,Salaried,Bachelors,7952,600.0,4,Yes
+60 - 70,31701.0,Salaried,Bachelors,3552,649.0,2,No
+≥ 70,15890.0,Salaried,PhD,8470,729.0,4,No
+50 - 60,18786.0,Salaried,Masters,8469,640.0,3,No
+50 - 60,39070.0,Salaried,Bachelors,2400,757.0,4,Yes
+30 - 40,39339.0,Salaried,Bachelors,11100,756.0,4,No
+30 - 40,62977.0,Salaried,Bachelors,9641,525.0,6,No
+50 - 60,61622.0,Self-Employed,Masters,6368,612.0,3,No
+40 - 50,37533.0,Salaried,Masters,5885,637.0,8,No
+60 - 70,32536.0,Salaried,Bachelors,12903,819.0,8,No
+60 - 70,48448.0,Salaried,Bachelors,10527,624.0,3,No
+< 30,36889.0,Salaried,Bachelors,8531,605.0,11,No
+< 30,43959.0,Self-Employed,Bachelors,10959,673.0,6,No
+< 30,46255.0,Self-Employed,HS,12338,623.0,4,No
+40 - 50,58082.0,Unemployed,Bachelors,4558,604.0,5,No
+< 30,36261.0,Salaried,HS,10863,713.0,5,No
+< 30,69369.0,Unemployed,Bachelors,5366,664.0,6,No
+50 - 60,56643.0,Self-Employed,Bachelors,7679,738.0,8,No
+50 - 60,56916.0,Salaried,Bachelors,7079,775.0,1,No
+40 - 50,45440.0,Salaried,Masters,8241,603.0,8,No
+< 30,14898.0,Salaried,HS,10001,704.0,7,No
+60 - 70,36192.0,Salaried,HS,10382,597.0,6,Yes
+< 30,44071.0,Salaried,Masters,11051,780.0,4,Yes
+50 - 60,60071.0,Salaried,HS,9258,784.0,5,No
+60 - 70,40376.0,Salaried,HS,6719,839.0,2,No
+50 - 60,49929.0,Salaried,Bachelors,13705,740.0,4,No
+50 - 60,59875.0,Salaried,Bachelors,20445,616.0,4,No
+< 30,100389.0,Salaried,Bachelors,6565,589.0,4,No
+< 30,24085.0,Salaried,Masters,7755,775.0,3,No
+< 30,67462.0,Salaried,Masters,7198,507.0,9,No
+30 - 40,53168.0,Salaried,Masters,4742,512.0,5,No
+60 - 70,30564.0,Salaried,Bachelors,12786,666.0,7,No
+40 - 50,45327.0,Salaried,Masters,5017,680.0,2,No
+30 - 40,47664.0,Self-Employed,Masters,4297,656.0,5,No
+< 30,32576.0,Salaried,Bachelors,4409,652.0,4,No
+< 30,61184.0,Salaried,HS,14609,779.0,4,No
+50 - 60,54346.0,Salaried,Bachelors,8437,708.0,6,No
+30 - 40,71590.0,Self-Employed,Masters,16802,739.0,3,No
+30 - 40,69396.0,Salaried,Masters,19765,624.0,2,No
+40 - 50,19164.0,Salaried,HS,10398,820.0,2,No
+50 - 60,45881.0,Unemployed,HS,11103,734.0,2,No
+< 30,60262.0,Salaried,Bachelors,9594,609.0,8,No
+60 - 70,49351.0,Salaried,HS,5920,718.0,4,No
+< 30,75787.0,Unemployed,Bachelors,14768,584.0,3,No
+< 30,26984.0,Self-Employed,PhD,21342,643.0,4,No
+50 - 60,48347.0,Self-Employed,Bachelors,7006,703.0,3,No
+50 - 60,24086.0,Salaried,Masters,2523,631.0,9,No
+< 30,42605.0,Salaried,Bachelors,14885,542.0,3,No
+60 - 70,28521.0,Salaried,HS,6853,579.0,4,No
+< 30,18084.0,Unemployed,HS,7111,850.0,6,Yes
+< 30,49241.0,Self-Employed,Masters,8036,674.0,5,Yes
+30 - 40,41710.0,Salaried,Bachelors,48033,763.0,3,No
+< 30,29847.0,Salaried,Bachelors,13388,603.0,7,No
+< 30,47575.0,Salaried,Masters,5993,588.0,7,No
+60 - 70,67430.0,Salaried,HS,5942,639.0,7,Yes
+< 30,16663.0,Self-Employed,Bachelors,10154,687.0,5,No
+50 - 60,23677.0,Salaried,Bachelors,12528,609.0,4,No
+30 - 40,39838.0,Salaried,HS,9272,641.0,6,No
+< 30,86928.0,Salaried,HS,6790,692.0,3,No
+30 - 40,19530.0,Salaried,Masters,1128,720.0,3,No
+≥ 70,78031.0,Salaried,Masters,6648,710.0,12,No
+40 - 50,36718.0,Salaried,HS,23542,713.0,6,No
+< 30,43038.0,Salaried,Bachelors,6843,603.0,6,No
+50 - 60,45380.0,Salaried,Bachelors,6841,691.0,1,Yes
+60 - 70,19989.0,Salaried,Bachelors,5931,726.0,4,Yes
+≥ 70,49650.0,Salaried,Bachelors,30092,710.0,2,No
+50 - 60,28764.0,Salaried,Bachelors,12522,651.0,1,No
+60 - 70,89708.0,Salaried,Masters,4067,750.0,4,No
+30 - 40,52444.0,Unemployed,HS,7232,728.0,7,No
+< 30,42904.0,Salaried,PhD,12649,698.0,5,No
+30 - 40,36422.0,Salaried,Bachelors,3353,684.0,4,No
+< 30,38891.0,Unemployed,Masters,12353,703.0,7,No
+40 - 50,56347.0,Salaried,Masters,4848,735.0,2,Yes
+< 30,58867.0,Salaried,HS,8503,582.0,4,No
+60 - 70,23468.0,Self-Employed,Bachelors,8962,606.0,4,No
+< 30,33995.0,Salaried,HS,4516,788.0,5,No
+50 - 60,13261.0,Salaried,Masters,11164,714.0,3,No
+≥ 70,37900.0,Salaried,Bachelors,21187,535.0,3,No
+60 - 70,84548.0,Self-Employed,HS,3945,721.0,7,No
+≥ 70,29367.0,Salaried,Bachelors,13671,658.0,5,No
+< 30,151409.0,Self-Employed,Masters,3485,616.0,5,No
+30 - 40,27941.0,Salaried,Bachelors,9149,677.0,4,No
+40 - 50,55102.0,Salaried,Masters,2693,735.0,6,No
+30 - 40,40445.0,Salaried,PhD,8299,692.0,6,No
+≥ 70,89057.0,Salaried,Bachelors,9715,616.0,5,No
+< 30,35860.0,Salaried,Bachelors,9979,647.0,5,Yes
+50 - 60,44097.0,Self-Employed,Masters,11403,576.0,4,No
+< 30,55402.0,Salaried,HS,13950,722.0,4,No
+30 - 40,31050.0,Salaried,Bachelors,10803,630.0,1,No
+60 - 70,90889.0,Self-Employed,Bachelors,11569,567.0,1,No
+< 30,36338.0,Salaried,Masters,4998,707.0,2,No
+≥ 70,55701.0,Unemployed,HS,9195,650.0,7,No
+60 - 70,76755.0,Self-Employed,Bachelors,2941,793.0,5,No
+60 - 70,67193.0,Salaried,Bachelors,13443,724.0,3,No
+50 - 60,41015.0,Self-Employed,HS,4467,608.0,7,No
+< 30,63045.0,Salaried,Bachelors,10089,672.0,6,No
+40 - 50,17749.0,Salaried,HS,22585,691.0,7,No
+50 - 60,60211.0,Salaried,Bachelors,9646,664.0,5,No
+60 - 70,41552.0,Salaried,PhD,14305,724.0,0,Yes
+30 - 40,42255.0,Salaried,Bachelors,8242,741.0,6,No
+60 - 70,43265.0,Self-Employed,Bachelors,10119,784.0,6,Yes
+50 - 60,70311.0,Salaried,Bachelors,7707,666.0,2,No
+30 - 40,37575.0,Self-Employed,PhD,8136,749.0,1,No
+30 - 40,52617.0,Self-Employed,HS,8659,674.0,8,No
+40 - 50,34123.0,Salaried,Bachelors,17143,653.0,6,Yes
+40 - 50,61604.0,Self-Employed,HS,4763,717.0,3,No
+≥ 70,41150.0,Salaried,HS,6947,666.0,7,No
+60 - 70,23843.0,Salaried,HS,11101,615.0,6,Yes
+30 - 40,17944.0,Self-Employed,HS,4201,749.0,7,Yes
+< 30,20787.0,Salaried,Bachelors,9344,786.0,1,No
+40 - 50,94460.0,Salaried,Bachelors,9461,626.0,3,No
+50 - 60,24421.0,Salaried,Masters,22400,756.0,5,No
+50 - 60,76639.0,Salaried,Bachelors,9945,785.0,2,No
+30 - 40,25267.0,Salaried,Bachelors,10699,680.0,7,No
+50 - 60,44064.0,Salaried,PhD,12754,850.0,3,No
+60 - 70,74624.0,Self-Employed,HS,7411,537.0,7,No
+< 30,31538.0,Self-Employed,HS,7699,746.0,4,No
+50 - 60,37472.0,Salaried,Bachelors,6556,738.0,5,No
+50 - 60,33952.0,Self-Employed,Bachelors,13093,640.0,1,No
+≥ 70,49230.0,Salaried,HS,4924,636.0,6,No
+40 - 50,62432.0,Salaried,Bachelors,5692,672.0,4,No
+40 - 50,17160.0,Self-Employed,Bachelors,5479,589.0,2,No
+≥ 70,45389.0,Self-Employed,Masters,3393,779.0,5,No
+40 - 50,20462.0,Salaried,HS,10235,616.0,2,No
+< 30,19545.0,Salaried,HS,4362,676.0,1,No
+≥ 70,17999.0,Salaried,Masters,6900,529.0,4,No
+< 30,60460.0,Self-Employed,Bachelors,6129,729.0,1,No
+60 - 70,47373.0,Salaried,Bachelors,11577,690.0,6,No
+60 - 70,45071.0,Self-Employed,Bachelors,4971,631.0,3,No
+50 - 60,31993.0,Salaried,Bachelors,6797,698.0,5,No
+60 - 70,59200.0,Self-Employed,HS,4942,586.0,5,No
+40 - 50,47896.0,Self-Employed,HS,6150,757.0,5,No
+< 30,57286.0,Salaried,Masters,19584,655.0,3,No
+50 - 60,40923.0,Salaried,Masters,8957,768.0,5,No
+< 30,30486.0,Salaried,Masters,5927,629.0,6,No
+50 - 60,24095.0,Self-Employed,Bachelors,17772,734.0,8,No
+60 - 70,91767.0,Salaried,HS,1818,651.0,3,No
+50 - 60,59268.0,Salaried,HS,13628,665.0,6,Yes
+≥ 70,33829.0,Salaried,HS,6132,691.0,5,No
+30 - 40,57878.0,Salaried,Masters,8336,636.0,7,Yes
+< 30,28783.0,Salaried,Bachelors,3042,597.0,5,No
+60 - 70,33411.0,Self-Employed,Masters,12998,802.0,5,No
+40 - 50,29888.0,Salaried,Bachelors,14840,737.0,4,No
+40 - 50,69434.0,Salaried,HS,2117,698.0,1,No
+30 - 40,85320.0,Salaried,HS,11874,637.0,4,No
+60 - 70,53781.0,Salaried,Masters,6945,545.0,4,No
+< 30,42648.0,Salaried,Bachelors,19404,700.0,5,No
+60 - 70,63992.0,Self-Employed,Masters,34401,738.0,6,No
+< 30,22754.0,Unemployed,HS,8109,623.0,6,No
+50 - 60,46225.0,Self-Employed,HS,11576,758.0,5,No
+40 - 50,23212.0,Self-Employed,HS,36854,624.0,8,No
+50 - 60,36408.0,Self-Employed,HS,7368,688.0,1,No
+60 - 70,56661.0,Salaried,Masters,17579,745.0,3,No
+≥ 70,70711.0,Salaried,Bachelors,13050,764.0,9,No
+< 30,85089.0,Salaried,HS,1677,796.0,3,No
+40 - 50,22451.0,Salaried,Masters,9290,730.0,4,No
+40 - 50,27309.0,Salaried,HS,6459,697.0,8,No
+50 - 60,36963.0,Self-Employed,HS,9357,647.0,1,No
+60 - 70,30502.0,Salaried,Bachelors,3040,686.0,6,No
+50 - 60,27626.0,Salaried,HS,4305,713.0,4,No
+50 - 60,38512.0,Self-Employed,Bachelors,14609,753.0,8,Yes
+30 - 40,40771.0,Salaried,Bachelors,13357,801.0,3,No
+50 - 60,25683.0,Salaried,Masters,18340,574.0,3,No
+30 - 40,28919.0,Salaried,Masters,15396,691.0,5,No
+≥ 70,33165.0,Self-Employed,HS,8401,511.0,3,No
+< 30,38235.0,Salaried,HS,5287,660.0,6,No
+30 - 40,18799.0,Self-Employed,HS,8098,641.0,3,No
+40 - 50,25321.0,Salaried,Bachelors,5070,716.0,7,No
+60 - 70,30095.0,Salaried,PhD,4302,611.0,2,Yes
+30 - 40,35450.0,Salaried,HS,11689,711.0,8,No
+60 - 70,33845.0,Salaried,HS,9516,670.0,4,No
+50 - 60,44695.0,Salaried,HS,24208,523.0,5,No
+60 - 70,49368.0,Salaried,HS,15589,768.0,2,Yes
+40 - 50,90763.0,Salaried,PhD,5871,801.0,5,No
+40 - 50,30030.0,Salaried,HS,8133,640.0,5,No
+60 - 70,42562.0,Unemployed,PhD,5417,674.0,4,No
+60 - 70,26419.0,Salaried,Masters,11036,720.0,8,No
+60 - 70,28296.0,Salaried,Bachelors,6006,753.0,2,No
+< 30,37137.0,Salaried,Bachelors,4858,671.0,7,No
+30 - 40,15069.0,Self-Employed,HS,12944,583.0,3,No
+30 - 40,118416.0,Salaried,Bachelors,16350,679.0,8,No
+60 - 70,58110.0,Salaried,Masters,12655,500.0,6,Yes
+40 - 50,37944.0,Salaried,HS,13492,635.0,4,Yes
+30 - 40,118088.0,Salaried,HS,8025,717.0,3,No
+60 - 70,71946.0,Self-Employed,Masters,6657,587.0,6,Yes
+≥ 70,32729.0,Self-Employed,HS,9844,594.0,4,No
+≥ 70,66602.0,Salaried,Bachelors,4758,768.0,2,No
+30 - 40,16379.0,Salaried,HS,6761,636.0,4,No
+≥ 70,40855.0,Salaried,HS,18008,733.0,6,Yes
+< 30,26146.0,Self-Employed,HS,9290,722.0,6,No
+60 - 70,13016.0,Salaried,Bachelors,6297,702.0,8,No
+30 - 40,50666.0,Salaried,Bachelors,5985,711.0,2,No
+40 - 50,16273.0,Salaried,Bachelors,10285,680.0,2,No
+60 - 70,15222.0,Self-Employed,HS,8387,767.0,4,No
+50 - 60,74561.0,Salaried,Bachelors,18459,542.0,5,No
+≥ 70,41910.0,Salaried,Bachelors,8025,729.0,7,No
+50 - 60,36066.0,Salaried,HS,9691,717.0,4,No
+60 - 70,45173.0,Salaried,Bachelors,4446,821.0,3,No
+60 - 70,83459.0,Salaried,Masters,15720,742.0,1,No
+60 - 70,66165.0,Salaried,Masters,5953,765.0,2,No
+30 - 40,48524.0,Salaried,Masters,11839,706.0,1,No
+50 - 60,49182.0,Salaried,Bachelors,4186,746.0,1,No
+40 - 50,63458.0,Salaried,HS,20609,722.0,6,No
+40 - 50,31455.0,Salaried,Bachelors,3930,798.0,5,No
+50 - 60,49315.0,Salaried,Bachelors,17286,676.0,9,No
+30 - 40,70063.0,Self-Employed,Bachelors,8813,673.0,4,No
+50 - 60,53303.0,Salaried,Bachelors,5113,823.0,5,No
+60 - 70,30853.0,Self-Employed,Masters,7779,752.0,3,No
+50 - 60,109011.0,Salaried,Bachelors,3659,676.0,3,No
+60 - 70,19035.0,Salaried,Bachelors,9457,657.0,5,No
+40 - 50,29851.0,Self-Employed,Bachelors,24468,569.0,5,No
+≥ 70,17855.0,Unemployed,Bachelors,4662,624.0,7,No
+< 30,54314.0,Salaried,Bachelors,14034,674.0,4,No
+< 30,53717.0,Salaried,HS,8625,702.0,3,No
+60 - 70,27689.0,Self-Employed,PhD,14597,714.0,3,No
+30 - 40,41139.0,Salaried,HS,10818,701.0,2,Yes
+40 - 50,28448.0,Self-Employed,Bachelors,7258,646.0,5,No
+60 - 70,47967.0,Unemployed,Masters,2845,734.0,4,No
+30 - 40,39074.0,Salaried,Bachelors,9839,716.0,5,No
+40 - 50,42555.0,Salaried,Masters,44419,820.0,3,Yes
+30 - 40,26879.0,Unemployed,HS,5558,745.0,5,No
+60 - 70,85771.0,Salaried,Bachelors,5280,645.0,6,No
+60 - 70,58346.0,Salaried,Masters,6146,778.0,1,No
+60 - 70,18353.0,Salaried,HS,10476,822.0,4,Yes
+60 - 70,45059.0,Self-Employed,HS,3855,714.0,4,No
+50 - 60,34472.0,Self-Employed,HS,5270,708.0,4,No
+< 30,36593.0,Salaried,Bachelors,7584,620.0,4,No
+30 - 40,24953.0,Salaried,Masters,4256,652.0,4,No
+< 30,69979.0,Self-Employed,HS,8817,735.0,3,No
+50 - 60,58056.0,Salaried,Bachelors,6286,560.0,8,No
+40 - 50,107485.0,Salaried,Masters,4202,733.0,4,Yes
+60 - 70,65827.0,Salaried,Masters,6186,728.0,5,Yes
+40 - 50,26076.0,Self-Employed,HS,15944,737.0,4,No
+40 - 50,75800.0,Salaried,HS,7226,699.0,9,Yes
+30 - 40,43934.0,Salaried,Bachelors,10940,710.0,5,No
+< 30,56565.0,Salaried,Bachelors,10708,730.0,6,Yes
+40 - 50,68739.0,Self-Employed,HS,24514,759.0,6,No
+≥ 70,29695.0,Salaried,Masters,5399,691.0,5,No
+< 30,26124.0,Salaried,PhD,5475,764.0,7,No
+< 30,35834.0,Salaried,HS,3396,581.0,5,No
+< 30,28253.0,Salaried,Bachelors,3805,707.0,3,No
+≥ 70,23542.0,Salaried,HS,7457,706.0,2,Yes
+< 30,29241.0,Unemployed,Masters,10333,804.0,7,No
+40 - 50,44166.0,Salaried,HS,28781,675.0,5,No
+40 - 50,56462.0,Salaried,Bachelors,12129,739.0,3,No
+40 - 50,29079.0,Salaried,HS,10777,672.0,5,No
+30 - 40,26366.0,Salaried,HS,4017,709.0,5,No
+50 - 60,39658.0,Self-Employed,Masters,14497,632.0,6,No
+50 - 60,36231.0,Salaried,HS,1381,625.0,3,No
+30 - 40,35542.0,Salaried,Bachelors,6149,850.0,3,No
+60 - 70,34837.0,Salaried,Masters,21305,767.0,4,No
+< 30,64795.0,Salaried,Bachelors,9962,601.0,6,No
+30 - 40,56221.0,Salaried,Masters,16669,735.0,8,No
+50 - 60,63016.0,Salaried,PhD,2752,769.0,3,No
+≥ 70,78888.0,Salaried,Bachelors,23730,580.0,3,No
+40 - 50,96120.0,Salaried,Bachelors,5462,675.0,3,No
+< 30,72479.0,Self-Employed,Bachelors,1055,607.0,5,Yes
+30 - 40,30321.0,Salaried,HS,9197,598.0,5,No
+40 - 50,20909.0,Salaried,Bachelors,5479,695.0,5,Yes
+60 - 70,14552.0,Salaried,PhD,10662,609.0,6,No
+50 - 60,25310.0,Salaried,Bachelors,6215,638.0,2,No
+40 - 50,55858.0,Self-Employed,HS,7821,786.0,2,No
+≥ 70,13769.0,Salaried,Bachelors,6122,685.0,7,No
+≥ 70,35506.0,Self-Employed,Masters,3569,724.0,4,No
+60 - 70,15431.0,Salaried,PhD,9948,651.0,5,No
+30 - 40,74149.0,Self-Employed,PhD,18048,594.0,6,No
+40 - 50,21977.0,Salaried,Masters,5512,806.0,3,No
+50 - 60,85080.0,Self-Employed,Masters,5410,695.0,2,No
+30 - 40,59384.0,Unemployed,Bachelors,9602,620.0,3,No
+60 - 70,20699.0,Self-Employed,HS,8482,608.0,5,No
+40 - 50,35673.0,Salaried,Bachelors,1789,715.0,7,Yes
+60 - 70,68963.0,Salaried,Bachelors,2312,634.0,5,No
+30 - 40,19424.0,Salaried,Masters,29380,743.0,2,Yes
+50 - 60,31251.0,Unemployed,HS,13751,677.0,4,No
+30 - 40,15466.0,Self-Employed,HS,7161,850.0,3,No
+< 30,16104.0,Salaried,Masters,13193,768.0,2,No
+60 - 70,23771.0,Salaried,Bachelors,4785,698.0,2,No
+30 - 40,76924.0,Salaried,Bachelors,6268,627.0,3,No
+≥ 70,46812.0,Self-Employed,HS,10646,686.0,3,No
+30 - 40,57021.0,Salaried,PhD,6405,683.0,6,No
+50 - 60,45879.0,Salaried,Bachelors,6379,691.0,5,No
+60 - 70,37212.0,Salaried,Masters,19540,689.0,3,No
+< 30,11552.0,Salaried,Bachelors,5124,646.0,4,Yes
+< 30,40652.0,Salaried,Masters,2136,669.0,3,No
+≥ 70,45848.0,Self-Employed,PhD,10489,632.0,8,No
+60 - 70,43083.0,Salaried,HS,5593,683.0,5,No
+30 - 40,53233.0,Salaried,Bachelors,4394,688.0,9,No
+40 - 50,23022.0,Salaried,Bachelors,4600,689.0,5,No
+60 - 70,42293.0,Salaried,HS,2996,755.0,5,No
+50 - 60,28361.0,Salaried,HS,4651,659.0,2,No
+40 - 50,53794.0,Salaried,Bachelors,5454,767.0,6,No
+40 - 50,31311.0,Self-Employed,Bachelors,9638,697.0,2,Yes
+50 - 60,70152.0,Salaried,Bachelors,9402,757.0,5,No
+≥ 70,10150.0,Salaried,Masters,9714,668.0,6,No
+30 - 40,56856.0,Salaried,Bachelors,6642,645.0,5,No
+30 - 40,73623.0,Salaried,Bachelors,8861,657.0,6,No
+40 - 50,72016.0,Salaried,Bachelors,14514,669.0,4,No
+< 30,21901.0,Self-Employed,Bachelors,6190,725.0,8,No
+40 - 50,45113.0,Unemployed,HS,9817,600.0,3,No
+≥ 70,39401.0,Salaried,HS,5575,648.0,1,No
+60 - 70,69739.0,Salaried,HS,2576,696.0,3,No
+30 - 40,83186.0,Self-Employed,HS,4695,681.0,2,No
+50 - 60,55866.0,Salaried,Bachelors,11568,751.0,2,No
+30 - 40,32391.0,Salaried,Masters,12181,614.0,5,Yes
+60 - 70,49663.0,Salaried,Bachelors,6033,579.0,3,No
+< 30,55531.0,Salaried,HS,11490,567.0,2,No
+40 - 50,27966.0,Salaried,HS,8249,656.0,2,No
+< 30,32438.0,Salaried,Masters,6484,701.0,4,Yes
+40 - 50,28299.0,Salaried,Masters,10226,622.0,3,Yes
+60 - 70,24559.0,Salaried,Bachelors,7789,760.0,3,No
+60 - 70,27914.0,Salaried,HS,21230,605.0,7,No
+50 - 60,47856.0,Self-Employed,HS,3099,609.0,2,No
+40 - 50,38659.0,Salaried,Masters,12887,771.0,5,No
+< 30,115319.0,Salaried,Bachelors,2690,626.0,8,No
+30 - 40,66430.0,Salaried,Masters,23409,560.0,4,No
+≥ 70,25772.0,Salaried,Masters,17928,568.0,6,No
+< 30,48295.0,Salaried,Masters,25649,662.0,3,No
+40 - 50,32104.0,Self-Employed,Bachelors,16042,809.0,6,No
+50 - 60,30418.0,Salaried,Bachelors,34394,551.0,4,No
+< 30,25260.0,Salaried,Bachelors,19274,752.0,2,No
+30 - 40,39802.0,Salaried,Bachelors,6098,577.0,7,No
+30 - 40,7733.0,Salaried,PhD,13461,564.0,4,No
+50 - 60,35126.0,Salaried,HS,2283,745.0,6,No
+30 - 40,87974.0,Salaried,HS,4231,702.0,6,Yes
+60 - 70,46382.0,Self-Employed,Bachelors,2012,664.0,9,No
+40 - 50,44182.0,Salaried,HS,13040,716.0,6,No
+50 - 60,58799.0,Salaried,Masters,3969,784.0,9,No
+30 - 40,40010.0,Salaried,Masters,6778,646.0,4,No
+60 - 70,86470.0,Salaried,Bachelors,18688,638.0,5,No
+50 - 60,71560.0,Salaried,Masters,9565,524.0,6,Yes
+≥ 70,46232.0,Salaried,Bachelors,27500,669.0,8,No
+≥ 70,36663.0,Salaried,Bachelors,7811,601.0,4,No
+50 - 60,30294.0,Salaried,Masters,12276,766.0,3,No
+50 - 60,27321.0,Salaried,Masters,7974,670.0,8,No
+40 - 50,129069.0,Salaried,Bachelors,4478,733.0,5,No
+40 - 50,32941.0,Salaried,Masters,8130,657.0,6,No
+30 - 40,34320.0,Self-Employed,HS,7936,664.0,6,No
+30 - 40,21560.0,Self-Employed,Bachelors,5181,721.0,2,No
+60 - 70,58009.0,Salaried,HS,11376,540.0,4,No
+30 - 40,31077.0,Self-Employed,Bachelors,7747,748.0,8,Yes
+≥ 70,71605.0,Self-Employed,HS,6043,756.0,4,No
+60 - 70,22521.0,Salaried,Masters,10837,683.0,6,No
+30 - 40,27109.0,Self-Employed,Bachelors,4662,675.0,5,No
+< 30,54149.0,Salaried,PhD,12143,682.0,0,No
+< 30,139112.0,Unemployed,Bachelors,18976,810.0,5,Yes
+≥ 70,39453.0,Unemployed,Masters,10146,601.0,13,No
+30 - 40,63444.0,Salaried,HS,22585,638.0,4,No
+60 - 70,25386.0,Self-Employed,Masters,4103,782.0,5,No
+40 - 50,31661.0,Salaried,HS,7168,574.0,2,No
+< 30,34390.0,Self-Employed,Masters,9269,708.0,2,No
+30 - 40,32827.0,Salaried,Masters,11985,719.0,5,No
+< 30,70949.0,Self-Employed,Bachelors,9845,534.0,3,No
+60 - 70,44511.0,Unemployed,Masters,12524,697.0,10,No
+50 - 60,60110.0,Salaried,Masters,13521,532.0,5,No
+40 - 50,19503.0,Salaried,HS,8718,588.0,3,No
+30 - 40,39009.0,Salaried,Bachelors,2530,683.0,3,No
+50 - 60,74345.0,Salaried,HS,15429,655.0,3,No
+40 - 50,43373.0,Salaried,Bachelors,12457,596.0,10,No
+40 - 50,65702.0,Salaried,Bachelors,1453,630.0,5,No
+60 - 70,27249.0,Self-Employed,Masters,16039,730.0,4,No
+30 - 40,98292.0,Salaried,HS,8531,578.0,3,No
+50 - 60,77137.0,Salaried,HS,6162,707.0,2,No
+50 - 60,145414.0,Salaried,Masters,16116,741.0,3,No
+≥ 70,58012.0,Salaried,HS,10749,625.0,13,Yes
+60 - 70,23442.0,Salaried,HS,5963,636.0,3,Yes
+30 - 40,89864.0,Self-Employed,Bachelors,9328,708.0,7,Yes
+30 - 40,36504.0,Salaried,Masters,4475,699.0,6,No
+30 - 40,21771.0,Salaried,Bachelors,9873,589.0,10,No
+60 - 70,65805.0,Self-Employed,Masters,12027,627.0,5,No
+40 - 50,21123.0,Salaried,Masters,3369,611.0,6,No
+40 - 50,45911.0,Salaried,Bachelors,21561,687.0,3,No
+50 - 60,28291.0,Salaried,Bachelors,5133,603.0,5,No
+< 30,21545.0,Salaried,Bachelors,7239,597.0,2,Yes
+40 - 50,30352.0,Self-Employed,Bachelors,17707,580.0,9,No
+60 - 70,27564.0,Salaried,Masters,15969,718.0,4,Yes
+< 30,28778.0,Unemployed,Bachelors,9960,758.0,4,No
+≥ 70,76597.0,Unemployed,Bachelors,11210,650.0,4,No
+50 - 60,33852.0,Self-Employed,Masters,20490,609.0,6,No
+< 30,60208.0,Salaried,Masters,13034,635.0,7,No
+40 - 50,23793.0,Self-Employed,Bachelors,29790,639.0,4,No
+50 - 60,55627.0,Salaried,HS,5177,580.0,8,No
+≥ 70,59362.0,Self-Employed,Bachelors,2185,700.0,1,No
+30 - 40,34632.0,Unemployed,Bachelors,18368,717.0,5,No
+40 - 50,53509.0,Unemployed,Masters,10467,633.0,6,No
+50 - 60,45055.0,Self-Employed,Bachelors,9378,722.0,4,No
+50 - 60,37320.0,Salaried,Bachelors,28142,558.0,3,No
+50 - 60,86726.0,Salaried,Bachelors,12062,741.0,6,No
+60 - 70,16656.0,Self-Employed,Bachelors,20893,675.0,7,Yes
+30 - 40,35255.0,Salaried,HS,17640,695.0,6,No
+40 - 50,40466.0,Salaried,HS,21715,433.0,4,No
+60 - 70,34398.0,Salaried,HS,7070,649.0,4,No
+40 - 50,22442.0,Salaried,Bachelors,16768,649.0,5,No
+60 - 70,93075.0,Salaried,Bachelors,2332,647.0,4,No
+≥ 70,13217.0,Salaried,Bachelors,11795,726.0,6,No
+< 30,16344.0,Salaried,Masters,15859,706.0,4,No
+40 - 50,55653.0,Salaried,HS,2682,779.0,1,No
+40 - 50,21055.0,Salaried,Masters,3064,629.0,3,No
+50 - 60,25255.0,Salaried,HS,4143,652.0,2,No
+40 - 50,18055.0,Self-Employed,Bachelors,19202,814.0,6,No
+30 - 40,40906.0,Self-Employed,Bachelors,11364,622.0,7,No
+< 30,37413.0,Salaried,Bachelors,3589,707.0,3,No
+60 - 70,34420.0,Self-Employed,Bachelors,16804,586.0,3,No
+40 - 50,27584.0,Self-Employed,HS,5076,721.0,2,No
+60 - 70,19955.0,Unemployed,HS,7247,626.0,7,No
+30 - 40,31823.0,Salaried,Bachelors,41598,695.0,5,No
+< 30,155370.0,Salaried,HS,16544,736.0,6,No
+50 - 60,37404.0,Salaried,Bachelors,7014,706.0,3,No
+< 30,39622.0,Salaried,HS,5764,648.0,4,No
+50 - 60,17425.0,Salaried,Bachelors,22923,639.0,4,No
+60 - 70,17360.0,Salaried,HS,12883,661.0,3,No
+60 - 70,139057.0,Salaried,Masters,20499,634.0,4,No
+60 - 70,43101.0,Self-Employed,HS,6921,687.0,8,No
+40 - 50,24276.0,Salaried,Bachelors,5540,565.0,5,No
+60 - 70,59762.0,Salaried,Bachelors,9458,657.0,4,No
+60 - 70,75016.0,Salaried,Bachelors,17722,804.0,4,No
+50 - 60,59496.0,Salaried,Bachelors,12116,640.0,4,Yes
+40 - 50,65781.0,Salaried,HS,8017,740.0,5,Yes
+30 - 40,22970.0,Salaried,HS,3597,784.0,4,Yes
+30 - 40,24343.0,Salaried,HS,8046,723.0,5,No
+< 30,30370.0,Salaried,PhD,2545,638.0,4,No
+50 - 60,66421.0,Self-Employed,Bachelors,4565,698.0,3,Yes
+50 - 60,47649.0,Salaried,Bachelors,12431,688.0,4,No
+30 - 40,44363.0,Self-Employed,Bachelors,12256,671.0,5,Yes
+60 - 70,49132.0,Salaried,HS,10125,783.0,2,No
+50 - 60,44063.0,Self-Employed,Bachelors,17039,801.0,4,Yes
+30 - 40,49286.0,Self-Employed,Masters,1647,606.0,5,Yes
+≥ 70,77485.0,Unemployed,Masters,14879,660.0,8,No
+60 - 70,48567.0,Salaried,Masters,1914,730.0,4,No
+< 30,56284.0,Self-Employed,Bachelors,6940,670.0,4,No
+50 - 60,38212.0,Salaried,HS,10527,596.0,6,No
+< 30,16647.0,Salaried,Masters,21047,615.0,3,No
+60 - 70,73412.0,Salaried,Masters,6886,683.0,5,No
+< 30,31568.0,Salaried,HS,9420,624.0,5,No
+30 - 40,35108.0,Salaried,Masters,5118,644.0,4,No
+50 - 60,17466.0,Self-Employed,Bachelors,7948,614.0,3,No
+50 - 60,51713.0,Salaried,PhD,6708,655.0,4,No
+40 - 50,51453.0,Salaried,Bachelors,11615,657.0,4,No
+60 - 70,15003.0,Salaried,HS,7955,686.0,4,No
+30 - 40,35429.0,Salaried,Bachelors,18512,703.0,6,No
+50 - 60,60058.0,Salaried,Bachelors,6932,649.0,4,No
+60 - 70,20500.0,Salaried,Bachelors,6081,716.0,5,No
+30 - 40,78232.0,Salaried,Bachelors,7237,633.0,3,No
+50 - 60,32328.0,Salaried,HS,14326,704.0,5,No
+30 - 40,54264.0,Salaried,HS,28620,690.0,6,No
+30 - 40,31570.0,Salaried,Masters,11262,694.0,6,No
+50 - 60,37856.0,Salaried,Bachelors,2057,738.0,5,No
+< 30,59485.0,Salaried,Bachelors,8739,657.0,2,No
+< 30,20327.0,Self-Employed,HS,4534,684.0,6,No
+< 30,44894.0,Self-Employed,HS,3249,764.0,4,Yes
+50 - 60,55569.0,Salaried,PhD,34543,699.0,5,Yes
+60 - 70,52114.0,Salaried,Bachelors,4256,691.0,4,No
+< 30,62759.0,Salaried,Masters,10092,640.0,6,No
+≥ 70,28914.0,Salaried,Masters,5674,710.0,6,No
+60 - 70,30847.0,Salaried,Bachelors,9047,659.0,12,No
+30 - 40,36479.0,Self-Employed,PhD,10940,699.0,4,No
+30 - 40,55855.0,Salaried,HS,14938,609.0,5,No
+30 - 40,14243.0,Salaried,PhD,20894,641.0,4,No
+< 30,41113.0,Self-Employed,PhD,20532,672.0,4,No
+40 - 50,70225.0,Self-Employed,Bachelors,7687,623.0,2,No
+< 30,82490.0,Salaried,HS,19089,718.0,6,No
+30 - 40,69901.0,Self-Employed,Bachelors,8118,713.0,1,No
+60 - 70,64408.0,Self-Employed,Bachelors,7595,598.0,8,No
+50 - 60,34790.0,Salaried,Masters,5298,690.0,7,Yes
+< 30,37577.0,Salaried,Bachelors,13035,621.0,8,No
+40 - 50,114320.0,Salaried,HS,7433,733.0,4,No
+30 - 40,35021.0,Salaried,Bachelors,9610,608.0,4,No
+50 - 60,56446.0,Unemployed,Bachelors,7009,752.0,7,No
+30 - 40,41870.0,Self-Employed,Bachelors,7727,652.0,6,No
+50 - 60,57428.0,Self-Employed,PhD,6253,732.0,6,No
+≥ 70,29759.0,Salaried,Masters,13365,640.0,4,No
+≥ 70,51336.0,Salaried,Masters,9295,673.0,2,No
+< 30,24861.0,Salaried,Bachelors,16521,602.0,3,No
+30 - 40,44284.0,Unemployed,Bachelors,19797,685.0,6,No
+< 30,73238.0,Salaried,HS,17189,701.0,1,No
+≥ 70,63157.0,Salaried,Bachelors,13159,608.0,5,No
+40 - 50,45598.0,Salaried,HS,8102,769.0,5,No
+< 30,106452.0,Self-Employed,Masters,6140,676.0,2,No
+≥ 70,30457.0,Salaried,Masters,7255,781.0,4,No
+60 - 70,97781.0,Salaried,HS,9105,629.0,3,No
+60 - 70,35940.0,Salaried,HS,9741,707.0,7,Yes
+< 30,51525.0,Salaried,Bachelors,8298,717.0,9,No
+50 - 60,34621.0,Salaried,Bachelors,13205,724.0,1,No
+< 30,27118.0,Salaried,HS,3391,674.0,7,No
+40 - 50,47625.0,Salaried,PhD,8945,714.0,8,No
+40 - 50,16540.0,Salaried,HS,6749,563.0,1,No
+40 - 50,47549.0,Salaried,HS,4431,661.0,8,No
+< 30,54657.0,Salaried,Bachelors,11066,624.0,4,No
+< 30,75514.0,Unemployed,HS,32007,697.0,3,No
+50 - 60,87956.0,Salaried,HS,7839,613.0,5,No
+40 - 50,40103.0,Self-Employed,HS,15871,660.0,2,No
+50 - 60,43937.0,Salaried,Bachelors,13561,725.0,6,No
+40 - 50,15586.0,Salaried,Masters,14263,471.0,2,Yes
+40 - 50,44347.0,Unemployed,Masters,11897,778.0,4,No
+50 - 60,43173.0,Salaried,Bachelors,5100,542.0,5,No
+≥ 70,24201.0,Salaried,Masters,5225,680.0,5,No
+50 - 60,59109.0,Salaried,Bachelors,2692,664.0,6,No
+< 30,28759.0,Salaried,Bachelors,31417,738.0,4,No
+60 - 70,27633.0,Self-Employed,Masters,1767,596.0,1,No
+40 - 50,16726.0,Self-Employed,Bachelors,18968,798.0,6,No
+60 - 70,36562.0,Self-Employed,Bachelors,7994,656.0,3,No
+≥ 70,47543.0,Salaried,Bachelors,4028,679.0,5,Yes
+40 - 50,47884.0,Salaried,Bachelors,3063,670.0,5,Yes
+30 - 40,25132.0,Self-Employed,Bachelors,2559,741.0,5,No
+40 - 50,30526.0,Salaried,HS,20720,700.0,3,No
+< 30,108465.0,Salaried,HS,15140,680.0,1,No
+40 - 50,43290.0,Salaried,Masters,25927,751.0,7,No
+30 - 40,59394.0,Salaried,Bachelors,12526,790.0,4,No
+50 - 60,26374.0,Salaried,HS,2243,685.0,4,No
+60 - 70,121746.0,Salaried,HS,34839,622.0,2,Yes
+< 30,33335.0,Self-Employed,HS,11095,647.0,7,No
+60 - 70,51226.0,Salaried,Bachelors,5171,713.0,2,No
+40 - 50,37834.0,Salaried,Masters,7695,644.0,6,No
+50 - 60,20233.0,Self-Employed,Bachelors,4234,643.0,5,No
+40 - 50,30542.0,Self-Employed,PhD,5086,606.0,6,No
+50 - 60,34767.0,Salaried,Bachelors,9202,592.0,3,Yes
+50 - 60,15932.0,Salaried,HS,12650,702.0,5,Yes
+< 30,83647.0,Salaried,Masters,24225,663.0,10,No
+50 - 60,42218.0,Self-Employed,HS,9548,658.0,4,No
+50 - 60,59556.0,Salaried,Bachelors,5786,685.0,5,Yes
+30 - 40,14547.0,Salaried,Bachelors,25262,493.0,6,No
+30 - 40,40183.0,Unemployed,PhD,1098,718.0,2,Yes
+≥ 70,26115.0,Self-Employed,HS,20862,694.0,5,No
+40 - 50,59865.0,Self-Employed,Bachelors,2669,637.0,4,Yes
+≥ 70,31921.0,Salaried,Bachelors,12431,728.0,2,No
+40 - 50,44678.0,Unemployed,Bachelors,3731,803.0,7,No
+≥ 70,28387.0,Salaried,HS,15884,774.0,3,Yes
+≥ 70,70728.0,Self-Employed,HS,5300,672.0,7,No
+60 - 70,17959.0,Salaried,Bachelors,21565,706.0,5,Yes
+≥ 70,35226.0,Salaried,Masters,6665,716.0,6,No
+30 - 40,86202.0,Salaried,Bachelors,6044,730.0,4,No
+< 30,64433.0,Salaried,Bachelors,2959,618.0,5,No
+60 - 70,53037.0,Salaried,Masters,2912,647.0,2,No
+< 30,42759.0,Salaried,Masters,10965,758.0,6,No
+40 - 50,51799.0,Salaried,HS,7352,702.0,3,No
+40 - 50,16338.0,Self-Employed,HS,3125,727.0,3,Yes
+< 30,41341.0,Salaried,Bachelors,5948,639.0,2,No
+40 - 50,36772.0,Self-Employed,Masters,2876,783.0,6,No
+60 - 70,51965.0,Salaried,PhD,3200,703.0,5,No
+30 - 40,33877.0,Salaried,HS,5145,643.0,6,No
+< 30,113412.0,Salaried,HS,6278,707.0,3,No
+≥ 70,46687.0,Salaried,Bachelors,24746,715.0,6,No
+50 - 60,41817.0,Salaried,HS,12650,730.0,9,No
+60 - 70,20895.0,Salaried,Bachelors,13176,804.0,6,No
+≥ 70,37634.0,Salaried,Masters,21691,688.0,4,No
+≥ 70,69809.0,Self-Employed,Bachelors,10817,723.0,3,No
+< 30,54724.0,Salaried,Bachelors,4851,686.0,4,No
+30 - 40,41185.0,Salaried,HS,6502,733.0,3,No
+< 30,50001.0,Salaried,Bachelors,12318,521.0,1,No
+30 - 40,36485.0,Salaried,PhD,5058,730.0,5,No
+≥ 70,23318.0,Salaried,Bachelors,2154,701.0,4,No
+40 - 50,30172.0,Salaried,Bachelors,9474,733.0,3,No
+≥ 70,73684.0,Salaried,Masters,4524,627.0,3,No
+50 - 60,37782.0,Salaried,Bachelors,5438,732.0,5,No
+50 - 60,29768.0,Unemployed,Bachelors,10073,511.0,9,No
+30 - 40,41322.0,Unemployed,HS,6947,763.0,7,No
+40 - 50,45500.0,Self-Employed,Masters,12010,705.0,5,No
+30 - 40,41464.0,Self-Employed,Bachelors,16988,826.0,5,No
+60 - 70,104927.0,Salaried,HS,9384,761.0,4,No
+< 30,44063.0,Self-Employed,HS,26274,628.0,3,No
+30 - 40,25020.0,Self-Employed,Masters,3491,794.0,2,No
+< 30,36783.0,Salaried,Bachelors,5518,635.0,4,No
+50 - 60,58352.0,Self-Employed,Bachelors,10312,774.0,1,No
+50 - 60,41615.0,Salaried,Masters,3261,747.0,1,No
+60 - 70,16536.0,Salaried,Masters,8045,628.0,7,No
+50 - 60,38456.0,Salaried,HS,16513,633.0,8,No
+60 - 70,36913.0,Salaried,Bachelors,4484,690.0,4,No
+40 - 50,51765.0,Salaried,HS,14661,830.0,5,No
+30 - 40,36496.0,Salaried,HS,10865,656.0,2,No
+< 30,21703.0,Salaried,Masters,5937,763.0,8,No
+50 - 60,41795.0,Salaried,Masters,5419,817.0,3,No
+40 - 50,39586.0,Salaried,HS,20454,580.0,5,Yes
+50 - 60,36073.0,Salaried,Masters,6760,741.0,5,No
+30 - 40,53381.0,Salaried,HS,3746,499.0,8,No
+60 - 70,54934.0,Self-Employed,Masters,17254,796.0,4,No
+40 - 50,27427.0,Unemployed,Masters,12836,716.0,2,No
+40 - 50,34177.0,Salaried,HS,9240,700.0,3,No
+50 - 60,22157.0,Salaried,Bachelors,3717,799.0,5,No
+≥ 70,25914.0,Salaried,Masters,18963,685.0,1,No
+50 - 60,36989.0,Salaried,HS,9011,716.0,3,No
+40 - 50,36814.0,Salaried,Bachelors,6148,628.0,4,No
+30 - 40,27407.0,Self-Employed,Masters,6320,733.0,5,No
+< 30,28238.0,Salaried,HS,14508,545.0,2,Yes
+≥ 70,36383.0,Salaried,Masters,8718,677.0,6,Yes
+50 - 60,21684.0,Salaried,PhD,4149,655.0,4,Yes
+≥ 70,37154.0,Salaried,HS,7990,646.0,3,No
+< 30,35496.0,Salaried,HS,13975,684.0,4,No
+30 - 40,23851.0,Salaried,HS,9995,632.0,4,No
+60 - 70,67851.0,Salaried,Bachelors,11012,669.0,3,No
+30 - 40,72599.0,Unemployed,Bachelors,4937,695.0,5,No
+50 - 60,57930.0,Self-Employed,HS,10024,542.0,5,No
+< 30,25905.0,Salaried,HS,8487,622.0,8,No
+40 - 50,61367.0,Salaried,Masters,4063,764.0,4,No
+30 - 40,23220.0,Salaried,Masters,5869,668.0,4,Yes
+40 - 50,30522.0,Salaried,Bachelors,12336,616.0,3,No
+60 - 70,32362.0,Salaried,Masters,10138,811.0,9,No
+30 - 40,88878.0,Self-Employed,Bachelors,7664,617.0,2,No
+60 - 70,52176.0,Salaried,Masters,22797,417.0,3,Yes
+≥ 70,66859.0,Salaried,HS,6147,689.0,8,No
+< 30,31134.0,Salaried,PhD,9009,705.0,3,No
+40 - 50,63274.0,Self-Employed,Bachelors,10186,807.0,4,Yes
+30 - 40,24895.0,Salaried,Bachelors,13099,641.0,3,No
+50 - 60,32018.0,Salaried,Bachelors,5689,702.0,5,No
+50 - 60,21634.0,Salaried,HS,4333,607.0,3,No
+50 - 60,23501.0,Self-Employed,Bachelors,21910,583.0,9,No
+30 - 40,43753.0,Self-Employed,HS,8027,662.0,1,No
+60 - 70,39404.0,Salaried,Bachelors,4332,822.0,5,No
+50 - 60,21405.0,Salaried,Bachelors,12385,608.0,7,No
+≥ 70,21087.0,Salaried,PhD,9186,647.0,5,No
+40 - 50,11392.0,Salaried,Masters,17819,622.0,8,No
+40 - 50,42956.0,Salaried,Masters,2881,763.0,7,No
+40 - 50,17318.0,Unemployed,Bachelors,18589,668.0,10,No
+< 30,99381.0,Salaried,Bachelors,6395,700.0,2,No
+< 30,62416.0,Salaried,HS,14317,682.0,8,No
+50 - 60,13980.0,Salaried,Masters,4305,606.0,4,No
+30 - 40,38860.0,Self-Employed,HS,23542,591.0,2,Yes
+40 - 50,23846.0,Salaried,HS,16010,659.0,4,No
+60 - 70,71410.0,Salaried,Bachelors,3768,785.0,8,No
+≥ 70,20806.0,Salaried,HS,7965,602.0,4,No
+40 - 50,46758.0,Self-Employed,Masters,4575,656.0,6,No
+40 - 50,10584.0,Self-Employed,HS,6270,548.0,4,No
+50 - 60,38478.0,Salaried,Masters,5161,739.0,3,No
+40 - 50,46112.0,Salaried,Bachelors,18111,650.0,2,No
+60 - 70,91301.0,Salaried,Bachelors,9838,720.0,2,No
+50 - 60,23221.0,Salaried,Bachelors,4996,693.0,3,No
+50 - 60,90164.0,Salaried,Bachelors,33920,600.0,3,No
+50 - 60,31620.0,Unemployed,Bachelors,14647,605.0,1,No
+50 - 60,84198.0,Salaried,PhD,12001,771.0,5,Yes
+60 - 70,38557.0,Self-Employed,Bachelors,3355,810.0,6,No
+40 - 50,105451.0,Self-Employed,PhD,17568,692.0,6,No
+< 30,20784.0,Salaried,HS,5981,696.0,7,No
+50 - 60,10758.0,Self-Employed,Bachelors,17826,797.0,3,No
+40 - 50,10396.0,Salaried,Masters,3792,699.0,5,Yes
+30 - 40,13903.0,Self-Employed,Bachelors,10805,599.0,8,Yes
+50 - 60,52196.0,Salaried,HS,23190,495.0,11,No
+30 - 40,61605.0,Self-Employed,Bachelors,6675,753.0,5,No
+< 30,34439.0,Salaried,Bachelors,2569,702.0,3,No
+30 - 40,40292.0,Salaried,Masters,3062,615.0,3,No
+40 - 50,49464.0,Self-Employed,Bachelors,26846,672.0,1,No
+50 - 60,40629.0,Salaried,HS,9647,711.0,5,No
+< 30,36208.0,Self-Employed,HS,11589,744.0,14,No
+50 - 60,24721.0,Unemployed,HS,9309,753.0,7,No
+30 - 40,36580.0,Self-Employed,HS,9432,743.0,3,No
+< 30,21741.0,Salaried,Bachelors,4536,557.0,6,No
+50 - 60,105768.0,Salaried,HS,27277,700.0,6,No
+< 30,36298.0,Self-Employed,Bachelors,12258,666.0,3,No
+50 - 60,23188.0,Salaried,Bachelors,6619,762.0,4,Yes
+40 - 50,20896.0,Self-Employed,Masters,13702,575.0,4,No
+< 30,22214.0,Self-Employed,Bachelors,8039,781.0,4,No
+40 - 50,24140.0,Unemployed,Masters,7539,653.0,6,No
+30 - 40,58173.0,Self-Employed,Bachelors,7118,623.0,2,No
+60 - 70,60418.0,Salaried,HS,10543,651.0,0,No
+50 - 60,68915.0,Salaried,Masters,8858,744.0,4,No
+60 - 70,36470.0,Self-Employed,Masters,4641,711.0,5,No
+40 - 50,75813.0,Salaried,PhD,23618,744.0,3,No
+30 - 40,34556.0,Self-Employed,HS,2531,666.0,5,No
+40 - 50,55324.0,Self-Employed,HS,3259,690.0,3,No
+40 - 50,17548.0,Salaried,Bachelors,9651,447.0,5,Yes
+< 30,48303.0,Self-Employed,Bachelors,8136,669.0,5,No
+60 - 70,67495.0,Salaried,HS,12966,642.0,2,No
+40 - 50,54856.0,Salaried,HS,9352,777.0,6,No
+30 - 40,19918.0,Salaried,HS,8218,630.0,7,No
+40 - 50,24555.0,Self-Employed,HS,3039,767.0,6,No
+30 - 40,20574.0,Salaried,HS,4437,755.0,4,No
+≥ 70,43073.0,Salaried,Bachelors,14585,675.0,8,No
+60 - 70,16834.0,Self-Employed,HS,7616,653.0,5,No
+< 30,73340.0,Salaried,Masters,14653,820.0,6,No
+30 - 40,28066.0,Salaried,HS,1849,627.0,7,No
+60 - 70,45210.0,Self-Employed,HS,5465,761.0,3,No
+≥ 70,32773.0,Self-Employed,Bachelors,8080,610.0,5,No
+40 - 50,34878.0,Unemployed,Bachelors,5027,694.0,5,No
+30 - 40,49067.0,Self-Employed,HS,2001,772.0,3,No
+30 - 40,55239.0,Salaried,HS,1884,662.0,7,No
+< 30,41512.0,Salaried,Bachelors,5248,619.0,5,No
+< 30,25868.0,Salaried,HS,3152,710.0,4,No
+40 - 50,33601.0,Self-Employed,HS,1684,719.0,1,No
+< 30,29410.0,Salaried,HS,5224,515.0,4,No
+30 - 40,113206.0,Self-Employed,HS,4527,571.0,1,No
+30 - 40,64484.0,Salaried,HS,22743,700.0,4,No
+40 - 50,33415.0,Salaried,Bachelors,4209,781.0,0,No
+30 - 40,9412.0,Unemployed,HS,26682,740.0,2,No
+60 - 70,34520.0,Salaried,Masters,12755,773.0,5,No
+50 - 60,11370.0,Salaried,PhD,4122,732.0,6,No
+≥ 70,13208.0,Salaried,HS,4925,565.0,2,No
+40 - 50,16520.0,Unemployed,PhD,20149,702.0,1,No
+< 30,61733.0,Salaried,Bachelors,3947,784.0,3,No
+50 - 60,14693.0,Self-Employed,Masters,5495,537.0,7,No
+30 - 40,58177.0,Salaried,Bachelors,21593,686.0,8,No
+50 - 60,41986.0,Salaried,Masters,8161,602.0,8,No
+60 - 70,31488.0,Self-Employed,HS,11744,687.0,5,No
+60 - 70,59366.0,Unemployed,Bachelors,3546,645.0,6,No
+30 - 40,44909.0,Unemployed,Masters,17143,515.0,5,No
+≥ 70,83609.0,Salaried,Masters,7357,648.0,5,No
+30 - 40,42035.0,Self-Employed,Masters,7052,720.0,4,No
+30 - 40,24530.0,Salaried,Bachelors,5300,730.0,1,No
+30 - 40,44888.0,Salaried,HS,3980,769.0,7,No
+< 30,95448.0,Unemployed,Bachelors,21188,674.0,5,No
+50 - 60,37073.0,Salaried,Masters,11803,658.0,3,No
+60 - 70,75926.0,Salaried,HS,6829,783.0,6,No
+30 - 40,63474.0,Salaried,HS,12155,647.0,4,No
+50 - 60,14403.0,Salaried,Masters,9157,696.0,4,No
+< 30,79138.0,Self-Employed,Bachelors,4920,718.0,2,Yes
+60 - 70,66746.0,Unemployed,HS,4182,696.0,5,No
+40 - 50,20601.0,Self-Employed,Bachelors,17593,554.0,4,No
+30 - 40,87236.0,Self-Employed,Masters,2257,673.0,8,No
+60 - 70,29914.0,Salaried,Bachelors,12137,698.0,5,Yes
+< 30,61254.0,Salaried,Masters,6665,742.0,6,No
+40 - 50,132469.0,Salaried,Bachelors,11004,642.0,3,No
+40 - 50,35679.0,Salaried,PhD,2841,825.0,4,Yes
+< 30,76249.0,Salaried,Bachelors,8411,691.0,6,No
+30 - 40,49606.0,Salaried,Masters,2691,657.0,7,No
+≥ 70,33408.0,Unemployed,Masters,9749,723.0,2,No
+60 - 70,73799.0,Salaried,HS,15525,611.0,6,No
+30 - 40,36132.0,Self-Employed,HS,9481,583.0,5,No
+40 - 50,52311.0,Salaried,HS,12833,604.0,5,No
+40 - 50,40305.0,Self-Employed,Bachelors,8334,617.0,3,No
+60 - 70,89765.0,Salaried,Bachelors,23970,653.0,3,No
+< 30,35631.0,Salaried,Bachelors,4251,655.0,3,No
+40 - 50,99462.0,Self-Employed,HS,23516,736.0,4,No
+30 - 40,23043.0,Salaried,Masters,6589,570.0,5,No
+40 - 50,21675.0,Salaried,Bachelors,4587,600.0,8,No
+< 30,39428.0,Salaried,PhD,7987,646.0,3,No
+30 - 40,52630.0,Self-Employed,Bachelors,6156,692.0,2,No
+50 - 60,115884.0,Salaried,HS,8746,595.0,3,Yes
+< 30,119910.0,Salaried,Bachelors,2018,756.0,6,Yes
+60 - 70,39814.0,Salaried,Bachelors,10562,682.0,9,No
+60 - 70,64260.0,Self-Employed,Masters,15475,798.0,1,No
+< 30,43194.0,Salaried,HS,18640,630.0,3,No
+60 - 70,48953.0,Salaried,Masters,13660,688.0,4,No
+40 - 50,22331.0,Salaried,Bachelors,10077,731.0,3,No
+40 - 50,37139.0,Salaried,HS,3957,750.0,7,No
+< 30,70726.0,Self-Employed,Bachelors,5591,654.0,2,No
+< 30,35693.0,Salaried,Masters,5302,578.0,5,No
+60 - 70,30529.0,Salaried,Bachelors,8185,608.0,3,No
+< 30,21910.0,Salaried,Bachelors,23824,602.0,7,No
+≥ 70,31617.0,Salaried,Bachelors,10209,718.0,4,No
+< 30,19981.0,Salaried,Masters,8508,606.0,3,Yes
+30 - 40,29216.0,Salaried,Bachelors,6929,504.0,5,No
+60 - 70,66718.0,Self-Employed,HS,8665,645.0,5,Yes
+30 - 40,86280.0,Salaried,Masters,5722,795.0,5,No
+40 - 50,81016.0,Self-Employed,Bachelors,6054,630.0,5,Yes
+60 - 70,11041.0,Salaried,HS,5546,751.0,1,No
+30 - 40,43296.0,Salaried,Masters,6754,591.0,4,No
+60 - 70,46931.0,Salaried,Bachelors,21933,596.0,3,No
+40 - 50,24414.0,Self-Employed,Masters,21118,669.0,3,No
+30 - 40,43380.0,Salaried,PhD,11346,711.0,2,Yes
+30 - 40,51224.0,Self-Employed,HS,10215,761.0,2,Yes
+50 - 60,29373.0,Salaried,HS,7664,806.0,4,No
+≥ 70,87156.0,Salaried,HS,12542,744.0,8,Yes
+30 - 40,32579.0,Self-Employed,Bachelors,5476,741.0,0,Yes
+40 - 50,43094.0,Salaried,HS,14998,673.0,4,No
+< 30,21471.0,Salaried,Bachelors,11741,740.0,2,No
+60 - 70,78096.0,Salaried,HS,11465,706.0,3,No
+30 - 40,49854.0,Salaried,Bachelors,17413,586.0,3,No
+50 - 60,27679.0,Salaried,Bachelors,2035,732.0,4,No
+< 30,54055.0,Salaried,Masters,14718,652.0,4,No
+60 - 70,47123.0,Salaried,Masters,10439,739.0,4,No
+< 30,67394.0,Self-Employed,Masters,5193,579.0,4,No
+30 - 40,29513.0,Self-Employed,HS,7575,583.0,5,No
+< 30,69160.0,Salaried,HS,6287,756.0,4,No
+40 - 50,27890.0,Self-Employed,HS,11870,601.0,4,No
+30 - 40,25381.0,Salaried,Bachelors,8252,787.0,4,No
+50 - 60,30892.0,Salaried,Bachelors,5095,801.0,3,No
+50 - 60,53297.0,Self-Employed,Masters,21494,697.0,6,No
+60 - 70,21140.0,Salaried,Bachelors,9425,700.0,5,No
+< 30,63384.0,Salaried,PhD,19699,727.0,8,No
+50 - 60,23867.0,Self-Employed,HS,14374,675.0,1,No
+30 - 40,14834.0,Salaried,Masters,13507,649.0,7,No
+< 30,25328.0,Self-Employed,HS,33048,618.0,1,No
+60 - 70,19690.0,Unemployed,Bachelors,13590,486.0,5,Yes
+40 - 50,29018.0,Salaried,HS,10463,642.0,6,No
+60 - 70,45715.0,Unemployed,HS,6011,565.0,1,No
+< 30,18144.0,Salaried,Bachelors,27561,620.0,3,Yes
+≥ 70,32785.0,Salaried,HS,11203,640.0,4,No
+60 - 70,50926.0,Salaried,HS,4874,632.0,5,No
+40 - 50,16238.0,Self-Employed,Bachelors,6127,601.0,4,No
+< 30,30333.0,Self-Employed,Bachelors,8313,818.0,6,No
+< 30,58190.0,Salaried,Masters,14482,691.0,5,No
+30 - 40,37354.0,Salaried,Masters,3709,713.0,3,Yes
+50 - 60,41534.0,Salaried,HS,3077,689.0,8,No
+≥ 70,20595.0,Salaried,Bachelors,12216,628.0,6,No
+30 - 40,59388.0,Self-Employed,Bachelors,12734,667.0,3,No
+50 - 60,62169.0,Salaried,Masters,21837,492.0,2,No
+30 - 40,24827.0,Salaried,Bachelors,6173,630.0,3,No
+40 - 50,72924.0,Salaried,HS,4828,553.0,8,No
+40 - 50,44984.0,Self-Employed,Bachelors,18439,600.0,5,No
+40 - 50,46605.0,Salaried,PhD,14750,600.0,4,No
+< 30,39538.0,Self-Employed,Bachelors,10943,698.0,3,No
+40 - 50,52659.0,Salaried,HS,12590,763.0,5,No
+50 - 60,111118.0,Salaried,HS,35800,717.0,11,Yes
+50 - 60,24285.0,Salaried,Bachelors,21631,638.0,5,No
+50 - 60,22653.0,Salaried,PhD,13999,719.0,4,Yes
+50 - 60,47789.0,Salaried,HS,3759,781.0,8,Yes
+40 - 50,27036.0,Self-Employed,Bachelors,13416,741.0,9,No
+60 - 70,43728.0,Salaried,Masters,17333,695.0,4,No
+< 30,64514.0,Salaried,Bachelors,5940,771.0,5,No
+30 - 40,32807.0,Salaried,HS,7560,805.0,7,No
+40 - 50,20276.0,Self-Employed,Masters,4153,605.0,5,No
+30 - 40,45264.0,Salaried,HS,9754,691.0,7,No
+40 - 50,66647.0,Self-Employed,Bachelors,15029,757.0,2,No
+40 - 50,38746.0,Salaried,Bachelors,8973,808.0,6,No
+≥ 70,37482.0,Salaried,Masters,6213,632.0,1,No
+50 - 60,78559.0,Unemployed,Masters,12986,733.0,2,No
+≥ 70,48572.0,Self-Employed,HS,6090,611.0,6,No
+50 - 60,57802.0,Salaried,HS,7130,676.0,7,Yes
+50 - 60,47138.0,Salaried,Masters,6976,722.0,6,Yes
+40 - 50,45277.0,Self-Employed,Bachelors,19654,700.0,5,No
+40 - 50,41577.0,Salaried,HS,6335,630.0,5,No
+30 - 40,25330.0,Salaried,HS,7722,681.0,2,No
+60 - 70,70271.0,Self-Employed,HS,6690,693.0,3,No
+40 - 50,30669.0,Self-Employed,Bachelors,5128,746.0,2,No
+30 - 40,44161.0,Salaried,Bachelors,22495,598.0,6,No
+50 - 60,15721.0,Salaried,Bachelors,6439,817.0,5,No
+40 - 50,15438.0,Self-Employed,Bachelors,21425,689.0,7,No
+30 - 40,22712.0,Salaried,HS,17910,637.0,2,No
+≥ 70,36159.0,Salaried,Bachelors,12247,705.0,5,No
+30 - 40,27953.0,Salaried,Masters,5318,648.0,5,No
+50 - 60,70324.0,Unemployed,HS,10753,644.0,4,Yes
+50 - 60,39422.0,Salaried,Masters,9120,678.0,7,No
+30 - 40,37944.0,Salaried,HS,8874,645.0,5,No
+30 - 40,46378.0,Salaried,Bachelors,4109,834.0,5,No
+60 - 70,39455.0,Salaried,Bachelors,6124,780.0,5,No
+40 - 50,61595.0,Self-Employed,Bachelors,41672,575.0,6,No
+50 - 60,17659.0,Salaried,HS,11851,640.0,3,No
+40 - 50,35850.0,Unemployed,Masters,13365,695.0,4,Yes
+50 - 60,44378.0,Salaried,Bachelors,13247,573.0,1,No
+30 - 40,40781.0,Salaried,HS,4962,610.0,5,No
+50 - 60,30227.0,Salaried,Bachelors,7904,704.0,3,No
+30 - 40,26614.0,Self-Employed,Bachelors,6794,560.0,5,No
+≥ 70,75603.0,Salaried,Bachelors,5398,707.0,9,No
+< 30,28982.0,Self-Employed,Masters,3561,680.0,4,No
+< 30,58359.0,Unemployed,PhD,13658,737.0,8,No
+≥ 70,28700.0,Unemployed,Masters,26098,672.0,5,Yes
+50 - 60,31539.0,Salaried,HS,1989,613.0,2,No
+40 - 50,30611.0,Salaried,Bachelors,4415,786.0,6,No
+40 - 50,46179.0,Self-Employed,PhD,10501,766.0,2,No
+< 30,17866.0,Salaried,HS,19220,669.0,5,No
+60 - 70,23068.0,Self-Employed,HS,5633,725.0,2,No
+50 - 60,64350.0,Salaried,Bachelors,6944,850.0,7,No
+≥ 70,18435.0,Self-Employed,Bachelors,22314,629.0,7,No
+< 30,28931.0,Self-Employed,HS,12082,591.0,8,No
+30 - 40,51709.0,Salaried,HS,14792,557.0,8,No
+60 - 70,43159.0,Self-Employed,Bachelors,8016,488.0,8,No
+60 - 70,24575.0,Salaried,Bachelors,7340,614.0,6,No
+< 30,31298.0,Salaried,Masters,2996,676.0,5,No
+≥ 70,32377.0,Self-Employed,Masters,7674,691.0,3,No
+< 30,46437.0,Self-Employed,Masters,4480,622.0,3,No
+30 - 40,72093.0,Salaried,Bachelors,9447,672.0,3,No
+40 - 50,66564.0,Salaried,Bachelors,9011,654.0,6,No
+50 - 60,43388.0,Self-Employed,PhD,37538,662.0,6,No
+60 - 70,38653.0,Salaried,Masters,5096,770.0,9,No
+40 - 50,35561.0,Salaried,HS,23445,627.0,1,No
+50 - 60,100781.0,Salaried,Bachelors,18142,625.0,4,No
+40 - 50,60523.0,Salaried,Masters,8694,577.0,1,No
+50 - 60,21216.0,Salaried,Masters,2327,730.0,2,No
+40 - 50,33776.0,Salaried,HS,9741,614.0,1,No
+< 30,29969.0,Self-Employed,Masters,32851,582.0,3,No
+40 - 50,25169.0,Salaried,HS,8312,634.0,4,No
+< 30,118229.0,Salaried,Bachelors,18539,723.0,0,No
+60 - 70,48308.0,Salaried,Masters,13212,657.0,3,No
+< 30,26824.0,Salaried,Masters,13227,652.0,3,No
+< 30,39529.0,Unemployed,Bachelors,13021,796.0,4,No
+≥ 70,46641.0,Salaried,HS,8412,633.0,3,No
+< 30,44711.0,Self-Employed,Masters,8178,677.0,1,No
+60 - 70,64144.0,Salaried,HS,3143,590.0,1,No
+50 - 60,44446.0,Salaried,Bachelors,4827,782.0,5,Yes
+50 - 60,21862.0,Salaried,Masters,8682,613.0,4,No
+≥ 70,28766.0,Self-Employed,Bachelors,8925,679.0,5,No
+≥ 70,31313.0,Self-Employed,Bachelors,36605,825.0,3,No
+< 30,42372.0,Salaried,Bachelors,9909,730.0,3,No
+40 - 50,27855.0,Salaried,Masters,4472,757.0,3,No
+60 - 70,42324.0,Salaried,Masters,9166,610.0,8,No
+40 - 50,19993.0,Salaried,Bachelors,17456,536.0,3,No
+60 - 70,26581.0,Salaried,Masters,4555,742.0,11,No
+30 - 40,46719.0,Salaried,Masters,7742,534.0,5,No
+30 - 40,74767.0,Salaried,Bachelors,2782,615.0,2,No
+50 - 60,110920.0,Salaried,Bachelors,14443,684.0,6,No
+30 - 40,27128.0,Unemployed,Bachelors,8094,677.0,3,No
+40 - 50,87832.0,Salaried,HS,30784,742.0,3,No
+60 - 70,48552.0,Unemployed,Bachelors,6258,601.0,7,No
+< 30,38909.0,Salaried,Bachelors,4099,734.0,7,No
+50 - 60,50443.0,Salaried,Bachelors,13873,697.0,9,No
+50 - 60,49099.0,Salaried,HS,12022,738.0,6,No
+30 - 40,31063.0,Salaried,Bachelors,6847,824.0,8,No
+40 - 50,36599.0,Salaried,Bachelors,4345,817.0,1,No
+≥ 70,63024.0,Salaried,HS,22818,745.0,8,Yes
+50 - 60,74139.0,Salaried,HS,2291,687.0,3,No
+60 - 70,36086.0,Salaried,Masters,12548,663.0,4,No
+40 - 50,12074.0,Self-Employed,HS,7467,685.0,3,Yes
+60 - 70,54019.0,Salaried,Masters,5210,624.0,3,Yes
+30 - 40,30659.0,Salaried,HS,7991,675.0,3,No
+30 - 40,52639.0,Self-Employed,PhD,7309,667.0,4,No
+50 - 60,67683.0,Self-Employed,Bachelors,5300,659.0,6,No
+40 - 50,97849.0,Salaried,HS,5229,637.0,3,No
+50 - 60,35704.0,Salaried,HS,4603,702.0,4,Yes
+60 - 70,27614.0,Self-Employed,HS,5237,767.0,4,No
+50 - 60,56209.0,Salaried,Masters,14873,780.0,5,No
+60 - 70,65284.0,Salaried,HS,6640,578.0,2,No
+60 - 70,22683.0,Salaried,HS,8750,805.0,5,No
+50 - 60,36617.0,Salaried,HS,13234,649.0,0,No
+< 30,30806.0,Salaried,Masters,9006,647.0,5,No
+60 - 70,47006.0,Salaried,Bachelors,13301,758.0,6,No
+50 - 60,44526.0,Salaried,Masters,13885,802.0,3,No
+40 - 50,43928.0,Self-Employed,Bachelors,6926,696.0,2,No
+30 - 40,33528.0,Self-Employed,Bachelors,10679,679.0,4,Yes
+< 30,100437.0,Salaried,Bachelors,6288,670.0,4,No
+50 - 60,70551.0,Self-Employed,HS,17624,664.0,3,No
+50 - 60,24528.0,Salaried,HS,2432,487.0,14,No
+30 - 40,42601.0,Salaried,HS,7937,700.0,3,No
+60 - 70,89040.0,Unemployed,Masters,10563,738.0,4,No
+40 - 50,53404.0,Salaried,Masters,4532,654.0,3,No
+50 - 60,45089.0,Salaried,Masters,17232,585.0,5,No
+60 - 70,60443.0,Salaried,Bachelors,26726,642.0,13,No
+50 - 60,94944.0,Unemployed,Masters,4304,703.0,6,No
+30 - 40,36162.0,Unemployed,Bachelors,13802,636.0,5,No
+50 - 60,58677.0,Salaried,PhD,8759,701.0,3,No
+30 - 40,20360.0,Salaried,HS,16142,723.0,4,No
+< 30,20918.0,Salaried,HS,3104,620.0,2,No
+40 - 50,52991.0,Salaried,Masters,19095,716.0,7,No
+< 30,51524.0,Salaried,Masters,15686,622.0,9,No
+60 - 70,44293.0,Salaried,Bachelors,7563,712.0,3,No
+50 - 60,17465.0,Salaried,Bachelors,12066,592.0,7,No
+30 - 40,55540.0,Salaried,Bachelors,12033,619.0,5,Yes
+30 - 40,19765.0,Self-Employed,Bachelors,26075,670.0,3,No
+50 - 60,37669.0,Self-Employed,Bachelors,8569,710.0,3,No
+40 - 50,72178.0,Salaried,Bachelors,10151,587.0,5,No
+40 - 50,34089.0,Self-Employed,Masters,4907,669.0,2,No
+< 30,69076.0,Unemployed,Masters,5996,684.0,1,No
+50 - 60,45399.0,Salaried,Bachelors,2726,668.0,6,No
+50 - 60,38544.0,Salaried,Bachelors,18189,461.0,3,Yes
+60 - 70,31337.0,Salaried,Bachelors,7557,583.0,7,No
+60 - 70,39902.0,Salaried,Bachelors,9115,571.0,6,No
+≥ 70,15166.0,Salaried,HS,17557,675.0,1,No
+60 - 70,17582.0,Salaried,Bachelors,4516,736.0,2,No
+40 - 50,65313.0,Salaried,Bachelors,11852,748.0,2,No
+50 - 60,135533.0,Salaried,HS,4702,737.0,3,No
+50 - 60,34055.0,Salaried,PhD,2481,632.0,10,No
+< 30,93953.0,Salaried,HS,5627,724.0,0,No
+≥ 70,32341.0,Salaried,HS,3781,641.0,5,No
+50 - 60,66171.0,Salaried,Masters,9361,584.0,6,No
+30 - 40,26604.0,Salaried,Bachelors,5213,690.0,1,No
+40 - 50,12501.0,Self-Employed,PhD,3205,850.0,0,No
+30 - 40,43845.0,Salaried,Masters,7685,767.0,6,No
+30 - 40,43958.0,Salaried,HS,12466,580.0,8,No
+40 - 50,22603.0,Salaried,Masters,7155,779.0,5,No
+< 30,73457.0,Salaried,HS,12172,743.0,6,No
+< 30,16355.0,Salaried,Masters,17829,706.0,9,No
+30 - 40,21973.0,Salaried,Masters,25531,658.0,4,No
+40 - 50,100320.0,Salaried,Bachelors,6455,825.0,4,No
+< 30,37196.0,Salaried,Masters,23873,667.0,5,No
+50 - 60,38385.0,Self-Employed,HS,4936,722.0,6,Yes
+60 - 70,20007.0,Salaried,Masters,10759,693.0,7,Yes
+< 30,19602.0,Salaried,Bachelors,7489,631.0,7,No
+30 - 40,23452.0,Salaried,Masters,2171,622.0,6,No
+60 - 70,33052.0,Salaried,Bachelors,24103,734.0,2,No
+50 - 60,21734.0,Self-Employed,Bachelors,11444,506.0,2,Yes
+≥ 70,35783.0,Salaried,HS,4723,708.0,5,No
+40 - 50,58935.0,Salaried,Bachelors,15421,634.0,6,No
+60 - 70,20730.0,Self-Employed,HS,25762,614.0,0,No
+40 - 50,25213.0,Salaried,Masters,16200,696.0,8,No
+< 30,28416.0,Salaried,HS,3084,672.0,2,Yes
+< 30,42879.0,Salaried,Bachelors,10420,702.0,5,No
+40 - 50,50689.0,Self-Employed,Bachelors,5215,755.0,1,No
+30 - 40,40964.0,Unemployed,Bachelors,7931,768.0,7,No
+≥ 70,26408.0,Salaried,Masters,3253,765.0,6,No
+< 30,21551.0,Self-Employed,HS,6896,659.0,10,Yes
+60 - 70,49265.0,Salaried,Masters,10057,735.0,5,No
+< 30,54671.0,Self-Employed,Bachelors,5648,629.0,7,No
+< 30,44030.0,Salaried,Bachelors,21493,735.0,6,No
+50 - 60,42116.0,Self-Employed,Masters,11718,606.0,4,Yes
+40 - 50,72742.0,Self-Employed,Masters,12154,667.0,4,No
+60 - 70,31827.0,Salaried,Bachelors,4495,706.0,3,No
+60 - 70,32061.0,Unemployed,Bachelors,23856,653.0,3,No
+50 - 60,36077.0,Salaried,Masters,5937,622.0,5,No
+30 - 40,59816.0,Unemployed,Bachelors,4966,807.0,4,No
+40 - 50,94369.0,Salaried,HS,11321,646.0,6,No
+30 - 40,41727.0,Salaried,HS,11480,799.0,7,No
+≥ 70,48925.0,Salaried,Masters,7265,687.0,3,No
+< 30,42157.0,Salaried,Masters,5062,716.0,1,No
+50 - 60,19819.0,Salaried,Masters,7629,726.0,2,Yes
+50 - 60,35987.0,Salaried,Masters,14601,775.0,4,No
+40 - 50,65972.0,Salaried,Bachelors,7465,644.0,5,No
+30 - 40,17706.0,Salaried,HS,3849,632.0,4,Yes
+60 - 70,62494.0,Self-Employed,Bachelors,4456,714.0,5,No
+30 - 40,24599.0,Self-Employed,HS,11015,631.0,4,Yes
+30 - 40,58914.0,Salaried,Bachelors,16457,668.0,3,No
+30 - 40,32622.0,Salaried,Bachelors,1366,675.0,4,No
+30 - 40,23355.0,Salaried,Bachelors,10864,745.0,4,No
+< 30,154079.0,Salaried,HS,10463,663.0,6,No
+50 - 60,56168.0,Self-Employed,HS,4342,694.0,4,No
+30 - 40,52854.0,Self-Employed,Bachelors,21948,603.0,4,No
+< 30,124804.0,Salaried,Masters,13708,642.0,8,No
+< 30,29176.0,Salaried,Bachelors,21549,797.0,6,No
+50 - 60,74604.0,Salaried,Masters,9910,640.0,2,No
+60 - 70,106597.0,Self-Employed,Masters,4152,848.0,2,No
+50 - 60,39004.0,Salaried,HS,6878,686.0,3,No
+≥ 70,42527.0,Salaried,HS,9878,777.0,5,No
+≥ 70,100622.0,Salaried,Masters,15054,731.0,7,No
+30 - 40,26427.0,Salaried,HS,7062,732.0,3,No
+50 - 60,60809.0,Salaried,Bachelors,14953,710.0,2,No
+60 - 70,21642.0,Salaried,Bachelors,14088,749.0,5,Yes
+< 30,25517.0,Salaried,HS,20860,626.0,2,No
+40 - 50,57335.0,Salaried,HS,7041,681.0,3,No
+30 - 40,16980.0,Salaried,Masters,8392,705.0,2,No
+30 - 40,31056.0,Unemployed,Bachelors,9096,650.0,6,No
+60 - 70,66488.0,Self-Employed,Masters,12097,573.0,6,No
+30 - 40,25286.0,Salaried,Bachelors,9122,668.0,2,No
+50 - 60,29821.0,Salaried,Bachelors,4011,690.0,4,No
+30 - 40,55113.0,Salaried,HS,3968,792.0,8,No
+40 - 50,43810.0,Salaried,HS,5032,693.0,3,No
+≥ 70,64087.0,Self-Employed,PhD,8645,599.0,4,Yes
+< 30,27776.0,Unemployed,Masters,7725,756.0,5,No
+30 - 40,31371.0,Salaried,Bachelors,4938,778.0,4,No
+50 - 60,13929.0,Self-Employed,Bachelors,18020,820.0,5,No
+50 - 60,19906.0,Salaried,Bachelors,5501,685.0,4,No
+30 - 40,64014.0,Unemployed,HS,7188,670.0,4,No
+60 - 70,104124.0,Salaried,Bachelors,34595,699.0,9,No
+60 - 70,32097.0,Self-Employed,HS,7104,595.0,5,No
+40 - 50,30576.0,Salaried,Masters,2681,848.0,2,No
+60 - 70,67647.0,Self-Employed,Bachelors,11329,762.0,8,No
+< 30,163482.0,Self-Employed,Bachelors,37933,776.0,2,No
+40 - 50,13118.0,Salaried,PhD,5060,662.0,2,No
+60 - 70,30929.0,Salaried,HS,21300,637.0,9,No
+50 - 60,59529.0,Self-Employed,Masters,6805,708.0,6,No
+30 - 40,31716.0,Salaried,Bachelors,17643,570.0,3,Yes
+< 30,40741.0,Salaried,Bachelors,14655,716.0,6,No
+60 - 70,30767.0,Unemployed,PhD,6520,770.0,3,No
+40 - 50,31401.0,Unemployed,Bachelors,12776,677.0,9,No
+≥ 70,55090.0,Salaried,HS,12458,732.0,3,No
+60 - 70,31001.0,Self-Employed,PhD,3952,731.0,5,No
+40 - 50,43874.0,Salaried,HS,5814,702.0,7,No
+60 - 70,38150.0,Salaried,HS,9916,541.0,7,Yes
+< 30,25469.0,Unemployed,HS,8299,690.0,4,Yes
+40 - 50,49601.0,Self-Employed,Bachelors,14262,743.0,8,No
+50 - 60,38427.0,Salaried,Masters,5928,639.0,3,No
+50 - 60,37406.0,Self-Employed,Masters,4999,782.0,5,No
+< 30,40034.0,Self-Employed,HS,20090,633.0,4,No
+50 - 60,28523.0,Self-Employed,HS,7646,711.0,2,No
+40 - 50,27303.0,Self-Employed,Masters,5791,656.0,5,No
+30 - 40,71889.0,Salaried,Masters,16327,650.0,5,Yes
+50 - 60,55948.0,Salaried,HS,7386,738.0,1,No
+30 - 40,28689.0,Unemployed,Bachelors,27458,730.0,4,No
+< 30,54530.0,Salaried,Masters,28963,509.0,5,No
+40 - 50,53575.0,Salaried,Masters,3719,570.0,2,No
+< 30,18397.0,Salaried,PhD,8421,806.0,5,No
+60 - 70,47376.0,Salaried,HS,10543,850.0,6,No
+< 30,94855.0,Self-Employed,PhD,15770,659.0,6,No
+≥ 70,45689.0,Salaried,Bachelors,7191,618.0,3,No
+≥ 70,57967.0,Self-Employed,HS,9398,659.0,4,No
+30 - 40,19311.0,Self-Employed,HS,5695,735.0,4,No
+40 - 50,36834.0,Self-Employed,HS,13068,605.0,2,No
+40 - 50,14566.0,Salaried,Masters,9801,535.0,3,No
+30 - 40,49874.0,Salaried,HS,16987,687.0,2,Yes
+30 - 40,55344.0,Salaried,HS,2986,748.0,4,No
+30 - 40,56185.0,Self-Employed,Masters,12763,594.0,5,No
+≥ 70,35046.0,Salaried,HS,9679,588.0,6,No
+40 - 50,51813.0,Unemployed,Bachelors,12961,697.0,5,No
+30 - 40,41889.0,Salaried,Masters,5785,647.0,4,No
+50 - 60,25130.0,Unemployed,Bachelors,4206,805.0,9,Yes
+30 - 40,19088.0,Salaried,Bachelors,6133,681.0,6,No
+30 - 40,59324.0,Salaried,Bachelors,6120,752.0,9,No
+≥ 70,27311.0,Salaried,HS,28974,664.0,5,No
+60 - 70,80883.0,Self-Employed,Bachelors,6876,647.0,4,Yes
+50 - 60,30530.0,Self-Employed,Masters,6481,620.0,3,No
+30 - 40,69898.0,Salaried,Masters,2601,667.0,3,No
+50 - 60,23143.0,Salaried,HS,4812,738.0,1,Yes
+≥ 70,38856.0,Salaried,Bachelors,9376,702.0,9,No
+60 - 70,18305.0,Self-Employed,HS,12738,839.0,3,No
+50 - 60,28257.0,Salaried,HS,2783,801.0,1,No
+< 30,22449.0,Salaried,Masters,8687,618.0,1,No
+< 30,83252.0,Self-Employed,HS,2534,704.0,4,No
+< 30,67776.0,Self-Employed,Masters,9801,586.0,1,No
+40 - 50,67607.0,Salaried,Bachelors,6130,634.0,3,Yes
+50 - 60,53700.0,Salaried,Bachelors,8669,666.0,4,No
+< 30,42548.0,Salaried,PhD,10098,721.0,9,No
+≥ 70,75787.0,Salaried,HS,5904,550.0,3,No
+< 30,63665.0,Salaried,Bachelors,11844,708.0,5,No
+30 - 40,140132.0,Salaried,Masters,6485,720.0,5,No
+30 - 40,94687.0,Salaried,Bachelors,9379,670.0,1,No
+40 - 50,43364.0,Salaried,Bachelors,10122,569.0,7,No
+< 30,32112.0,Salaried,Bachelors,9058,653.0,3,No
+40 - 50,47710.0,Salaried,Bachelors,11234,706.0,5,No
+30 - 40,25366.0,Salaried,Bachelors,3183,585.0,6,No
+40 - 50,51385.0,Salaried,HS,7600,692.0,5,No
+40 - 50,32258.0,Self-Employed,HS,11406,576.0,5,No
+30 - 40,33318.0,Salaried,Bachelors,5143,698.0,2,No
+50 - 60,71552.0,Salaried,Bachelors,5796,680.0,11,No
+50 - 60,27649.0,Salaried,PhD,15243,578.0,6,Yes
+30 - 40,71703.0,Salaried,Bachelors,6961,550.0,2,Yes
+50 - 60,64243.0,Salaried,HS,13464,734.0,6,No
+< 30,98543.0,Salaried,HS,2087,628.0,6,No
+30 - 40,60929.0,Salaried,Bachelors,12899,686.0,7,No
+50 - 60,19576.0,Self-Employed,HS,11405,712.0,2,Yes
+< 30,34122.0,Salaried,Masters,9133,811.0,2,No
+40 - 50,76658.0,Salaried,Masters,9158,757.0,0,No
+≥ 70,49881.0,Salaried,HS,5058,805.0,6,No
+40 - 50,116589.0,Salaried,HS,11035,715.0,5,No
+40 - 50,77726.0,Unemployed,Masters,25319,695.0,5,No
+40 - 50,24758.0,Salaried,Bachelors,13670,676.0,5,No
+< 30,42730.0,Salaried,Bachelors,10265,771.0,4,Yes
+40 - 50,43335.0,Self-Employed,Masters,7805,688.0,0,No
+30 - 40,48137.0,Salaried,Bachelors,6598,738.0,4,No
+≥ 70,19946.0,Salaried,Bachelors,9179,603.0,6,No
+50 - 60,36719.0,Self-Employed,Bachelors,14602,660.0,7,No
+30 - 40,28054.0,Self-Employed,Bachelors,6374,734.0,3,No
+≥ 70,62770.0,Salaried,Bachelors,2809,686.0,2,No
+< 30,30959.0,Self-Employed,Masters,8437,789.0,4,No
+40 - 50,60794.0,Salaried,Bachelors,12426,716.0,6,No
+40 - 50,79577.0,Unemployed,Bachelors,9408,655.0,5,No
+50 - 60,24183.0,Salaried,HS,20948,632.0,3,No
+≥ 70,57017.0,Salaried,HS,7509,600.0,7,No
+50 - 60,41251.0,Unemployed,HS,7476,722.0,4,No
+30 - 40,44028.0,Salaried,Bachelors,20217,702.0,3,No
+40 - 50,40863.0,Salaried,HS,14752,655.0,3,No
+30 - 40,38643.0,Salaried,HS,4386,785.0,3,No
+< 30,9263.0,Unemployed,HS,20571,655.0,1,No
+60 - 70,23248.0,Salaried,Bachelors,4257,661.0,4,No
+≥ 70,53902.0,Self-Employed,Bachelors,16101,680.0,2,No
+40 - 50,15695.0,Salaried,HS,5766,802.0,3,No
+50 - 60,69431.0,Salaried,HS,5000,794.0,7,Yes
+30 - 40,36537.0,Self-Employed,Masters,24100,685.0,1,No
+60 - 70,14050.0,Salaried,HS,10299,672.0,2,No
+50 - 60,34507.0,Self-Employed,Masters,2103,640.0,4,No
+< 30,27982.0,Salaried,Masters,13558,728.0,0,No
+≥ 70,39590.0,Salaried,Masters,10019,785.0,1,No
+60 - 70,79508.0,Salaried,Bachelors,8020,782.0,5,No
+≥ 70,24517.0,Salaried,Bachelors,7657,734.0,7,No
+40 - 50,57948.0,Self-Employed,HS,1890,754.0,4,Yes
+50 - 60,33204.0,Self-Employed,HS,3472,611.0,2,No
+60 - 70,49056.0,Salaried,HS,5000,633.0,5,No
+< 30,13130.0,Salaried,Masters,5460,618.0,11,Yes
+50 - 60,54660.0,Self-Employed,Bachelors,11379,547.0,8,No
+30 - 40,50232.0,Salaried,Bachelors,6323,676.0,6,No
+< 30,34995.0,Salaried,HS,11298,645.0,9,No
+60 - 70,78828.0,Self-Employed,Bachelors,5091,751.0,2,No
+40 - 50,45108.0,Salaried,Masters,6393,631.0,4,Yes
+< 30,51684.0,Salaried,HS,2555,684.0,6,No
+60 - 70,26280.0,Salaried,PhD,9262,712.0,5,No
+40 - 50,30564.0,Salaried,Bachelors,4812,644.0,3,No
+30 - 40,26754.0,Salaried,Bachelors,13117,726.0,3,No
+40 - 50,28741.0,Salaried,HS,3361,740.0,3,No
+30 - 40,69326.0,Salaried,Masters,4977,647.0,4,Yes
+30 - 40,41722.0,Salaried,HS,4007,633.0,4,No
+30 - 40,50854.0,Self-Employed,Bachelors,5362,631.0,3,No
+< 30,74602.0,Salaried,Bachelors,8657,647.0,3,No
+< 30,59326.0,Salaried,Bachelors,6830,594.0,3,No
+40 - 50,48811.0,Self-Employed,HS,4725,719.0,4,No
+< 30,54197.0,Salaried,HS,2837,745.0,6,No
+30 - 40,33311.0,Salaried,Masters,5762,710.0,1,No
+60 - 70,51572.0,Salaried,Masters,24380,772.0,4,No
+50 - 60,109568.0,Self-Employed,HS,40303,706.0,9,Yes
+30 - 40,32580.0,Salaried,Masters,16057,722.0,4,No
+< 30,54847.0,Self-Employed,HS,3200,710.0,3,No
+60 - 70,102209.0,Self-Employed,Masters,6737,611.0,2,No
+50 - 60,38740.0,Salaried,Bachelors,15881,631.0,3,No
+40 - 50,33318.0,Salaried,HS,1896,758.0,11,No
+< 30,53306.0,Self-Employed,HS,5015,618.0,6,Yes
+60 - 70,59059.0,Salaried,Bachelors,14730,798.0,2,No
+< 30,28473.0,Salaried,Bachelors,6545,706.0,5,No
+≥ 70,42624.0,Salaried,Bachelors,3287,677.0,6,No
+60 - 70,26467.0,Salaried,HS,2827,758.0,6,No
+60 - 70,47962.0,Salaried,Bachelors,4671,745.0,5,Yes
+50 - 60,79435.0,Salaried,Bachelors,19375,682.0,5,No
+40 - 50,35247.0,Salaried,Bachelors,8217,620.0,2,No
+30 - 40,60933.0,Salaried,Bachelors,13223,636.0,4,No
+60 - 70,34444.0,Salaried,HS,6021,684.0,7,No
+< 30,56018.0,Salaried,Masters,31332,567.0,3,No
+50 - 60,25492.0,Salaried,Masters,22787,682.0,4,No
+40 - 50,40671.0,Salaried,Bachelors,7018,685.0,5,No
+30 - 40,54648.0,Salaried,HS,12521,671.0,3,No
+30 - 40,37811.0,Unemployed,Bachelors,7616,699.0,8,No
+30 - 40,19340.0,Salaried,HS,3443,811.0,5,No
+< 30,29265.0,Salaried,Bachelors,8031,683.0,2,No
+< 30,41941.0,Salaried,HS,11103,832.0,4,No
+30 - 40,25715.0,Unemployed,HS,7629,732.0,5,No
+< 30,33854.0,Unemployed,HS,10442,749.0,3,No
+< 30,37268.0,Salaried,Bachelors,13685,761.0,3,No
+30 - 40,105264.0,Self-Employed,PhD,6106,516.0,5,No
+30 - 40,24581.0,Self-Employed,Masters,6728,747.0,4,Yes
+≥ 70,19295.0,Unemployed,Masters,8703,645.0,4,Yes
+60 - 70,43927.0,Salaried,Bachelors,8451,792.0,2,No
+40 - 50,71751.0,Salaried,Bachelors,4281,667.0,4,No
+50 - 60,37941.0,Salaried,Masters,6991,645.0,6,No
+< 30,71714.0,Unemployed,HS,4061,720.0,4,No
+30 - 40,24687.0,Salaried,Bachelors,9625,645.0,6,No
+40 - 50,60969.0,Salaried,Bachelors,2044,768.0,7,No
+< 30,66713.0,Salaried,HS,6281,634.0,3,No
+< 30,17114.0,Self-Employed,Bachelors,23075,660.0,7,Yes
+50 - 60,41494.0,Salaried,HS,5443,773.0,3,No
+60 - 70,36255.0,Self-Employed,HS,6139,746.0,3,No
+< 30,52712.0,Salaried,Bachelors,10916,660.0,5,No
+30 - 40,30132.0,Salaried,Masters,2999,647.0,5,No
+30 - 40,56281.0,Self-Employed,HS,11061,798.0,6,No
+50 - 60,47394.0,Unemployed,Bachelors,9035,534.0,6,No
+30 - 40,48930.0,Salaried,Bachelors,16671,748.0,7,No
+50 - 60,57501.0,Unemployed,Masters,6093,761.0,8,No
+60 - 70,17156.0,Salaried,HS,7773,563.0,3,No
+30 - 40,88330.0,Salaried,Bachelors,21659,697.0,5,No
+< 30,27592.0,Salaried,Masters,9404,796.0,8,No
+60 - 70,80220.0,Self-Employed,Masters,5034,713.0,2,No
+< 30,22982.0,Salaried,Masters,11660,691.0,5,No
+< 30,17126.0,Unemployed,Masters,3955,814.0,6,No
+< 30,33804.0,Salaried,Bachelors,5654,615.0,6,No
+50 - 60,44138.0,Salaried,HS,2195,729.0,5,No
+< 30,22914.0,Self-Employed,Bachelors,25449,788.0,1,No
+< 30,36260.0,Salaried,Masters,3157,674.0,5,No
+≥ 70,12905.0,Salaried,HS,6520,731.0,2,No
+60 - 70,41115.0,Self-Employed,HS,6522,727.0,2,No
+30 - 40,24469.0,Salaried,HS,27349,527.0,3,Yes
+≥ 70,16743.0,Salaried,HS,14366,665.0,8,No
+< 30,29241.0,Salaried,Bachelors,28525,611.0,3,No
+30 - 40,33819.0,Salaried,Masters,8415,541.0,0,No
+30 - 40,60847.0,Self-Employed,HS,6262,717.0,2,Yes
+< 30,48030.0,Self-Employed,Bachelors,5090,572.0,2,No
+50 - 60,28632.0,Salaried,Masters,5740,597.0,6,No
+30 - 40,64727.0,Salaried,Masters,27400,662.0,3,No
+< 30,55880.0,Self-Employed,HS,22398,665.0,5,No
+40 - 50,40501.0,Unemployed,HS,2838,635.0,10,No
+30 - 40,48244.0,Salaried,PhD,9067,730.0,2,No
+30 - 40,31274.0,Unemployed,Bachelors,9116,807.0,3,No
+40 - 50,50595.0,Salaried,Masters,8947,644.0,6,No
+40 - 50,67814.0,Salaried,Masters,21224,728.0,4,No
+60 - 70,29288.0,Self-Employed,Bachelors,11348,739.0,4,No
+≥ 70,59150.0,Salaried,Bachelors,7349,751.0,4,No
+30 - 40,78782.0,Self-Employed,Masters,12302,620.0,6,No
+40 - 50,95111.0,Unemployed,Bachelors,28780,674.0,5,No
+< 30,40168.0,Salaried,HS,3810,689.0,4,No
+30 - 40,57152.0,Self-Employed,HS,4576,677.0,4,No
+40 - 50,30744.0,Salaried,Bachelors,13369,696.0,3,No
+50 - 60,66593.0,Self-Employed,Bachelors,12364,745.0,5,No
+< 30,28313.0,Salaried,Bachelors,13553,773.0,3,No
+40 - 50,32570.0,Salaried,Bachelors,6082,772.0,7,No
+40 - 50,49844.0,Unemployed,HS,9100,662.0,1,No
+40 - 50,23280.0,Self-Employed,Bachelors,8375,609.0,5,No
+30 - 40,31443.0,Salaried,PhD,8946,648.0,4,No
+50 - 60,48931.0,Salaried,PhD,6430,615.0,5,No
+≥ 70,59384.0,Salaried,Bachelors,15112,656.0,4,No
+≥ 70,46592.0,Salaried,Masters,7915,752.0,5,No
+60 - 70,70662.0,Salaried,HS,2972,593.0,0,No
+< 30,18373.0,Self-Employed,Bachelors,13996,597.0,7,No
+60 - 70,69752.0,Salaried,Masters,11370,806.0,3,Yes
+≥ 70,96196.0,Self-Employed,Bachelors,7459,501.0,5,No
+50 - 60,23041.0,Salaried,Bachelors,2297,571.0,5,No
+60 - 70,16771.0,Salaried,HS,15431,785.0,4,No
+60 - 70,53104.0,Unemployed,Masters,3560,636.0,3,No
+40 - 50,42420.0,Salaried,Masters,25464,610.0,3,No
+50 - 60,16432.0,Salaried,HS,6615,702.0,1,No
+< 30,41203.0,Salaried,HS,10996,666.0,6,Yes
+60 - 70,59818.0,Self-Employed,Masters,3983,668.0,5,No
+30 - 40,66827.0,Self-Employed,Bachelors,9492,803.0,3,No
+60 - 70,32318.0,Salaried,HS,13259,689.0,5,No
+≥ 70,69471.0,Salaried,Masters,6455,674.0,2,No
+50 - 60,42814.0,Salaried,Bachelors,11585,696.0,5,No
+< 30,41458.0,Self-Employed,Bachelors,6825,514.0,2,No
+60 - 70,31173.0,Salaried,HS,12625,755.0,4,No
+40 - 50,67281.0,Salaried,Bachelors,12526,700.0,9,No
+60 - 70,26322.0,Salaried,Masters,2113,692.0,2,No
+50 - 60,31908.0,Salaried,Bachelors,4613,658.0,7,No
+50 - 60,38115.0,Salaried,Bachelors,20634,547.0,6,No
+50 - 60,37978.0,Salaried,Masters,23031,701.0,3,No
+30 - 40,124219.0,Self-Employed,Masters,9611,724.0,10,No
+60 - 70,38233.0,Salaried,Bachelors,11368,596.0,4,No
+60 - 70,46029.0,Salaried,Masters,11088,714.0,2,No
+60 - 70,25125.0,Salaried,Bachelors,7782,709.0,2,No
+50 - 60,88998.0,Salaried,Bachelors,26382,625.0,3,No
+50 - 60,44720.0,Salaried,Masters,13280,705.0,7,No
+< 30,36859.0,Self-Employed,Bachelors,10338,707.0,5,No
+50 - 60,65552.0,Salaried,HS,5208,662.0,5,Yes
+60 - 70,43031.0,Salaried,HS,2365,686.0,8,No
+30 - 40,22540.0,Salaried,PhD,6448,646.0,10,No
+30 - 40,71081.0,Salaried,Bachelors,21206,850.0,4,Yes
+≥ 70,111725.0,Salaried,Masters,14478,602.0,7,No
+30 - 40,31490.0,Salaried,Bachelors,9105,651.0,3,No
+40 - 50,55568.0,Salaried,Bachelors,7222,656.0,4,No
+30 - 40,66716.0,Salaried,Masters,14945,774.0,3,No
+60 - 70,31271.0,Salaried,Bachelors,2553,693.0,3,No
+50 - 60,30043.0,Salaried,Masters,14002,721.0,3,No
+40 - 50,32134.0,Salaried,HS,6668,613.0,2,No
+≥ 70,36272.0,Unemployed,Bachelors,8251,780.0,2,No
+40 - 50,63796.0,Self-Employed,HS,10696,780.0,5,No
+50 - 60,34898.0,Self-Employed,HS,6546,691.0,7,No
+40 - 50,50122.0,Self-Employed,PhD,11185,774.0,3,No
+30 - 40,39368.0,Salaried,HS,6196,615.0,6,No
+40 - 50,18081.0,Salaried,HS,2595,698.0,3,No
+≥ 70,48082.0,Salaried,HS,8145,726.0,1,No
+40 - 50,54848.0,Salaried,Bachelors,12152,682.0,3,No
+≥ 70,18842.0,Salaried,Bachelors,25602,679.0,6,No
+≥ 70,22534.0,Salaried,HS,4567,643.0,4,No
+60 - 70,48897.0,Salaried,Bachelors,13685,621.0,6,Yes
+60 - 70,59157.0,Salaried,Bachelors,8458,658.0,3,No
+30 - 40,27823.0,Salaried,Bachelors,6489,628.0,5,No
+< 30,27246.0,Self-Employed,HS,9339,639.0,5,No
+30 - 40,44612.0,Salaried,Masters,6224,729.0,4,Yes
+30 - 40,45127.0,Unemployed,HS,6392,634.0,4,No
+60 - 70,78201.0,Salaried,Masters,19927,655.0,10,No
+30 - 40,15743.0,Salaried,Masters,14662,712.0,7,No
+40 - 50,23657.0,Self-Employed,Masters,7406,737.0,6,No
+60 - 70,25375.0,Salaried,Bachelors,6445,798.0,3,No
+30 - 40,76831.0,Salaried,HS,48369,705.0,6,No
+40 - 50,66638.0,Self-Employed,HS,7627,637.0,2,No
+60 - 70,51786.0,Salaried,Bachelors,4022,654.0,5,No
+< 30,28889.0,Self-Employed,Masters,1997,676.0,3,No
+50 - 60,53186.0,Salaried,Masters,4807,746.0,4,No
+< 30,26049.0,Salaried,HS,11718,821.0,1,No
+50 - 60,63442.0,Salaried,Masters,19225,688.0,5,No
+30 - 40,25491.0,Self-Employed,Masters,24671,754.0,3,No
+≥ 70,50377.0,Salaried,Bachelors,10752,731.0,3,No
+60 - 70,237129.0,Self-Employed,Masters,11497,690.0,6,No
+≥ 70,78409.0,Unemployed,Masters,5904,850.0,5,No
+< 30,35719.0,Salaried,HS,12478,644.0,2,No
+40 - 50,89894.0,Salaried,HS,8164,662.0,2,No
+30 - 40,26765.0,Self-Employed,Bachelors,3551,595.0,3,No
+≥ 70,28352.0,Unemployed,Bachelors,18633,692.0,3,No
+30 - 40,55071.0,Salaried,PhD,3148,663.0,4,No
+≥ 70,21643.0,Self-Employed,Bachelors,6887,574.0,4,No
+60 - 70,66972.0,Salaried,Masters,12563,588.0,5,No
+40 - 50,16724.0,Unemployed,Bachelors,10356,599.0,2,No
+< 30,36958.0,Salaried,HS,6086,615.0,6,No
+30 - 40,24393.0,Self-Employed,Bachelors,11630,455.0,4,No
+60 - 70,81187.0,Salaried,Bachelors,8793,629.0,2,No
+40 - 50,75367.0,Salaried,Bachelors,10384,736.0,3,Yes
+50 - 60,55869.0,Salaried,HS,16434,690.0,2,Yes
+30 - 40,30372.0,Salaried,Bachelors,4953,715.0,7,No
+30 - 40,42104.0,Salaried,Bachelors,9678,597.0,7,No
+40 - 50,29818.0,Salaried,Masters,5335,739.0,6,No
+30 - 40,57240.0,Salaried,Bachelors,20077,575.0,0,No
+≥ 70,28449.0,Salaried,Bachelors,19726,702.0,4,No
+40 - 50,37505.0,Salaried,Bachelors,12856,568.0,4,No
+40 - 50,58843.0,Salaried,Masters,8661,709.0,5,No
+< 30,44844.0,Self-Employed,HS,32172,713.0,5,No
+40 - 50,41724.0,Salaried,Bachelors,4842,695.0,2,No
+30 - 40,40884.0,Salaried,HS,4473,669.0,3,No
+30 - 40,26700.0,Salaried,HS,22739,649.0,5,No
+< 30,34885.0,Salaried,HS,6614,744.0,3,No
+30 - 40,25670.0,Self-Employed,HS,4280,728.0,1,No
+≥ 70,32332.0,Salaried,Bachelors,9164,574.0,4,Yes
+40 - 50,18921.0,Salaried,Bachelors,9098,714.0,8,No
+50 - 60,14131.0,Salaried,Masters,10702,724.0,6,No
+< 30,33502.0,Self-Employed,Masters,3002,677.0,4,No
+30 - 40,87770.0,Salaried,Bachelors,6104,542.0,4,No
+60 - 70,31546.0,Salaried,Masters,19058,636.0,4,No
+≥ 70,69079.0,Self-Employed,HS,9836,787.0,8,No
+60 - 70,121860.0,Self-Employed,Bachelors,4499,759.0,3,No
+60 - 70,19508.0,Salaried,HS,11958,583.0,7,No
+40 - 50,45720.0,Salaried,HS,4568,772.0,6,Yes
+40 - 50,22536.0,Salaried,Bachelors,14619,490.0,4,No
+< 30,32914.0,Salaried,Bachelors,18710,685.0,4,No
+< 30,18014.0,Self-Employed,Bachelors,1777,809.0,6,No
+60 - 70,30421.0,Salaried,HS,20758,718.0,1,No
+50 - 60,46942.0,Salaried,Bachelors,11467,617.0,7,No
+< 30,39261.0,Self-Employed,HS,3614,597.0,0,No
+≥ 70,73905.0,Salaried,Masters,2666,767.0,3,No
+50 - 60,99501.0,Self-Employed,Masters,12863,760.0,3,Yes
+40 - 50,74299.0,Self-Employed,PhD,8578,797.0,4,No
+40 - 50,83477.0,Self-Employed,Masters,6696,767.0,5,No
+30 - 40,74713.0,Salaried,Masters,3424,736.0,3,No
+60 - 70,52788.0,Unemployed,HS,8489,648.0,4,No
+< 30,100957.0,Salaried,Masters,7858,778.0,1,No
+40 - 50,42801.0,Self-Employed,HS,4628,735.0,1,No
+≥ 70,45703.0,Salaried,HS,4559,731.0,6,No
+< 30,34606.0,Self-Employed,Bachelors,5626,712.0,7,No
+40 - 50,30674.0,Self-Employed,Bachelors,12824,754.0,4,Yes
+50 - 60,146838.0,Salaried,HS,13440,742.0,4,Yes
+40 - 50,33319.0,Salaried,Bachelors,21284,781.0,7,No
+60 - 70,40647.0,Self-Employed,HS,5409,601.0,4,No
+< 30,54436.0,Salaried,Masters,13917,772.0,2,No
+50 - 60,27362.0,Self-Employed,Bachelors,5407,719.0,8,No
+30 - 40,69431.0,Salaried,HS,3661,617.0,6,Yes
+≥ 70,26064.0,Salaried,Bachelors,13324,617.0,3,No
+60 - 70,70112.0,Salaried,Bachelors,13209,641.0,3,No
+60 - 70,18514.0,Self-Employed,Masters,9673,667.0,4,Yes
+50 - 60,21162.0,Salaried,Bachelors,5894,587.0,6,No
+30 - 40,57301.0,Unemployed,Bachelors,9726,829.0,7,No
+≥ 70,52168.0,Salaried,HS,14841,628.0,8,No
+50 - 60,42409.0,Salaried,HS,8050,657.0,6,No
+40 - 50,63980.0,Self-Employed,Bachelors,9106,690.0,7,No
+50 - 60,37365.0,Salaried,Bachelors,19903,682.0,6,No
+40 - 50,34291.0,Salaried,Bachelors,8078,640.0,2,No
+≥ 70,18248.0,Self-Employed,HS,19884,683.0,4,No
+30 - 40,24654.0,Self-Employed,Masters,14190,793.0,6,No
+60 - 70,46279.0,Salaried,HS,14356,667.0,2,No
+40 - 50,56425.0,Salaried,HS,6920,759.0,5,No
+50 - 60,44557.0,Salaried,Bachelors,16668,752.0,3,No
+60 - 70,47414.0,Salaried,Masters,10800,529.0,7,No
+60 - 70,68560.0,Self-Employed,Masters,6501,770.0,7,No
+50 - 60,35428.0,Unemployed,Bachelors,31781,590.0,2,No
+≥ 70,31269.0,Salaried,HS,6015,690.0,5,Yes
+60 - 70,42474.0,Salaried,HS,14203,850.0,0,No
+50 - 60,65517.0,Salaried,HS,11127,711.0,7,No
+≥ 70,31049.0,Salaried,PhD,13976,752.0,2,No
+< 30,24429.0,Salaried,Bachelors,8061,701.0,4,No
+30 - 40,116419.0,Self-Employed,PhD,9559,658.0,6,No
+60 - 70,32957.0,Salaried,Masters,3464,730.0,4,No
+60 - 70,22545.0,Salaried,Bachelors,17624,737.0,11,No
+30 - 40,30971.0,Salaried,Bachelors,8953,733.0,5,No
+30 - 40,34220.0,Salaried,HS,5302,710.0,1,No
+50 - 60,50324.0,Salaried,Bachelors,18555,801.0,4,No
+50 - 60,40435.0,Salaried,HS,4048,811.0,3,Yes
+50 - 60,39150.0,Salaried,Bachelors,7819,727.0,10,Yes
+60 - 70,40553.0,Salaried,HS,6589,649.0,6,No
+40 - 50,26568.0,Salaried,Masters,26384,566.0,1,No
+40 - 50,44936.0,Salaried,Bachelors,2419,641.0,8,No
+40 - 50,38398.0,Self-Employed,HS,5995,605.0,4,No
+50 - 60,31486.0,Salaried,HS,8539,744.0,4,Yes
+60 - 70,54780.0,Salaried,Masters,12463,727.0,3,No
+40 - 50,28319.0,Unemployed,Masters,26686,665.0,3,No
+50 - 60,37303.0,Salaried,Bachelors,6312,649.0,5,No
+60 - 70,34274.0,Unemployed,Bachelors,9345,688.0,4,No
+30 - 40,62568.0,Salaried,PhD,6335,706.0,6,Yes
+50 - 60,64022.0,Salaried,Bachelors,5620,686.0,3,Yes
+60 - 70,48288.0,Self-Employed,HS,4829,714.0,3,No
+30 - 40,32149.0,Unemployed,Masters,5823,692.0,3,No
+< 30,36861.0,Salaried,HS,9831,622.0,5,No
+< 30,58560.0,Self-Employed,Masters,12504,620.0,5,No
+40 - 50,82990.0,Salaried,Masters,14692,600.0,4,No
+50 - 60,53325.0,Self-Employed,Bachelors,17946,798.0,3,No
+50 - 60,43236.0,Salaried,Masters,3616,750.0,6,No
+50 - 60,51748.0,Salaried,Bachelors,4831,757.0,5,No
+60 - 70,46107.0,Unemployed,PhD,13740,694.0,6,No
+≥ 70,84618.0,Salaried,Masters,6874,779.0,6,No
+30 - 40,57423.0,Salaried,Masters,14913,651.0,5,No
+30 - 40,28821.0,Unemployed,Masters,9090,728.0,6,No
+50 - 60,37867.0,Self-Employed,Bachelors,10559,596.0,5,No
+< 30,51534.0,Self-Employed,Bachelors,5897,738.0,4,No
+60 - 70,39788.0,Salaried,Bachelors,9368,660.0,2,No
+< 30,26312.0,Salaried,Masters,14603,572.0,2,No
+< 30,104137.0,Salaried,Masters,14130,584.0,7,No
+< 30,26331.0,Salaried,Bachelors,9775,730.0,1,No
+40 - 50,41732.0,Self-Employed,Masters,8775,702.0,5,No
+60 - 70,17120.0,Unemployed,PhD,15487,648.0,3,No
+30 - 40,94047.0,Salaried,Bachelors,4057,718.0,4,No
+40 - 50,37347.0,Salaried,Bachelors,2015,750.0,8,No
+40 - 50,61717.0,Self-Employed,HS,2652,648.0,4,No
+30 - 40,51707.0,Self-Employed,HS,5726,722.0,4,No
+≥ 70,19059.0,Salaried,Masters,12360,639.0,3,No
+< 30,41103.0,Salaried,Bachelors,2313,741.0,4,No
+40 - 50,34371.0,Salaried,Bachelors,6554,720.0,12,No
+40 - 50,93862.0,Self-Employed,HS,7684,651.0,1,No
+40 - 50,65317.0,Unemployed,PhD,3408,689.0,2,No
+40 - 50,36632.0,Salaried,HS,5360,573.0,6,No
+< 30,111079.0,Salaried,Masters,11179,680.0,3,No
+< 30,30946.0,Salaried,Bachelors,3835,850.0,6,No
+< 30,13756.0,Self-Employed,Bachelors,36041,606.0,5,No
+50 - 60,55924.0,Salaried,Bachelors,7888,711.0,3,No
+50 - 60,57002.0,Self-Employed,HS,9401,644.0,0,No
+60 - 70,27025.0,Unemployed,HS,4056,698.0,11,No
+40 - 50,31354.0,Salaried,HS,5609,688.0,2,No
+60 - 70,71291.0,Salaried,Bachelors,12284,783.0,4,No
+< 30,32545.0,Salaried,PhD,31517,686.0,4,No
+30 - 40,39221.0,Unemployed,Masters,3867,659.0,2,No
+30 - 40,37925.0,Salaried,HS,9935,677.0,5,No
+≥ 70,91632.0,Unemployed,Masters,16104,634.0,3,No
+40 - 50,47749.0,Unemployed,HS,6144,800.0,3,No
+< 30,68224.0,Salaried,Bachelors,7986,721.0,5,Yes
+60 - 70,80753.0,Salaried,HS,4983,582.0,3,No
+60 - 70,61855.0,Salaried,Masters,13524,712.0,8,No
+< 30,34758.0,Unemployed,Bachelors,14831,558.0,5,Yes
+30 - 40,22846.0,Salaried,HS,7844,608.0,2,Yes
+30 - 40,22149.0,Salaried,HS,8717,614.0,4,No
+< 30,25348.0,Salaried,HS,6283,689.0,1,No
+< 30,55695.0,Salaried,Bachelors,7333,752.0,3,No
+30 - 40,19278.0,Salaried,HS,10619,623.0,6,No
+40 - 50,62899.0,Self-Employed,HS,9879,685.0,4,No
+< 30,36847.0,Salaried,Bachelors,16818,802.0,4,Yes
+60 - 70,26063.0,Salaried,HS,7370,577.0,4,No
+< 30,80311.0,Salaried,Masters,4166,682.0,3,No
+50 - 60,26449.0,Salaried,HS,2906,742.0,3,No
+50 - 60,40471.0,Self-Employed,HS,9791,675.0,4,No
+< 30,34215.0,Salaried,HS,17260,626.0,6,No
+40 - 50,35180.0,Salaried,Masters,10294,716.0,7,No
+≥ 70,37730.0,Salaried,HS,1305,703.0,4,Yes
+30 - 40,67183.0,Salaried,Bachelors,52611,754.0,5,No
+< 30,39985.0,Self-Employed,Masters,5318,810.0,5,No
+50 - 60,51650.0,Salaried,Bachelors,8352,656.0,4,No
+50 - 60,37724.0,Salaried,Bachelors,6037,618.0,4,No
+< 30,53360.0,Self-Employed,Bachelors,7973,744.0,4,No
+≥ 70,55099.0,Salaried,Masters,11579,732.0,2,No
+40 - 50,44369.0,Salaried,Masters,11635,820.0,8,No
+50 - 60,46840.0,Salaried,HS,3500,624.0,4,No
+< 30,33048.0,Salaried,Masters,9889,617.0,4,No
+40 - 50,78715.0,Salaried,PhD,14417,671.0,6,No
+50 - 60,72878.0,Salaried,Bachelors,17369,772.0,4,No
+30 - 40,92712.0,Salaried,HS,2321,678.0,2,No
+40 - 50,66613.0,Salaried,Masters,29740,728.0,6,No
+30 - 40,30642.0,Salaried,HS,4091,576.0,4,No
+60 - 70,27507.0,Salaried,Masters,9382,673.0,5,Yes
+30 - 40,38476.0,Self-Employed,Bachelors,18716,570.0,5,No
+30 - 40,22327.0,Salaried,HS,13917,666.0,4,No
+40 - 50,10073.0,Salaried,HS,8767,572.0,2,Yes
+< 30,43327.0,Unemployed,Bachelors,14468,612.0,5,No
+30 - 40,61991.0,Salaried,HS,6758,651.0,6,No
+≥ 70,24302.0,Self-Employed,Bachelors,12676,682.0,5,No
+30 - 40,32346.0,Self-Employed,Masters,7562,713.0,4,Yes
+40 - 50,43361.0,Salaried,HS,15477,602.0,10,No
+30 - 40,25826.0,Salaried,Masters,10537,583.0,5,No
+50 - 60,88237.0,Salaried,Bachelors,2428,849.0,8,No
+60 - 70,64581.0,Unemployed,Masters,10173,803.0,6,No
+< 30,29375.0,Salaried,Masters,11812,648.0,6,Yes
+≥ 70,81225.0,Salaried,HS,7935,632.0,3,No
+50 - 60,21517.0,Unemployed,HS,6922,640.0,6,No
+< 30,47539.0,Salaried,Masters,6937,692.0,0,No
+< 30,79625.0,Salaried,Bachelors,3185,576.0,7,No
+60 - 70,34897.0,Self-Employed,HS,9028,706.0,2,No
+50 - 60,52094.0,Self-Employed,Bachelors,3452,725.0,5,Yes
+30 - 40,42522.0,Self-Employed,Masters,16190,630.0,5,No
+40 - 50,56727.0,Salaried,Masters,8722,630.0,10,No
+< 30,42998.0,Self-Employed,Bachelors,4952,668.0,5,Yes
+40 - 50,27890.0,Salaried,HS,5523,850.0,0,No
+30 - 40,27162.0,Salaried,Masters,16517,749.0,2,No
+50 - 60,41066.0,Salaried,Bachelors,20921,704.0,2,No
+< 30,28854.0,Salaried,Bachelors,8464,649.0,1,No
+40 - 50,38425.0,Salaried,Masters,6938,708.0,7,No
+≥ 70,48306.0,Salaried,Masters,14553,765.0,5,No
+30 - 40,28563.0,Salaried,HS,21525,748.0,6,No
+< 30,99135.0,Salaried,Masters,2136,681.0,2,No
+≥ 70,68119.0,Salaried,Masters,4886,675.0,4,No
+40 - 50,20948.0,Self-Employed,HS,13348,850.0,0,Yes
+40 - 50,16331.0,Self-Employed,Masters,18564,639.0,5,No
+< 30,28366.0,Salaried,Bachelors,14315,545.0,8,No
+30 - 40,26558.0,Unemployed,Bachelors,6165,745.0,6,No
+< 30,25981.0,Unemployed,Masters,7990,706.0,9,No
+40 - 50,22386.0,Salaried,HS,7115,839.0,4,No
+30 - 40,49444.0,Self-Employed,Bachelors,11786,664.0,2,No
+50 - 60,60997.0,Self-Employed,Bachelors,14729,711.0,2,Yes
+60 - 70,38222.0,Salaried,Bachelors,6441,710.0,3,No
+< 30,51863.0,Salaried,Bachelors,1729,725.0,7,No
+50 - 60,34875.0,Salaried,Bachelors,20684,656.0,5,No
+60 - 70,52272.0,Salaried,HS,4568,699.0,1,No
+≥ 70,36717.0,Salaried,Bachelors,6221,718.0,2,No
+30 - 40,59993.0,Salaried,Bachelors,4296,717.0,5,No
+30 - 40,32998.0,Salaried,Masters,5231,626.0,7,No
+50 - 60,29558.0,Salaried,Masters,3285,581.0,5,No
+40 - 50,58752.0,Salaried,Masters,24902,534.0,4,No
+50 - 60,98420.0,Salaried,Masters,3031,696.0,0,No
+50 - 60,54993.0,Salaried,Masters,26145,561.0,6,Yes
+40 - 50,40231.0,Self-Employed,Bachelors,4812,688.0,8,No
+50 - 60,45487.0,Salaried,Bachelors,24222,719.0,4,No
+60 - 70,58784.0,Unemployed,HS,16477,752.0,8,No
+50 - 60,44985.0,Self-Employed,HS,2844,696.0,7,Yes
+≥ 70,44874.0,Salaried,Masters,10110,644.0,7,No
+50 - 60,96933.0,Salaried,Bachelors,6392,771.0,4,No
+< 30,124963.0,Salaried,HS,9375,677.0,5,No
+60 - 70,36374.0,Salaried,Bachelors,10536,630.0,2,No
+60 - 70,40034.0,Salaried,Masters,34602,579.0,3,No
+< 30,45916.0,Salaried,Bachelors,14203,737.0,6,Yes
+50 - 60,32365.0,Salaried,Masters,5059,647.0,5,No
+50 - 60,72288.0,Salaried,Bachelors,15549,646.0,8,No
+60 - 70,52063.0,Salaried,HS,1977,721.0,5,No
+60 - 70,22869.0,Salaried,Bachelors,69139,586.0,7,No
+30 - 40,78491.0,Salaried,Bachelors,11008,644.0,6,No
+< 30,61165.0,Self-Employed,Bachelors,22901,640.0,4,No
+40 - 50,57400.0,Salaried,HS,15922,817.0,7,No
+50 - 60,30667.0,Salaried,Bachelors,4571,736.0,5,No
+< 30,37622.0,Salaried,Bachelors,19152,736.0,5,No
+≥ 70,44863.0,Salaried,Masters,6728,634.0,7,No
+< 30,21042.0,Salaried,Bachelors,11340,744.0,3,No
+50 - 60,42646.0,Salaried,Bachelors,10678,636.0,1,Yes
+50 - 60,45604.0,Unemployed,HS,7034,716.0,4,No
+60 - 70,33117.0,Self-Employed,PhD,6221,611.0,6,No
+50 - 60,22633.0,Self-Employed,Masters,17354,544.0,3,Yes
+< 30,34687.0,Self-Employed,HS,6863,643.0,7,No
+≥ 70,73577.0,Unemployed,Masters,1573,828.0,7,No
+≥ 70,47061.0,Salaried,HS,2681,761.0,5,No
+50 - 60,61465.0,Unemployed,Masters,6549,679.0,9,No
+40 - 50,64047.0,Salaried,HS,18005,522.0,4,Yes
+60 - 70,48362.0,Salaried,HS,9840,667.0,3,No
+40 - 50,25344.0,Self-Employed,Bachelors,7050,796.0,2,Yes
+60 - 70,15099.0,Salaried,Bachelors,16077,689.0,5,No
+40 - 50,95681.0,Self-Employed,Bachelors,13896,711.0,7,No
+30 - 40,47752.0,Salaried,Masters,19481,775.0,7,No
+60 - 70,41850.0,Salaried,HS,34649,664.0,5,No
+50 - 60,40876.0,Salaried,HS,3362,785.0,2,No
+30 - 40,42815.0,Salaried,HS,8700,662.0,5,No
+50 - 60,52602.0,Salaried,HS,5307,730.0,4,No
+60 - 70,45982.0,Salaried,Bachelors,10214,565.0,7,No
+40 - 50,23470.0,Salaried,Bachelors,8715,759.0,3,No
+50 - 60,39053.0,Salaried,Bachelors,23174,606.0,4,No
+40 - 50,28757.0,Salaried,HS,5891,779.0,4,No
+30 - 40,27773.0,Self-Employed,Masters,2866,642.0,6,No
+40 - 50,36646.0,Self-Employed,HS,7858,640.0,4,No
+40 - 50,49823.0,Self-Employed,PhD,7283,759.0,4,No
+50 - 60,36711.0,Self-Employed,HS,7646,541.0,7,Yes
+≥ 70,38985.0,Salaried,HS,9030,657.0,5,Yes
+< 30,19558.0,Self-Employed,Bachelors,16195,751.0,6,Yes
+≥ 70,33905.0,Unemployed,HS,10911,662.0,4,No
+≥ 70,55121.0,Salaried,Masters,9217,647.0,4,No
+60 - 70,33060.0,Salaried,Bachelors,8203,832.0,5,No
+50 - 60,30324.0,Salaried,Masters,8794,796.0,3,No
+< 30,21611.0,Salaried,Bachelors,2425,718.0,3,No
+50 - 60,22862.0,Salaried,HS,5657,683.0,6,No
+30 - 40,69099.0,Salaried,HS,4336,619.0,3,No
+60 - 70,19191.0,Salaried,Bachelors,7304,739.0,4,No
+60 - 70,28946.0,Salaried,PhD,27879,610.0,3,No
+50 - 60,76041.0,Salaried,PhD,21628,575.0,2,No
+30 - 40,86706.0,Salaried,Bachelors,1839,828.0,2,No
+40 - 50,15910.0,Self-Employed,HS,2379,706.0,6,No
+60 - 70,22049.0,Salaried,Masters,3385,612.0,5,No
+50 - 60,86846.0,Salaried,Bachelors,8651,682.0,4,No
+30 - 40,45225.0,Salaried,PhD,5210,757.0,1,Yes
+≥ 70,36809.0,Salaried,HS,23393,736.0,6,Yes
+60 - 70,50455.0,Salaried,Bachelors,9248,653.0,4,No
+30 - 40,24648.0,Salaried,HS,4454,698.0,7,No
+40 - 50,48712.0,Salaried,Bachelors,4300,824.0,6,No
+40 - 50,109014.0,Self-Employed,HS,3960,755.0,6,Yes
+≥ 70,49280.0,Self-Employed,Masters,16472,587.0,4,Yes
+30 - 40,37129.0,Unemployed,Masters,10763,629.0,4,No
+30 - 40,48066.0,Salaried,Masters,22133,598.0,4,No
+≥ 70,67546.0,Salaried,Bachelors,6156,699.0,11,No
+≥ 70,42448.0,Salaried,HS,17036,678.0,3,No
+30 - 40,62113.0,Unemployed,Bachelors,14271,813.0,2,No
+50 - 60,54450.0,Salaried,HS,19108,642.0,3,No
+60 - 70,20916.0,Salaried,HS,4973,692.0,3,No
+≥ 70,17176.0,Salaried,HS,4395,628.0,4,No
+40 - 50,32442.0,Self-Employed,Bachelors,9995,581.0,4,No
+≥ 70,25630.0,Salaried,HS,10415,637.0,6,No
+30 - 40,41368.0,Salaried,Bachelors,2637,725.0,2,No
+30 - 40,23295.0,Salaried,Masters,12596,605.0,3,Yes
+40 - 50,24422.0,Salaried,Bachelors,6614,633.0,4,No
+40 - 50,50937.0,Salaried,HS,41720,610.0,5,No
+< 30,19983.0,Salaried,Masters,7830,683.0,6,Yes
+30 - 40,32048.0,Self-Employed,Bachelors,7409,698.0,6,No
+60 - 70,21973.0,Salaried,Bachelors,7581,729.0,7,No
+< 30,39052.0,Salaried,Masters,3269,818.0,3,No
+< 30,58154.0,Salaried,HS,3425,748.0,4,Yes
+30 - 40,30613.0,Salaried,Bachelors,5683,682.0,2,Yes
+50 - 60,30838.0,Salaried,Masters,7841,720.0,9,No
+60 - 70,27103.0,Salaried,HS,6955,795.0,5,No
+50 - 60,59815.0,Self-Employed,Masters,16046,658.0,4,Yes
+30 - 40,40122.0,Salaried,HS,14208,655.0,9,No
+50 - 60,27770.0,Salaried,Bachelors,7191,573.0,3,No
+≥ 70,10306.0,Salaried,Bachelors,11045,758.0,6,No
+30 - 40,17898.0,Self-Employed,Masters,10064,679.0,4,No
+< 30,52654.0,Self-Employed,HS,12489,672.0,4,No
+40 - 50,37578.0,Salaried,Masters,25398,676.0,6,No
+< 30,12402.0,Salaried,Masters,17574,582.0,5,No
+50 - 60,91050.0,Salaried,Bachelors,7029,607.0,7,No
+50 - 60,52264.0,Salaried,HS,11889,683.0,6,No
+50 - 60,26733.0,Salaried,Masters,15979,579.0,4,No
+30 - 40,41612.0,Salaried,Masters,9592,735.0,4,No
+30 - 40,30680.0,Salaried,Masters,20049,743.0,3,No
+40 - 50,59509.0,Salaried,Bachelors,19753,587.0,4,No
+60 - 70,46331.0,Salaried,Masters,10588,691.0,4,No
+60 - 70,54021.0,Self-Employed,HS,6746,739.0,6,Yes
+50 - 60,25118.0,Salaried,HS,24922,612.0,6,No
+30 - 40,46150.0,Salaried,Masters,8928,708.0,6,No
+50 - 60,60609.0,Self-Employed,Bachelors,6298,785.0,8,No
+40 - 50,38794.0,Salaried,HS,2206,774.0,6,No
+50 - 60,27676.0,Salaried,Bachelors,9390,643.0,6,No
+40 - 50,21532.0,Salaried,HS,5324,693.0,4,No
+40 - 50,58663.0,Salaried,HS,15416,675.0,3,No
+≥ 70,36322.0,Salaried,Masters,6516,723.0,6,No
+30 - 40,87680.0,Salaried,Bachelors,7558,643.0,2,No
+40 - 50,29006.0,Salaried,HS,5741,702.0,7,No
+40 - 50,28759.0,Salaried,HS,15082,723.0,6,No
+40 - 50,43344.0,Self-Employed,Bachelors,3999,768.0,6,No
+≥ 70,38987.0,Salaried,Masters,4237,625.0,5,No
+< 30,17909.0,Unemployed,HS,4305,665.0,4,No
+50 - 60,23206.0,Salaried,HS,5367,631.0,2,No
+< 30,79157.0,Salaried,Masters,5080,830.0,6,No
+50 - 60,25166.0,Salaried,HS,21187,784.0,7,No
+50 - 60,36136.0,Salaried,HS,13877,627.0,1,Yes
+60 - 70,32933.0,Salaried,Bachelors,10995,661.0,9,No
+50 - 60,37578.0,Salaried,Bachelors,8264,568.0,4,Yes
+60 - 70,47242.0,Salaried,HS,8920,663.0,8,No
+40 - 50,52842.0,Self-Employed,HS,15206,622.0,4,No
+60 - 70,76215.0,Self-Employed,HS,12506,691.0,5,No
+40 - 50,26452.0,Self-Employed,HS,12327,522.0,5,No
+60 - 70,23538.0,Salaried,Bachelors,21735,732.0,8,No
+40 - 50,25658.0,Self-Employed,HS,4006,652.0,2,Yes
+60 - 70,30173.0,Unemployed,HS,1738,690.0,5,No
+50 - 60,23991.0,Self-Employed,Bachelors,5627,662.0,3,No
+60 - 70,103009.0,Self-Employed,HS,10144,688.0,4,No
+30 - 40,24979.0,Salaried,HS,2906,646.0,4,Yes
+30 - 40,48019.0,Unemployed,Masters,4564,723.0,2,No
+< 30,18425.0,Self-Employed,PhD,10125,788.0,4,No
+60 - 70,41353.0,Salaried,HS,32259,603.0,5,No
+40 - 50,28753.0,Salaried,Bachelors,5365,674.0,5,Yes
+< 30,28466.0,Self-Employed,Masters,14083,714.0,5,No
+50 - 60,27550.0,Unemployed,HS,5328,762.0,3,No
+60 - 70,83762.0,Self-Employed,HS,2092,737.0,4,Yes
+30 - 40,30903.0,Salaried,Bachelors,3377,621.0,4,No
+40 - 50,27008.0,Self-Employed,Masters,7359,722.0,9,No
+50 - 60,50399.0,Self-Employed,HS,7793,747.0,9,No
+≥ 70,11508.0,Self-Employed,HS,4722,694.0,5,No
+30 - 40,75008.0,Salaried,Masters,5133,503.0,5,No
+30 - 40,40924.0,Salaried,Bachelors,11038,738.0,3,No
+40 - 50,29576.0,Salaried,Masters,3596,657.0,4,No
+50 - 60,58412.0,Salaried,Masters,14185,564.0,5,No
+60 - 70,71507.0,Salaried,Masters,10312,694.0,2,No
+30 - 40,87979.0,Salaried,Masters,7111,713.0,8,No
+30 - 40,64494.0,Salaried,Bachelors,3240,614.0,4,No
+30 - 40,60550.0,Salaried,Masters,13568,728.0,4,No
+40 - 50,44860.0,Salaried,Bachelors,18099,806.0,6,Yes
+60 - 70,46039.0,Salaried,Bachelors,3929,650.0,3,No
+40 - 50,42268.0,Salaried,Bachelors,8478,676.0,7,No
+30 - 40,25957.0,Salaried,Bachelors,4916,655.0,3,No
+≥ 70,38452.0,Salaried,Masters,5041,764.0,2,No
+60 - 70,34519.0,Self-Employed,HS,4554,681.0,6,No
+40 - 50,58634.0,Salaried,HS,5073,633.0,3,No
+30 - 40,81535.0,Salaried,Masters,11583,737.0,7,Yes
+50 - 60,27205.0,Self-Employed,HS,16140,632.0,5,No
+50 - 60,33085.0,Unemployed,Bachelors,9806,580.0,7,No
+50 - 60,35668.0,Salaried,Bachelors,8431,593.0,6,No
+40 - 50,82550.0,Salaried,Bachelors,14379,674.0,2,No
+60 - 70,45019.0,Salaried,Bachelors,7495,716.0,1,No
+30 - 40,76451.0,Unemployed,Masters,7277,719.0,5,No
+40 - 50,10869.0,Salaried,Bachelors,5710,804.0,2,Yes
+< 30,22141.0,Salaried,Bachelors,5405,599.0,3,No
+< 30,17935.0,Self-Employed,Bachelors,10281,723.0,6,No
+< 30,33328.0,Salaried,Bachelors,15503,577.0,5,No
+≥ 70,24893.0,Salaried,HS,6374,643.0,6,No
+< 30,72082.0,Unemployed,HS,18207,729.0,9,No
+30 - 40,25717.0,Unemployed,Masters,6891,712.0,4,No
+40 - 50,52638.0,Salaried,Bachelors,17094,499.0,2,No
+60 - 70,15931.0,Self-Employed,Bachelors,18050,548.0,2,No
+< 30,41291.0,Salaried,HS,40074,703.0,7,No
+50 - 60,56304.0,Self-Employed,Bachelors,6477,725.0,7,Yes
+50 - 60,32867.0,Self-Employed,Masters,3522,664.0,6,No
+50 - 60,18238.0,Salaried,HS,12014,721.0,6,No
+40 - 50,52426.0,Salaried,Bachelors,7002,850.0,7,No
+50 - 60,38584.0,Salaried,HS,4158,676.0,4,No
+30 - 40,16267.0,Self-Employed,Bachelors,7255,715.0,7,No
+40 - 50,29592.0,Self-Employed,HS,14870,676.0,6,No
+40 - 50,104848.0,Salaried,HS,6053,764.0,6,No
+60 - 70,101224.0,Salaried,Bachelors,18861,743.0,5,Yes
+50 - 60,36430.0,Salaried,Bachelors,17200,750.0,3,No
+40 - 50,37876.0,Salaried,HS,5019,792.0,7,No
+50 - 60,43063.0,Self-Employed,Masters,25586,583.0,3,No
+30 - 40,28559.0,Self-Employed,Bachelors,3077,614.0,3,No
+30 - 40,52184.0,Self-Employed,Masters,6445,712.0,7,No
+50 - 60,29012.0,Salaried,HS,9759,581.0,3,No
+50 - 60,75268.0,Salaried,Bachelors,13485,719.0,4,No
+50 - 60,52302.0,Salaried,Masters,6250,632.0,5,No
+50 - 60,19348.0,Salaried,PhD,6552,808.0,7,No
+30 - 40,10571.0,Self-Employed,HS,11166,647.0,4,No
+50 - 60,40826.0,Salaried,HS,10019,629.0,11,No
+60 - 70,17417.0,Self-Employed,HS,6152,850.0,4,No
+40 - 50,52902.0,Self-Employed,Masters,16075,569.0,2,No
+60 - 70,19182.0,Salaried,Bachelors,8979,774.0,7,Yes
+60 - 70,38006.0,Salaried,Masters,4422,467.0,3,No
+< 30,40433.0,Self-Employed,Bachelors,9038,571.0,4,No
+30 - 40,46482.0,Salaried,HS,8592,630.0,6,No
+40 - 50,28147.0,Salaried,HS,11998,649.0,4,No
+< 30,42159.0,Self-Employed,Bachelors,6883,597.0,2,No
+< 30,46431.0,Self-Employed,HS,5813,822.0,9,No
+30 - 40,180566.0,Salaried,Masters,10438,741.0,3,Yes
+< 30,52311.0,Salaried,Bachelors,2723,687.0,8,No
+60 - 70,27331.0,Salaried,HS,9294,714.0,6,No
+< 30,33636.0,Salaried,Masters,9203,585.0,6,No
+60 - 70,29426.0,Salaried,Masters,16687,711.0,6,Yes
+40 - 50,18080.0,Salaried,HS,10209,534.0,3,No
+40 - 50,49864.0,Self-Employed,Bachelors,3511,708.0,5,No
+60 - 70,110827.0,Salaried,Masters,6838,706.0,4,No
+60 - 70,59628.0,Salaried,HS,15990,808.0,2,No
+40 - 50,34854.0,Salaried,Masters,10766,691.0,8,No
+30 - 40,11893.0,Salaried,Bachelors,10890,617.0,10,No
+30 - 40,38003.0,Salaried,HS,10874,707.0,5,Yes
+< 30,52855.0,Salaried,Masters,20143,786.0,5,No
+< 30,49414.0,Salaried,Masters,20091,647.0,7,No
+50 - 60,35843.0,Salaried,Bachelors,11132,696.0,7,No
+60 - 70,56660.0,Salaried,Bachelors,2874,591.0,6,No
+50 - 60,47340.0,Salaried,Bachelors,3627,626.0,1,No
+30 - 40,60275.0,Salaried,Bachelors,7584,744.0,2,No
+30 - 40,26685.0,Salaried,Masters,17034,567.0,4,No
+50 - 60,37026.0,Salaried,Bachelors,18643,767.0,4,No
+< 30,49791.0,Salaried,HS,4463,813.0,3,No
+< 30,13754.0,Salaried,HS,9375,622.0,2,No
+< 30,47944.0,Salaried,HS,2185,703.0,5,No
+40 - 50,15225.0,Salaried,HS,8013,629.0,6,No
+50 - 60,65068.0,Salaried,Masters,19894,713.0,3,No
+≥ 70,111939.0,Self-Employed,HS,17061,670.0,9,No
+≥ 70,30980.0,Self-Employed,HS,5393,670.0,7,No
+< 30,34792.0,Salaried,Bachelors,7664,736.0,6,No
+30 - 40,38865.0,Salaried,PhD,15402,582.0,3,Yes
+< 30,63916.0,Self-Employed,HS,6435,749.0,8,No
+30 - 40,36028.0,Salaried,HS,3726,671.0,1,No
+40 - 50,26710.0,Unemployed,Masters,10178,570.0,4,No
+50 - 60,44140.0,Salaried,Bachelors,5714,734.0,6,No
+< 30,24131.0,Salaried,Masters,11372,611.0,4,No
+40 - 50,24398.0,Salaried,HS,14931,816.0,2,No
+≥ 70,14246.0,Self-Employed,Bachelors,8668,648.0,5,No
+50 - 60,33634.0,Salaried,Bachelors,20391,692.0,3,No
+60 - 70,30368.0,Salaried,HS,10393,786.0,3,No
+60 - 70,44395.0,Salaried,HS,8683,768.0,2,No
+50 - 60,52554.0,Salaried,Masters,7605,552.0,3,No
+60 - 70,76685.0,Salaried,HS,7906,704.0,5,No
+50 - 60,40208.0,Salaried,Masters,14048,638.0,3,No
+40 - 50,32996.0,Salaried,HS,8335,770.0,4,No
+60 - 70,33756.0,Self-Employed,Masters,15035,762.0,7,No
+60 - 70,23064.0,Self-Employed,Bachelors,22595,689.0,4,Yes
+50 - 60,28864.0,Salaried,Masters,13135,640.0,5,No
+< 30,36963.0,Salaried,HS,1203,716.0,7,Yes
+50 - 60,48120.0,Salaried,Bachelors,10116,662.0,8,Yes
+30 - 40,59970.0,Self-Employed,HS,7493,612.0,5,No
+40 - 50,44175.0,Self-Employed,Bachelors,9278,745.0,10,No
+≥ 70,103271.0,Salaried,Bachelors,5230,745.0,7,No
+30 - 40,19058.0,Self-Employed,Bachelors,3607,850.0,3,No
+40 - 50,69341.0,Salaried,Bachelors,9992,677.0,5,No
+≥ 70,103492.0,Salaried,Bachelors,23464,684.0,3,No
+30 - 40,35961.0,Salaried,Bachelors,21430,644.0,2,No
+50 - 60,64092.0,Salaried,Masters,13085,773.0,5,No
+40 - 50,21464.0,Self-Employed,PhD,5016,716.0,6,Yes
+≥ 70,81297.0,Unemployed,Bachelors,13562,722.0,3,No
+≥ 70,71344.0,Salaried,Masters,14734,745.0,5,No
+60 - 70,75528.0,Unemployed,Masters,4166,713.0,10,Yes
+< 30,20750.0,Unemployed,HS,12517,783.0,3,No
+30 - 40,60903.0,Salaried,Bachelors,3604,824.0,4,No
+≥ 70,35783.0,Salaried,Masters,4313,713.0,6,No
+40 - 50,50790.0,Self-Employed,Bachelors,1658,788.0,3,No
+40 - 50,66351.0,Unemployed,Bachelors,17175,672.0,5,No
+60 - 70,52007.0,Unemployed,HS,16334,532.0,7,No
+50 - 60,54607.0,Salaried,Masters,10724,680.0,6,No
+60 - 70,99403.0,Salaried,Bachelors,8968,663.0,2,No
+40 - 50,20494.0,Salaried,Bachelors,8528,644.0,8,No
+50 - 60,22826.0,Salaried,Bachelors,12129,519.0,5,No
+40 - 50,45380.0,Salaried,Bachelors,7110,850.0,3,No
+< 30,38283.0,Unemployed,Bachelors,9905,714.0,2,Yes
+50 - 60,56599.0,Unemployed,HS,10763,715.0,8,No
+40 - 50,29554.0,Salaried,Masters,12398,697.0,7,No
+60 - 70,50247.0,Self-Employed,Bachelors,13641,769.0,4,No
+30 - 40,33236.0,Salaried,Bachelors,14600,639.0,5,No
+40 - 50,40481.0,Salaried,HS,16212,780.0,5,No
+50 - 60,71541.0,Salaried,Masters,13134,757.0,5,No
+60 - 70,29241.0,Salaried,Bachelors,7209,715.0,5,No
+30 - 40,40791.0,Salaried,PhD,12979,738.0,3,Yes
+60 - 70,24557.0,Self-Employed,Bachelors,12745,694.0,1,No
+60 - 70,25220.0,Salaried,HS,19015,777.0,7,Yes
+60 - 70,18702.0,Salaried,Bachelors,4277,724.0,7,No
+30 - 40,64856.0,Salaried,Bachelors,12705,741.0,5,No
+40 - 50,48278.0,Salaried,HS,7237,700.0,8,No
+40 - 50,75726.0,Salaried,HS,4005,712.0,6,No
+40 - 50,12967.0,Salaried,HS,15831,712.0,5,No
+50 - 60,17593.0,Salaried,HS,28277,589.0,5,No
+50 - 60,60090.0,Salaried,Bachelors,5691,729.0,5,No
+60 - 70,55157.0,Salaried,Bachelors,8234,631.0,5,No
+40 - 50,37123.0,Salaried,HS,4711,648.0,3,No
+40 - 50,41444.0,Salaried,Bachelors,5455,624.0,3,No
+30 - 40,36308.0,Self-Employed,Bachelors,6321,753.0,3,No
+30 - 40,60720.0,Salaried,Bachelors,11921,753.0,4,No
+60 - 70,95326.0,Salaried,Masters,5654,602.0,7,No
+50 - 60,26773.0,Salaried,HS,12303,715.0,3,No
+40 - 50,23755.0,Salaried,Bachelors,7605,682.0,4,No
+< 30,35081.0,Salaried,HS,2028,544.0,6,No
+30 - 40,79175.0,Salaried,Masters,5088,729.0,4,No
+50 - 60,37171.0,Salaried,Masters,10419,630.0,4,No
+< 30,42776.0,Salaried,HS,17934,648.0,6,No
+40 - 50,82106.0,Salaried,Bachelors,4399,719.0,10,No
+30 - 40,43538.0,Salaried,Bachelors,17283,517.0,3,No
+< 30,44569.0,Self-Employed,HS,9789,640.0,2,No
+≥ 70,61873.0,Unemployed,Masters,26605,715.0,1,No
+30 - 40,28412.0,Salaried,HS,3594,643.0,4,No
+< 30,10338.0,Self-Employed,Masters,7221,637.0,0,No
+60 - 70,44356.0,Salaried,HS,23174,810.0,4,No
+50 - 60,19515.0,Salaried,HS,10943,703.0,5,No
+60 - 70,54765.0,Self-Employed,Masters,11240,694.0,4,No
+40 - 50,52122.0,Salaried,PhD,2245,642.0,10,No
+60 - 70,19259.0,Salaried,HS,13414,727.0,3,No
+60 - 70,39653.0,Self-Employed,Masters,18120,713.0,6,No
+60 - 70,27727.0,Salaried,Masters,5832,684.0,5,No
+60 - 70,17532.0,Salaried,HS,7691,748.0,5,No
+60 - 70,70172.0,Salaried,HS,5141,680.0,3,Yes
+≥ 70,15834.0,Salaried,Masters,20989,635.0,6,No
+30 - 40,32560.0,Self-Employed,Bachelors,14213,746.0,1,No
+40 - 50,32150.0,Salaried,Bachelors,4258,572.0,2,No
+60 - 70,54993.0,Salaried,Masters,12144,670.0,5,No
+≥ 70,38001.0,Salaried,Masters,2050,688.0,6,No
+50 - 60,39465.0,Salaried,PhD,11452,589.0,2,No
+40 - 50,62413.0,Salaried,Masters,4495,664.0,3,No
+50 - 60,37583.0,Salaried,HS,4906,553.0,3,No
+60 - 70,18097.0,Salaried,PhD,6270,740.0,3,No
+40 - 50,22132.0,Salaried,HS,13399,558.0,4,No
+30 - 40,29297.0,Salaried,HS,9331,628.0,5,Yes
+40 - 50,30043.0,Salaried,PhD,15015,714.0,4,Yes
+40 - 50,27586.0,Salaried,Bachelors,13582,656.0,10,No
+< 30,33300.0,Salaried,HS,9136,816.0,5,No
+30 - 40,75592.0,Salaried,HS,21688,552.0,12,No
+60 - 70,26886.0,Salaried,HS,35404,750.0,4,No
+< 30,36756.0,Salaried,Masters,2585,690.0,6,No
+50 - 60,49447.0,Salaried,HS,22818,712.0,4,No
+60 - 70,39945.0,Salaried,HS,25640,630.0,2,No
+40 - 50,17470.0,Salaried,Bachelors,6474,703.0,7,No
+≥ 70,125541.0,Salaried,Bachelors,3736,757.0,5,No
+50 - 60,57192.0,Salaried,Bachelors,2287,661.0,6,No
+40 - 50,30480.0,Salaried,Masters,23745,657.0,3,No
+30 - 40,40343.0,Salaried,Masters,8519,664.0,2,No
+50 - 60,44406.0,Salaried,Masters,10244,694.0,6,No
+< 30,32921.0,Salaried,Masters,18214,795.0,5,No
+50 - 60,31205.0,Salaried,Masters,7341,655.0,4,No
+≥ 70,30577.0,Salaried,Masters,9996,785.0,3,No
+60 - 70,18022.0,Salaried,Bachelors,12479,649.0,2,No
+40 - 50,29292.0,Salaried,HS,5210,779.0,5,No
+50 - 60,15740.0,Salaried,Masters,12516,626.0,5,No
+60 - 70,60875.0,Salaried,Masters,20014,612.0,3,No
+< 30,51172.0,Self-Employed,Bachelors,14904,695.0,7,No
+60 - 70,51041.0,Self-Employed,Bachelors,11471,619.0,0,Yes
+50 - 60,36290.0,Salaried,Bachelors,30804,536.0,4,No
+60 - 70,25227.0,Salaried,Bachelors,11168,643.0,5,No
+≥ 70,83582.0,Salaried,Bachelors,10731,630.0,2,No
+40 - 50,95153.0,Salaried,Bachelors,12988,733.0,7,No
+30 - 40,84528.0,Self-Employed,HS,5020,686.0,5,No
+40 - 50,11697.0,Self-Employed,Bachelors,9361,762.0,5,No
+< 30,32692.0,Salaried,Bachelors,20936,614.0,3,No
+50 - 60,59087.0,Salaried,Masters,8744,623.0,6,No
+60 - 70,84070.0,Self-Employed,Bachelors,6715,532.0,4,No
+30 - 40,73362.0,Unemployed,HS,15894,850.0,0,No
+40 - 50,77794.0,Salaried,HS,18285,626.0,3,No
+≥ 70,41105.0,Self-Employed,Masters,9679,563.0,3,Yes
+60 - 70,40895.0,Salaried,Bachelors,6564,719.0,3,Yes
+30 - 40,48209.0,Salaried,Masters,6685,723.0,8,No
+40 - 50,170792.0,Self-Employed,Masters,7320,747.0,5,No
+30 - 40,94541.0,Salaried,Bachelors,17099,720.0,7,No
+60 - 70,25974.0,Salaried,Bachelors,10324,728.0,5,No
+40 - 50,49663.0,Salaried,Masters,11866,696.0,5,No
+40 - 50,74511.0,Salaried,HS,7696,683.0,4,No
+50 - 60,41625.0,Salaried,Bachelors,26742,614.0,6,No
+≥ 70,15536.0,Salaried,Masters,10947,651.0,6,Yes
+30 - 40,117030.0,Salaried,HS,11160,800.0,4,No
+30 - 40,58693.0,Salaried,Masters,12750,675.0,3,No
+50 - 60,53632.0,Salaried,Bachelors,5640,518.0,2,No
+40 - 50,63444.0,Self-Employed,HS,4586,670.0,1,No
+30 - 40,15684.0,Salaried,Bachelors,2578,617.0,4,No
+50 - 60,49455.0,Salaried,PhD,33799,762.0,8,No
+< 30,22486.0,Salaried,Bachelors,5303,694.0,9,No
+40 - 50,66917.0,Salaried,Bachelors,3712,648.0,3,No
+< 30,26049.0,Salaried,Masters,5892,672.0,1,No
+60 - 70,54143.0,Salaried,Bachelors,5084,748.0,2,No
+40 - 50,28887.0,Self-Employed,Bachelors,27522,670.0,5,Yes
+60 - 70,21763.0,Salaried,HS,5458,635.0,5,No
+50 - 60,40507.0,Salaried,Bachelors,9952,698.0,3,Yes
+30 - 40,70525.0,Salaried,Bachelors,3022,572.0,7,No
+40 - 50,61225.0,Salaried,HS,9070,670.0,7,Yes
+30 - 40,27912.0,Salaried,Bachelors,7041,605.0,4,Yes
+< 30,64914.0,Salaried,Bachelors,3207,736.0,5,No
+40 - 50,38055.0,Salaried,HS,48869,724.0,3,No
+< 30,32262.0,Salaried,Bachelors,12254,680.0,3,No
+< 30,51318.0,Salaried,Masters,15262,763.0,8,No
+50 - 60,33870.0,Self-Employed,PhD,5641,641.0,4,No
+≥ 70,61820.0,Salaried,HS,8992,699.0,5,No
+40 - 50,31887.0,Salaried,HS,27847,734.0,1,No
+40 - 50,34077.0,Salaried,PhD,3187,732.0,6,No
+40 - 50,18515.0,Self-Employed,Masters,7871,801.0,4,Yes
+≥ 70,24369.0,Salaried,Bachelors,16441,612.0,6,No
+40 - 50,55806.0,Salaried,Masters,13998,616.0,5,Yes
+60 - 70,65496.0,Self-Employed,Bachelors,8686,673.0,5,No
+40 - 50,43898.0,Salaried,HS,27922,527.0,3,No
+50 - 60,22828.0,Salaried,Bachelors,13576,597.0,6,No
+60 - 70,42016.0,Salaried,HS,6066,719.0,3,Yes
+40 - 50,53094.0,Salaried,Bachelors,6156,610.0,5,No
+60 - 70,31304.0,Self-Employed,HS,7856,750.0,2,No
+60 - 70,95251.0,Salaried,HS,12132,547.0,5,No
+50 - 60,41656.0,Salaried,Bachelors,11178,791.0,7,No
+30 - 40,14099.0,Salaried,Bachelors,6501,770.0,11,No
+60 - 70,56604.0,Self-Employed,PhD,5128,777.0,3,No
+30 - 40,64796.0,Salaried,HS,20875,768.0,3,No
+≥ 70,82883.0,Salaried,Bachelors,9035,685.0,6,Yes
+< 30,26046.0,Salaried,Bachelors,14409,673.0,4,No
+60 - 70,31442.0,Self-Employed,Bachelors,5959,687.0,4,No
+50 - 60,22521.0,Salaried,HS,9594,713.0,2,No
+60 - 70,22235.0,Salaried,HS,8988,702.0,5,No
+≥ 70,53330.0,Salaried,Bachelors,7010,682.0,7,No
+< 30,26659.0,Salaried,Bachelors,8641,774.0,2,No
+50 - 60,19662.0,Salaried,Bachelors,21453,616.0,6,No
+< 30,25111.0,Salaried,Masters,9920,735.0,8,No
+≥ 70,47957.0,Salaried,Bachelors,56514,575.0,3,No
+60 - 70,47833.0,Salaried,Bachelors,21602,776.0,5,No
+60 - 70,48788.0,Self-Employed,Masters,10800,728.0,4,No
+40 - 50,36181.0,Salaried,HS,7385,686.0,3,No
+< 30,43648.0,Self-Employed,Bachelors,19091,721.0,2,No
+< 30,62500.0,Self-Employed,Bachelors,12589,596.0,5,Yes
+< 30,24904.0,Salaried,Masters,11245,787.0,9,No
+40 - 50,36498.0,Salaried,PhD,15715,684.0,5,No
+50 - 60,90778.0,Self-Employed,Bachelors,12455,816.0,6,No
+≥ 70,17713.0,Self-Employed,HS,12121,646.0,10,Yes
+50 - 60,20794.0,Unemployed,Masters,44196,644.0,5,No
+< 30,52093.0,Salaried,HS,13625,676.0,2,Yes
+60 - 70,70712.0,Salaried,Masters,18978,642.0,3,No
+< 30,38026.0,Salaried,Masters,13531,654.0,8,No
+< 30,29298.0,Salaried,Masters,8761,614.0,3,No
+60 - 70,74412.0,Salaried,HS,12710,714.0,2,No
+60 - 70,74535.0,Salaried,Masters,30952,662.0,2,No
+< 30,27423.0,Self-Employed,Bachelors,25286,623.0,4,No
+60 - 70,81212.0,Salaried,Bachelors,10688,593.0,6,No
+30 - 40,27394.0,Self-Employed,Bachelors,6415,668.0,2,No
+50 - 60,48858.0,Salaried,Bachelors,5313,729.0,4,No
+< 30,25202.0,Salaried,Masters,9930,742.0,3,No
+60 - 70,10623.0,Unemployed,Bachelors,6861,625.0,5,No
+40 - 50,37651.0,Self-Employed,HS,10799,681.0,7,No
+30 - 40,36258.0,Salaried,Masters,4775,676.0,2,No
+60 - 70,49742.0,Salaried,HS,2637,696.0,4,No
+≥ 70,22936.0,Salaried,HS,9028,628.0,11,No
+40 - 50,76009.0,Salaried,Bachelors,5293,747.0,1,No
+50 - 60,30522.0,Salaried,HS,16235,719.0,8,No
+30 - 40,56003.0,Salaried,HS,18341,602.0,1,No
+50 - 60,27576.0,Self-Employed,HS,9463,805.0,5,No
+60 - 70,40345.0,Salaried,Bachelors,3009,583.0,13,No
+< 30,50692.0,Salaried,Bachelors,12368,739.0,2,No
+< 30,77586.0,Salaried,Bachelors,6628,655.0,7,Yes
+60 - 70,69859.0,Self-Employed,Masters,8045,674.0,4,No
+< 30,57512.0,Self-Employed,Masters,14726,633.0,4,No
+30 - 40,15342.0,Salaried,Bachelors,12615,679.0,4,No
+50 - 60,59336.0,Self-Employed,HS,6994,690.0,7,No
+50 - 60,29334.0,Salaried,Bachelors,9318,627.0,5,No
+30 - 40,23605.0,Salaried,Masters,8059,508.0,5,No
+< 30,35416.0,Salaried,Bachelors,7072,744.0,7,No
+40 - 50,52645.0,Unemployed,HS,15545,784.0,3,No
+50 - 60,28763.0,Self-Employed,Masters,8734,692.0,4,No
+≥ 70,48866.0,Unemployed,HS,16196,692.0,3,No
+60 - 70,19070.0,Salaried,HS,32918,638.0,3,No
+30 - 40,27946.0,Unemployed,HS,20538,699.0,6,No
+40 - 50,27787.0,Salaried,Bachelors,13486,794.0,5,Yes
+< 30,85302.0,Salaried,HS,7133,555.0,6,No
+50 - 60,46896.0,Salaried,Masters,18758,756.0,3,No
+40 - 50,29841.0,Self-Employed,HS,24601,739.0,1,No
+< 30,37442.0,Salaried,HS,14822,739.0,3,No
+30 - 40,64691.0,Unemployed,PhD,8032,652.0,3,Yes
+40 - 50,27233.0,Salaried,HS,3139,752.0,4,No
+60 - 70,75580.0,Salaried,Bachelors,6800,738.0,1,No
+60 - 70,44191.0,Salaried,Bachelors,7571,715.0,4,No
+60 - 70,44386.0,Salaried,Masters,4862,749.0,5,No
+40 - 50,45533.0,Salaried,Masters,3623,659.0,7,No
+< 30,48700.0,Salaried,Bachelors,15105,766.0,2,No
+60 - 70,30607.0,Salaried,Bachelors,16804,698.0,7,No
+60 - 70,36814.0,Salaried,Bachelors,4478,730.0,0,No
+< 30,38611.0,Salaried,Masters,8973,674.0,4,No
+50 - 60,31999.0,Self-Employed,Bachelors,12594,665.0,8,No
+60 - 70,24328.0,Salaried,Bachelors,18553,678.0,4,No
+50 - 60,21166.0,Salaried,HS,12219,711.0,3,No
+≥ 70,78714.0,Salaried,Masters,13895,689.0,6,No
+30 - 40,33740.0,Salaried,Bachelors,8782,678.0,2,No
+40 - 50,39585.0,Salaried,HS,4367,634.0,4,No
+60 - 70,29093.0,Salaried,PhD,9355,512.0,3,Yes
+30 - 40,69712.0,Salaried,Masters,3059,628.0,5,No
+40 - 50,25629.0,Self-Employed,Bachelors,9136,738.0,9,No
+< 30,60044.0,Salaried,Bachelors,12771,733.0,5,No
+40 - 50,48105.0,Self-Employed,Masters,5262,787.0,7,No
+40 - 50,19551.0,Salaried,Bachelors,7136,733.0,9,No
+60 - 70,29065.0,Self-Employed,Bachelors,1382,650.0,6,No
+50 - 60,46880.0,Salaried,Bachelors,3648,795.0,2,No
+50 - 60,42710.0,Unemployed,Masters,1096,609.0,2,Yes
+< 30,41034.0,Self-Employed,PhD,10275,718.0,6,No
+50 - 60,32184.0,Unemployed,HS,10336,765.0,6,No
+30 - 40,40275.0,Unemployed,HS,2379,641.0,3,No
+50 - 60,41035.0,Salaried,Masters,8325,673.0,2,Yes
+50 - 60,45390.0,Self-Employed,Masters,12451,678.0,3,Yes
+≥ 70,65795.0,Salaried,Bachelors,2772,642.0,4,No
+< 30,52868.0,Salaried,PhD,11854,642.0,4,No
+50 - 60,38497.0,Salaried,Bachelors,15466,734.0,8,No
+40 - 50,19499.0,Salaried,Masters,5442,628.0,1,No
+60 - 70,25470.0,Self-Employed,Masters,6596,664.0,3,No
+50 - 60,51604.0,Salaried,Bachelors,6355,666.0,4,No
+≥ 70,76242.0,Self-Employed,Bachelors,4556,716.0,7,No
+≥ 70,55084.0,Salaried,Bachelors,13694,540.0,1,No
+< 30,92888.0,Unemployed,Bachelors,15095,717.0,7,No
+< 30,39470.0,Unemployed,Masters,5698,703.0,3,No
+60 - 70,21813.0,Self-Employed,Bachelors,16301,612.0,3,Yes
+30 - 40,74800.0,Salaried,Bachelors,5141,766.0,6,No
+< 30,29378.0,Salaried,Bachelors,7577,664.0,3,No
+< 30,58668.0,Salaried,Bachelors,10093,647.0,4,No
+40 - 50,103462.0,Salaried,Masters,10072,692.0,2,No
+30 - 40,66945.0,Self-Employed,Bachelors,4731,763.0,2,No
+≥ 70,53540.0,Salaried,HS,5821,621.0,4,No
+< 30,21807.0,Salaried,Bachelors,9681,744.0,5,No
+40 - 50,86281.0,Salaried,Masters,10082,692.0,2,Yes
+30 - 40,21631.0,Self-Employed,Masters,15658,678.0,8,Yes
+≥ 70,52062.0,Self-Employed,Masters,5931,745.0,8,No
+< 30,27565.0,Salaried,HS,5090,587.0,4,Yes
+≥ 70,29477.0,Salaried,HS,13683,541.0,3,No
+< 30,74512.0,Salaried,HS,5391,588.0,2,No
+≥ 70,24184.0,Salaried,Bachelors,9843,674.0,4,No
+30 - 40,29247.0,Salaried,HS,2133,771.0,4,No
+50 - 60,43816.0,Salaried,Masters,5429,730.0,6,No
+50 - 60,28020.0,Self-Employed,Bachelors,5085,813.0,3,No
+40 - 50,43441.0,Self-Employed,Masters,5206,625.0,7,Yes
+30 - 40,58295.0,Salaried,Masters,5812,819.0,3,No
+50 - 60,28975.0,Salaried,HS,10485,731.0,8,No
+30 - 40,70355.0,Self-Employed,Bachelors,15609,643.0,4,No
+< 30,27597.0,Unemployed,Bachelors,3452,682.0,4,No
+60 - 70,104152.0,Salaried,Masters,8738,742.0,12,No
+60 - 70,68132.0,Salaried,HS,8382,745.0,4,No
+30 - 40,59258.0,Salaried,Masters,11195,765.0,1,No
+50 - 60,22937.0,Salaried,Bachelors,6863,543.0,7,No
+60 - 70,101139.0,Salaried,HS,7951,701.0,4,No
+< 30,56638.0,Salaried,Masters,5373,732.0,4,No
+50 - 60,61671.0,Unemployed,HS,8389,598.0,4,No
+< 30,67589.0,Salaried,Bachelors,9345,653.0,5,No
+< 30,73736.0,Salaried,HS,9281,664.0,1,No
+< 30,45904.0,Self-Employed,HS,3064,804.0,3,Yes
+≥ 70,34220.0,Salaried,HS,19894,687.0,6,No
+60 - 70,87540.0,Salaried,Masters,31413,740.0,5,No
+30 - 40,26984.0,Salaried,HS,4926,744.0,7,No
+50 - 60,13683.0,Unemployed,Bachelors,12799,745.0,5,No
+≥ 70,52870.0,Salaried,Masters,13354,667.0,3,No
+30 - 40,48234.0,Self-Employed,Bachelors,3898,635.0,4,No
+40 - 50,82274.0,Self-Employed,Bachelors,10274,687.0,2,No
+50 - 60,23279.0,Salaried,Masters,32182,552.0,4,No
+< 30,28192.0,Salaried,Masters,16646,632.0,6,No
+≥ 70,29488.0,Salaried,Bachelors,10393,679.0,2,No
+< 30,27919.0,Unemployed,HS,8672,636.0,4,No
+60 - 70,26354.0,Salaried,Masters,6134,596.0,7,No
+30 - 40,56330.0,Salaried,Bachelors,9837,850.0,2,No
+50 - 60,31636.0,Salaried,HS,11600,758.0,6,No
+< 30,29543.0,Salaried,HS,7609,829.0,3,No
+≥ 70,51635.0,Salaried,Bachelors,4083,665.0,3,No
+60 - 70,69155.0,Self-Employed,PhD,1867,723.0,3,No
+< 30,25949.0,Salaried,HS,3820,784.0,5,No
+50 - 60,41263.0,Self-Employed,Masters,10728,608.0,0,No
+50 - 60,44201.0,Self-Employed,HS,5707,736.0,2,No
+< 30,54192.0,Salaried,Bachelors,24980,756.0,5,No
+50 - 60,39752.0,Salaried,HS,5799,783.0,4,No
+40 - 50,55718.0,Salaried,Bachelors,18845,671.0,4,No
+≥ 70,20358.0,Self-Employed,HS,5279,612.0,5,No
+60 - 70,60836.0,Self-Employed,Bachelors,15174,806.0,4,No
+≥ 70,61370.0,Self-Employed,PhD,22767,760.0,10,No
+50 - 60,22772.0,Salaried,Bachelors,3874,628.0,8,No
+60 - 70,29888.0,Salaried,PhD,4059,782.0,2,No
+30 - 40,19813.0,Salaried,PhD,5279,733.0,7,No
+50 - 60,38252.0,Self-Employed,Bachelors,9113,748.0,6,No
+30 - 40,21312.0,Self-Employed,Bachelors,8388,724.0,7,No
+60 - 70,38315.0,Salaried,PhD,13646,663.0,6,No
+< 30,35533.0,Salaried,Bachelors,4534,603.0,5,No
+40 - 50,14723.0,Salaried,HS,10112,707.0,4,No
+50 - 60,91097.0,Unemployed,Bachelors,16944,827.0,3,No
+40 - 50,32906.0,Salaried,HS,8587,657.0,2,No
+40 - 50,34415.0,Salaried,Bachelors,6499,734.0,3,No
+60 - 70,27128.0,Salaried,Bachelors,3042,615.0,7,No
+≥ 70,47145.0,Salaried,Bachelors,3799,670.0,4,No
+≥ 70,26389.0,Salaried,HS,16395,667.0,4,No
+< 30,35797.0,Salaried,HS,1904,584.0,1,No
+50 - 60,47270.0,Salaried,PhD,12021,794.0,5,No
+50 - 60,29859.0,Salaried,HS,10208,682.0,6,No
+40 - 50,29204.0,Salaried,PhD,35647,581.0,5,No
+< 30,35530.0,Salaried,Masters,16703,462.0,3,Yes
+30 - 40,16099.0,Salaried,Bachelors,9037,768.0,8,Yes
+< 30,96552.0,Salaried,Bachelors,7946,654.0,3,No
+60 - 70,91437.0,Salaried,Bachelors,20820,613.0,3,No
+50 - 60,30088.0,Salaried,Bachelors,11740,734.0,6,No
+50 - 60,26958.0,Self-Employed,HS,6589,622.0,5,No
+< 30,46479.0,Salaried,PhD,38097,715.0,9,No
+50 - 60,84825.0,Salaried,Bachelors,1458,588.0,4,No
+30 - 40,87675.0,Salaried,Bachelors,9453,810.0,2,No
+< 30,35667.0,Salaried,Bachelors,28479,742.0,2,No
+50 - 60,29983.0,Salaried,Bachelors,1043,689.0,6,Yes
+< 30,31055.0,Salaried,HS,12237,701.0,2,No
+≥ 70,44133.0,Salaried,Bachelors,3575,850.0,2,No
+≥ 70,50971.0,Unemployed,Masters,18739,613.0,5,No
+30 - 40,23928.0,Salaried,Bachelors,5779,752.0,6,No
+≥ 70,58079.0,Salaried,Masters,25069,640.0,8,No
+60 - 70,18875.0,Self-Employed,Bachelors,8904,555.0,3,Yes
+< 30,35495.0,Self-Employed,HS,8055,699.0,5,No
+60 - 70,28003.0,Salaried,Bachelors,33873,639.0,2,No
+< 30,37439.0,Salaried,Bachelors,6581,554.0,3,No
+30 - 40,18798.0,Salaried,Masters,9319,666.0,4,No
+≥ 70,52116.0,Salaried,HS,11320,585.0,5,No
+40 - 50,76395.0,Self-Employed,HS,17230,688.0,3,Yes
+40 - 50,72966.0,Salaried,Masters,27527,654.0,6,No
+30 - 40,49519.0,Salaried,Bachelors,26631,672.0,4,No
+60 - 70,46100.0,Self-Employed,HS,3879,695.0,7,No
+60 - 70,49748.0,Salaried,HS,13315,745.0,3,No
+30 - 40,28191.0,Salaried,Bachelors,23958,823.0,4,No
+40 - 50,60845.0,Self-Employed,Bachelors,10170,703.0,2,No
+30 - 40,36296.0,Unemployed,Bachelors,14154,650.0,7,Yes
+< 30,72563.0,Salaried,Bachelors,10198,657.0,6,No
+50 - 60,16481.0,Salaried,Bachelors,18312,601.0,5,No
+50 - 60,60792.0,Salaried,Bachelors,6375,700.0,9,No
+60 - 70,37057.0,Salaried,HS,5825,779.0,2,No
+60 - 70,53190.0,Self-Employed,Bachelors,17617,722.0,8,No
+40 - 50,35585.0,Salaried,Masters,20384,706.0,10,No
+< 30,42292.0,Self-Employed,Bachelors,31168,632.0,2,No
+30 - 40,53609.0,Salaried,Masters,26766,789.0,11,No
+40 - 50,34551.0,Salaried,HS,6770,849.0,3,No
+60 - 70,35007.0,Salaried,HS,27984,625.0,3,Yes
+≥ 70,14800.0,Salaried,Bachelors,18249,611.0,4,No
+30 - 40,14751.0,Salaried,HS,14069,596.0,7,No
+≥ 70,63579.0,Salaried,HS,5511,818.0,5,No
+< 30,24616.0,Salaried,Masters,4011,685.0,3,No
+60 - 70,16980.0,Salaried,HS,10556,665.0,6,No
+30 - 40,72871.0,Self-Employed,PhD,12089,783.0,4,No
+40 - 50,24622.0,Self-Employed,Bachelors,8335,518.0,3,No
+≥ 70,52436.0,Salaried,HS,9264,638.0,7,Yes
+50 - 60,48949.0,Salaried,HS,8797,642.0,2,No
+40 - 50,33580.0,Salaried,Bachelors,10875,634.0,7,No
+40 - 50,36837.0,Self-Employed,Bachelors,18791,671.0,1,Yes
+40 - 50,48169.0,Salaried,HS,27151,786.0,3,No
+< 30,28904.0,Salaried,Masters,3847,612.0,4,No
+40 - 50,22175.0,Salaried,Bachelors,9849,698.0,4,Yes
+≥ 70,39666.0,Self-Employed,Masters,13232,799.0,5,No
+40 - 50,73160.0,Salaried,Masters,1471,655.0,8,No
+60 - 70,97195.0,Salaried,Bachelors,9881,710.0,5,No
+60 - 70,20208.0,Salaried,Bachelors,22675,762.0,2,Yes
+30 - 40,26350.0,Self-Employed,HS,10874,820.0,5,No
+50 - 60,64383.0,Salaried,HS,1429,706.0,6,No
+30 - 40,77255.0,Salaried,Bachelors,8035,630.0,3,No
+50 - 60,17220.0,Self-Employed,Masters,16880,627.0,6,No
+50 - 60,68493.0,Salaried,Bachelors,6633,655.0,7,No
+40 - 50,37496.0,Salaried,HS,13648,812.0,6,No
+30 - 40,30814.0,Self-Employed,HS,2867,487.0,6,Yes
+60 - 70,47210.0,Self-Employed,Bachelors,12956,690.0,3,No
+≥ 70,60138.0,Self-Employed,Masters,13332,734.0,5,No
+30 - 40,19925.0,Salaried,PhD,27581,657.0,3,Yes
+60 - 70,53940.0,Salaried,Bachelors,9920,650.0,4,No
+50 - 60,32084.0,Salaried,HS,13440,634.0,4,No
+40 - 50,27091.0,Salaried,Bachelors,12407,683.0,2,No
+< 30,74726.0,Self-Employed,HS,7182,718.0,5,No
+30 - 40,24055.0,Salaried,Bachelors,8365,642.0,8,No
+50 - 60,33264.0,Salaried,HS,7863,802.0,6,No
+60 - 70,93483.0,Salaried,Masters,3936,662.0,2,No
+40 - 50,44941.0,Self-Employed,PhD,5001,606.0,4,No
+40 - 50,44736.0,Salaried,Masters,4617,721.0,5,No
+60 - 70,38089.0,Salaried,Masters,18739,728.0,7,No
+≥ 70,40328.0,Salaried,Masters,4205,736.0,8,No
+< 30,40800.0,Salaried,Bachelors,9875,696.0,2,No
+50 - 60,80087.0,Salaried,HS,6690,595.0,4,No
+60 - 70,95117.0,Salaried,Bachelors,15148,570.0,1,Yes
+< 30,26008.0,Salaried,Masters,5377,666.0,5,No
+60 - 70,45041.0,Salaried,Bachelors,16417,698.0,10,No
+40 - 50,50400.0,Salaried,Bachelors,3487,737.0,3,No
+50 - 60,100592.0,Salaried,Bachelors,7326,538.0,6,No
+30 - 40,12085.0,Self-Employed,HS,9336,802.0,4,No
+60 - 70,24523.0,Self-Employed,HS,10244,768.0,7,No
+30 - 40,25339.0,Salaried,Masters,6155,685.0,6,No
+≥ 70,51971.0,Self-Employed,Masters,20554,850.0,6,No
+50 - 60,21093.0,Salaried,HS,29114,476.0,6,No
+< 30,26155.0,Salaried,Masters,7681,746.0,4,No
+30 - 40,21582.0,Salaried,HS,2602,754.0,3,Yes
+40 - 50,41161.0,Self-Employed,HS,9135,726.0,4,No
+50 - 60,66534.0,Salaried,HS,23355,608.0,6,No
+40 - 50,36393.0,Salaried,HS,10752,764.0,3,No
+< 30,55279.0,Self-Employed,Bachelors,7158,551.0,6,No
+50 - 60,30093.0,Salaried,Bachelors,11302,643.0,3,Yes
+≥ 70,15574.0,Salaried,Bachelors,3781,558.0,4,No
+50 - 60,19305.0,Salaried,Masters,3844,768.0,4,No
+< 30,27564.0,Self-Employed,Masters,5332,659.0,4,No
+30 - 40,134436.0,Salaried,Masters,8417,716.0,3,No
+30 - 40,39386.0,Self-Employed,Bachelors,5637,584.0,3,Yes
+50 - 60,41877.0,Salaried,Bachelors,8428,685.0,6,No
+60 - 70,72252.0,Salaried,Masters,11007,674.0,3,No
+60 - 70,34225.0,Salaried,Masters,6197,696.0,1,No
+50 - 60,85743.0,Salaried,Masters,4045,672.0,4,No
+< 30,63895.0,Salaried,Bachelors,10192,638.0,6,No
+60 - 70,50918.0,Salaried,Masters,4353,641.0,4,No
+60 - 70,21456.0,Self-Employed,HS,2903,653.0,3,No
+50 - 60,52947.0,Salaried,PhD,3288,723.0,3,No
+50 - 60,83148.0,Salaried,Masters,8542,760.0,8,No
+60 - 70,35992.0,Salaried,Bachelors,5623,736.0,1,No
+50 - 60,77308.0,Salaried,PhD,11056,674.0,4,No
+60 - 70,14316.0,Salaried,Bachelors,11796,587.0,6,No
+50 - 60,44949.0,Unemployed,PhD,23017,521.0,9,Yes
+40 - 50,49684.0,Self-Employed,HS,4198,651.0,2,No
+< 30,28177.0,Salaried,HS,3972,662.0,8,No
+30 - 40,80378.0,Salaried,Bachelors,2182,742.0,8,No
+40 - 50,31069.0,Salaried,Bachelors,10011,501.0,7,No
+≥ 70,65772.0,Salaried,HS,19232,605.0,6,No
+60 - 70,32274.0,Salaried,Bachelors,9442,619.0,9,No
+50 - 60,59335.0,Salaried,HS,16693,664.0,2,No
+60 - 70,51281.0,Salaried,HS,2543,708.0,4,No
+30 - 40,80145.0,Salaried,HS,17092,776.0,3,No
+< 30,69149.0,Self-Employed,HS,16870,620.0,3,Yes
+40 - 50,63334.0,Salaried,HS,2929,717.0,5,No
+≥ 70,67420.0,Salaried,HS,7654,635.0,4,No
+≥ 70,34119.0,Salaried,Masters,6304,624.0,6,No
+< 30,86238.0,Self-Employed,Bachelors,4324,791.0,6,No
+60 - 70,88815.0,Salaried,HS,7067,724.0,6,No
+≥ 70,101200.0,Salaried,Bachelors,5823,638.0,6,Yes
+40 - 50,35983.0,Unemployed,Masters,9042,846.0,4,Yes
+50 - 60,42595.0,Salaried,HS,15161,635.0,6,No
+60 - 70,44718.0,Salaried,Masters,19455,625.0,0,No
+< 30,69247.0,Salaried,HS,6683,743.0,5,No
+50 - 60,78902.0,Self-Employed,Bachelors,11029,667.0,5,No
+40 - 50,64784.0,Salaried,Masters,11713,566.0,4,No
+< 30,63646.0,Salaried,Bachelors,8257,574.0,3,No
+30 - 40,30050.0,Salaried,HS,9403,739.0,4,Yes
+60 - 70,32183.0,Self-Employed,HS,11452,684.0,3,No
+40 - 50,27116.0,Salaried,HS,7161,804.0,6,No
+50 - 60,31832.0,Salaried,Bachelors,11780,666.0,5,No
+30 - 40,58083.0,Salaried,HS,6429,613.0,5,No
+50 - 60,34526.0,Salaried,Bachelors,20344,765.0,4,No
+< 30,20363.0,Unemployed,HS,21820,647.0,5,No
+60 - 70,38687.0,Self-Employed,HS,6204,829.0,6,No
+50 - 60,71780.0,Salaried,Bachelors,11792,655.0,6,No
+30 - 40,147091.0,Salaried,HS,11902,796.0,2,No
+≥ 70,57184.0,Salaried,Masters,6998,625.0,2,No
+< 30,22662.0,Salaried,Masters,5673,762.0,3,No
+30 - 40,111412.0,Unemployed,HS,5226,655.0,4,No
+< 30,46045.0,Salaried,Bachelors,9483,667.0,8,No
+≥ 70,113616.0,Salaried,Bachelors,9049,636.0,4,No
+≥ 70,57391.0,Salaried,Bachelors,21772,769.0,0,No
+≥ 70,27149.0,Salaried,Bachelors,21116,544.0,5,Yes
+50 - 60,18797.0,Salaried,HS,16541,753.0,4,No
+30 - 40,60170.0,Salaried,HS,3332,697.0,5,No
+60 - 70,20974.0,Salaried,HS,10361,591.0,1,No
+30 - 40,43060.0,Salaried,Masters,16638,626.0,5,No
+30 - 40,38208.0,Salaried,Bachelors,5909,712.0,5,No
+≥ 70,44065.0,Salaried,PhD,6103,565.0,7,Yes
+40 - 50,23379.0,Salaried,HS,18156,663.0,4,No
+60 - 70,82442.0,Salaried,Bachelors,17924,636.0,3,No
+< 30,36895.0,Salaried,HS,7602,599.0,9,No
+< 30,40073.0,Self-Employed,Bachelors,5064,715.0,6,Yes
+40 - 50,46261.0,Unemployed,Masters,4675,742.0,5,No
+< 30,35555.0,Self-Employed,HS,8453,679.0,8,No
+50 - 60,47963.0,Salaried,Bachelors,4758,746.0,9,No
+30 - 40,23992.0,Salaried,HS,6621,708.0,3,No
+< 30,29508.0,Unemployed,HS,2780,620.0,8,No
+40 - 50,53807.0,Salaried,HS,2589,784.0,5,No
+≥ 70,44261.0,Unemployed,HS,6362,624.0,1,Yes
+< 30,24220.0,Salaried,Bachelors,11472,590.0,3,Yes
+≥ 70,23214.0,Unemployed,Bachelors,9383,590.0,8,No
+30 - 40,37828.0,Self-Employed,HS,18779,572.0,0,No
+30 - 40,41857.0,Unemployed,Masters,11385,677.0,8,No
+30 - 40,13448.0,Salaried,Masters,10198,768.0,3,No
+60 - 70,45019.0,Salaried,Bachelors,8717,644.0,10,No
+60 - 70,144800.0,Self-Employed,Bachelors,4808,686.0,5,No
+≥ 70,45734.0,Salaried,Bachelors,13812,637.0,4,No
+30 - 40,83438.0,Salaried,HS,3839,681.0,7,No
+< 30,39369.0,Salaried,Masters,6973,713.0,5,No
+60 - 70,44606.0,Salaried,Masters,26546,720.0,6,Yes
+30 - 40,69603.0,Self-Employed,HS,10922,738.0,6,No
+40 - 50,17243.0,Salaried,Bachelors,7005,790.0,5,No
+< 30,24076.0,Self-Employed,Bachelors,3728,707.0,8,No
+60 - 70,67954.0,Salaried,HS,3205,707.0,0,No
+< 30,40777.0,Salaried,HS,6484,692.0,5,No
+< 30,36267.0,Salaried,Bachelors,7707,661.0,1,Yes
+30 - 40,81745.0,Salaried,Masters,10556,633.0,3,Yes
+50 - 60,22180.0,Salaried,Bachelors,24252,600.0,5,No
+< 30,46891.0,Salaried,HS,10426,622.0,4,No
+< 30,42661.0,Self-Employed,Bachelors,6675,710.0,4,No
+50 - 60,20862.0,Self-Employed,PhD,18995,538.0,0,No
+60 - 70,59897.0,Salaried,Bachelors,2360,695.0,1,No
+< 30,39095.0,Salaried,Bachelors,10317,755.0,4,No
+< 30,28112.0,Salaried,Bachelors,11197,685.0,2,No
+60 - 70,31334.0,Self-Employed,PhD,9805,793.0,6,No
+40 - 50,59860.0,Salaried,Bachelors,8686,692.0,6,No
+50 - 60,104848.0,Salaried,HS,6917,685.0,2,No
+50 - 60,31987.0,Salaried,Bachelors,5403,705.0,2,No
+50 - 60,31166.0,Salaried,HS,31725,516.0,4,No
+30 - 40,85490.0,Salaried,Masters,18159,664.0,5,No
+40 - 50,36781.0,Salaried,Bachelors,10636,652.0,1,No
+30 - 40,29345.0,Salaried,Bachelors,1654,639.0,11,No
+30 - 40,55817.0,Salaried,Masters,3528,645.0,4,No
+30 - 40,35175.0,Salaried,Bachelors,20333,762.0,5,No
+< 30,50861.0,Salaried,HS,3107,728.0,2,No
+< 30,49854.0,Salaried,Bachelors,13065,683.0,7,No
+50 - 60,30659.0,Salaried,Bachelors,17539,664.0,1,No
+60 - 70,54432.0,Salaried,Masters,6261,729.0,8,No
+40 - 50,59977.0,Salaried,Masters,23027,714.0,5,No
+30 - 40,17245.0,Salaried,HS,8084,745.0,1,No
+60 - 70,39008.0,Salaried,Bachelors,4344,631.0,0,No
+50 - 60,46857.0,Salaried,Bachelors,14702,547.0,5,No
+60 - 70,42839.0,Salaried,Bachelors,6164,716.0,4,Yes
+30 - 40,47055.0,Salaried,HS,12117,752.0,2,No
+50 - 60,40402.0,Salaried,Masters,4910,579.0,5,No
+30 - 40,97122.0,Salaried,Bachelors,6248,622.0,4,No
+30 - 40,36858.0,Salaried,Masters,8874,802.0,4,No
+< 30,52046.0,Salaried,HS,8263,745.0,4,No
+50 - 60,64290.0,Salaried,Masters,18089,658.0,5,Yes
+40 - 50,26296.0,Salaried,HS,19380,705.0,2,No
+< 30,69482.0,Salaried,Bachelors,11976,639.0,6,No
+40 - 50,49148.0,Self-Employed,Bachelors,6091,603.0,6,No
+< 30,59229.0,Salaried,Bachelors,5112,720.0,4,Yes
+< 30,76084.0,Self-Employed,HS,7781,760.0,4,No
+< 30,35288.0,Salaried,HS,4314,715.0,2,No
+≥ 70,28998.0,Self-Employed,Masters,7466,705.0,5,No
+40 - 50,59985.0,Salaried,Bachelors,11383,763.0,6,Yes
+40 - 50,58898.0,Salaried,Bachelors,12849,746.0,3,No
+40 - 50,26924.0,Salaried,HS,8109,608.0,4,No
+≥ 70,44215.0,Self-Employed,Bachelors,11439,723.0,3,No
+60 - 70,128197.0,Salaried,Masters,10475,685.0,8,No
+50 - 60,77281.0,Salaried,HS,1927,582.0,5,No
+30 - 40,25648.0,Salaried,Masters,30413,579.0,4,No
+50 - 60,43621.0,Unemployed,Masters,6610,659.0,2,No
+60 - 70,48583.0,Salaried,Bachelors,7196,522.0,4,No
+< 30,72330.0,Salaried,PhD,5290,674.0,1,Yes
+50 - 60,107226.0,Salaried,Masters,8734,671.0,4,No
+40 - 50,75827.0,Salaried,Bachelors,6458,718.0,5,No
+50 - 60,45765.0,Salaried,HS,17294,550.0,3,No
+30 - 40,43201.0,Self-Employed,Bachelors,11857,766.0,3,No
+60 - 70,30361.0,Salaried,Masters,27109,597.0,4,Yes
+≥ 70,20495.0,Salaried,Masters,5843,486.0,5,No
+30 - 40,53964.0,Salaried,HS,4997,702.0,1,No
+< 30,38800.0,Salaried,HS,9215,659.0,5,No
+< 30,20055.0,Salaried,Bachelors,7946,736.0,1,No
+30 - 40,49228.0,Salaried,HS,18170,658.0,6,No
+30 - 40,46614.0,Salaried,Bachelors,6803,552.0,2,No
+≥ 70,24633.0,Salaried,PhD,15421,672.0,5,No
+30 - 40,40143.0,Self-Employed,HS,8383,757.0,5,No
+60 - 70,44777.0,Salaried,Masters,10256,721.0,3,No
+< 30,18311.0,Self-Employed,Masters,14933,692.0,3,No
+≥ 70,59549.0,Salaried,PhD,9543,685.0,6,No
+40 - 50,76087.0,Salaried,Bachelors,1781,734.0,6,No
+30 - 40,13704.0,Salaried,Masters,6153,616.0,3,No
+60 - 70,20556.0,Salaried,HS,8926,625.0,4,No
+< 30,38967.0,Salaried,HS,3750,787.0,3,No
+40 - 50,46505.0,Salaried,HS,7174,638.0,3,No
+50 - 60,75858.0,Salaried,Masters,11851,781.0,4,No
+30 - 40,44528.0,Salaried,Masters,6066,516.0,8,No
+50 - 60,8113.0,Salaried,Masters,8975,793.0,3,No
+50 - 60,35176.0,Self-Employed,Bachelors,9471,749.0,2,Yes
+40 - 50,66648.0,Salaried,HS,7401,679.0,6,No
+40 - 50,34822.0,Salaried,Bachelors,4749,660.0,2,No
+30 - 40,33369.0,Self-Employed,HS,6117,628.0,3,No
+30 - 40,87400.0,Salaried,Bachelors,8546,780.0,5,No
+50 - 60,53947.0,Salaried,Bachelors,10684,576.0,0,No
+30 - 40,50626.0,Salaried,Bachelors,12178,715.0,4,No
+≥ 70,66939.0,Unemployed,Masters,1165,674.0,2,No
+30 - 40,37553.0,Salaried,Bachelors,3886,662.0,6,No
+60 - 70,23048.0,Salaried,Bachelors,9900,737.0,5,No
+50 - 60,37121.0,Salaried,Bachelors,13908,710.0,7,No
+60 - 70,46875.0,Salaried,HS,11100,609.0,1,No
+60 - 70,61992.0,Salaried,HS,15320,698.0,3,No
+30 - 40,76424.0,Self-Employed,Masters,5097,826.0,6,No
+40 - 50,18155.0,Salaried,HS,8159,736.0,5,No
+60 - 70,34727.0,Self-Employed,Bachelors,3800,680.0,4,No
+50 - 60,75572.0,Salaried,Bachelors,6105,538.0,2,No
+50 - 60,26506.0,Salaried,Bachelors,13606,653.0,3,No
+60 - 70,81485.0,Salaried,Bachelors,12623,787.0,8,No
+≥ 70,104264.0,Salaried,Bachelors,5877,563.0,5,No
+40 - 50,69728.0,Salaried,Bachelors,6527,709.0,1,No
+30 - 40,60054.0,Salaried,HS,6524,629.0,2,No
+30 - 40,37613.0,Self-Employed,Bachelors,3545,713.0,6,No
+50 - 60,76049.0,Unemployed,Bachelors,4393,820.0,7,No
+50 - 60,68138.0,Salaried,HS,12099,569.0,8,Yes
+60 - 70,42550.0,Salaried,Masters,11281,702.0,8,No
+30 - 40,123934.0,Salaried,HS,8778,668.0,4,No
+50 - 60,16971.0,Self-Employed,Bachelors,12068,719.0,1,Yes
+60 - 70,37366.0,Unemployed,Bachelors,4055,643.0,4,No
+≥ 70,46247.0,Salaried,HS,5900,752.0,7,No
+30 - 40,83688.0,Self-Employed,Bachelors,2507,622.0,2,No
+40 - 50,32428.0,Salaried,HS,32216,680.0,2,No
+40 - 50,22249.0,Salaried,Masters,5208,705.0,4,No
+30 - 40,42191.0,Salaried,HS,5420,566.0,5,No
+40 - 50,76906.0,Self-Employed,Masters,12486,772.0,5,No
+60 - 70,42185.0,Salaried,HS,11466,706.0,4,No
+30 - 40,68948.0,Salaried,HS,27103,682.0,10,No
+≥ 70,22032.0,Salaried,Masters,6021,676.0,3,No
+50 - 60,23527.0,Salaried,HS,6421,740.0,8,No
+60 - 70,33192.0,Salaried,Bachelors,3307,644.0,5,No
+50 - 60,28896.0,Salaried,PhD,10313,833.0,4,No
+30 - 40,23403.0,Salaried,Bachelors,10645,629.0,6,No
+50 - 60,19328.0,Salaried,Bachelors,14275,702.0,4,No
+30 - 40,18417.0,Self-Employed,Masters,5067,633.0,1,No
+60 - 70,33145.0,Self-Employed,HS,35213,689.0,4,Yes
+≥ 70,76535.0,Salaried,Masters,3508,814.0,6,Yes
+50 - 60,17563.0,Unemployed,PhD,9885,696.0,5,No
+30 - 40,74907.0,Unemployed,PhD,15040,725.0,6,No
+60 - 70,46526.0,Salaried,HS,11982,696.0,5,No
+< 30,24527.0,Self-Employed,Bachelors,31238,736.0,6,No
+30 - 40,36962.0,Salaried,Bachelors,5164,738.0,3,No
+40 - 50,33526.0,Salaried,Masters,11946,665.0,7,No
+< 30,38195.0,Self-Employed,Bachelors,11872,800.0,4,No
+< 30,45709.0,Salaried,Masters,13020,714.0,3,Yes
+50 - 60,56455.0,Salaried,Masters,3420,623.0,3,No
+< 30,95422.0,Self-Employed,Bachelors,15369,741.0,3,No
+60 - 70,91570.0,Unemployed,Bachelors,8668,601.0,4,No
+50 - 60,50242.0,Salaried,HS,8440,674.0,5,No
+< 30,51788.0,Salaried,HS,9259,620.0,1,No
+60 - 70,23632.0,Salaried,HS,5569,627.0,4,Yes
+30 - 40,33264.0,Salaried,HS,5516,721.0,3,No
+30 - 40,70855.0,Salaried,HS,6536,690.0,3,No
+30 - 40,53706.0,Salaried,Masters,10976,684.0,7,No
+< 30,98388.0,Salaried,Masters,34841,704.0,1,No
+50 - 60,34333.0,Salaried,Masters,2757,770.0,2,No
+< 30,12004.0,Salaried,Bachelors,4751,730.0,7,No
+< 30,26694.0,Salaried,HS,8582,718.0,3,No
+60 - 70,40325.0,Self-Employed,Masters,11058,716.0,6,No
+40 - 50,50568.0,Salaried,Masters,14043,728.0,5,No
+40 - 50,72137.0,Salaried,HS,4332,732.0,6,No
+30 - 40,46021.0,Salaried,HS,12285,684.0,6,No
+< 30,15760.0,Salaried,Masters,6433,640.0,4,No
+40 - 50,23477.0,Salaried,Bachelors,9338,708.0,2,No
+≥ 70,24656.0,Unemployed,Bachelors,23023,766.0,3,No
+< 30,69282.0,Salaried,HS,7047,561.0,7,No
+40 - 50,73010.0,Self-Employed,Bachelors,2613,763.0,4,No
+< 30,65183.0,Salaried,HS,2079,655.0,6,No
+40 - 50,46553.0,Self-Employed,Bachelors,16932,606.0,3,No
+< 30,51579.0,Self-Employed,Masters,5188,716.0,2,No
+< 30,10676.0,Salaried,Bachelors,3718,699.0,4,No
+40 - 50,37327.0,Self-Employed,PhD,4024,713.0,7,Yes
+30 - 40,49355.0,Salaried,HS,17633,518.0,2,No
+< 30,28408.0,Self-Employed,Bachelors,6085,742.0,1,No
+≥ 70,62631.0,Salaried,Masters,9243,667.0,3,No
+40 - 50,113467.0,Self-Employed,Masters,8787,681.0,12,Yes
+50 - 60,59335.0,Salaried,Masters,14948,702.0,2,No
+< 30,27425.0,Salaried,PhD,4018,747.0,9,No
+≥ 70,70933.0,Unemployed,Bachelors,10922,654.0,9,Yes
+< 30,41790.0,Salaried,Masters,15883,677.0,1,Yes
+30 - 40,107599.0,Self-Employed,Bachelors,7577,657.0,3,No
+50 - 60,26376.0,Salaried,Bachelors,6709,748.0,4,No
+≥ 70,47380.0,Salaried,Masters,4051,587.0,6,No
+60 - 70,13624.0,Salaried,Bachelors,13885,609.0,6,No
+40 - 50,30438.0,Salaried,Bachelors,3265,721.0,5,No
+30 - 40,48541.0,Salaried,HS,10540,676.0,4,No
+40 - 50,18155.0,Salaried,Bachelors,14505,640.0,5,No
+60 - 70,29247.0,Salaried,HS,5781,727.0,5,No
+≥ 70,36538.0,Salaried,Bachelors,8601,665.0,2,Yes
+50 - 60,37134.0,Salaried,Masters,10805,544.0,5,No
+30 - 40,51065.0,Salaried,PhD,13075,837.0,6,No
+30 - 40,44402.0,Salaried,Bachelors,8656,646.0,9,No
+< 30,17417.0,Unemployed,PhD,15354,662.0,5,No
+50 - 60,14388.0,Salaried,Masters,11215,801.0,4,No
+50 - 60,26002.0,Salaried,HS,3428,700.0,6,No
+< 30,38827.0,Salaried,HS,12557,626.0,4,Yes
+40 - 50,51832.0,Salaried,HS,19951,663.0,4,Yes
+50 - 60,84758.0,Self-Employed,Bachelors,3690,527.0,8,No
+50 - 60,21095.0,Salaried,Bachelors,6007,752.0,4,No
+30 - 40,20289.0,Salaried,Bachelors,8549,671.0,3,No
+60 - 70,38216.0,Unemployed,HS,16492,597.0,2,No
+30 - 40,31423.0,Self-Employed,Bachelors,2629,608.0,5,No
+< 30,87732.0,Salaried,Masters,4253,653.0,1,No
+< 30,55084.0,Salaried,Masters,9627,713.0,6,No
+30 - 40,35741.0,Salaried,HS,13342,709.0,2,No
+50 - 60,56634.0,Salaried,Bachelors,18658,658.0,3,No
+30 - 40,32801.0,Salaried,Masters,17467,527.0,3,No
+30 - 40,56922.0,Salaried,Bachelors,2494,750.0,4,No
+≥ 70,27310.0,Salaried,HS,14881,726.0,4,No
+40 - 50,78833.0,Unemployed,PhD,4276,772.0,6,No
+< 30,17433.0,Self-Employed,Bachelors,5827,590.0,5,No
+40 - 50,57428.0,Salaried,Bachelors,8382,850.0,4,No
+40 - 50,50769.0,Self-Employed,Bachelors,3199,595.0,8,No
+≥ 70,31131.0,Self-Employed,HS,4275,647.0,3,No
+50 - 60,54332.0,Salaried,Masters,11884,565.0,7,No
+50 - 60,60841.0,Salaried,Bachelors,32094,678.0,2,No
+30 - 40,32303.0,Self-Employed,Bachelors,8254,763.0,9,No
+60 - 70,67128.0,Salaried,Masters,9339,735.0,5,No
+60 - 70,43903.0,Self-Employed,HS,3178,702.0,4,No
+< 30,12871.0,Salaried,Bachelors,17398,749.0,4,No
+50 - 60,17923.0,Salaried,Bachelors,18890,698.0,1,No
+30 - 40,56917.0,Salaried,HS,6285,629.0,5,No
+60 - 70,34398.0,Salaried,Bachelors,7767,692.0,1,No
+< 30,75930.0,Self-Employed,Bachelors,11621,640.0,4,No
+60 - 70,16441.0,Self-Employed,HS,9022,737.0,7,No
+30 - 40,37346.0,Self-Employed,Bachelors,5824,566.0,3,No
+40 - 50,17484.0,Self-Employed,Bachelors,4827,694.0,6,No
+50 - 60,34699.0,Self-Employed,Masters,12863,718.0,3,No
+60 - 70,45713.0,Unemployed,Bachelors,18044,655.0,7,No
+50 - 60,17477.0,Salaried,Bachelors,33979,680.0,5,No
+≥ 70,54874.0,Salaried,HS,6736,679.0,4,No
+50 - 60,52333.0,Salaried,HS,5187,617.0,4,No
+30 - 40,58978.0,Salaried,HS,11911,673.0,8,No
+< 30,63286.0,Self-Employed,Masters,5154,731.0,4,No
+60 - 70,25029.0,Self-Employed,Bachelors,5966,729.0,7,No
+50 - 60,96937.0,Salaried,Bachelors,20519,587.0,3,No
+60 - 70,27510.0,Self-Employed,Bachelors,8296,674.0,7,No
+< 30,18815.0,Salaried,PhD,9898,631.0,5,No
+30 - 40,111042.0,Self-Employed,Masters,20433,604.0,3,No
+30 - 40,23859.0,Salaried,Masters,27908,692.0,3,Yes
+40 - 50,25986.0,Salaried,Bachelors,8809,698.0,3,No
+30 - 40,57851.0,Self-Employed,HS,14178,723.0,5,No
+30 - 40,31402.0,Salaried,Bachelors,18364,667.0,2,No
+30 - 40,82567.0,Self-Employed,PhD,11888,629.0,7,No
+40 - 50,45468.0,Salaried,Bachelors,9639,769.0,6,No
+40 - 50,42685.0,Unemployed,Masters,4540,698.0,4,No
+40 - 50,14971.0,Salaried,HS,1016,697.0,4,Yes
+50 - 60,30722.0,Salaried,HS,19906,738.0,3,No
+50 - 60,29599.0,Salaried,Bachelors,3983,658.0,6,No
+< 30,36025.0,Salaried,Bachelors,10209,692.0,4,No
+30 - 40,24954.0,Self-Employed,HS,25325,588.0,6,No
+60 - 70,32260.0,Salaried,Bachelors,18214,760.0,5,No
+40 - 50,31870.0,Self-Employed,Bachelors,3484,610.0,4,No
+≥ 70,16673.0,Salaried,Bachelors,33556,763.0,2,No
+40 - 50,42769.0,Salaried,Masters,29481,540.0,2,Yes
+< 30,35846.0,Salaried,HS,6922,715.0,6,No
+60 - 70,78717.0,Salaried,Bachelors,3823,708.0,2,No
+30 - 40,24204.0,Unemployed,PhD,9300,724.0,1,Yes
+40 - 50,13594.0,Self-Employed,Bachelors,2564,680.0,3,No
+< 30,53417.0,Self-Employed,HS,11809,644.0,3,No
+50 - 60,47192.0,Salaried,Bachelors,6233,696.0,8,No
+40 - 50,31291.0,Salaried,Bachelors,4988,711.0,8,No
+50 - 60,23047.0,Salaried,HS,6797,640.0,1,No
+50 - 60,21128.0,Unemployed,Masters,13337,741.0,9,No
+50 - 60,40853.0,Salaried,HS,8601,790.0,5,No
+50 - 60,33644.0,Salaried,HS,4396,795.0,7,No
+30 - 40,74090.0,Self-Employed,Bachelors,5488,727.0,3,No
+< 30,54874.0,Salaried,HS,14214,751.0,2,No
+< 30,58224.0,Salaried,HS,7221,753.0,5,No
+30 - 40,34306.0,Self-Employed,HS,4287,662.0,3,Yes
+60 - 70,42794.0,Salaried,HS,5406,706.0,6,No
+60 - 70,40063.0,Salaried,HS,7199,632.0,3,No
+40 - 50,17968.0,Salaried,HS,25339,732.0,3,No
+40 - 50,53068.0,Salaried,Bachelors,8505,564.0,5,No
+50 - 60,33875.0,Self-Employed,Bachelors,3809,694.0,4,No
+30 - 40,49932.0,Salaried,Bachelors,20787,636.0,9,No
+50 - 60,31255.0,Salaried,HS,7082,822.0,6,No
+30 - 40,50265.0,Salaried,Bachelors,6439,641.0,1,No
+60 - 70,28325.0,Salaried,Bachelors,9270,750.0,3,Yes
+40 - 50,73065.0,Salaried,Bachelors,3888,698.0,2,No
+40 - 50,46355.0,Self-Employed,HS,6697,665.0,4,No
+30 - 40,30705.0,Salaried,Bachelors,5403,765.0,4,No
+40 - 50,49764.0,Salaried,HS,10270,757.0,4,No
+40 - 50,34059.0,Salaried,Bachelors,2636,577.0,1,No
+60 - 70,49724.0,Salaried,Masters,14956,520.0,1,No
+60 - 70,51131.0,Salaried,PhD,3615,535.0,5,No
+30 - 40,51585.0,Self-Employed,HS,13828,635.0,4,No
+< 30,24182.0,Salaried,Masters,10261,680.0,7,No
+40 - 50,46556.0,Self-Employed,HS,4270,561.0,2,No
+< 30,15722.0,Self-Employed,Bachelors,19212,542.0,4,No
+40 - 50,60505.0,Salaried,Bachelors,9605,688.0,2,No
+60 - 70,31833.0,Salaried,HS,5180,724.0,6,No
+60 - 70,28969.0,Self-Employed,HS,4416,717.0,5,No
+50 - 60,48162.0,Salaried,Bachelors,2186,718.0,5,No
+40 - 50,28364.0,Self-Employed,Bachelors,15205,629.0,5,Yes
+30 - 40,73391.0,Salaried,HS,4989,724.0,4,No
+50 - 60,28882.0,Self-Employed,Masters,18719,676.0,1,No
+40 - 50,23385.0,Unemployed,HS,11882,726.0,7,No
+40 - 50,32553.0,Self-Employed,HS,16480,618.0,5,No
+50 - 60,74507.0,Salaried,HS,14590,628.0,6,No
+30 - 40,51941.0,Salaried,HS,3932,747.0,8,No
+40 - 50,63478.0,Salaried,Bachelors,4445,707.0,10,No
+< 30,78871.0,Salaried,PhD,2840,704.0,7,Yes
+50 - 60,95710.0,Unemployed,HS,8377,646.0,7,No
+60 - 70,23264.0,Salaried,Bachelors,11634,671.0,10,No
+< 30,32832.0,Salaried,Masters,7835,630.0,5,No
+40 - 50,47012.0,Salaried,Bachelors,10899,690.0,2,No
+< 30,61197.0,Self-Employed,Bachelors,6238,739.0,4,No
+50 - 60,27228.0,Self-Employed,Masters,4167,698.0,7,Yes
+< 30,40777.0,Unemployed,Masters,21554,793.0,6,No
+30 - 40,24848.0,Salaried,Bachelors,14334,637.0,6,No
+< 30,50629.0,Unemployed,Bachelors,4612,648.0,2,No
+< 30,18361.0,Salaried,Masters,6050,633.0,2,No
+< 30,48382.0,Self-Employed,HS,8423,788.0,6,Yes
+50 - 60,63633.0,Salaried,Masters,4754,741.0,5,No
+30 - 40,83916.0,Salaried,HS,3890,720.0,4,No
+50 - 60,142611.0,Self-Employed,Bachelors,16066,582.0,6,No
+30 - 40,47466.0,Self-Employed,Bachelors,5752,672.0,1,No
+30 - 40,72015.0,Salaried,Bachelors,9576,722.0,6,No
+40 - 50,22565.0,Salaried,Masters,19117,613.0,4,No
+50 - 60,84300.0,Salaried,PhD,7050,717.0,3,No
+60 - 70,22688.0,Salaried,HS,5205,724.0,8,No
+40 - 50,44680.0,Self-Employed,Bachelors,5056,761.0,3,No
+30 - 40,42194.0,Salaried,Bachelors,22149,608.0,3,No
+40 - 50,16350.0,Self-Employed,HS,15880,546.0,3,No
+< 30,48656.0,Unemployed,HS,8765,731.0,7,No
+50 - 60,42854.0,Unemployed,Bachelors,15390,636.0,4,No
+40 - 50,20138.0,Salaried,Bachelors,11075,701.0,6,No
+50 - 60,37589.0,Self-Employed,Bachelors,3122,705.0,3,No
+40 - 50,38137.0,Salaried,Bachelors,6742,647.0,3,No
+< 30,39733.0,Salaried,Masters,15826,746.0,4,No
+30 - 40,35462.0,Unemployed,Bachelors,4382,639.0,4,Yes
+30 - 40,34267.0,Salaried,Masters,2185,727.0,3,No
+< 30,27725.0,Salaried,Bachelors,9642,828.0,3,No
+50 - 60,101255.0,Salaried,Masters,9684,483.0,4,No
+< 30,56826.0,Self-Employed,Bachelors,3259,640.0,2,No
+30 - 40,49525.0,Salaried,Masters,25073,471.0,2,No
+30 - 40,75133.0,Salaried,Bachelors,5355,641.0,4,No
+< 30,19769.0,Salaried,Bachelors,5713,838.0,5,No
+40 - 50,22965.0,Salaried,Bachelors,2876,706.0,3,No
+50 - 60,65548.0,Salaried,HS,5387,568.0,3,No
+40 - 50,38692.0,Salaried,HS,13763,599.0,7,No
+40 - 50,55565.0,Self-Employed,Bachelors,3588,788.0,3,Yes
+40 - 50,44929.0,Salaried,Bachelors,12197,636.0,4,No
+30 - 40,36592.0,Unemployed,Bachelors,16830,688.0,2,No
+≥ 70,33462.0,Salaried,Bachelors,15055,737.0,5,No
+50 - 60,14125.0,Salaried,HS,2788,703.0,5,No
+50 - 60,27393.0,Salaried,Bachelors,5232,503.0,4,Yes
+≥ 70,25435.0,Salaried,HS,11099,496.0,3,No
+40 - 50,62199.0,Salaried,PhD,9503,688.0,4,No
+< 30,72552.0,Salaried,Bachelors,4686,643.0,3,No
+50 - 60,45878.0,Salaried,HS,9068,554.0,5,No
+40 - 50,49493.0,Salaried,Bachelors,9818,627.0,3,No
+50 - 60,35427.0,Salaried,HS,4995,656.0,4,No
+30 - 40,27990.0,Salaried,Bachelors,8279,772.0,1,No
+30 - 40,44735.0,Self-Employed,Masters,3195,654.0,3,No
+50 - 60,71812.0,Salaried,HS,15210,695.0,2,No
+< 30,81984.0,Unemployed,HS,11065,624.0,2,No
+50 - 60,28142.0,Salaried,Bachelors,4640,719.0,4,No
+60 - 70,24209.0,Self-Employed,PhD,19244,578.0,4,No
+40 - 50,24095.0,Salaried,HS,5414,638.0,3,No
+40 - 50,25688.0,Salaried,Bachelors,1786,724.0,4,No
+40 - 50,46155.0,Self-Employed,Masters,4209,686.0,5,No
+< 30,29053.0,Salaried,HS,32043,592.0,2,No
+< 30,34732.0,Salaried,HS,8149,710.0,6,No
+30 - 40,85818.0,Unemployed,Bachelors,18783,636.0,3,No
+50 - 60,93851.0,Salaried,PhD,9334,580.0,4,No
+60 - 70,15775.0,Salaried,Bachelors,5183,797.0,7,No
+50 - 60,72945.0,Salaried,Bachelors,6106,585.0,8,No
+50 - 60,41508.0,Salaried,Masters,4212,699.0,4,No
+40 - 50,22263.0,Salaried,Bachelors,4219,739.0,3,No
+< 30,18357.0,Salaried,HS,7038,642.0,3,No
+50 - 60,31443.0,Salaried,Bachelors,29552,811.0,6,No
+30 - 40,37536.0,Self-Employed,Bachelors,5065,743.0,2,No
+30 - 40,49484.0,Salaried,Bachelors,4015,778.0,9,Yes
+≥ 70,39020.0,Salaried,Masters,20231,729.0,2,No
+50 - 60,39632.0,Salaried,Masters,8104,704.0,0,Yes
+60 - 70,27384.0,Salaried,HS,11495,667.0,3,No
+60 - 70,17519.0,Salaried,Masters,12723,554.0,1,No
+30 - 40,45904.0,Salaried,Masters,1854,773.0,8,No
+30 - 40,50236.0,Salaried,Bachelors,8055,702.0,4,No
+< 30,49062.0,Unemployed,Masters,2516,731.0,2,Yes
+40 - 50,36107.0,Salaried,HS,17316,538.0,4,No
+< 30,34456.0,Salaried,Masters,13648,704.0,6,No
+50 - 60,45578.0,Salaried,HS,7456,803.0,5,No
+< 30,30885.0,Salaried,Masters,2391,729.0,9,No
+60 - 70,22527.0,Salaried,HS,15987,760.0,3,No
+50 - 60,36247.0,Salaried,Masters,12190,674.0,2,No
+≥ 70,23974.0,Self-Employed,Masters,3024,661.0,10,No
+50 - 60,110125.0,Unemployed,Masters,25830,579.0,3,No
+60 - 70,53711.0,Salaried,Masters,11443,627.0,2,No
+60 - 70,59288.0,Self-Employed,HS,5745,621.0,3,No
+60 - 70,22805.0,Salaried,HS,7730,618.0,2,No
+40 - 50,17394.0,Salaried,HS,16130,608.0,0,Yes
+≥ 70,26579.0,Salaried,Masters,8754,694.0,6,No
+60 - 70,43195.0,Salaried,Bachelors,3443,576.0,6,No
+50 - 60,47554.0,Salaried,HS,5402,695.0,5,No
+60 - 70,26590.0,Salaried,Masters,16214,771.0,3,No
+40 - 50,31440.0,Salaried,Bachelors,17254,751.0,3,No
+30 - 40,42631.0,Salaried,Bachelors,30268,767.0,6,Yes
+< 30,32326.0,Salaried,Masters,8258,678.0,7,No
+≥ 70,91185.0,Salaried,Bachelors,8517,535.0,5,No
+50 - 60,71670.0,Salaried,Bachelors,6649,749.0,5,No
+40 - 50,38292.0,Salaried,Bachelors,29383,764.0,2,No
+60 - 70,18038.0,Salaried,Masters,4155,649.0,2,No
+60 - 70,96835.0,Unemployed,Bachelors,38410,687.0,8,Yes
+< 30,68138.0,Salaried,HS,7897,697.0,9,No
+60 - 70,54734.0,Self-Employed,PhD,9681,640.0,3,No
+60 - 70,62084.0,Salaried,Masters,7616,700.0,2,No
+< 30,43410.0,Salaried,HS,10019,845.0,4,No
+< 30,18641.0,Salaried,Bachelors,2928,782.0,2,No
+30 - 40,30699.0,Salaried,HS,2525,753.0,4,Yes
+30 - 40,73824.0,Salaried,Bachelors,2930,763.0,6,No
+< 30,25510.0,Unemployed,Bachelors,6284,722.0,6,No
+40 - 50,36988.0,Salaried,HS,13540,577.0,4,No
+< 30,62846.0,Self-Employed,PhD,6781,792.0,2,No
+50 - 60,33019.0,Unemployed,Bachelors,16718,623.0,4,Yes
+60 - 70,81677.0,Salaried,Masters,20238,624.0,5,No
+40 - 50,26119.0,Salaried,Bachelors,5063,658.0,5,No
+30 - 40,26326.0,Self-Employed,HS,7486,755.0,6,No
+30 - 40,18074.0,Self-Employed,Bachelors,9414,713.0,8,No
+40 - 50,26151.0,Salaried,Bachelors,13270,570.0,6,No
+40 - 50,41847.0,Salaried,Bachelors,9333,740.0,0,No
+60 - 70,28601.0,Salaried,HS,10848,664.0,8,No
+50 - 60,71965.0,Salaried,Bachelors,8771,755.0,5,No
+30 - 40,54456.0,Salaried,Bachelors,7472,770.0,5,No
+< 30,25717.0,Salaried,Masters,7434,618.0,4,Yes
+50 - 60,34550.0,Salaried,PhD,9697,667.0,2,No
+≥ 70,36350.0,Salaried,Bachelors,2963,653.0,6,No
+40 - 50,10576.0,Salaried,HS,14366,667.0,4,No
+≥ 70,48133.0,Salaried,Masters,10577,644.0,4,Yes
+50 - 60,53874.0,Salaried,Masters,8941,588.0,6,No
+50 - 60,32984.0,Salaried,HS,9909,643.0,5,No
+50 - 60,22597.0,Salaried,Masters,7279,788.0,3,No
+40 - 50,32904.0,Self-Employed,Bachelors,6170,782.0,2,No
+40 - 50,63384.0,Salaried,Bachelors,3695,702.0,5,Yes
+60 - 70,38979.0,Self-Employed,Bachelors,10649,760.0,2,No
+60 - 70,57398.0,Salaried,Bachelors,13880,583.0,4,No
+50 - 60,45906.0,Salaried,Masters,10464,735.0,6,No
+50 - 60,52799.0,Salaried,HS,3728,687.0,3,No
+60 - 70,40754.0,Salaried,HS,20855,638.0,5,No
+30 - 40,17892.0,Salaried,Bachelors,12118,579.0,4,No
+60 - 70,11353.0,Salaried,Bachelors,24261,667.0,6,No
+40 - 50,45260.0,Salaried,HS,7453,697.0,6,No
+50 - 60,36694.0,Self-Employed,HS,10941,608.0,3,No
+40 - 50,39563.0,Salaried,Bachelors,23971,723.0,5,No
+50 - 60,60736.0,Salaried,Masters,13331,763.0,5,No
+50 - 60,61903.0,Salaried,HS,6813,677.0,1,Yes
+50 - 60,81371.0,Salaried,HS,11057,552.0,6,No
+< 30,49503.0,Salaried,Bachelors,26337,616.0,5,No
+40 - 50,18462.0,Salaried,Masters,12205,635.0,6,No
+< 30,15695.0,Unemployed,HS,15067,645.0,3,Yes
+60 - 70,47341.0,Salaried,HS,7858,693.0,3,No
+60 - 70,70033.0,Self-Employed,Bachelors,3762,750.0,3,No
+< 30,51116.0,Self-Employed,Masters,9984,703.0,3,No
+≥ 70,26812.0,Self-Employed,HS,1594,738.0,3,No
+60 - 70,49332.0,Unemployed,HS,4758,783.0,7,No
+60 - 70,38511.0,Salaried,PhD,7950,623.0,4,No
+30 - 40,61436.0,Salaried,HS,15628,539.0,3,No
+< 30,82524.0,Self-Employed,Bachelors,3331,805.0,6,No
+50 - 60,60811.0,Salaried,Masters,10150,539.0,7,No
+≥ 70,17126.0,Salaried,Bachelors,8194,741.0,3,Yes
+50 - 60,106152.0,Self-Employed,Bachelors,6927,657.0,4,No
+≥ 70,46247.0,Salaried,Bachelors,4855,781.0,6,No
+< 30,30135.0,Salaried,HS,4643,708.0,8,No
+40 - 50,67447.0,Salaried,Bachelors,13349,767.0,2,No
+< 30,23794.0,Self-Employed,Masters,4398,625.0,8,No
+30 - 40,49035.0,Self-Employed,HS,2498,794.0,8,No
+60 - 70,175721.0,Salaried,Masters,22900,626.0,6,No
+40 - 50,27748.0,Unemployed,HS,10316,649.0,3,No
+< 30,44644.0,Self-Employed,HS,7119,623.0,6,No
+30 - 40,34181.0,Self-Employed,Bachelors,4232,789.0,3,No
+< 30,25214.0,Salaried,Bachelors,1699,628.0,6,No
+< 30,63762.0,Salaried,Bachelors,12654,592.0,2,No
+40 - 50,26145.0,Salaried,Bachelors,6185,759.0,4,No
+60 - 70,65449.0,Self-Employed,HS,6340,767.0,6,No
+60 - 70,24875.0,Salaried,HS,3142,654.0,7,No
+≥ 70,30099.0,Salaried,Bachelors,5632,755.0,8,No
+< 30,39144.0,Salaried,Masters,10472,682.0,3,No
+60 - 70,51436.0,Salaried,PhD,6284,653.0,6,No
+40 - 50,62509.0,Salaried,Masters,17619,793.0,6,No
+50 - 60,48834.0,Salaried,HS,10780,703.0,6,No
+< 30,64363.0,Salaried,HS,10913,531.0,3,Yes
+< 30,22492.0,Self-Employed,Masters,6125,627.0,2,No
+40 - 50,31636.0,Salaried,HS,5215,645.0,2,No
+30 - 40,106410.0,Salaried,HS,17000,645.0,1,No
+30 - 40,57068.0,Salaried,Bachelors,2441,672.0,4,No
+30 - 40,63747.0,Salaried,Masters,16241,593.0,5,No
+< 30,37903.0,Self-Employed,Bachelors,11889,605.0,3,No
+< 30,38316.0,Salaried,HS,10252,643.0,9,Yes
+60 - 70,20298.0,Salaried,PhD,6519,656.0,6,No
+≥ 70,15778.0,Self-Employed,HS,7983,680.0,4,No
+40 - 50,74112.0,Salaried,HS,4702,684.0,7,Yes
+< 30,31528.0,Salaried,Bachelors,11178,660.0,3,No
+< 30,22756.0,Salaried,Bachelors,2915,749.0,5,No
+< 30,34622.0,Salaried,HS,15331,847.0,4,No
+40 - 50,7433.0,Salaried,Bachelors,13386,635.0,7,No
+≥ 70,67334.0,Unemployed,Bachelors,1560,667.0,6,No
+30 - 40,42951.0,Self-Employed,Masters,8300,605.0,2,No
+60 - 70,53361.0,Unemployed,HS,14877,722.0,1,No
+30 - 40,24718.0,Self-Employed,Masters,13016,502.0,3,No
+30 - 40,115832.0,Unemployed,Bachelors,26938,621.0,5,No
+40 - 50,16134.0,Self-Employed,Bachelors,3495,676.0,3,No
+40 - 50,33912.0,Self-Employed,Masters,11233,637.0,4,No
+60 - 70,34489.0,Salaried,Bachelors,4718,766.0,7,No
+40 - 50,51574.0,Salaried,Masters,4380,687.0,4,No
+60 - 70,38216.0,Salaried,HS,9411,610.0,2,No
+< 30,35638.0,Salaried,Bachelors,5257,714.0,4,No
+60 - 70,112705.0,Salaried,Masters,7354,570.0,7,No
+60 - 70,48322.0,Salaried,Masters,9356,571.0,2,No
+40 - 50,59176.0,Salaried,Masters,11537,638.0,3,No
+50 - 60,21576.0,Self-Employed,Bachelors,15614,522.0,7,No
+< 30,33824.0,Salaried,Bachelors,4329,691.0,7,No
+50 - 60,43558.0,Salaried,HS,31358,704.0,5,No
+40 - 50,115896.0,Unemployed,Bachelors,12891,680.0,2,No
+≥ 70,42386.0,Salaried,Masters,4728,730.0,9,Yes
+60 - 70,23123.0,Salaried,Masters,35043,529.0,3,No
+40 - 50,71607.0,Salaried,Masters,30848,728.0,6,No
+60 - 70,24610.0,Salaried,Bachelors,13382,492.0,4,No
+60 - 70,97570.0,Self-Employed,HS,13393,612.0,8,No
+60 - 70,42188.0,Self-Employed,Masters,9333,662.0,4,No
+30 - 40,23417.0,Salaried,HS,7805,664.0,7,No
+40 - 50,31658.0,Salaried,Bachelors,6181,683.0,7,No
+30 - 40,87061.0,Salaried,Bachelors,9321,613.0,3,No
+30 - 40,41663.0,Salaried,HS,2338,677.0,6,No
+40 - 50,57302.0,Salaried,Bachelors,4269,694.0,4,No
+40 - 50,50093.0,Salaried,HS,5274,629.0,3,No
+< 30,58208.0,Salaried,Bachelors,10423,633.0,6,No
+40 - 50,60878.0,Salaried,Bachelors,5330,687.0,5,No
+50 - 60,59257.0,Self-Employed,Bachelors,3265,733.0,4,No
+40 - 50,29654.0,Salaried,PhD,10465,687.0,5,No
+60 - 70,13734.0,Salaried,HS,5039,685.0,2,No
+30 - 40,42027.0,Salaried,Masters,3250,646.0,6,No
+≥ 70,76750.0,Self-Employed,Bachelors,35501,636.0,1,No
+30 - 40,44341.0,Salaried,Masters,9574,640.0,5,No
+60 - 70,55248.0,Self-Employed,HS,6093,771.0,4,No
+60 - 70,37140.0,Self-Employed,Bachelors,16227,775.0,6,Yes
+50 - 60,28019.0,Salaried,HS,5500,692.0,8,No
+< 30,17597.0,Salaried,Bachelors,9669,701.0,7,No
+30 - 40,17531.0,Self-Employed,Masters,9368,536.0,2,No
+< 30,40780.0,Salaried,Masters,6625,629.0,6,No
+30 - 40,29806.0,Self-Employed,HS,19376,642.0,1,No
+60 - 70,29481.0,Salaried,Masters,3986,612.0,3,No
+50 - 60,64435.0,Self-Employed,HS,11146,582.0,2,No
+30 - 40,26690.0,Salaried,Bachelors,3832,775.0,12,No
+≥ 70,54295.0,Self-Employed,Masters,13400,674.0,2,No
+40 - 50,43086.0,Salaried,HS,4669,601.0,3,No
+50 - 60,33668.0,Salaried,Masters,12747,610.0,8,No
+30 - 40,25952.0,Salaried,Masters,5109,673.0,2,No
+30 - 40,35852.0,Salaried,HS,5330,757.0,6,No
+60 - 70,49652.0,Self-Employed,HS,6433,621.0,2,No
+60 - 70,52726.0,Salaried,Masters,20779,641.0,7,Yes
+40 - 50,32847.0,Salaried,Masters,16082,552.0,4,No
+≥ 70,26412.0,Salaried,PhD,11246,697.0,8,Yes
+≥ 70,45520.0,Salaried,Bachelors,26327,577.0,5,No
+≥ 70,64711.0,Unemployed,HS,4507,733.0,7,No
+≥ 70,23214.0,Unemployed,Bachelors,30642.6,590.0,8,No
+< 30,29176.0,Salaried,Bachelors,57407.8,797.0,6,No
+50 - 60,53186.0,Salaried,Masters,20575.4,746.0,4,No
+50 - 60,32018.0,Salaried,Bachelors,22515.8,702.0,5,No
+30 - 40,72599.0,Unemployed,Bachelors,20861.4,695.0,5,No
+50 - 60,78559.0,Unemployed,Masters,38569.2,733.0,2,No
+≥ 70,19059.0,Salaried,Masters,37192,639.0,3,No
+40 - 50,100320.0,Salaried,Bachelors,24201,825.0,4,No
+< 30,36889.0,Salaried,Bachelors,28768.2,605.0,11,No
+30 - 40,60903.0,Salaried,Bachelors,17928.8,824.0,4,No
+30 - 40,36132.0,Self-Employed,HS,30858.2,583.0,5,No
+50 - 60,42595.0,Salaried,HS,43354.2,635.0,6,No
+≥ 70,28766.0,Self-Employed,Bachelors,29635,679.0,5,No
+50 - 60,41534.0,Salaried,HS,16769.4,689.0,8,No
+30 - 40,17892.0,Salaried,Bachelors,36659.6,579.0,4,No
+< 30,39144.0,Salaried,Masters,33038.4,682.0,3,No
+40 - 50,23379.0,Salaried,HS,49943.2,663.0,4,No
+40 - 50,43874.0,Salaried,HS,22790.8,702.0,7,No
+60 - 70,71946.0,Self-Employed,Masters,24645.4,587.0,6,Yes
+40 - 50,28147.0,Salaried,HS,36395.6,649.0,4,No
+30 - 40,87770.0,Salaried,Bachelors,23428.8,542.0,4,No
+30 - 40,13448.0,Salaried,Masters,32435.6,768.0,3,No
+50 - 60,32328.0,Salaried,HS,41517.2,704.0,5,No
+50 - 60,98420.0,Salaried,Masters,16668.2,696.0,0,No
+60 - 70,10623.0,Unemployed,Bachelors,25094.2,625.0,5,No
+40 - 50,47749.0,Unemployed,HS,23516.8,800.0,3,No
+< 30,63646.0,Salaried,Bachelors,28165.4,574.0,3,No
+< 30,73736.0,Salaried,HS,30418.2,664.0,1,No
+30 - 40,17531.0,Self-Employed,Masters,30609.6,536.0,2,No
+40 - 50,108704.0,Salaried,Masters,29159.8,674.0,5,No
+50 - 60,42710.0,Unemployed,Masters,12411.2,609.0,2,Yes
+50 - 60,52264.0,Salaried,HS,36155.8,683.0,6,No
+60 - 70,65496.0,Self-Employed,Bachelors,29109.2,673.0,5,No
+≥ 70,24369.0,Salaried,Bachelors,46170.2,612.0,6,No
+50 - 60,42218.0,Self-Employed,HS,31005.6,658.0,4,No
+40 - 50,107485.0,Salaried,Masters,19244.4,733.0,4,Yes
+< 30,36958.0,Salaried,HS,23389.2,615.0,6,No
+≥ 70,55084.0,Salaried,Bachelors,40126.8,540.0,1,No
+50 - 60,40923.0,Salaried,Masters,29705.4,768.0,5,No
+30 - 40,58083.0,Salaried,HS,24143.8,613.0,5,No
+60 - 70,28296.0,Salaried,Bachelors,23213.2,753.0,2,No

@@ -5,4 +5,8 @@ Designing Information Systems
 
 ## PMO
 
-Applied optimization methods
+Applied Optimization Methods
+
+## IIS
+
+Intelligent Information Systems
