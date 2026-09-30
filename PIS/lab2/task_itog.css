@@ -3,15 +3,356 @@
   ИТОГОВОЕ ЗАДАНИЕ
   Вариант 04
   Стиль: «Игра» — GameZone
-
-  Полное описание задания и требований — в var04.html.
 */
 
-/* Обязательный элемент в любом проекте — глобальный box-sizing,
-   чтобы padding и border не увеличивали заданную ширину элементов. */
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-/* Дальше — вся стилизация ваша: цвета, отступы, Flexbox, Grid,
-   position, псевдоклассы/псевдоэлементы, адаптивность. */
+
+body {
+    margin: 0;
+    padding-top: 80px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #e8ecff;
+    background-color: #0d1020;
+}
+
+h1 {
+    font-size: 40px;
+    margin: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 18px rgba(0, 229, 255, 0.55);
+}
+
+h2 {
+    font-size: 30px;
+    margin: 0 0 16px;
+}
+
+h3 {
+    font-size: 23px;
+    margin: 0 0 8px;
+    color: #00e5ff;
+}
+
+p {
+    margin: 0 0 16px;
+}
+
+a {
+    color: #00e5ff;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 32px;
+    background-color: #171b31;
+    border-bottom: 2px solid #00e5ff;
+}
+
+.nav {
+    display: flex;
+    gap: 24px;
+}
+
+.nav a {
+    color: #e8ecff;
+    padding: 8px 12px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: color 0.25s ease, background-color 0.25s ease,
+                border-color 0.25s ease, transform 0.25s ease;
+}
+
+.nav a:hover {
+    color: #0d1020;
+    background-color: #00e5ff;
+    border-color: #00e5ff;
+    transform: translateY(-2px);
+}
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+}
+
+.hero {
+    margin: 48px 0;
+    padding: 56px 32px;
+    text-align: center;
+    background: linear-gradient(135deg, #171b31, #241a4d);
+    border: 1px solid #2c3566;
+    border-radius: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero:hover {
+    border-color: #00e5ff;
+    box-shadow: 0 0 40px rgba(0, 229, 255, 0.18);
+}
+
+.hero p {
+    font-size: 30px;
+    margin: 0;
+    color: #cfd6ff;
+}
+
+.hero p::before {
+    content: "▶ ";
+    color: #ff2e88;
+}
+
+.hero p::after {
+    content: " ◀";
+    color: #ff2e88;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.feature-card {
+    padding: 24px;
+    background-color: #171b31;
+    border: 1px solid #2c3566;
+    border-top: 4px solid #00e5ff;
+    border-radius: 16px;
+    transition: border-color 0.3s ease, transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.feature-card p {
+    margin: 0;
+    color: #a9b1d9;
+}
+
+.feature-card:nth-child(2) {
+    border-top-color: #ff2e88;
+}
+
+.feature-card:hover {
+    border-color: #00e5ff;
+    transform: translateY(-6px);
+    box-shadow: 0 14px 34px rgba(0, 229, 255, 0.25);
+}
+
+.promo {
+    margin-bottom: 48px;
+}
+
+.promo-card {
+    position: relative;
+    padding: 40px 32px;
+    background: linear-gradient(120deg, #3a1060, #171b31);
+    border: 1px solid #ff2e88;
+    border-radius: 16px;
+    transition: box-shadow 0.3s ease;
+}
+
+.promo-card:hover {
+    box-shadow: 0 14px 34px rgba(255, 46, 136, 0.3);
+}
+
+.badge {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #ffffff;
+    background-color: #ff2e88;
+    border-radius: 999px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.promo-card:hover .badge {
+    transform: rotate(6deg) scale(1.06);
+    box-shadow: 0 0 18px rgba(255, 46, 136, 0.7);
+}
+
+.form-section {
+    padding: 32px;
+    background-color: #171b31;
+    border: 1px solid #2c3566;
+    border-radius: 16px;
+}
+
+.form-section h2 {
+    text-align: center;
+}
+
+.form-section h2::after {
+    content: " — поля обязательны";
+    font-size: 13px;
+    color: #ff2e88;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="tel"] {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 17px;
+    color: #e8ecff;
+    background-color: #0d1020;
+    border: 2px solid #2c3566;
+    border-radius: 10px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease,
+                background-color 0.25s ease;
+}
+
+form input::placeholder {
+    color: #6b74a8;
+}
+
+form input:hover {
+    border-color: #4b5690;
+}
+
+form input:focus {
+    border-color: #00e5ff;
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.25);
+    outline: none;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 6px 0 0;
+    padding: 14px 18px 18px;
+    border: 1px solid #2c3566;
+    border-radius: 10px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.radio-group:hover {
+    border-color: #ff2e88;
+    box-shadow: 0 0 0 3px rgba(255, 46, 136, 0.12);
+}
+
+.radio-group legend {
+    padding: 0 8px;
+    font-size: 13px;
+    color: #a9b1d9;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+
+.radio-group label:hover {
+    color: #00e5ff;
+}
+
+form input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #ff2e88;
+}
+
+.btn {
+    width: 100%;
+    margin-top: 6px;
+    padding: 16px 24px;
+    font-family: inherit;
+    font-size: 17px;
+    color: #0d1020;
+    background-color: #00e5ff;
+    border: none;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.25s ease, background-color 0.25s ease,
+                transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn:hover {
+    color: #ffffff;
+    background-color: #ff2e88;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(255, 46, 136, 0.45);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+footer {
+    padding: 24px 32px;
+    font-size: 13px;
+    text-align: center;
+    color: #6b74a8;
+    background-color: #0a0c18;
+    border-top: 1px solid #2c3566;
+}
+
+@media (max-width: 560px) {
+    body {
+        padding-top: 150px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        font-size: 23px;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
