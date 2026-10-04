@@ -148,7 +148,10 @@ vite.config.ts.timestamp-*
 __pycache__
 
 # ide cache
-.zed
 .vs
 .vscode
 .ide
+
+# rust
+target/
+Cargo.lock

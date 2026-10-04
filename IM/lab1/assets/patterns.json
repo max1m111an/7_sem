@@ -1,0 +1,34 @@
+﻿[
+  {
+    "name": "water_well",
+    "kind": "Water",
+    "ascii": [".W.", "WWW", ".W."],
+    "produce": { "water": 5.0 }
+  },
+  {
+    "name": "farm",
+    "kind": "Food",
+    "ascii": ["FF", "FF"],
+    "produce": { "food": 4.0 }
+  },
+  {
+    "name": "solar",
+    "kind": "Energy",
+    "ascii": [".E.", "EEE", ".E."],
+    "produce": { "energy": 5.0 }
+  },
+  {
+    "name": "habitat",
+    "kind": "Population",
+    "ascii": [".P.", "PPP", ".P."],
+    "produce": { "population": 1.0 }
+  },
+  {
+    "name": "conflict_zone",
+    "kind": "Conflict",
+    "ascii": ["CCC", "CCC", "CCC"],
+    "produce": {},
+    "stress_radius": 3,
+    "stress_per_tick": 0.5
+  }
+]
