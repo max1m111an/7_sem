@@ -7,8 +7,14 @@
   },
   {
     "label": "MSYS2",
-    "command": "msys2",
+    "shell": {
+      "with_arguments": {
+        "program": "C:\\msys64\\ucrt64.exe",
+        "args": ["--login"]
+      }
+    },
+    "command": "echo Hello from MSYS2",
     "use_new_terminal": true,
-    "reveal": "never"
+    "reveal": "always"
   }
 ]
