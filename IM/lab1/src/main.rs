@@ -5,13 +5,13 @@ use lab1::app::App;
 fn main() -> eframe::Result<()> {
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
-            .with_title("Planetary Colonies CA")
-            .with_inner_size([1600.0, 1000.0])
-            .with_min_inner_size([1100.0, 700.0]),
+            .with_title("Игра «Жизнь»")
+            .with_inner_size([960.0, 600.0])
+            .with_min_inner_size([780.0, 500.0]),
         ..Default::default()
     };
     eframe::run_native(
-        "Planetary Colonies CA",
+        "Игра «Жизнь»",
         options,
         Box::new(|cc| Ok(Box::new(App::new(cc)))),
     )

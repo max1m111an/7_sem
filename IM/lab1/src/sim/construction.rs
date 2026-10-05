@@ -1,7 +1,7 @@
 use std::collections::{HashMap, HashSet};
 
 use crate::sim::cell::{CellState, ConstructionKind};
-use crate::sim::grid::Grid;
+use crate::sim::grid::{wrap, Grid};
 use crate::sim::pattern::PatternLibrary;
 
 /// Production/consumption multiplier for one construction complex.
@@ -69,40 +69,48 @@ fn complex_alive(grid: &Grid, library: &PatternLibrary, id: u32, anchor: usize) 
         })
 }
 
-/// True when every cell of the bounding box either belongs to `rot` and carries
-/// `id`, or lies outside `rot` and does not. A single mismatch means this
-/// rotation is not the shape the complex was built from, so another rotation
-/// must be tried.
+/// True when the cells carrying `id` still spell `rot`.
+///
+/// The anchor is *some* cell of the shape, so the bounding box has to be
+/// placed so that the anchor lands on the pattern cell it actually is. Older
+/// code hung the box off the anchor towards the top-left, which silently
+/// assumed the anchor was its bottom-right corner: every other cell of a fresh
+/// complex then failed the check, was released on the next generation and the
+/// grid oscillated between "all construction" and "all citizens" until the
+/// cycle detector stopped the run. Every origin that puts the anchor inside
+/// the shape is tried instead, and the first one whose box matches the cells
+/// carrying `id` wins.
 fn shape_holds(grid: &Grid, rot: &crate::sim::pattern::Pattern, id: u32, anchor: usize) -> bool {
     let min_x = rot.cells.iter().map(|(x, _)| *x as i32).min().unwrap_or(0);
     let min_y = rot.cells.iter().map(|(_, y)| *y as i32).min().unwrap_or(0);
     let w = rot.cells.iter().map(|(x, _)| *x as i32).max().unwrap_or(0) + 1 - min_x;
     let h = rot.cells.iter().map(|(_, y)| *y as i32).max().unwrap_or(0) + 1 - min_y;
+    // A shape larger than the field would fold onto itself, and the
+    // outside-the-box test would then contradict the inside test.
+    if w as usize > grid.width || h as usize > grid.height {
+        return false;
+    }
     let (ax, ay) = grid.xy(anchor);
 
-    for oy in 0..h {
-        for ox in 0..w {
-            let inside = rot
-                .cells
-                .iter()
-                .any(|(dx, dy)| *dx as i32 - min_x == ox && *dy as i32 - min_y == oy);
-            // Cells outside the grid cannot hold part of this complex, so a
-            // shape that would extend past the border cannot match.
-            let px = ax as i32 - ox;
-            let py = ay as i32 - oy;
-            if px < 0 || py < 0 || px >= grid.width as i32 || py >= grid.height as i32 {
-                if inside {
-                    return false;
-                }
-                continue;
-            }
-            let idx = grid.idx(px as usize, py as usize);
-            if inside != (grid.cells[idx].construction_id == Some(id)) {
-                return false;
-            }
-        }
-    }
-    true
+    rot.cells.iter().any(|(dx, dy)| {
+        // Try the placement where the anchor plays this cell of the pattern.
+        let ox0 = *dx as i32 - min_x;
+        let oy0 = *dy as i32 - min_y;
+        let origin_x = wrap(ax, -(ox0 as isize), grid.width);
+        let origin_y = wrap(ay, -(oy0 as isize), grid.height);
+        (0..h as isize).all(|oy| {
+            (0..w as isize).all(|ox| {
+                let inside = rot.cells.iter().any(|(rx, ry)| {
+                    *rx as i32 - min_x == ox as i32 && *ry as i32 - min_y == oy as i32
+                });
+                // The box may reach across the seam of the torus instead of
+                // failing a bounds test.
+                let px = wrap(origin_x, ox, grid.width);
+                let py = wrap(origin_y, oy, grid.height);
+                inside == (grid.cells[grid.idx(px, py)].construction_id == Some(id))
+            })
+        })
+    })
 }
 
 /// Detect pattern matches over a grid of citizens.
@@ -175,14 +183,17 @@ fn try_match(
         .unwrap_or(0)
         + 1
         - min_y;
-    if x + w as usize > grid.width || y + h as usize > grid.height {
+    // A shape may straddle the seam, but it must not fold onto itself: two of
+    // its cells would then claim the same index and the pattern could never be
+    // distinguished from a smaller one.
+    if w as usize > grid.width || h as usize > grid.height {
         return None;
     }
     let mut cells = Vec::with_capacity(pattern.cells.len());
     for (dx, dy) in &pattern.cells {
-        let px = x as i32 + *dx as i32 - min_x;
-        let py = y as i32 + *dy as i32 - min_y;
-        let idx = grid.idx(px as usize, py as usize);
+        let px = wrap(x, *dx as isize - min_x as isize, grid.width);
+        let py = wrap(y, *dy as isize - min_y as isize, grid.height);
+        let idx = grid.idx(px, py);
         let c = &grid.cells[idx];
         let ok = c.state == CellState::Citizen
             || (matches!(c.state, CellState::Construction | CellState::Overlap)

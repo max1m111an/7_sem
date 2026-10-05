@@ -53,12 +53,9 @@ impl SimConfig {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct RenderConfig {
     pub cell_px: usize,
-    pub border_px: usize,
-    pub show_grid_lines: bool,
     pub overlay_stress: bool,
     pub overlay_fatigue: bool,
     pub overlay_loyalty: bool,
-    pub show_construction_outlines: bool,
     pub show_conflict_radius: bool,
 }
 
@@ -101,13 +98,10 @@ impl Default for SimConfig {
 impl Default for RenderConfig {
     fn default() -> Self {
         Self {
-            cell_px: 4,
-            border_px: 1,
-            show_grid_lines: true,
+            cell_px: 8,
             overlay_stress: false,
             overlay_fatigue: false,
             overlay_loyalty: false,
-            show_construction_outlines: true,
             show_conflict_radius: false,
         }
     }

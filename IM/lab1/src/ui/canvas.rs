@@ -1,20 +1,21 @@
 use egui::{Color32, ColorImage, Context, TextureHandle, TextureOptions, Ui, Vec2};
 
-use crate::sim::cell::{CellState, ConstructionKind};
-use crate::sim::{Brush, Sim};
+use crate::sim::cell::{Cell, Species};
+use crate::sim::Life;
 use crate::ui::palette;
 
 /// Hard GPU texture side limit; egui/glow rejects anything larger.
-pub const MAX_TEXTURE_SIDE: usize = 2048;
-pub const MAX_CELL_PX: usize = 32;
+pub use crate::sim::MAX_TEXTURE_SIDE;
 
-/// Largest `cell_px` that keeps `width * cell_px` and `height * cell_px`
-/// within the GPU texture limit.
-pub fn max_cell_px(width: usize, height: usize) -> usize {
-    let longest = width.max(height).max(1) as f32;
-    let fit = (MAX_TEXTURE_SIDE as f32 / longest).floor() as usize;
-    fit.clamp(1, MAX_CELL_PX)
-}
+/// Пределы зума: размер клетки в текстурных пикселях, 1..=32.
+pub use crate::sim::{MAX_CELL_PX, MIN_CELL_PX};
+
+/// Размер клетки до первого кручения колеса с Ctrl.
+pub const DEFAULT_CELL_PX: usize = 14;
+
+/// Толщина чёрной рамки клетки в пикселях. Фиксированная: при клетке в один
+/// пиксель рамки нет совсем — места на неё не остаётся.
+pub const BORDER_PX: usize = 1;
 
 /// A changed-cell bounding box in grid coordinates.
 #[derive(Clone, Copy, Debug, Default)]
@@ -44,7 +45,6 @@ impl DirtyRect {
     }
 }
 
-#[derive(Default)]
 pub struct Canvas {
     texture: Option<TextureHandle>,
     /// CPU-side copy of the texture. Dirty-region updates patch this buffer so
@@ -55,7 +55,29 @@ pub struct Canvas {
     /// Texture size the current `buffer`/`texture` were built for.
     tex_size: [usize; 2],
     full_rebuild: bool,
-    dragging: bool,
+    /// Размер клетки в текстурных пикселях: 1..=32, крутится Ctrl+колесом.
+    pub cell_px: usize,
+    /// Дробный остаток прокрутки колеса — колесо даёт дробные дельты, а зум
+    /// шагами по 50 px.
+    scroll_accum: f32,
+    /// Размер клетки, под который мир был подогнан в последний раз. Подгонка
+    /// нужна только при смене зума: при каждом ресайзе окна мир бы обрезался
+    /// прямо на глазах.
+    fitted_zoom: Option<usize>,
+    /// Drag in progress: the last cell visited and the species the brush
+    /// paints (`None` for the erasing right button).
+    drag: Option<(usize, usize, Option<Species>)>,
+    /// Screen rect the grid was last painted into.
+    pub rect: egui::Rect,
+    /// Screen pixels per cell actually in effect. Equal to [`Self::cell_px`]
+    /// except for a sub-pixel stretch that hides the fit slack.
+    pub display_cell_px: f32,
+}
+
+impl Default for Canvas {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl Canvas {
@@ -66,7 +88,12 @@ impl Canvas {
             prev: Vec::new(),
             tex_size: [0, 0],
             full_rebuild: true,
-            dragging: false,
+            cell_px: DEFAULT_CELL_PX,
+            scroll_accum: 0.0,
+            fitted_zoom: None,
+            drag: None,
+            rect: egui::Rect::NOTHING,
+            display_cell_px: DEFAULT_CELL_PX as f32,
         }
     }
 
@@ -74,60 +101,77 @@ impl Canvas {
     pub fn invalidate(&mut self) {
         self.full_rebuild = true;
         self.prev.clear();
-        self.dragging = false;
+        self.drag = None;
     }
 
-    pub fn is_full_rebuild(&self) -> bool {
-        self.full_rebuild
-    }
-
-    pub fn show(
-        &mut self,
-        ui: &mut Ui,
-        sim: &mut Sim,
-        tool: crate::ui::tools::Tool,
-        rotation: usize,
-        drag: &mut Option<(usize, usize)>,
-    ) {
-        let (w, h) = (sim.grid.width, sim.grid.height);
-        let cap = max_cell_px(w, h);
-        let mut cell_px = sim.render.cell_px.clamp(1, MAX_CELL_PX).min(cap);
-        sim.render.cell_px = cell_px;
-
-        let zoom = ui.input(|i| i.zoom_delta());
-        if (zoom - 1.0).abs() > f32::EPSILON {
-            let scaled = (cell_px as f32 * zoom).round() as i64;
-            cell_px = scaled.clamp(1, cap as i64) as usize;
-            sim.render.cell_px = cell_px;
+    pub fn show(&mut self, ui: &mut Ui, life: &mut Life, brush: Species) {
+        let steps = steps_from_ctrl_wheel(ui, &mut self.scroll_accum);
+        if steps != 0 {
+            self.zoom_by(steps);
         }
 
-        let dirty = self.sync_colors(sim);
+        let area = ui.available_size();
+        // The grid is refitted only when the zoom changes. Doing it on window
+        // resizes too would crop the world on every frame of a window drag.
+        if self.fitted_zoom != Some(self.cell_px) {
+            let (w, h) = crate::sim::grid_dims_for(
+                self.cell_px,
+                area.x.round().max(0.0) as usize,
+                area.y.round().max(0.0) as usize,
+            );
+            life.resize(w, h);
+            self.fitted_zoom = Some(self.cell_px);
+            self.invalidate();
+        }
+
+        let (w, h) = (life.grid.width, life.grid.height);
+        let cell_px = self.cell_px;
+        let dirty = self.sync_colors(life);
         if self.full_rebuild || dirty.any {
-            self.upload(ui.ctx(), sim, cell_px, dirty);
+            self.upload(ui.ctx(), life, dirty);
         }
 
-        let size = Vec2::new((w * cell_px) as f32, (h * cell_px) as f32);
+        // Stretch to the panel instead of leaving dead space; the difference is
+        // at most a fraction of a pixel per cell because the grid is snapped.
         let tex_id = self.texture.as_ref().map(|t| t.id()).unwrap_or_default();
-        let image = egui::Image::new((tex_id, size)).sense(egui::Sense::click_and_drag());
+        let image = egui::Image::new((
+            tex_id,
+            Vec2::new((w * cell_px) as f32, (h * cell_px) as f32),
+        ))
+        .fit_to_exact_size(area)
+        .sense(egui::Sense::click_and_drag());
         let resp = ui.add(image);
         let rect = resp.rect;
+        self.rect = rect;
+        let display_cell_px = if w > 0 {
+            rect.width() / w as f32
+        } else {
+            cell_px as f32
+        };
+        self.display_cell_px = display_cell_px;
 
-        self.handle_input(ui, sim, tool, rotation, drag, rect, cell_px, w, h);
+        self.handle_input(ui, life, rect, display_cell_px, w, h, brush);
+    }
+
+    /// Крутит размер клетки на `steps` шагов, не выходя за 1..=32.
+    fn zoom_by(&mut self, steps: isize) {
+        self.cell_px = (self.cell_px as isize + steps)
+            .clamp(MIN_CELL_PX as isize, MAX_CELL_PX as isize) as usize;
     }
 
     /// Compare the grid against the cached colours, returning the bounding box
     /// of everything that changed. Empty when the grid is untouched, so a
-    /// paused simulation uploads nothing.
-    fn sync_colors(&mut self, sim: &Sim) -> DirtyRect {
-        let n = sim.grid.cells.len();
+    /// paused game uploads nothing.
+    fn sync_colors(&mut self, life: &Life) -> DirtyRect {
+        let n = life.grid.cells.len();
         let mut dirty = DirtyRect::default();
         if self.prev.len() != n {
-            self.prev = vec![palette::EMPTY; n];
+            self.prev = vec![palette::FIELD; n];
             self.full_rebuild = true;
         }
-        let w = sim.grid.width.max(1);
-        for (i, c) in sim.grid.cells.iter().enumerate() {
-            let want = cell_color(c.state, c.kind, sim);
+        let w = life.grid.width.max(1);
+        for (i, c) in life.grid.cells.iter().enumerate() {
+            let want = cell_color(c);
             if self.prev[i] != want {
                 self.prev[i] = want;
                 dirty.add(i % w, i / w);
@@ -138,11 +182,12 @@ impl Canvas {
 
     /// Repaints the dirty box into the CPU buffer and hands the buffer to the
     /// GPU. egui's `TextureHandle::set` replaces the whole texture, so the
-    /// buffer is kept and only the changed cells are redrawn вЂ” that keeps the
+    /// buffer is kept and only the changed cells are redrawn — that keeps the
     /// per-frame cost proportional to the number of changed cells.
-    fn upload(&mut self, ctx: &Context, sim: &Sim, cell_px: usize, dirty: DirtyRect) {
-        let w = sim.grid.width;
-        let h = sim.grid.height;
+    fn upload(&mut self, ctx: &Context, life: &Life, dirty: DirtyRect) {
+        let w = life.grid.width;
+        let h = life.grid.height;
+        let cell_px = self.cell_px;
         let tex_w = (w * cell_px).max(1);
         let tex_h = (h * cell_px).max(1);
         let tex_size = [tex_w, tex_h];
@@ -158,9 +203,9 @@ impl Canvas {
 
         let buf = self
             .buffer
-            .get_or_insert_with(|| ColorImage::new(tex_size, palette::EMPTY));
+            .get_or_insert_with(|| ColorImage::new(tex_size, palette::FIELD));
         if buf.size != tex_size {
-            *buf = ColorImage::new(tex_size, palette::EMPTY);
+            *buf = ColorImage::new(tex_size, palette::FIELD);
         }
 
         let (bx0, by0, bx1, by1) = if full {
@@ -174,7 +219,7 @@ impl Canvas {
         for y in by0..=by1.min(h.saturating_sub(1)) {
             for x in bx0..=bx1.min(w.saturating_sub(1)) {
                 let i = y * w + x;
-                paint_cell(buf, &sim.grid.cells[i], sim, x, y, cell_px);
+                paint_cell(buf, &life.grid.cells[i], x, y, cell_px);
             }
         }
 
@@ -193,18 +238,18 @@ impl Canvas {
         self.full_rebuild = false;
     }
 
+    /// ЛКМ рисует выбранным видом, ПКМ стирает; при перетаскивании клетки
+    /// ложатся линией без пропусков.
     #[allow(clippy::too_many_arguments)]
     fn handle_input(
         &mut self,
         ui: &mut Ui,
-        sim: &mut Sim,
-        tool: crate::ui::tools::Tool,
-        rotation: usize,
-        drag: &mut Option<(usize, usize)>,
+        life: &mut Life,
         rect: egui::Rect,
-        cell_px: usize,
+        cell_px: f32,
         w: usize,
         h: usize,
+        brush: Species,
     ) {
         if rect.width() <= 0.0 || rect.height() <= 0.0 {
             return;
@@ -214,8 +259,8 @@ impl Canvas {
             .filter(|p| rect.contains(*p));
         let cell_at = |p: egui::Pos2| -> Option<(usize, usize)> {
             let local = p - rect.min;
-            let x = (local.x / cell_px as f32) as usize;
-            let y = (local.y / cell_px as f32) as usize;
+            let x = (local.x / cell_px) as usize;
+            let y = (local.y / cell_px) as usize;
             if x < w && y < h {
                 Some((x, y))
             } else {
@@ -223,65 +268,85 @@ impl Canvas {
             }
         };
 
-        if ui.input(|i| i.pointer.button_pressed(egui::PointerButton::Secondary)) {
-            if let Some(pos) = hovered {
-                if let Some((x, y)) = cell_at(pos) {
-                    sim.paint(x, y, Brush::Empty);
-                }
-            }
-        }
-
         if ui.input(|i| i.pointer.button_pressed(egui::PointerButton::Primary)) {
-            if let Some(pos) = hovered {
-                if let Some((x, y)) = cell_at(pos) {
-                    *drag = Some((x, y));
-                    self.dragging = true;
-                    apply(sim, tool, rotation, x, y);
-                }
+            if let Some(cell) = hovered.and_then(cell_at) {
+                life.set_cell(cell.0, cell.1, Some(brush));
+                self.drag = Some((cell.0, cell.1, Some(brush)));
             }
-        } else if self.dragging && ui.input(|i| i.pointer.any_down()) {
-            if let Some(pos) = hovered {
-                if let Some((x, y)) = cell_at(pos) {
-                    if let Some((px, py)) = *drag {
-                        draw_line(sim, tool, rotation, px, py, x, y);
-                    }
-                    *drag = Some((x, y));
-                }
+        }
+        if ui.input(|i| i.pointer.button_pressed(egui::PointerButton::Secondary)) {
+            if let Some(cell) = hovered.and_then(cell_at) {
+                life.set_cell(cell.0, cell.1, None);
+                self.drag = Some((cell.0, cell.1, None));
             }
         }
 
-        if !ui.input(|i| i.pointer.any_down()) {
-            self.dragging = false;
-            *drag = None;
+        match self.drag {
+            Some((px, py, painted)) if ui.input(|i| i.pointer.any_down()) => {
+                if let Some((x, y)) = hovered.and_then(cell_at) {
+                    if (x, y) != (px, py) {
+                        draw_line(life, painted, px, py, x, y);
+                    }
+                    self.drag = Some((x, y, painted));
+                }
+            }
+            _ => self.drag = None,
         }
     }
 }
 
-/// Fills the `cell_px` square at `(x, y)` with its fill colour and, when
-/// enabled, a black border. Borders are skipped entirely at `cell_px == 1`
-/// because a single pixel per cell has no room for them (В§8.5).
-fn paint_cell(
-    img: &mut ColorImage,
-    cell: &crate::sim::Cell,
-    sim: &Sim,
-    x: usize,
-    y: usize,
-    cell_px: usize,
-) {
-    let mut fill = cell_color(cell.state, cell.kind, sim);
-    let b = sim.render.border_px.min(cell_px.saturating_sub(1));
-    // В§8.6: overlay heat maps tint the cell body only, borders stay black.
-    if cell.state == CellState::Citizen {
-        if let Some(d) = cell.citizen {
-            if sim.render.overlay_stress {
-                fill = palette::heat(Color32::from_rgb(255, 0, 0), d.stress / sim.config.c_max);
-            } else if sim.render.overlay_fatigue {
-                fill = palette::heat(Color32::from_rgb(0, 0, 255), d.fatigue / sim.config.f_max);
-            } else if sim.render.overlay_loyalty {
-                fill = palette::heat(Color32::from_rgb(0, 255, 0), d.loyalty / sim.config.l_max);
-            }
+/// Wheel distance that equals one zoom step.
+const ZOOM_STEP: f32 = 50.0;
+
+/// Ctrl + mouse wheel is the zoom control. A bare wheel is left alone so it
+/// stays available for whatever the surrounding panels want to do with it.
+///
+/// `raw_scroll_delta` is used rather than `zoom_delta` because Windows only
+/// reports the latter for touchpads; a real wheel with Ctrl held arrives as a
+/// plain scroll event. Wheel deltas are fractional on high-resolution wheels,
+/// so travel is accumulated into whole steps.
+fn steps_from_ctrl_wheel(ui: &Ui, accum: &mut f32) -> isize {
+    let scroll = ui.input(|i| {
+        if i.modifiers.ctrl {
+            i.raw_scroll_delta.y
+        } else {
+            0.0
         }
+    });
+    if scroll == 0.0 {
+        // Drop the remainder so a direction change cannot carry stale travel
+        // into the next gesture.
+        *accum = 0.0;
+        return 0;
     }
+    *accum += scroll;
+    let mut steps = 0isize;
+    while *accum >= ZOOM_STEP {
+        *accum -= ZOOM_STEP;
+        steps += 1;
+    }
+    while *accum <= -ZOOM_STEP {
+        *accum += ZOOM_STEP;
+        steps -= 1;
+    }
+    steps
+}
+
+/// Цвет клетки по её виду: добыча чёрная, хищник красный, пусто — поле.
+fn cell_color(cell: &Cell) -> Color32 {
+    match cell.species {
+        Some(Species::Prey) => palette::PREY,
+        Some(Species::Predator) => palette::PREDATOR,
+        None => palette::FIELD,
+    }
+}
+
+/// Fills the `cell_px` square at `(x, y)` with its colour and a black border.
+/// Borders are skipped entirely at `cell_px == 1`: one pixel per cell has no
+/// room for them.
+fn paint_cell(img: &mut ColorImage, cell: &Cell, x: usize, y: usize, cell_px: usize) {
+    let fill = cell_color(cell);
+    let b = BORDER_PX.min(cell_px.saturating_sub(1));
     for py in 0..cell_px {
         for px in 0..cell_px {
             let idx = (y * cell_px + py) * img.size[0] + (x * cell_px + px);
@@ -291,42 +356,10 @@ fn paint_cell(
     }
 }
 
-/// Fill colour for a cell, ignoring borders (В§8.5 palette).
-fn cell_color(state: CellState, kind: Option<ConstructionKind>, _sim: &Sim) -> Color32 {
-    match state {
-        CellState::Empty => palette::EMPTY,
-        CellState::AntiCell => palette::ANTICELL,
-        CellState::Overlap => palette::OVERLAP,
-        CellState::Construction => match kind {
-            Some(ConstructionKind::Water) => palette::WATER,
-            Some(ConstructionKind::Food) => palette::FOOD,
-            Some(ConstructionKind::Energy) => palette::ENERGY,
-            Some(ConstructionKind::Population) => palette::POPULATION,
-            Some(ConstructionKind::Conflict) => palette::CONFLICT,
-            None => palette::CITIZEN,
-        },
-        CellState::Citizen => palette::CITIZEN,
-    }
-}
-
-fn apply(sim: &mut Sim, tool: crate::ui::tools::Tool, rotation: usize, x: usize, y: usize) {
-    match tool {
-        crate::ui::tools::Tool::Empty => sim.paint(x, y, Brush::Empty),
-        crate::ui::tools::Tool::Citizen => sim.paint(x, y, Brush::Citizen),
-        crate::ui::tools::Tool::AntiCell => sim.paint(x, y, Brush::AntiCell),
-        other => {
-            if let Some(name) = other.pattern_name() {
-                sim.stamp(name, x, y, rotation);
-            }
-        }
-    }
-}
-
-/// Bresenham line so dragging does not leave gaps between sampled cells (§8.4).
+/// Bresenham line so dragging does not leave gaps between sampled cells.
 fn draw_line(
-    sim: &mut Sim,
-    tool: crate::ui::tools::Tool,
-    rotation: usize,
+    life: &mut Life,
+    painted: Option<Species>,
     x0: usize,
     y0: usize,
     x1: usize,
@@ -340,8 +373,8 @@ fn draw_line(
     let sy = if y < ty { 1 } else { -1 };
     let mut err = dx - dy;
     loop {
-        if x >= 0 && y >= 0 && (x as usize) < sim.grid.width && (y as usize) < sim.grid.height {
-            apply(sim, tool, rotation, x as usize, y as usize);
+        if x >= 0 && y >= 0 && (x as usize) < life.grid.width && (y as usize) < life.grid.height {
+            life.set_cell(x as usize, y as usize, painted);
         }
         if x == tx && y == ty {
             break;
