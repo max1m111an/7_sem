@@ -7,18 +7,12 @@ use crate::sim::grid::Grid;
 /// Number of occupied cells in N8 around `(x, y)`.
 pub fn density(grid: &Grid, x: usize, y: usize) -> usize {
     grid.neighbors8(x, y)
-        .into_iter()
         .filter(|(nx, ny)| grid.get(*nx, *ny).is_occupied())
         .count()
 }
 
 /// Rule 9: citizens drift towards the least dense empty face neighbour.
-pub fn rule9_citizen_move(
-    grid: &Grid,
-    next: &mut [Cell],
-    config: &SimConfig,
-    rng: &mut impl Rng,
-) {
+pub fn rule9_citizen_move(grid: &Grid, next: &mut [Cell], config: &SimConfig, rng: &mut impl Rng) {
     if !config.citizen_move_enabled {
         return;
     }

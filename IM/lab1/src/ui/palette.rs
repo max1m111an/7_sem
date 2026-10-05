@@ -1,31 +1,20 @@
-﻿pub struct Palette;
+use egui::Color32;
 
-impl Palette {
-    pub fn empty() -> egui::Color32 {
-        egui::Color32::from_rgb(30, 30, 30)
-    }
-    pub fn citizen() -> egui::Color32 {
-        egui::Color32::BLACK
-    }
-    pub fn water() -> egui::Color32 {
-        egui::Color32::from_rgb(30, 111, 255)
-    }
-    pub fn food() -> egui::Color32 {
-        egui::Color32::from_rgb(46, 204, 64)
-    }
-    pub fn energy() -> egui::Color32 {
-        egui::Color32::from_rgb(255, 212, 0)
-    }
-    pub fn population() -> egui::Color32 {
-        egui::Color32::from_rgb(217, 217, 217)
-    }
-    pub fn conflict() -> egui::Color32 {
-        egui::Color32::from_rgb(138, 43, 226)
-    }
-    pub fn overlap() -> egui::Color32 {
-        egui::Color32::from_rgb(255, 122, 0)
-    }
-    pub fn anticell() -> egui::Color32 {
-        egui::Color32::from_rgb(224, 27, 36)
-    }
+pub const EMPTY: Color32 = Color32::from_rgb(0x1E, 0x1E, 0x1E);
+pub const CITIZEN: Color32 = Color32::from_rgb(0x00, 0x00, 0x00);
+pub const WATER: Color32 = Color32::from_rgb(0x1E, 0x6F, 0xFF);
+pub const FOOD: Color32 = Color32::from_rgb(0x2E, 0xCC, 0x40);
+pub const ENERGY: Color32 = Color32::from_rgb(0xFF, 0xD4, 0x00);
+pub const POPULATION: Color32 = Color32::from_rgb(0xD9, 0xD9, 0xD9);
+pub const CONFLICT: Color32 = Color32::from_rgb(0x8A, 0x2B, 0xE2);
+pub const OVERLAP: Color32 = Color32::from_rgb(0xFF, 0x7A, 0x00);
+pub const ANTICELL: Color32 = Color32::from_rgb(0xE0, 0x1B, 0x24);
+pub const BORDER: Color32 = Color32::from_rgb(0x00, 0x00, 0x00);
+
+/// Normalised `0..1` interpolation between `transparent` and `color`, used by
+/// the stress / fatigue / loyalty heat maps (§8.6).
+pub fn heat(color: Color32, t: f32) -> Color32 {
+    let t = t.clamp(0.0, 1.0);
+    let [r, g, b, _] = color.to_array();
+    Color32::from_rgba_unmultiplied(r, g, b, (255.0 * t) as u8)
 }

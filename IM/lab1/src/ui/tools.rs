@@ -1,28 +1,53 @@
-﻿use crate::app::Tool;
-use crate::sim::{Brush, ConstructionKind, Sim};
-
-
-pub fn brush_for_tool(tool: &Tool) -> Brush {
-    match tool {
-        Tool::Empty => Brush::Empty,
-        Tool::Citizen => Brush::Citizen,
-        Tool::Water => Brush::Water,
-        Tool::Food => Brush::Food,
-        Tool::Energy => Brush::Energy,
-        Tool::Population => Brush::Population,
-        Tool::Conflict => Brush::Conflict,
-        Tool::AntiCell => Brush::AntiCell,
-        Tool::Stamp => Brush::Citizen,
-    }
+﻿/// Tool selected in the left toolbar.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Tool {
+    Empty,
+    Citizen,
+    AntiCell,
+    StampWater,
+    StampFood,
+    StampEnergy,
+    StampPopulation,
+    StampConflict,
 }
 
-pub fn apply_tool_at(sim: &mut Sim, tool: &Tool, x: usize, y: usize) {
-    match tool {
-        Tool::Stamp => {}
-        _ => {
-            let b = brush_for_tool(tool);
-            sim.paint(x, y, b);
+impl Tool {
+    pub fn label(self) -> &'static str {
+        match self {
+            Tool::Empty => "Кисть: Пусто",
+            Tool::Citizen => "Кисть: Гражданин",
+            Tool::AntiCell => "Кисть: Антиклетка",
+            Tool::StampWater => "Штамп: Вода",
+            Tool::StampFood => "Штамп: Еда",
+            Tool::StampEnergy => "Штамп: Энергия",
+            Tool::StampPopulation => "Штамп: Население",
+            Tool::StampConflict => "Штамп: Конфликт",
         }
     }
+
+    pub fn pattern_name(self) -> Option<&'static str> {
+        match self {
+            Tool::StampWater => Some("water_well"),
+            Tool::StampFood => Some("farm"),
+            Tool::StampEnergy => Some("solar"),
+            Tool::StampPopulation => Some("habitat"),
+            Tool::StampConflict => Some("conflict_zone"),
+            _ => None,
+        }
+    }
+
+    pub fn is_stamp(self) -> bool {
+        self.pattern_name().is_some()
+    }
 }
 
+pub const ALL_TOOLS: [Tool; 8] = [
+    Tool::Empty,
+    Tool::Citizen,
+    Tool::AntiCell,
+    Tool::StampWater,
+    Tool::StampFood,
+    Tool::StampEnergy,
+    Tool::StampPopulation,
+    Tool::StampConflict,
+];

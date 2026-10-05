@@ -1,4 +1,4 @@
-﻿use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 
 use crate::sim::cell::ConstructionKind;
 use crate::sim::resources::Resources;
@@ -69,7 +69,10 @@ impl PatternLibrary {
 
     pub fn from_json(json: &str) -> Result<Self, serde_json::Error> {
         let raw: Vec<RawPattern> = serde_json::from_str(json)?;
-        let patterns = raw.into_iter().map(RawPattern::into_pattern).collect();
+        let patterns = raw
+            .into_iter()
+            .map(RawPattern::into_pattern)
+            .collect::<Result<Vec<_>, _>>()?;
         Ok(Self { patterns })
     }
 }
@@ -90,7 +93,7 @@ struct RawPattern {
 }
 
 impl RawPattern {
-    fn into_pattern(self) -> Pattern {
+    fn into_pattern(self) -> Result<Pattern, serde_json::Error> {
         let mut cells: Vec<(i8, i8)> = Vec::new();
         for (y, line) in self.ascii.iter().enumerate() {
             for (x, b) in line.bytes().enumerate() {
@@ -100,22 +103,27 @@ impl RawPattern {
             }
         }
         cells.sort_by_key(|(x, y)| (*y as i16, *x as i16));
-        Pattern {
+        let kind = match self.kind.as_str() {
+            "Water" => ConstructionKind::Water,
+            "Food" => ConstructionKind::Food,
+            "Energy" => ConstructionKind::Energy,
+            "Population" => ConstructionKind::Population,
+            "Conflict" => ConstructionKind::Conflict,
+            other => {
+                return Err(serde::de::Error::custom(format!(
+                    "unknown construction kind: {other}"
+                )))
+            }
+        };
+        Ok(Pattern {
             name: self.name,
-            kind: match self.kind.as_str() {
-                "Water" => ConstructionKind::Water,
-                "Food" => ConstructionKind::Food,
-                "Energy" => ConstructionKind::Energy,
-                "Population" => ConstructionKind::Population,
-                "Conflict" => ConstructionKind::Conflict,
-                other => panic!("unknown construction kind: {other}"),
-            },
+            kind,
             cells,
             produce: self.produce,
             consume: self.consume,
             stress_radius: self.stress_radius,
             stress_per_tick: self.stress_per_tick,
-        }
+        })
     }
 }
 

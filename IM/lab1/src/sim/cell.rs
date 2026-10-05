@@ -1,8 +1,9 @@
-﻿use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
+use std::hash::Hash;
 
-use crate::sim::citizen::CitizenData;
+pub use crate::sim::citizen::CitizenData;
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum CellState {
     Empty,
     Citizen,
@@ -11,7 +12,7 @@ pub enum CellState {
     AntiCell,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ConstructionKind {
     Water,
     Food,

@@ -1,4 +1,4 @@
-﻿pub mod anticell;
+pub mod anticell;
 pub mod cell;
 pub mod citizen;
 pub mod construction;
@@ -25,8 +25,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::config::{RenderConfig, SimConfig};
 
-pub const DEFAULT_WIDTH: usize = 128;
-pub const DEFAULT_HEIGHT: usize = 128;
+pub const DEFAULT_WIDTH: usize = 256;
+pub const DEFAULT_HEIGHT: usize = 256;
 pub const MAX_TICKS_PER_FRAME: usize = 6;
 pub const CYCLE_HISTORY: usize = 8;
 pub const CYCLE_REPEATS: usize = 3;
@@ -45,7 +45,7 @@ impl SimStatus {
             SimStatus::Running => "Running",
             SimStatus::Paused => "Paused",
             SimStatus::GameOver => "Game Over",
-            SimStatus::CycleDetected => "Цикл обнаружен",
+            SimStatus::CycleDetected => "Р¦РёРєР» РѕР±РЅР°СЂСѓР¶РµРЅ",
         }
     }
 }
@@ -133,8 +133,10 @@ impl Clone for Sim {
     }
 }
 
+/// Loads the embedded pattern library. The asset is part of the binary, so a
+/// parse failure is a build bug rather than a runtime condition to recover from.
 pub fn default_library() -> PatternLibrary {
-    PatternLibrary::from_embedded().unwrap_or_else(|_| PatternLibrary { patterns: Vec::new() })
+    PatternLibrary::from_embedded().expect("assets/patterns.json must parse")
 }
 
 impl Sim {
@@ -237,7 +239,7 @@ impl Sim {
                 if self.grid.cells[i].state != CellState::Citizen {
                     return;
                 }
-                let data = self.grid.cells[i].citizen.clone().unwrap_or(CitizenData {
+                let data = self.grid.cells[i].citizen.unwrap_or(CitizenData {
                     stress: 0.0,
                     fatigue: 0.0,
                     loyalty: 0.0,
@@ -282,7 +284,7 @@ impl Sim {
         let id = self.next_construction_id;
         self.next_construction_id += 1;
         for i in cells {
-            let data = self.grid.cells[i].citizen.clone().unwrap_or(CitizenData {
+            let data = self.grid.cells[i].citizen.unwrap_or(CitizenData {
                 stress: 0.0,
                 fatigue: 0.0,
                 loyalty: 0.0,
@@ -321,15 +323,18 @@ impl Sim {
 
     fn tick(&mut self) {
         let ctx = self.counters();
+        // В§7: `next` starts as a copy of the current generation; rules only
+        // overwrite the cells they change. Reusing the buffer avoids a
+        // per-tick allocation.
         self.scratch.clear();
-        self.scratch.resize(self.grid.cells.len(), Cell::empty());
+        self.scratch.extend_from_slice(&self.grid.cells);
 
         rules::rule1_hunger(&self.grid, &mut self.scratch);
         rules::rule2_stress(&self.grid, &mut self.scratch, &self.config);
         rules::rule3_citizen_update(&self.grid, &mut self.scratch, &self.config, &ctx);
         rules::rule4_construction_entry(&self.grid, &mut self.scratch, &self.library);
         rules::rule5_overlap(&self.grid, &mut self.scratch, &self.library);
-        rules::rule6_construction_exit(&self.grid, &mut self.scratch);
+        rules::rule6_construction_exit(&self.grid, &mut self.scratch, &self.library);
         rules::rule7_anticell_explosion(&self.grid, &mut self.scratch);
         let exploding = anticell::explosion_sources(&self.grid);
         anticell::rule8_anticell_wave(&self.grid, &mut self.scratch, &self.config, &exploding);
@@ -339,7 +344,7 @@ impl Sim {
     }
 
     fn counters(&self) -> rules::GlobalCtx {
-        rules::compute_global_counters(&self.grid, &self.config)
+        rules::compute_global_counters(&self.grid, &self.config, &self.library)
     }
 
     pub fn refresh_stats(&mut self) {
@@ -425,6 +430,7 @@ impl<'de> Deserialize<'de> for Sim {
             raw.config,
             default_library(),
         );
+        sim.render = raw.render;
         sim.grid = raw.grid;
         sim.generation = raw.generation;
         sim.next_construction_id = raw.next_construction_id;

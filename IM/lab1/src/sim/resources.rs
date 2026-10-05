@@ -1,10 +1,14 @@
-﻿use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Copy, Debug, Default, Serialize, Deserialize)]
 pub struct Resources {
+    #[serde(default)]
     pub water: f32,
+    #[serde(default)]
     pub food: f32,
+    #[serde(default)]
     pub energy: f32,
+    #[serde(default)]
     pub population: f32,
 }
 
