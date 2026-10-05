@@ -4,17 +4,9 @@ use crate::sim::cell::{CellState, ConstructionKind};
 use crate::sim::{Brush, Sim};
 use crate::ui::palette;
 
+pub use crate::sim::MAX_CELL_PX;
 /// Hard GPU texture side limit; egui/glow rejects anything larger.
-pub const MAX_TEXTURE_SIDE: usize = 2048;
-pub const MAX_CELL_PX: usize = 32;
-
-/// Largest `cell_px` that keeps `width * cell_px` and `height * cell_px`
-/// within the GPU texture limit.
-pub fn max_cell_px(width: usize, height: usize) -> usize {
-    let longest = width.max(height).max(1) as f32;
-    let fit = (MAX_TEXTURE_SIDE as f32 / longest).floor() as usize;
-    fit.clamp(1, MAX_CELL_PX)
-}
+pub use crate::sim::MAX_TEXTURE_SIDE;
 
 /// A changed-cell bounding box in grid coordinates.
 #[derive(Clone, Copy, Debug, Default)]
@@ -44,7 +36,6 @@ impl DirtyRect {
     }
 }
 
-#[derive(Default)]
 pub struct Canvas {
     texture: Option<TextureHandle>,
     /// CPU-side copy of the texture. Dirty-region updates patch this buffer so
@@ -56,6 +47,60 @@ pub struct Canvas {
     tex_size: [usize; 2],
     full_rebuild: bool,
     dragging: bool,
+    /// Leftover wheel travel, so a slow scroll still ends up moving a whole
+    /// zoom step instead of drifting between `cell_px` values.
+    scroll_accum: f32,
+    /// The `cell_px` the current grid was sized for, so the grid is refitted
+    /// on a zoom change but not on every window resize.
+    fitted_zoom: Option<usize>,
+    /// Screen rect the grid was last painted into, for the vector overlays.
+    pub rect: egui::Rect,
+    /// Screen pixels per cell actually in effect. Equal to `render.cell_px`
+    /// except for a sub-pixel stretch that hides the resize slack.
+    pub display_cell_px: f32,
+}
+
+/// Wheel distance that equals one zoom step.
+const ZOOM_STEP: f32 = 50.0;
+
+/// Ctrl + mouse wheel is the zoom control. A bare wheel is left alone so it
+/// stays available for whatever the surrounding panels want to do with it.
+///
+/// `raw_scroll_delta` is used rather than `zoom_delta` because Windows only
+/// reports the latter for touchpads; a real wheel with Ctrl held arrives as a
+/// plain scroll event. Wheel deltas are fractional on high-resolution wheels,
+/// so travel is accumulated into whole steps.
+fn steps_from_ctrl_wheel(ui: &Ui, accum: &mut f32) -> isize {
+    let scroll = ui.input(|i| {
+        if i.modifiers.ctrl {
+            i.raw_scroll_delta.y
+        } else {
+            0.0
+        }
+    });
+    if scroll == 0.0 {
+        // Drop the remainder so a direction change cannot carry stale travel
+        // into the next gesture.
+        *accum = 0.0;
+        return 0;
+    }
+    *accum += scroll;
+    let mut steps = 0isize;
+    while *accum >= ZOOM_STEP {
+        *accum -= ZOOM_STEP;
+        steps += 1;
+    }
+    while *accum <= -ZOOM_STEP {
+        *accum += ZOOM_STEP;
+        steps -= 1;
+    }
+    steps
+}
+
+impl Default for Canvas {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl Canvas {
@@ -67,6 +112,10 @@ impl Canvas {
             tex_size: [0, 0],
             full_rebuild: true,
             dragging: false,
+            scroll_accum: 0.0,
+            fitted_zoom: None,
+            rect: egui::Rect::NOTHING,
+            display_cell_px: 1.0,
         }
     }
 
@@ -89,30 +138,61 @@ impl Canvas {
         rotation: usize,
         drag: &mut Option<(usize, usize)>,
     ) {
-        let (w, h) = (sim.grid.width, sim.grid.height);
-        let cap = max_cell_px(w, h);
-        let mut cell_px = sim.render.cell_px.clamp(1, MAX_CELL_PX).min(cap);
-        sim.render.cell_px = cell_px;
-
-        let zoom = ui.input(|i| i.zoom_delta());
-        if (zoom - 1.0).abs() > f32::EPSILON {
-            let scaled = (cell_px as f32 * zoom).round() as i64;
-            cell_px = scaled.clamp(1, cap as i64) as usize;
-            sim.render.cell_px = cell_px;
+        // Ctrl + RMB drag is the zoom control, and zoom drives the grid size,
+        // so the colony always fills the whole middle area with square cells.
+        let steps = steps_from_ctrl_wheel(ui, &mut self.scroll_accum);
+        if steps != 0 {
+            sim.zoom_by(steps);
         }
+
+        let area = ui.available_size();
+        // The grid is refitted only when the zoom changes. Doing it on window
+        // resizes too would crop the world on every frame of a window drag.
+        if self.fitted_zoom != Some(sim.render.cell_px) {
+            sim.fit_view(
+                sim.render.cell_px,
+                area.x.round() as usize,
+                area.y.round() as usize,
+            );
+            self.fitted_zoom = Some(sim.render.cell_px);
+        }
+        let (w, h) = (sim.grid.width, sim.grid.height);
+        let cell_px = sim.render.cell_px;
 
         let dirty = self.sync_colors(sim);
         if self.full_rebuild || dirty.any {
             self.upload(ui.ctx(), sim, cell_px, dirty);
         }
 
-        let size = Vec2::new((w * cell_px) as f32, (h * cell_px) as f32);
+        // Stretch to the panel instead of leaving dead space; the difference is
+        // at most a fraction of a pixel per cell because the grid is snapped.
         let tex_id = self.texture.as_ref().map(|t| t.id()).unwrap_or_default();
-        let image = egui::Image::new((tex_id, size)).sense(egui::Sense::click_and_drag());
+        let image = egui::Image::new((
+            tex_id,
+            Vec2::new((w * cell_px) as f32, (h * cell_px) as f32),
+        ))
+        .fit_to_exact_size(area)
+        .sense(egui::Sense::click_and_drag());
         let resp = ui.add(image);
         let rect = resp.rect;
+        self.rect = rect;
+        self.display_cell_px = if w > 0 {
+            rect.width() / w as f32
+        } else {
+            cell_px as f32
+        };
 
-        self.handle_input(ui, sim, tool, rotation, drag, rect, cell_px, w, h);
+        self.handle_input(
+            ui,
+            sim,
+            tool,
+            rotation,
+            drag,
+            rect,
+            self.display_cell_px,
+            w,
+            h,
+        );
     }
 
     /// Compare the grid against the cached colours, returning the bounding box
@@ -202,7 +282,7 @@ impl Canvas {
         rotation: usize,
         drag: &mut Option<(usize, usize)>,
         rect: egui::Rect,
-        cell_px: usize,
+        cell_px: f32,
         w: usize,
         h: usize,
     ) {
@@ -214,8 +294,8 @@ impl Canvas {
             .filter(|p| rect.contains(*p));
         let cell_at = |p: egui::Pos2| -> Option<(usize, usize)> {
             let local = p - rect.min;
-            let x = (local.x / cell_px as f32) as usize;
-            let y = (local.y / cell_px as f32) as usize;
+            let x = (local.x / cell_px) as usize;
+            let y = (local.y / cell_px) as usize;
             if x < w && y < h {
                 Some((x, y))
             } else {
@@ -257,9 +337,14 @@ impl Canvas {
     }
 }
 
-/// Fills the `cell_px` square at `(x, y)` with its fill colour and, when
-/// enabled, a black border. Borders are skipped entirely at `cell_px == 1`
-/// because a single pixel per cell has no room for them (В§8.5).
+/// Black border thickness in pixels (В§8.5). Fixed rather than configurable:
+/// at the default `cell_px = 4` a single pixel is already a quarter of the cell,
+/// and the user has zoom rather than border thickness to spend effort on.
+pub const BORDER_PX: usize = 1;
+
+/// Fills the `cell_px` square at `(x, y)` with its fill colour and a black
+/// border. Borders are skipped entirely at `cell_px == 1` because a single
+/// pixel per cell has no room for them (В§8.5).
 fn paint_cell(
     img: &mut ColorImage,
     cell: &crate::sim::Cell,
@@ -269,7 +354,7 @@ fn paint_cell(
     cell_px: usize,
 ) {
     let mut fill = cell_color(cell.state, cell.kind, sim);
-    let b = sim.render.border_px.min(cell_px.saturating_sub(1));
+    let b = BORDER_PX.min(cell_px.saturating_sub(1));
     // В§8.6: overlay heat maps tint the cell body only, borders stay black.
     if cell.state == CellState::Citizen {
         if let Some(d) = cell.citizen {

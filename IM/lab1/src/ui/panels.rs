@@ -1,7 +1,6 @@
 use egui::Ui;
 
 use crate::app::App;
-use crate::sim::cell::ConstructionKind;
 use crate::sim::SimStatus;
 use crate::ui::tools::Tool;
 
@@ -119,15 +118,41 @@ pub fn params_panel(ui: &mut Ui, app: &mut App) {
 }
 
 pub fn render_panel(ui: &mut Ui, app: &mut App) {
-    let r = &mut app.sim.render;
     ui.heading("Отображение");
-    ui.add(egui::Slider::new(&mut r.cell_px, 1..=32).text("cell_px"));
-    ui.add(egui::Slider::new(&mut r.border_px, 0..=3).text("border_px"));
-    ui.checkbox(&mut r.show_grid_lines, "show_grid_lines");
+
+    // Zoom is driven through `zoom_by`, not by writing `render.cell_px`
+    // directly: zoom and grid size are one setting, so the grid has to follow.
+    ui.horizontal(|ui| {
+        if ui
+            .add_enabled(
+                app.sim.render.cell_px > crate::sim::MIN_CELL_PX,
+                egui::Button::new("−"),
+            )
+            .clicked()
+        {
+            app.sim.zoom_by(-1);
+        }
+        if ui
+            .add_enabled(
+                app.sim.render.cell_px < crate::sim::MAX_CELL_PX,
+                egui::Button::new("+"),
+            )
+            .clicked()
+        {
+            app.sim.zoom_by(1);
+        }
+        ui.label(format!("{} px", app.sim.render.cell_px));
+    });
+    ui.label(format!(
+        "сетка: {} × {}",
+        app.sim.grid.width, app.sim.grid.height
+    ));
+    ui.small("зум: Ctrl + колесо мыши; меняет и размер клетки, и размер сетки");
+
+    let r = &mut app.sim.render;
     ui.checkbox(&mut r.overlay_stress, "Стресс");
     ui.checkbox(&mut r.overlay_fatigue, "Усталость");
     ui.checkbox(&mut r.overlay_loyalty, "Лояльность");
-    ui.checkbox(&mut r.show_construction_outlines, "Контуры конструкций");
     ui.checkbox(&mut r.show_conflict_radius, "Радиус конфликта");
 }
 
@@ -183,31 +208,8 @@ pub fn stats_panel(ui: &mut Ui, app: &App) {
             ui.label(format!("{:.1} / {:.0}", s.mean_loyalty, cfg.l_max));
             ui.end_row();
 
-            ui.label("Пустых клеток");
-            ui.label(s.n_empty.to_string());
-            ui.end_row();
-
-            for (i, (name, _)) in [
-                ("Вода", ConstructionKind::Water),
-                ("Еда", ConstructionKind::Food),
-                ("Энергия", ConstructionKind::Energy),
-                ("Население", ConstructionKind::Population),
-                ("Конфликт", ConstructionKind::Conflict),
-            ]
-            .iter()
-            .enumerate()
-            {
-                ui.label(format!("Конструкций: {}", name));
-                ui.label(s.n_constructions[i].to_string());
-                ui.end_row();
-            }
-
             ui.label("Антиклеток");
             ui.label(s.n_anticell.to_string());
-            ui.end_row();
-
-            ui.label("Перекрытий");
-            ui.label(s.n_overlap.to_string());
             ui.end_row();
 
             ui.label("Статус");

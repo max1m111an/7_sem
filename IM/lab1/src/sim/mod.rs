@@ -25,8 +25,44 @@ use serde::{Deserialize, Serialize};
 
 use crate::config::{RenderConfig, SimConfig};
 
-pub const DEFAULT_WIDTH: usize = 256;
-pub const DEFAULT_HEIGHT: usize = 256;
+/// Zoom is a single setting: `cell_px` (1..=32) sets how big a cell looks, and
+/// the grid is sized to match the view it is being fitted to. The texture side
+/// therefore tracks the window instead of growing without bound.
+pub const MIN_CELL_PX: usize = 1;
+pub const MAX_CELL_PX: usize = 32;
+/// Smallest grid we are willing to show, so the colony cannot shrink away.
+pub const MIN_GRID_SIDE: usize = 16;
+/// Hard GPU texture side limit; egui/glow rejects anything larger.
+pub const MAX_TEXTURE_SIDE: usize = 2048;
+
+/// Grid dimensions are snapped down to a multiple of this many pixels, so the
+/// grid never overflows the view and the canvas can stretch the remainder away
+/// as a fraction of a pixel per cell.
+const SNAP_PX: usize = 64;
+
+/// Grid dimensions that fit an `area_w x area_h` view at `cell_px`, keeping
+/// cells square and matching the view's aspect ratio as closely as snapping
+/// allows. Capped at `MAX_TEXTURE_SIDE` so the texture cannot overflow the GPU.
+pub fn grid_dims_for(cell_px: usize, area_w: usize, area_h: usize) -> (usize, usize) {
+    let cell_px = cell_px.clamp(MIN_CELL_PX, MAX_CELL_PX);
+    let max_cells = (MAX_TEXTURE_SIDE / cell_px).max(MIN_GRID_SIDE);
+    let snap = (SNAP_PX / cell_px).max(1);
+    let side = |px: usize| -> usize {
+        // Floor, so the grid can never be wider than the view.
+        let cells = (px / cell_px).max(1);
+        let cells = (cells / snap * snap).max(MIN_GRID_SIDE);
+        cells.min(max_cells).max(1)
+    };
+    (side(area_w), side(area_h))
+}
+
+pub fn default_width() -> usize {
+    256
+}
+
+pub fn default_height() -> usize {
+    256
+}
 pub const MAX_TICKS_PER_FRAME: usize = 6;
 pub const CYCLE_HISTORY: usize = 8;
 pub const CYCLE_REPEATS: usize = 3;
@@ -177,14 +213,72 @@ impl Sim {
         self.refresh_stats();
     }
 
+    /// Resizes the grid while keeping the colony.
+    ///
+    /// The cell that sat at the centre of the old grid stays at the centre of
+    /// the new one, so zooming in crops towards the middle of the colony and
+    /// zooming out pads it with empty cells. The zoom control depends on this:
+    /// resizing must never throw away a running simulation, so the generation
+    /// and the run/pause status are preserved.
     pub fn resize(&mut self, width: usize, height: usize) {
-        self.grid = Grid::new(width, height);
+        let width = width.max(1);
+        let height = height.max(1);
+        if width == self.grid.width && height == self.grid.height {
+            return;
+        }
+        let old = std::mem::replace(&mut self.grid, Grid::new(width, height));
+        let (dx, dy) = (
+            old.width as isize / 2 - width as isize / 2,
+            old.height as isize / 2 - height as isize / 2,
+        );
+        for y in 0..height {
+            for x in 0..width {
+                let (ox, oy) = (x as isize + dx, y as isize + dy);
+                if ox < 0 || oy < 0 || ox >= old.width as isize || oy >= old.height as isize {
+                    continue;
+                }
+                let src = oy as usize * old.width + ox as usize;
+                self.grid.cells[y * width + x] = old.cells[src].clone();
+            }
+        }
         self.scratch = Vec::with_capacity(width * height);
         self.cycle_history.clear();
         self.cycle_length = None;
-        self.status = SimStatus::Paused;
-        self.generation = 0;
         self.refresh_stats();
+    }
+
+    /// Sets the zoom level. The grid is resized to match by `fit_view`, which
+    /// the UI calls every frame with the space it actually has.
+    pub fn set_cell_px(&mut self, cell_px: usize) {
+        self.render.cell_px = cell_px.clamp(MIN_CELL_PX, MAX_CELL_PX);
+    }
+
+    /// Zooms by `delta` steps. Returns whether anything changed, so callers can
+    /// skip a texture rebuild when the zoom is already at a limit.
+    pub fn zoom_by(&mut self, delta: isize) -> bool {
+        let next = (self.render.cell_px as isize + delta)
+            .clamp(MIN_CELL_PX as isize, MAX_CELL_PX as isize) as usize;
+        if next == self.render.cell_px {
+            return false;
+        }
+        self.set_cell_px(next);
+        true
+    }
+
+    /// Sizes the grid to fit an `area_w x area_h` view at `cell_px`, with
+    /// square cells and no dead space. Returns whether the grid changed.
+    ///
+    /// Only call this when the zoom changed: resizing the grid crops the world,
+    /// so tying it to the window size would eat the colony's border every time
+    /// the window moved. The canvas stretches the texture to the panel instead.
+    pub fn fit_view(&mut self, cell_px: usize, area_w: usize, area_h: usize) -> bool {
+        self.render.cell_px = cell_px.clamp(MIN_CELL_PX, MAX_CELL_PX);
+        let (w, h) = grid_dims_for(self.render.cell_px, area_w, area_h);
+        if (w, h) == (self.grid.width, self.grid.height) {
+            return false;
+        }
+        self.resize(w, h);
+        true
     }
 
     pub fn save(&self) -> Result<String> {

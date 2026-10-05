@@ -2,12 +2,12 @@ use egui::{vec2, Color32, Painter, Pos2, Rect, Stroke, Ui};
 
 use crate::sim::{Sim, SimStatus};
 
-/// Vector overlays plus the Game Over / cycle banner.
-pub fn draw(ui: &Ui, sim: &Sim, rect: Rect, cell_px: usize) {
+/// Vector overlays plus the Game Over / cycle banner. `cell_px` is the
+/// on-screen size of a cell, which may differ from `render.cell_px` by the
+/// sub-pixel stretch the canvas applies to fill the panel.
+pub fn draw(ui: &Ui, sim: &Sim, rect: Rect, cell_px: f32) {
     let painter = ui.painter();
-    if sim.render.show_construction_outlines {
-        draw_construction_outlines(painter, sim, rect, cell_px);
-    }
+
     if sim.render.show_conflict_radius {
         draw_conflict_radii(painter, sim, rect, cell_px);
     }
@@ -16,8 +16,8 @@ pub fn draw(ui: &Ui, sim: &Sim, rect: Rect, cell_px: usize) {
     }
 }
 
-fn draw_conflict_radii(painter: &Painter, sim: &Sim, rect: Rect, cell_px: usize) {
-    let r = sim.config.conflict_radius as f32 * cell_px as f32;
+fn draw_conflict_radii(painter: &Painter, sim: &Sim, rect: Rect, cell_px: f32) {
+    let r = sim.config.conflict_radius as f32 * cell_px;
     for y in 0..sim.grid.height {
         for x in 0..sim.grid.width {
             let c = &sim.grid.cells[y * sim.grid.width + x];
@@ -28,8 +28,8 @@ fn draw_conflict_radii(painter: &Painter, sim: &Sim, rect: Rect, cell_px: usize)
                 continue;
             }
             let center = Pos2::new(
-                rect.min.x + (x as f32 + 0.5) * cell_px as f32,
-                rect.min.y + (y as f32 + 0.5) * cell_px as f32,
+                rect.min.x + (x as f32 + 0.5) * cell_px,
+                rect.min.y + (y as f32 + 0.5) * cell_px,
             );
             painter.circle_stroke(
                 center,
@@ -40,68 +40,6 @@ fn draw_conflict_radii(painter: &Painter, sim: &Sim, rect: Rect, cell_px: usize)
                 ),
             );
         }
-    }
-}
-
-/// §8.6: outlines each construction complex in the colour of its kind. Only the
-/// edges facing outside the complex are stroked, so a 3x3 zone gets one box
-/// rather than a grid of nine.
-fn draw_construction_outlines(painter: &Painter, sim: &Sim, rect: Rect, cell_px: usize) {
-    let w = sim.grid.width;
-    let px = cell_px as f32;
-
-    let same_complex = |x: usize, y: usize, id: Option<u32>| -> bool {
-        let o = &sim.grid.cells[y * w + x];
-        o.construction_id == id
-            && matches!(
-                o.state,
-                crate::sim::cell::CellState::Construction | crate::sim::cell::CellState::Overlap
-            )
-    };
-
-    for y in 0..sim.grid.height {
-        for x in 0..w {
-            let c = &sim.grid.cells[y * w + x];
-            if !matches!(
-                c.state,
-                crate::sim::cell::CellState::Construction | crate::sim::cell::CellState::Overlap
-            ) {
-                continue;
-            }
-            let id = c.construction_id;
-            let stroke = Stroke::new(1.0_f32, kind_color(c.kind));
-            let cell = Rect::from_min_max(
-                Pos2::new(rect.min.x + x as f32 * px, rect.min.y + y as f32 * px),
-                Pos2::new(
-                    rect.min.x + (x + 1) as f32 * px,
-                    rect.min.y + (y + 1) as f32 * px,
-                ),
-            );
-            if x == 0 || !same_complex(x - 1, y, id) {
-                painter.line_segment([cell.left_top(), cell.left_bottom()], stroke);
-            }
-            if x + 1 >= w || !same_complex(x + 1, y, id) {
-                painter.line_segment([cell.right_top(), cell.right_bottom()], stroke);
-            }
-            if y == 0 || !same_complex(x, y - 1, id) {
-                painter.line_segment([cell.left_top(), cell.right_top()], stroke);
-            }
-            if y + 1 >= sim.grid.height || !same_complex(x, y + 1, id) {
-                painter.line_segment([cell.left_bottom(), cell.right_bottom()], stroke);
-            }
-        }
-    }
-}
-
-fn kind_color(kind: Option<crate::sim::cell::ConstructionKind>) -> Color32 {
-    use crate::sim::cell::ConstructionKind::*;
-    match kind {
-        Some(Water) => crate::ui::palette::WATER,
-        Some(Food) => crate::ui::palette::FOOD,
-        Some(Energy) => crate::ui::palette::ENERGY,
-        Some(Population) => crate::ui::palette::POPULATION,
-        Some(Conflict) => crate::ui::palette::CONFLICT,
-        None => crate::ui::palette::OVERLAP,
     }
 }
 

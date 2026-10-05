@@ -65,7 +65,7 @@ impl App {
                     .unwrap_or_else(|_| "info".into()),
             )
             .init();
-        let sim = Sim::with_defaults(crate::sim::DEFAULT_WIDTH, crate::sim::DEFAULT_HEIGHT);
+        let sim = Sim::with_defaults(crate::sim::default_width(), crate::sim::default_height());
         Self {
             sim,
             canvas: Canvas::new(),
@@ -245,13 +245,15 @@ impl eframe::App for App {
         egui::TopBottomPanel::top("toolbar").show(ctx, |ui| {
             panels::toolbar(ui, self);
         });
+        // Panel widths are tuned against the 960x600 default window so the canvas
+        // keeps the larger share of a small screen.
         egui::SidePanel::left("tools")
-            .exact_width(220.0)
+            .exact_width(160.0)
             .show(ctx, |ui| {
                 panels::tool_panel(ui, self);
             });
         egui::SidePanel::right("params")
-            .exact_width(320.0)
+            .exact_width(250.0)
             .show(ctx, |ui| {
                 egui::ScrollArea::vertical().show(ui, |ui| {
                     panels::params_panel(ui, self);
@@ -264,16 +266,17 @@ impl eframe::App for App {
         egui::TopBottomPanel::bottom("status").show(ctx, |ui| {
             panels::status_bar(ui, self);
         });
-        egui::CentralPanel::default().show(ctx, |ui| {
-            let rect_before = ui.max_rect();
-            self.canvas_rect = rect_before;
-            let mut canvas = std::mem::take(&mut self.canvas);
-            let mut drag = self.drag.take();
-            canvas.show(ui, &mut self.sim, self.tool, self.stamp_rotation, &mut drag);
-            self.canvas = canvas;
-            self.drag = drag;
-            crate::ui::overlays::draw(ui, &self.sim, self.canvas_rect, self.sim.render.cell_px);
-        });
+        egui::CentralPanel::default()
+            .frame(egui::Frame::none())
+            .show(ctx, |ui| {
+                let mut canvas = std::mem::take(&mut self.canvas);
+                let mut drag = self.drag.take();
+                canvas.show(ui, &mut self.sim, self.tool, self.stamp_rotation, &mut drag);
+                self.drag = drag;
+                self.canvas_rect = canvas.rect;
+                crate::ui::overlays::draw(ui, &self.sim, self.canvas_rect, canvas.display_cell_px);
+                self.canvas = canvas;
+            });
     }
 
     fn save(&mut self, _storage: &mut dyn eframe::Storage) {

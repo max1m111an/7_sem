@@ -202,7 +202,6 @@ pub struct RenderConfig {
     pub overlay_stress: bool,
     pub overlay_fatigue: bool,
     pub overlay_loyalty: bool,
-    pub show_construction_outlines: bool,
     pub show_conflict_radius: bool,
 }
 ```

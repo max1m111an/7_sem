@@ -511,7 +511,7 @@ fn old_save_without_reserves_still_loads() {
       },
       "render": {"cell_px":4,"border_px":1,"show_grid_lines":true,
         "overlay_stress":false,"overlay_fatigue":false,"overlay_loyalty":false,
-        "show_construction_outlines":true,"show_conflict_radius":false},
+        "show_conflict_radius":false},
       "generation": 7
     }"#;
     let mut sim = Sim::with_defaults(32, 32);
@@ -519,6 +519,10 @@ fn old_save_without_reserves_still_loads() {
     assert_eq!(sim.generation, 7);
     assert_eq!(sim.config.food_reserve, 0.0);
     assert_eq!(sim.grid.cells.len(), 4);
+    // `border_px` and `show_grid_lines` were dropped from RenderConfig, so this
+    // save carries fields that no longer exist. Serde ignores unknown fields,
+    // which is what keeps old saves loadable.
+    assert_eq!(sim.render.cell_px, 4);
 }
 
 #[test]
@@ -634,19 +638,25 @@ fn frame_budget_accumulates_and_caps() {
 
 #[test]
 fn zoom_is_clamped_to_gpu_texture_limit() {
-    use lab1::ui::canvas::{max_cell_px, MAX_TEXTURE_SIDE};
-    for (w, h) in [(128usize, 128usize), (256, 256), (512, 512), (1024, 1024)] {
-        let cap = max_cell_px(w, h);
-        assert!(cap >= 1);
-        assert!(
-            w * cap <= MAX_TEXTURE_SIDE && h * cap <= MAX_TEXTURE_SIDE,
-            "{w}x{h} at cell_px {cap} exceeds the {MAX_TEXTURE_SIDE}px limit"
-        );
+    use lab1::ui::canvas::MAX_TEXTURE_SIDE;
+    // Whatever the view, the texture must stay inside the GPU limit.
+    for area in [
+        (320usize, 240usize),
+        (1060, 860),
+        (2560, 1440),
+        (5120, 2880),
+    ] {
+        for cell_px in lab1::sim::MIN_CELL_PX..=lab1::sim::MAX_CELL_PX {
+            let mut sim = Sim::with_defaults(256, 256);
+            sim.fit_view(cell_px, area.0, area.1);
+            assert!(
+                sim.grid.width * sim.render.cell_px <= MAX_TEXTURE_SIDE
+                    && sim.grid.height * sim.render.cell_px <= MAX_TEXTURE_SIDE,
+                "{area:?} at cell_px {cell_px} -> {}px texture, limit {MAX_TEXTURE_SIDE}",
+                sim.grid.width * sim.render.cell_px
+            );
+        }
     }
-    // 256x256 is the spec'd target performance case.
-    assert_eq!(max_cell_px(256, 256), 8);
-    // A tiny grid still allows the maximum zoom.
-    assert_eq!(max_cell_px(4, 4), 32);
 }
 
 #[test]
@@ -717,7 +727,241 @@ fn resize_keeps_invariants() {
     assert_eq!(sim.grid.width, 32);
     assert_eq!(sim.grid.height, 24);
     assert_eq!(sim.grid.cells.len(), 32 * 24);
-    assert_eq!(sim.stats.n_citizen, 0);
+    // Resize is the zoom path, so it must keep the colony instead of wiping it.
+    assert_eq!(sim.stats.n_citizen, 10);
+}
+
+/// Central area of the default 960x600 window, minus the 160px and 250px side
+/// panels and the toolbar / status bar.
+const VIEW: (usize, usize) = (550, 520);
+
+#[test]
+fn zoom_buttons_stop_at_the_limits() {
+    // The +/− buttons drive `zoom_by`, which clamps rather than wrapping, and
+    // the UI disables the button at each end. Check the clamping contract.
+    let mut sim = Sim::with_defaults(256, 256);
+    for _ in 0..500 {
+        sim.zoom_by(1);
+        sim.fit_view(sim.render.cell_px, VIEW.0, VIEW.1);
+    }
+    assert_eq!(sim.render.cell_px, lab1::sim::MAX_CELL_PX);
+    assert!(!sim.zoom_by(1), "+ at the maximum must be a no-op");
+
+    for _ in 0..500 {
+        sim.zoom_by(-1);
+        sim.fit_view(sim.render.cell_px, VIEW.0, VIEW.1);
+    }
+    assert_eq!(sim.render.cell_px, lab1::sim::MIN_CELL_PX);
+    assert!(!sim.zoom_by(-1), "− at the minimum must be a no-op");
+}
+
+#[test]
+fn border_width_is_fixed_at_one_pixel() {
+    // border_px is no longer configurable; a single black pixel per cell edge,
+    // and none at all when there is only one pixel to spend.
+    assert_eq!(lab1::ui::canvas::BORDER_PX, 1);
+    let mut sim = Sim::with_defaults(8, 8);
+    assert_eq!(
+        lab1::ui::canvas::BORDER_PX.min(1_usize.saturating_sub(1)),
+        0,
+        "cell_px == 1 must leave no room for a border"
+    );
+    sim.render.cell_px = 4;
+    assert_eq!(lab1::ui::canvas::BORDER_PX.min(4 - 1), 1);
+}
+
+#[test]
+fn render_config_has_no_dead_toggles() {
+    // show_grid_lines was never read by the renderer, and border_px is now the
+    // fixed BORDER_PX const. Both must be gone from what gets saved.
+    let sim = Sim::with_defaults(8, 8);
+    let json = sim.save().unwrap();
+    let render = json
+        .split("\"render\"")
+        .nth(1)
+        .expect("save should contain a render section");
+    assert!(
+        !render.contains("show_grid_lines"),
+        "dead toggle still saved"
+    );
+    assert!(!render.contains("border_px"), "border_px still saved");
+    assert!(render.contains("cell_px"), "zoom should still be saved");
+}
+
+#[test]
+fn the_grid_fits_the_view_without_overflowing_it() {
+    for cell_px in lab1::sim::MIN_CELL_PX..=lab1::sim::MAX_CELL_PX {
+        let (w, h) = lab1::sim::grid_dims_for(cell_px, VIEW.0, VIEW.1);
+        assert!(
+            w * cell_px <= VIEW.0 && h * cell_px <= VIEW.1,
+            "cell_px={cell_px} gives a {}x{} grid, which overflows {VIEW:?}",
+            w * cell_px,
+            h * cell_px
+        );
+        // The leftover is what the canvas stretches away; keep it small.
+        let (slack_x, slack_y) = (VIEW.0 - w * cell_px, VIEW.1 - h * cell_px);
+        assert!(
+            slack_x <= 64 && slack_y <= 64,
+            "cell_px={cell_px} leaves {slack_x}x{slack_y}px of slack"
+        );
+        assert!(w >= lab1::sim::MIN_GRID_SIDE && h >= lab1::sim::MIN_GRID_SIDE);
+    }
+}
+
+#[test]
+fn cells_stay_square_within_a_pixel_or_two() {
+    // grid_dims_for snaps x and y independently, so a few percent of stretch is
+    // possible. Per cell it must stay imperceptible.
+    for cell_px in lab1::sim::MIN_CELL_PX..=lab1::sim::MAX_CELL_PX {
+        let (w, h) = lab1::sim::grid_dims_for(cell_px, VIEW.0, VIEW.1);
+        let sx = VIEW.0 as f32 / (w * cell_px) as f32;
+        let sy = VIEW.1 as f32 / (h * cell_px) as f32;
+        let skew = (sx / sy - 1.0).abs();
+        assert!(
+            skew < 0.07,
+            "cell_px={cell_px}: x scale {sx:.3} vs y scale {sy:.3}"
+        );
+    }
+}
+
+#[test]
+fn zoom_moves_cell_size_and_grid_together() {
+    let mut sim = Sim::with_defaults(256, 256);
+    sim.fit_view(4, VIEW.0, VIEW.1);
+    let (wide, tall) = (sim.grid.width, sim.grid.height);
+    assert_eq!(sim.render.cell_px, 4);
+
+    sim.zoom_by(1);
+    sim.fit_view(sim.render.cell_px, VIEW.0, VIEW.1);
+    assert_eq!(sim.render.cell_px, 5, "cells get bigger on screen");
+    assert!(sim.grid.width < wide, "and there are fewer of them");
+    assert!(sim.grid.height < tall);
+
+    sim.zoom_by(-1);
+    sim.fit_view(sim.render.cell_px, VIEW.0, VIEW.1);
+    assert_eq!(sim.render.cell_px, 4);
+    assert!(sim.grid.width >= wide);
+}
+
+#[test]
+fn the_texture_never_exceeds_the_gpu_limit() {
+    // On a view wider than the limit the grid has to give up some width: the
+    // canvas then stretches it back, rather than handing glow an oversized
+    // texture.
+    for area in [
+        (320usize, 240usize),
+        (1060, 860),
+        (2560, 1440),
+        (5120, 2880),
+    ] {
+        for cell_px in lab1::sim::MIN_CELL_PX..=lab1::sim::MAX_CELL_PX {
+            let (w, h) = lab1::sim::grid_dims_for(cell_px, area.0, area.1);
+            assert!(
+                w * cell_px <= lab1::ui::canvas::MAX_TEXTURE_SIDE
+                    && h * cell_px <= lab1::ui::canvas::MAX_TEXTURE_SIDE,
+                "{area:?} at cell_px {cell_px} -> {}x{}px texture",
+                w * cell_px,
+                h * cell_px
+            );
+        }
+    }
+}
+
+#[test]
+fn refitting_the_same_view_is_a_no_op() {
+    // This is what lets the canvas only refit on a zoom change: asking for the
+    // same view twice must not resize (and therefore crop) the world again.
+    let mut sim = Sim::with_defaults(256, 256);
+    sim.generate_colony(200);
+    for cell_px in lab1::sim::MIN_CELL_PX..=lab1::sim::MAX_CELL_PX {
+        if sim.fit_view(cell_px, VIEW.0, VIEW.1) {
+            // First fit for this zoom may legitimately resize.
+            sim.generate_colony(200);
+        }
+        let (w, h) = (sim.grid.width, sim.grid.height);
+        let citizens = sim.stats.n_citizen;
+        assert!(
+            !sim.fit_view(cell_px, VIEW.0, VIEW.1),
+            "cell_px={cell_px} refitted"
+        );
+        assert_eq!((sim.grid.width, sim.grid.height), (w, h));
+        assert_eq!(
+            sim.stats.n_citizen, citizens,
+            "cell_px={cell_px} cropped the colony"
+        );
+    }
+}
+
+#[test]
+fn zoom_is_clamped_to_the_slider_range() {
+    let mut sim = Sim::with_defaults(256, 256);
+    for _ in 0..200 {
+        sim.zoom_by(1);
+        sim.fit_view(sim.render.cell_px, VIEW.0, VIEW.1);
+    }
+    assert_eq!(sim.render.cell_px, 32);
+    assert!(!sim.zoom_by(1), "already at the maximum");
+    assert!(
+        sim.grid.width >= lab1::sim::MIN_GRID_SIDE,
+        "grid must not shrink below MIN_GRID_SIDE"
+    );
+
+    for _ in 0..200 {
+        sim.zoom_by(-1);
+        sim.fit_view(sim.render.cell_px, VIEW.0, VIEW.1);
+    }
+    assert_eq!(sim.render.cell_px, 1);
+    assert!(!sim.zoom_by(-1), "already at the minimum");
+}
+
+#[test]
+fn zoom_preserves_the_colony_around_the_centre() {
+    let mut sim = Sim::with_defaults(128, 128);
+    sim.paint(64, 64, Brush::Citizen);
+    sim.paint(0, 0, Brush::Citizen);
+
+    sim.set_cell_px(8);
+    sim.fit_view(8, VIEW.0, VIEW.1);
+    // The centre cell stays put; the border is cropped.
+    assert!(sim.stats.n_citizen <= 2);
+    let (w, h) = (sim.grid.width, sim.grid.height);
+    assert_eq!(
+        sim.grid.cells[h / 2 * w + w / 2].state,
+        CellState::Citizen,
+        "the centre citizen survived the zoom"
+    );
+
+    // The grid *is* the world, so cells cropped by zooming in are gone for good:
+    // zooming back out restores the size but pads with empty cells.
+    sim.set_cell_px(4);
+    sim.fit_view(4, VIEW.0, VIEW.1);
+    assert!(sim.grid.width > w, "zooming out grows the grid again");
+    assert_eq!(
+        sim.grid.cells[sim.grid.height / 2 * sim.grid.width + sim.grid.width / 2].state,
+        CellState::Citizen
+    );
+}
+
+#[test]
+fn zoom_does_not_stop_a_running_simulation() {
+    let mut sim = Sim::with_defaults(128, 128);
+    sim.generate_colony(40);
+    sim.status = SimStatus::Running;
+    let generation = sim.generation;
+    assert!(sim.step());
+    assert!(sim.generation > generation);
+
+    sim.zoom_by(2);
+    assert_eq!(
+        sim.status,
+        SimStatus::Running,
+        "zoom must not pause the run"
+    );
+    assert!(sim.generation > generation);
+    assert!(
+        sim.cycle_length.is_none(),
+        "a zoom invalidates the cycle history"
+    );
 }
 
 #[test]
