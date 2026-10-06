@@ -1,6 +1,6 @@
-//! Игра «Жизнь»: единственное правило B3/S23 и замкнутое поле.
+//! Игра «Жизнь»: правило «Хищник и добыча» и замкнутое поле.
 
-use lab1::sim::Life;
+use lab1::sim::{Life, Species};
 use rand::SeedableRng;
 use rand_chacha::ChaCha8Rng;
 
@@ -183,7 +183,7 @@ fn resize_recenters_the_world_and_recounts_the_live_cells() {
     assert!(life.cycle.is_none(), "resizing starts a fresh watch");
 }
 
-// ------------------------------------------------------------- Game Over
+// ---------------------------------------------------------- циклы (детекция)
 
 #[test]
 fn a_repeating_world_reports_the_length_of_its_cycle() {
@@ -249,15 +249,177 @@ fn watching_the_same_cycle_again_needs_a_fresh_history() {
 
 #[test]
 fn every_finite_world_eventually_reports_a_cycle() {
-    // A 4x4 world has 2^16 distinct states, so by the pigeonhole principle the
-    // trajectory must repeat within 65537 steps — and the watch must say so.
-    let mut life = Life::new(4, 4);
+    // A 3x3 world has 3^9 = 19683 distinct states (empty, prey, predator), so
+    // by the pigeonhole principle the trajectory must repeat within 19684
+    // steps — and the watch must say so.
+    let mut life = Life::new(3, 3);
     life.fill(0.5, &mut ChaCha8Rng::seed_from_u64(42));
-    for _ in 0..65_537 {
+    for _ in 0..20_000 {
         life.step();
         if life.cycle.is_some() {
             break;
         }
     }
     assert!(life.cycle.is_some(), "no cycle after the whole state space");
+}
+
+// --------------------------------------------------- два вида клеток
+
+#[test]
+fn a_predator_eats_an_adjacent_prey_and_stays_alive() {
+    // Блок из добычи, хищник стоит в N4 к ячейке (5, 4) — та съедается.
+    let mut life = world(&[(4, 4), (5, 4), (4, 5), (5, 5)], 12, 12);
+    life.set_cell(6, 4, Some(Species::Predator));
+    life.step();
+
+    assert!(!life.grid.get(5, 4).is_alive(), "съедена добыча в N4");
+    assert_eq!(life.grid.get(6, 4).species, Some(Species::Predator));
+    assert_eq!(life.prey, 3);
+    assert_eq!(life.predator, 1);
+    assert_eq!(life.alive, life.prey + life.predator);
+}
+
+#[test]
+fn a_lone_predator_starves_and_the_world_dies() {
+    let mut life = Life::new(8, 8);
+    life.set_cell(3, 3, Some(Species::Predator));
+    life.step();
+    assert_eq!(life.predator, 0, "без добычи в N4 хищник гибнет");
+    assert_eq!(life.alive, 0);
+    life.step();
+    assert_eq!(life.cycle, Some(1), "пустой мир циклится, колония вымерла");
+}
+
+#[test]
+fn a_predator_is_born_only_with_a_pack_and_prey_nearby() {
+    // Добыча (5,5), хищники (4,5) и (6,5): пустые (5,6) и (5,4) видят обоих
+    // хищников в N8 и добычу в N4 — рождаются ещё двое, добыча съедается.
+    let mut born = Life::new(11, 11);
+    born.set_cell(5, 5, Some(Species::Prey));
+    born.set_cell(4, 5, Some(Species::Predator));
+    born.set_cell(6, 5, Some(Species::Predator));
+    born.step();
+    assert_eq!(born.grid.get(5, 6).species, Some(Species::Predator));
+    assert_eq!(born.grid.get(5, 4).species, Some(Species::Predator));
+    assert_eq!((born.prey, born.predator), (0, 4));
+
+    // Без второй пары хищников рождения нет.
+    let mut pairless = Life::new(11, 11);
+    pairless.set_cell(5, 5, Some(Species::Prey));
+    pairless.set_cell(4, 5, Some(Species::Predator));
+    pairless.step();
+    assert!(
+        !pairless.grid.get(5, 6).is_alive(),
+        "стая меньше двух не рожает"
+    );
+
+    // Без добычи рядом рождения нет тоже.
+    let mut hungry = Life::new(11, 11);
+    hungry.set_cell(4, 5, Some(Species::Predator));
+    hungry.set_cell(6, 5, Some(Species::Predator));
+    hungry.step();
+    assert!(
+        !hungry.grid.get(5, 6).is_alive(),
+        "без добычи рожать незачем"
+    );
+}
+
+#[test]
+fn prey_is_not_born_beside_a_predator() {
+    // Три добычи над (5,5) как раз дают B3, но хищник в N4 запрещает
+    // рождение — хищник отпугивает размножение.
+    let mut life = Life::new(11, 11);
+    life.set_cell(4, 4, Some(Species::Prey));
+    life.set_cell(5, 4, Some(Species::Prey));
+    life.set_cell(6, 4, Some(Species::Prey));
+    life.set_cell(5, 6, Some(Species::Predator));
+    life.step();
+    assert!(
+        !life.grid.get(5, 5).is_alive(),
+        "рождение рядом с хищником заблокировано"
+    );
+}
+
+#[test]
+fn a_starving_predator_dies_and_the_prey_block_cycles() {
+    // Блок + голодный хищник: съедает (5,4), на втором шаге умирает, на
+    // третьем блок восстанавливается — и мир зацикливается с длиной 1.
+    let mut life = world(&[(4, 4), (5, 4), (4, 5), (5, 5)], 12, 12);
+    life.set_cell(6, 4, Some(Species::Predator));
+
+    life.step();
+    assert_eq!((life.prey, life.predator), (3, 1), "съел одну, сам сыт");
+    assert!(life.cycle.is_none());
+
+    life.step();
+    assert_eq!((life.prey, life.predator), (3, 0), "хищник умер от голода");
+    assert!(life.cycle.is_none());
+
+    life.step();
+    assert_eq!(
+        (life.prey, life.predator),
+        (4, 0),
+        "съеденная клетка родилась заново"
+    );
+    assert!(life.cycle.is_none());
+
+    life.step();
+    assert_eq!(life.cycle, Some(1), "стабильный блок повторяется");
+}
+
+#[test]
+fn set_cell_paints_a_species_and_starts_a_fresh_watch() {
+    let mut life = world(&[(4, 4), (5, 4), (4, 5), (5, 5)], 12, 12);
+    life.step();
+    assert_eq!(life.cycle, Some(1));
+
+    life.set_cell(8, 8, Some(Species::Predator));
+    assert!(life.cycle.is_none(), "правка мира начинает новый отсчёт");
+    assert_eq!(life.grid.get(8, 8).species, Some(Species::Predator));
+    assert_eq!((life.prey, life.predator, life.alive), (4, 1, 5));
+
+    life.set_cell(8, 8, None);
+    assert_eq!((life.prey, life.predator, life.alive), (4, 0, 4));
+}
+
+#[test]
+fn the_species_counters_always_add_up_to_alive() {
+    let mut life = Life::new(16, 16);
+    life.fill(0.6, &mut ChaCha8Rng::seed_from_u64(5));
+    assert_eq!(life.alive, life.prey + life.predator);
+
+    for _ in 0..10 {
+        life.step();
+        assert_eq!(life.alive, life.prey + life.predator);
+        assert_eq!(
+            life.alive,
+            life.grid.cells.iter().filter(|c| c.is_alive()).count()
+        );
+    }
+
+    life.set_cell(0, 0, Some(Species::Predator));
+    life.resize(8, 8);
+    assert_eq!(life.alive, life.prey + life.predator);
+    life.clear();
+    assert_eq!((life.alive, life.prey, life.predator), (0, 0, 0));
+}
+
+#[test]
+fn fill_spawns_both_species_reproducibly() {
+    let mut a = Life::new(20, 20);
+    let mut b = Life::new(20, 20);
+    a.fill(1.0, &mut ChaCha8Rng::seed_from_u64(11));
+    b.fill(1.0, &mut ChaCha8Rng::seed_from_u64(11));
+    assert_eq!(a.grid.cells, b.grid.cells, "один seed — один мир");
+    assert_eq!(a.alive, 400);
+    assert!(a.prey > 0, "добыча должна встретиться");
+    assert!(a.predator > 0, "хищники должны встретиться");
+    assert_eq!(a.prey + a.predator, a.alive);
+}
+
+#[test]
+fn the_species_colours_match_the_spec() {
+    use lab1::ui::palette;
+    assert_eq!(palette::PREY, egui::Color32::BLACK);
+    assert_eq!(palette::PREDATOR, egui::Color32::from_rgb(0xD3, 0x2F, 0x2F));
 }

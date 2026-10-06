@@ -9,7 +9,7 @@ pub mod pattern;
 pub mod resources;
 pub mod rules;
 
-pub use cell::{Cell, CellState, ConstructionKind};
+pub use cell::{Cell, CellState, ConstructionKind, Species};
 pub use citizen::CitizenData;
 pub use construction::Registry;
 use grid::wrap;

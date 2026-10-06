@@ -1,6 +1,6 @@
 use egui::{Color32, ColorImage, Context, TextureHandle, TextureOptions, Ui, Vec2};
 
-use crate::sim::cell::Cell;
+use crate::sim::cell::{Cell, Species};
 use crate::sim::Life;
 use crate::ui::palette;
 
@@ -64,9 +64,9 @@ pub struct Canvas {
     /// нужна только при смене зума: при каждом ресайзе окна мир бы обрезался
     /// прямо на глазах.
     fitted_zoom: Option<usize>,
-    /// Drag in progress: the last cell visited and whether the button paints
-    /// life (`true`) or death (`false`).
-    drag: Option<(usize, usize, bool)>,
+    /// Drag in progress: the last cell visited and the species the brush
+    /// paints (`None` for the erasing right button).
+    drag: Option<(usize, usize, Option<Species>)>,
     /// Screen rect the grid was last painted into.
     pub rect: egui::Rect,
     /// Screen pixels per cell actually in effect. Equal to [`Self::cell_px`]
@@ -104,7 +104,7 @@ impl Canvas {
         self.drag = None;
     }
 
-    pub fn show(&mut self, ui: &mut Ui, life: &mut Life) {
+    pub fn show(&mut self, ui: &mut Ui, life: &mut Life, brush: Species) {
         let steps = steps_from_ctrl_wheel(ui, &mut self.scroll_accum);
         if steps != 0 {
             self.zoom_by(steps);
@@ -150,7 +150,7 @@ impl Canvas {
         };
         self.display_cell_px = display_cell_px;
 
-        self.handle_input(ui, life, rect, display_cell_px, w, h);
+        self.handle_input(ui, life, rect, display_cell_px, w, h, brush);
     }
 
     /// Крутит размер клетки на `steps` шагов, не выходя за 1..=32.
@@ -171,11 +171,7 @@ impl Canvas {
         }
         let w = life.grid.width.max(1);
         for (i, c) in life.grid.cells.iter().enumerate() {
-            let want = if c.is_alive() {
-                palette::ALIVE
-            } else {
-                palette::FIELD
-            };
+            let want = cell_color(c);
             if self.prev[i] != want {
                 self.prev[i] = want;
                 dirty.add(i % w, i / w);
@@ -242,8 +238,9 @@ impl Canvas {
         self.full_rebuild = false;
     }
 
-    /// ЛКМ оживляет клетки, ПКМ убивает; при перетаскивании клетки ложатся
-    /// линией без пропусков.
+    /// ЛКМ рисует выбранным видом, ПКМ стирает; при перетаскивании клетки
+    /// ложатся линией без пропусков.
+    #[allow(clippy::too_many_arguments)]
     fn handle_input(
         &mut self,
         ui: &mut Ui,
@@ -252,6 +249,7 @@ impl Canvas {
         cell_px: f32,
         w: usize,
         h: usize,
+        brush: Species,
     ) {
         if rect.width() <= 0.0 || rect.height() <= 0.0 {
             return;
@@ -272,24 +270,24 @@ impl Canvas {
 
         if ui.input(|i| i.pointer.button_pressed(egui::PointerButton::Primary)) {
             if let Some(cell) = hovered.and_then(cell_at) {
-                life.set_alive(cell.0, cell.1, true);
-                self.drag = Some((cell.0, cell.1, true));
+                life.set_cell(cell.0, cell.1, Some(brush));
+                self.drag = Some((cell.0, cell.1, Some(brush)));
             }
         }
         if ui.input(|i| i.pointer.button_pressed(egui::PointerButton::Secondary)) {
             if let Some(cell) = hovered.and_then(cell_at) {
-                life.set_alive(cell.0, cell.1, false);
-                self.drag = Some((cell.0, cell.1, false));
+                life.set_cell(cell.0, cell.1, None);
+                self.drag = Some((cell.0, cell.1, None));
             }
         }
 
         match self.drag {
-            Some((px, py, alive)) if ui.input(|i| i.pointer.any_down()) => {
+            Some((px, py, painted)) if ui.input(|i| i.pointer.any_down()) => {
                 if let Some((x, y)) = hovered.and_then(cell_at) {
                     if (x, y) != (px, py) {
-                        draw_line(life, alive, px, py, x, y);
+                        draw_line(life, painted, px, py, x, y);
                     }
-                    self.drag = Some((x, y, alive));
+                    self.drag = Some((x, y, painted));
                 }
             }
             _ => self.drag = None,
@@ -334,15 +332,20 @@ fn steps_from_ctrl_wheel(ui: &Ui, accum: &mut f32) -> isize {
     steps
 }
 
+/// Цвет клетки по её виду: добыча чёрная, хищник красный, пусто — поле.
+fn cell_color(cell: &Cell) -> Color32 {
+    match cell.species {
+        Some(Species::Prey) => palette::PREY,
+        Some(Species::Predator) => palette::PREDATOR,
+        None => palette::FIELD,
+    }
+}
+
 /// Fills the `cell_px` square at `(x, y)` with its colour and a black border.
 /// Borders are skipped entirely at `cell_px == 1`: one pixel per cell has no
 /// room for them.
 fn paint_cell(img: &mut ColorImage, cell: &Cell, x: usize, y: usize, cell_px: usize) {
-    let fill = if cell.is_alive() {
-        palette::ALIVE
-    } else {
-        palette::FIELD
-    };
+    let fill = cell_color(cell);
     let b = BORDER_PX.min(cell_px.saturating_sub(1));
     for py in 0..cell_px {
         for px in 0..cell_px {
@@ -354,7 +357,14 @@ fn paint_cell(img: &mut ColorImage, cell: &Cell, x: usize, y: usize, cell_px: us
 }
 
 /// Bresenham line so dragging does not leave gaps between sampled cells.
-fn draw_line(life: &mut Life, alive: bool, x0: usize, y0: usize, x1: usize, y1: usize) {
+fn draw_line(
+    life: &mut Life,
+    painted: Option<Species>,
+    x0: usize,
+    y0: usize,
+    x1: usize,
+    y1: usize,
+) {
     let (mut x, mut y) = (x0 as i64, y0 as i64);
     let (tx, ty) = (x1 as i64, y1 as i64);
     let dx = (tx - x).abs();
@@ -364,7 +374,7 @@ fn draw_line(life: &mut Life, alive: bool, x0: usize, y0: usize, x1: usize, y1: 
     let mut err = dx - dy;
     loop {
         if x >= 0 && y >= 0 && (x as usize) < life.grid.width && (y as usize) < life.grid.height {
-            life.set_alive(x as usize, y as usize, alive);
+            life.set_cell(x as usize, y as usize, painted);
         }
         if x == tx && y == ty {
             break;

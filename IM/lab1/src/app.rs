@@ -2,14 +2,14 @@ use std::time::Instant;
 
 use eframe::egui;
 
-use crate::sim::Life;
+use crate::sim::{Life, Species};
 use crate::ui::canvas::Canvas;
 
 /// Upper bound on ticks per frame, re-exported so tests can assert the cap.
 pub use crate::sim::MAX_TICKS_PER_FRAME;
 
 pub const DEFAULT_TICKS_PER_SECOND: f32 = 10.0;
-pub const DEFAULT_DENSITY: f32 = 0.3;
+pub const DEFAULT_DENSITY: f32 = 0.2;
 
 /// Ticks due for `elapsed` seconds at `rate` ticks per second, capped at
 /// `MAX_TICKS_PER_FRAME`.
@@ -64,6 +64,8 @@ pub struct App {
     pub ticks_per_second: f32,
     /// Доля живых клеток для кнопки «Случайно».
     pub density: f32,
+    /// Вид, который рисует левая кнопка мыши.
+    pub brush: Species,
     pub message: String,
     last_tick: Instant,
     /// Fractional ticks carried between frames so a rate below the frame rate
@@ -87,42 +89,28 @@ impl App {
             running: false,
             ticks_per_second: DEFAULT_TICKS_PER_SECOND,
             density: DEFAULT_DENSITY,
+            brush: Species::Prey,
             message: String::new(),
             last_tick: Instant::now(),
             tick_accumulator: 0.0,
         }
     }
 
-    /// Старт/пауза. Старт после Game Over смотрит на цикл заново: мир уже
-    /// видели, но игроку дали просмотреть его ещё раз.
+    /// Старт/пауза: запуск не зависит от зацикленности мира — игра просто
+    /// продолжает шагать, а статус-бар скромно показывает длину цикла.
     pub fn toggle_running(&mut self) {
         self.running = !self.running;
         if self.running {
-            if self.life.cycle.is_some() {
-                self.life.forget_cycles();
-            }
             self.last_tick = Instant::now();
             self.tick_accumulator = 0.0;
             self.message.clear();
         }
     }
 
-    /// Один шаг вручную — и так же, как на старте, Game Over не мешает
-    /// посмотреть следующее поколение.
+    /// Один шаг вручную: тот же `Life::step`, только ровно одно поколение.
     pub fn step_once(&mut self) {
         self.running = false;
-        if self.life.cycle.is_some() {
-            self.life.forget_cycles();
-        }
         self.life.step();
-        self.stop_on_cycle();
-    }
-
-    /// Ловит Game Over: мир повторился — игра встаёт до правки или рестарта.
-    fn stop_on_cycle(&mut self) {
-        if self.life.cycle.is_some() {
-            self.running = false;
-        }
     }
 
     pub fn clear(&mut self) {
@@ -165,6 +153,14 @@ impl App {
         self.stop_on_cycle();
         ctx.request_repaint();
     }
+
+    /// Game Over — просто пауза: мир повторился или вымер, но игра останавливается
+    /// только до следующего «Пуск»/«Шаг», которые продолжают шагать по циклу.
+    fn stop_on_cycle(&mut self) {
+        if self.life.cycle.is_some() {
+            self.running = false;
+        }
+    }
 }
 
 impl eframe::App for App {
@@ -180,7 +176,7 @@ impl eframe::App for App {
         egui::CentralPanel::default()
             .frame(egui::Frame::none())
             .show(ctx, |ui| {
-                self.canvas.show(ui, &mut self.life);
+                self.canvas.show(ui, &mut self.life, self.brush);
             });
     }
 }
