@@ -1,5 +1,9 @@
 use egui::Color32;
 
+/// Поле «Жизни»: белый лист.
+pub const FIELD: Color32 = Color32::WHITE;
+/// Живая клетка «Жизни»: чёрная на белом поле.
+pub const ALIVE: Color32 = Color32::BLACK;
 pub const EMPTY: Color32 = Color32::from_rgb(0x1E, 0x1E, 0x1E);
 pub const CITIZEN: Color32 = Color32::from_rgb(0x00, 0x00, 0x00);
 pub const WATER: Color32 = Color32::from_rgb(0x1E, 0x6F, 0xFF);

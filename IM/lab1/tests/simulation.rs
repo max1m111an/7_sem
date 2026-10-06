@@ -12,20 +12,27 @@ use lab1::sim::{Brush, Sim, SimStatus};
 // ---------------------------------------------------------------- §10.1 units
 
 #[test]
-fn neighbors4_respects_edges_without_wrapping() {
+fn neighbors4_wraps_around_every_edge() {
+    // The field is a torus: a corner has four face neighbours, not two.
     let g = Grid::new(5, 5);
+    let mut corner: Vec<(usize, usize)> = g.neighbors4(0, 0).collect();
+    corner.sort_unstable();
     assert_eq!(
-        g.neighbors4(0, 0).count(),
-        2,
-        "corner has two face neighbours"
+        corner,
+        vec![(0, 1), (0, 4), (1, 0), (4, 0)],
+        "corner neighbours come back from the opposite edges"
     );
     assert_eq!(g.neighbors4(1, 1).count(), 4, "interior has four");
     assert_eq!(
         g.neighbors4(4, 4).count(),
-        2,
-        "corner has two face neighbours"
+        4,
+        "a corner still has four distinct neighbours"
     );
-    assert_eq!(g.neighbors4(0, 2).count(), 3, "edge has three");
+    assert_eq!(
+        g.neighbors4(0, 2).count(),
+        4,
+        "an edge cell has four, with the missing one supplied by the wrap"
+    );
 }
 
 #[test]
@@ -40,7 +47,27 @@ fn neighbors4_returns_expected_coords() {
 fn neighbors8_includes_diagonals() {
     let g = Grid::new(3, 3);
     assert_eq!(g.neighbors8(1, 1).count(), 8);
-    assert_eq!(g.neighbors8(0, 0).count(), 3);
+    assert_eq!(g.neighbors8(0, 0).count(), 8, "corners wrap too");
+    let mut all: Vec<(usize, usize)> = g.neighbors8(0, 0).collect();
+    all.sort_unstable();
+    all.dedup();
+    assert_eq!(all.len(), 8, "no neighbour may be produced twice");
+}
+
+#[test]
+fn neighbours_do_not_fold_onto_themselves_on_a_tiny_field() {
+    // Two cells wide, the left and right neighbour are the same cell; the
+    // iterator must yield it once so density() cannot double count.
+    let g = Grid::new(2, 3);
+    let mut n: Vec<(usize, usize)> = g.neighbors4(0, 0).collect();
+    n.sort_unstable();
+    n.dedup();
+    assert_eq!(n.len(), g.neighbors4(0, 0).count(), "no duplicates");
+    let mut wide: Vec<(usize, usize)> = g.neighbors8(0, 0).collect();
+    wide.sort_unstable();
+    let produced = wide.len();
+    wide.dedup();
+    assert_eq!(produced, wide.len(), "no diagonal may be produced twice");
 }
 
 #[test]
@@ -249,8 +276,39 @@ fn cells_in_radius_measures_from_the_centre_cell() {
     );
     // The centre cell is always included.
     assert!(g.cells_in_radius(4, 4, 0).collect::<Vec<_>>() == vec![(4, 4)]);
-    // The grid clips at the border instead of wrapping.
-    assert_eq!(g.cells_in_radius(0, 0, 2).count(), 6);
+    // The disc wraps instead of clipping: from the corner it reaches the three
+    // cells that lie just beyond the opposite edges.
+    let mut corner: Vec<(usize, usize)> = g.cells_in_radius(0, 0, 2).collect();
+    corner.sort_unstable();
+    assert_eq!(corner.len(), 13, "a radius-2 disc is 13 cells, wrapped");
+    assert!(corner.contains(&(0, 8)), "row 8 is one step above row 0");
+    assert!(
+        corner.contains(&(8, 0)),
+        "column 8 is one step left of column 0"
+    );
+    assert!(corner.contains(&(8, 8)), "and the diagonal wraps as well");
+}
+
+/// A radius wider than the field must still visit every cell exactly once.
+#[test]
+fn cells_in_radius_visits_each_cell_once_on_a_tiny_field() {
+    // Four cells across with radius 3: a naive wrap would list the same
+    // column three times over.
+    let g = Grid::new(4, 4);
+    let all: Vec<(usize, usize)> = g.cells_in_radius(0, 0, 3).collect();
+    let mut unique = all.clone();
+    unique.sort_unstable();
+    unique.dedup();
+    assert_eq!(
+        all.len(),
+        unique.len(),
+        "no cell may be counted twice: {all:?}"
+    );
+    assert_eq!(all.len(), 16, "radius 3 covers the whole 4x4 torus");
+    assert!(
+        all.contains(&(3, 3)),
+        "the opposite corner is one step away along both axes"
+    );
 }
 
 #[test]
@@ -992,4 +1050,191 @@ fn citizen_stats_stay_within_bounds() {
             }
         }
     }
+}
+
+// ------------------------------------------------------------ the torus field
+//
+// The field wraps at every edge: leaving one side comes back at the opposite
+// one. That holds for the rules, for pattern detection and for the stamp tool.
+
+/// A construction may straddle the seam: the farm's right column sits in the
+/// first column of the field.
+#[test]
+fn a_pattern_can_straddle_the_seam() {
+    let mut cfg = SimConfig::default();
+    cfg.citizen_move_enabled = false;
+    let mut sim = Sim::new(8, 8, cfg, lab1::sim::default_library());
+    for (x, y) in [(7, 5), (0, 5), (7, 6), (0, 6)] {
+        sim.paint(x, y, Brush::Citizen);
+    }
+
+    sim.step();
+
+    for (x, y) in [(7, 5), (0, 5), (7, 6), (0, 6)] {
+        assert_eq!(
+            sim.grid.get(x, y).state,
+            CellState::Construction,
+            "({x},{y}) belongs to the shape"
+        );
+        assert_eq!(sim.grid.get(x, y).kind, Some(ConstructionKind::Food));
+    }
+    assert_eq!(
+        sim.stats.n_constructions[1], 4,
+        "one farm across the seam, not two half shapes"
+    );
+}
+
+/// The seam must not tear a construction apart over time (rule 6 has to see
+/// the shape it is holding together).
+#[test]
+fn a_construction_across_the_seam_survives_many_ticks() {
+    let mut cfg = SimConfig::default();
+    cfg.citizen_move_enabled = false;
+    let mut sim = Sim::new(8, 8, cfg, lab1::sim::default_library());
+    for (x, y) in [(7, 5), (0, 5), (7, 6), (0, 6)] {
+        sim.paint(x, y, Brush::Citizen);
+    }
+    // A lone citizen that never completes a pattern: it keeps the colony out
+    // of Game Over and its numbers keep changing, so a frozen grid would not
+    // be mistaken for this.
+    sim.paint(4, 0, Brush::Citizen);
+
+    for _ in 0..10 {
+        sim.step();
+    }
+
+    assert_eq!(
+        sim.status,
+        SimStatus::Paused,
+        "neither Game Over nor a false cycle"
+    );
+    for (x, y) in [(7, 5), (0, 5), (7, 6), (0, 6)] {
+        assert_eq!(
+            sim.grid.get(x, y).state,
+            CellState::Construction,
+            "({x},{y}) still holds the shape"
+        );
+    }
+}
+
+/// The stamp tool wraps a shape instead of clipping it.
+#[test]
+fn the_stamp_tool_wraps_across_the_seam() {
+    let mut sim = Sim::with_defaults(8, 8);
+    sim.stamp("farm", 7, 3, 0);
+
+    let mut ids = Vec::new();
+    for (x, y) in [(7, 3), (0, 3), (7, 4), (0, 4)] {
+        let c = sim.grid.get(x, y);
+        assert_eq!(c.state, CellState::Construction, "({x},{y})");
+        assert_eq!(c.kind, Some(ConstructionKind::Food));
+        ids.push(c.construction_id);
+    }
+    let id = ids[0].expect("stamped cells carry a construction id");
+    assert!(
+        ids.iter().all(|other| *other == Some(id)),
+        "the wrapped cells form one complex: {ids:?}"
+    );
+    assert_eq!(
+        sim.grid.get(1, 3).state,
+        CellState::Empty,
+        "the shape is not stamped a second time on the far side"
+    );
+    assert_eq!(
+        sim.grid.get(7, 2).state,
+        CellState::Empty,
+        "and it starts at the cell the click selected"
+    );
+}
+
+/// Rule 8 steps through the seam like any other edge (§6.9).
+#[test]
+fn the_anticell_wave_crosses_the_seam() {
+    let mut cfg = SimConfig::default();
+    cfg.anticell_enabled = true;
+    cfg.citizen_move_enabled = false;
+    let mut sim = Sim::new(16, 16, cfg, lab1::sim::default_library());
+    // The blockers are anti-cells rather than citizens: a regular neighbour
+    // would make rule 7 explode before rule 8 ever runs.
+    sim.paint(0, 4, Brush::AntiCell); // the cell above is not empty
+    sim.paint(1, 5, Brush::AntiCell); // the cell to the right is not empty
+    sim.paint(14, 5, Brush::AntiCell); // the cell beyond the left neighbour
+    sim.paint(0, 5, Brush::AntiCell); // the wave
+
+    sim.step();
+
+    assert_eq!(
+        sim.grid.get(15, 5).state,
+        CellState::AntiCell,
+        "the wave steps out of the first column into the last one"
+    );
+    assert_eq!(
+        sim.grid.get(0, 5).state,
+        CellState::Empty,
+        "and its source is cleared"
+    );
+}
+
+/// Rule 9 walks a citizen from the first column to the last one (§6.10).
+#[test]
+fn a_citizen_steps_across_the_seam() {
+    let mut cfg = SimConfig::default();
+    cfg.citizen_move_enabled = true;
+    cfg.citizen_move_prob = 1.0;
+    // Rule 9 skips a cell whose numbers rule 3 has just touched, so every
+    // per-tick delta has to be zero for the move to happen in one step.
+    cfg.stress_hunger = 0.0;
+    cfg.stress_thirst = 0.0;
+    cfg.stress_dark = 0.0;
+    cfg.stress_over = 0.0;
+    cfg.stress_conflict_per_tick = 0.0;
+    cfg.fatigue_per_tick = 0.0;
+    cfg.fatigue_rest = 0.0;
+    cfg.loyalty_surplus = 0.0;
+    cfg.loyalty_deficit = 0.0;
+    cfg.loyalty_stress = 0.0;
+    let mut sim = Sim::new(8, 8, cfg, lab1::sim::default_library());
+    sim.paint(0, 0, Brush::Citizen);
+
+    sim.step();
+
+    assert_eq!(
+        sim.grid.get(0, 7).state,
+        CellState::Citizen,
+        "up wraps around to the last row"
+    );
+    assert_eq!(
+        sim.grid.get(0, 0).state,
+        CellState::Empty,
+        "the source cell is cleared"
+    );
+}
+
+/// The conflict radius (§6.4) measures across the seam too.
+#[test]
+fn the_conflict_radius_reaches_across_the_seam() {
+    let mut cfg = SimConfig::default();
+    cfg.conflict_radius = 3;
+    cfg.stress_conflict_per_tick = 2.0;
+    // Remove every other source of stress so only the conflict term remains.
+    cfg.stress_hunger = 0.0;
+    cfg.stress_thirst = 0.0;
+    cfg.stress_dark = 0.0;
+    cfg.stress_over = 0.0;
+    cfg.food_reserve = 0.0;
+    cfg.water_reserve = 0.0;
+    cfg.energy_reserve = 0.0;
+
+    let mut sim = Sim::new(32, 32, cfg, lab1::sim::default_library());
+    // The complex hugs the first column, the citizen the last one.
+    sim.stamp("conflict_zone", 0, 16, 0);
+    sim.paint(31, 16, Brush::Citizen);
+
+    let before = sim.grid.get(31, 16).citizen.unwrap().stress;
+    sim.step();
+    let after = sim.grid.get(31, 16).citizen.unwrap().stress;
+    assert!(
+        after > before,
+        "stress must cross the seam: {before} -> {after}"
+    );
 }

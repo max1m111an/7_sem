@@ -3,6 +3,7 @@ pub mod cell;
 pub mod citizen;
 pub mod construction;
 pub mod grid;
+pub mod life;
 pub mod movement;
 pub mod pattern;
 pub mod resources;
@@ -11,7 +12,9 @@ pub mod rules;
 pub use cell::{Cell, CellState, ConstructionKind};
 pub use citizen::CitizenData;
 pub use construction::Registry;
+use grid::wrap;
 pub use grid::Grid;
+pub use life::Life;
 pub use pattern::{Pattern, PatternLibrary};
 pub use resources::{Resources, Stocks};
 
@@ -359,19 +362,28 @@ impl Sim {
         };
         let mut min_x = i32::MAX;
         let mut min_y = i32::MAX;
+        let mut max_x = i32::MIN;
+        let mut max_y = i32::MIN;
         for (dx, dy) in &pattern.cells {
             min_x = min_x.min(*dx as i32);
             min_y = min_y.min(*dy as i32);
+            max_x = max_x.max(*dx as i32);
+            max_y = max_y.max(*dy as i32);
+        }
+        // Like pattern detection, the stamp may straddle the seam but must not
+        // fold onto itself: two cells of the shape would then be the same cell.
+        if max_x + 1 - min_x > self.grid.width as i32 || max_y + 1 - min_y > self.grid.height as i32
+        {
+            return;
         }
         let mut cells = Vec::with_capacity(pattern.cells.len());
         for (dx, dy) in &pattern.cells {
-            let px = x as i32 + (*dx as i32 - min_x);
-            let py = y as i32 + (*dy as i32 - min_y);
-            if px < 0 || py < 0 || px >= self.grid.width as i32 || py >= self.grid.height as i32 {
-                continue;
-            }
-            cells.push(self.grid.idx(px as usize, py as usize));
+            let px = wrap(x, *dx as isize - min_x as isize, self.grid.width);
+            let py = wrap(y, *dy as isize - min_y as isize, self.grid.height);
+            cells.push(self.grid.idx(px, py));
         }
+        cells.sort_unstable();
+        cells.dedup();
         if cells.len() != pattern.cells.len() {
             return;
         }

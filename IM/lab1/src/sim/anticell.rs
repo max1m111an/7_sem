@@ -1,6 +1,6 @@
 use crate::config::SimConfig;
 use crate::sim::cell::{Cell, CellState};
-use crate::sim::grid::Grid;
+use crate::sim::grid::{wrap, Grid};
 
 /// Direction priority for the anti-cell wave: up -> left -> right -> down.
 /// Each entry is `(dx, dy)`; up means `dy == -1`.
@@ -53,6 +53,9 @@ pub fn explosion_sources(grid: &Grid) -> Vec<usize> {
 /// Rule 8: a surviving anti-cell steps into the first empty N4 neighbour whose
 /// next cell along the same direction is not empty.
 ///
+/// Neighbours and the cell beyond them are read across the seam, so a wave
+/// travelling rightwards leaves the last column and re-enters the first.
+///
 /// Direction priority is fixed: up -> left -> right -> down. The first *empty*
 /// neighbour in that order is the target; if the cell beyond it is also empty
 /// the wave dissipates instead of moving. A target already claimed by another
@@ -77,23 +80,20 @@ pub fn rule8_anticell_wave(
                 continue;
             }
             for (dx, dy) in WAVE_PRIORITY {
-                let nx = x as isize + dx;
-                let ny = y as isize + dy;
-                if nx < 0 || ny < 0 || nx >= grid.width as isize || ny >= grid.height as isize {
+                let (nx, ny) = (wrap(x, dx, grid.width), wrap(y, dy, grid.height));
+                // A one-cell side folds this onto the cell itself; there is
+                // nowhere to step.
+                if (nx, ny) == (x, y) {
                     continue;
                 }
-                let (nx, ny) = (nx as usize, ny as usize);
                 let j = grid.idx(nx, ny);
                 if grid.cells[j].state != CellState::Empty {
                     continue;
                 }
-                let bx = nx as isize + dx;
-                let by = ny as isize + dy;
-                let beyond_filled = bx >= 0
-                    && by >= 0
-                    && (bx as usize) < grid.width
-                    && (by as usize) < grid.height
-                    && grid.get(bx as usize, by as usize).state != CellState::Empty;
+                // The cell beyond the target wraps too, so a wave can travel
+                // rightwards out of the last column and into the first.
+                let (bx, by) = (wrap(nx, dx, grid.width), wrap(ny, dy, grid.height));
+                let beyond_filled = grid.get(bx, by).state != CellState::Empty;
                 if beyond_filled {
                     next[j] = Cell::anticell();
                     next[i] = Cell::empty();

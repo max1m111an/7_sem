@@ -93,6 +93,26 @@ impl Cell {
         }
     }
 
+    /// A live cell of the Game of Life.
+    ///
+    /// The colony rules below keep their own states; Life only ever creates
+    /// `Citizen` (alive) and `Empty` (dead), so a live cell carries no citizen
+    /// data — [`Cell::is_alive`] is the test.
+    pub fn alive() -> Self {
+        Self {
+            state: CellState::Citizen,
+            kind: None,
+            construction_id: None,
+            citizen: None,
+            frozen: None,
+        }
+    }
+
+    /// Whether this cell is alive in the Game of Life.
+    pub fn is_alive(&self) -> bool {
+        self.state == CellState::Citizen
+    }
+
     pub fn is_regular(&self) -> bool {
         matches!(
             self.state,
