@@ -1,18 +1,21 @@
+mod app;
+mod config;
+mod sim;
+mod ui;
+
 use eframe::egui;
 
-use lab1::app::App;
+fn main() -> Result<(), eframe::Error> {
+    tracing_subscriber::fmt::init();
 
-fn main() -> eframe::Result<()> {
     let options = eframe::NativeOptions {
-        viewport: egui::ViewportBuilder::default()
-            .with_title("Игра «Жизнь»")
-            .with_inner_size([960.0, 600.0])
-            .with_min_inner_size([780.0, 500.0]),
+        viewport: egui::ViewportBuilder::default().with_inner_size([1280.0, 800.0]),
         ..Default::default()
     };
+
     eframe::run_native(
-        "Игра «Жизнь»",
+        "КА Фито–Зоо", // Переведённый заголовок окна
         options,
-        Box::new(|cc| Ok(Box::new(App::new(cc)))),
+        Box::new(|cc| Ok(Box::new(app::PhytoZooApp::new(cc)))),
     )
 }
