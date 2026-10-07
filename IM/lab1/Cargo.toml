@@ -1,5 +1,5 @@
-﻿[package]
-name = "lab1"
+[package]
+name = "lab2"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,11 +9,7 @@ egui = "0.29"
 rand = "0.8"
 rand_chacha = "0.3"
 serde = { version = "1", features = ["derive"] }
-serde_json = "1"
 anyhow = "1"
+thiserror = "1"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-
-[dev-dependencies]
-proptest = "1"
-
