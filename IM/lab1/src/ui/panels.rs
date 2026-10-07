@@ -36,9 +36,8 @@ pub fn toolbar(ui: &mut Ui, app: &mut App) {
         }
 
         ui.separator();
-        ui.label("Клетка:");
-        brush_button(ui, app, Species::Prey, "Добыча", palette::PREY);
-        brush_button(ui, app, Species::Predator, "Хищник", palette::PREDATOR);
+        brush_button(ui, app, Species::Prey, "Клетка", palette::PREY);
+        brush_button(ui, app, Species::Predator, "Антиклетка", palette::PREDATOR);
 
         ui.separator();
         ui.label("Заполнение:");
@@ -84,7 +83,7 @@ fn brush_button(ui: &mut Ui, app: &mut App, species: Species, text: &str, color:
 pub fn status_bar(ui: &mut Ui, app: &App) {
     ui.horizontal(|ui| {
         ui.label(format!(
-            "{} | поколение {} | добыча {} | хищников {} | сетка {}×{} | клетка {} px",
+            "{} | поколение {} | клеток {} | антиклеток {} | сетка {}×{} | клетка {} px",
             if app.running {
                 "играет"
             } else {
