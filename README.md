@@ -11,5 +11,10 @@ Applied Optimization Methods
 
 Intelligent Information Systems
 
+## IM
+
+Imitation Modeling
+
 ## SUiP
+
 Network Management and Protocols
