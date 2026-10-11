@@ -10,3 +10,6 @@ Applied Optimization Methods
 ## IIS
 
 Intelligent Information Systems
+
+## SUiP
+Network Management and Protocols
