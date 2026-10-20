@@ -151,6 +151,7 @@ __pycache__
 .vs
 .vscode
 .ide
+.idea
 
 # rust
 target/
