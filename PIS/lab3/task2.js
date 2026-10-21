@@ -10,7 +10,7 @@
 
 // Подсказка: textContent — это свойство (не метод, без скобок), просто
 // присвойте ему новую строку: element.textContent = "текст";
-
+document.getElementById("username").textContent = "Спортивный клуб «Атлет»";
 
 
 // TODO 2: textContent
@@ -18,7 +18,7 @@
 // описание, связанное с темой Спортивный клуб «Атлет»
 
 // Подсказка: тот же приём, что и в TODO 1 — просто другой элемент и текст.
-
+document.getElementById("bio").textContent = "Спортивный клуб «Атлет» — учреждение для подготовки спортсменов";
 
 
 // --- Средний уровень ---
@@ -31,7 +31,7 @@
 // Подсказка: innerHTML тоже присваивается строкой (element.innerHTML = "..."),
 // но, в отличие от textContent, теги внутри строки реально отрисуются как
 // разметка, а не как обычный видимый текст.
-
+document.getElementById("notice").innerHTML = "<strong>Внимание!</strong> Информация обновлена.";
 
 
 // TODO 4: setAttribute / getAttribute
@@ -42,7 +42,10 @@
 // Подсказка: getAttribute("имя") — читает (со скобками, имя атрибута строкой).
 // setAttribute("имя", "значение") — записывает (два аргумента строками).
 // Оба работают с ЛЮБЫМ атрибутом, не только с src/alt.
-
+const avatar = document.getElementById("avatar");
+console.log(avatar.getAttribute("alt"));
+avatar.setAttribute("src", "photo2.jpg");
+avatar.setAttribute("alt", "Новое описание");
 
 
 // --- Сложный уровень ---
@@ -54,7 +57,9 @@
 
 // Подсказка: classList.remove("класс") и classList.add("класс") — оба
 // принимают имя класса строкой, БЕЗ точки перед именем.
-
+const statusBadge = document.getElementById("status-badge");
+statusBadge.classList.remove("badge-offline");
+statusBadge.classList.add("badge-online");
 
 
 // TODO 6: classList.contains
@@ -63,7 +68,7 @@
 
 // Подсказка: classList.contains("имя-класса") возвращает true/false —
 // удобно использовать прямо внутри if (el.classList.contains("...")) { ... }
-
+console.log(document.getElementById("status-badge").classList.contains("badge-online"));
 
 
 // --- Задача уровня собеседования ---

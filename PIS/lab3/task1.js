@@ -10,7 +10,7 @@
 
 // Подсказка: document.getElementById("имя-id") — id передаётся БЕЗ решётки #
 // (в отличие от querySelector, где решётка обязательна).
-
+console.log(document.getElementById("main-title"))
 
 
 // TODO 2: querySelector по классу
@@ -19,7 +19,7 @@
 
 // Подсказка: querySelector принимает обычный CSS-селектор строкой — точку
 // перед именем класса указывать НУЖНО (в отличие от getElementById).
-
+console.log(document.querySelector(".card"))
 
 
 // --- Средний уровень ---
@@ -30,7 +30,8 @@
 
 // Подсказка: querySelectorAll возвращает СПИСОК элементов (даже если он один
 // или пустой). У списка есть свойство .length — без скобок, это не метод.
-
+let cards = document.querySelectorAll(".card");
+console.log(cards)
 
 
 // TODO 4: Перебор списка + вложенный поиск
@@ -43,7 +44,9 @@
 // искать нужно через card.querySelector(...), а не document.querySelector(...) —
 // иначе всегда найдёте заголовок ПЕРВОЙ карточки, а не текущей.
 // Структура: document.querySelectorAll(".card").forEach(function(card) { ... });
-
+document.querySelectorAll(".card").forEach(function(card) {
+    console.log(card.querySelector(".card-title").textContent);
+});
 
 
 // --- Сложный уровень ---
@@ -58,7 +61,12 @@
 // Подсказка: querySelector возвращает null, если элемент не найден — это НЕ
 // ошибка, а специальное "пустое" значение. null считается "ложным" (falsy),
 // поэтому if (el) { ... } просто не выполнится, когда el === null.
-
+let el = document.querySelector("#not-exist");
+if (el) {
+    console.log(el.textContent);
+} else {
+    console.log("Element not found");
+}
 
 
 // TODO 6: querySelectorAll по ссылкам меню
@@ -68,7 +76,9 @@
 // Подсказка: тот же паттерн, что и в TODO 4 — сначала querySelectorAll
 // (получаем список), затем forEach (перебираем), внутри — .textContent
 // у текущего элемента цикла.
-
+document.querySelectorAll(".menu-link").forEach(function(link) {
+    console.log(link.textContent);
+});
 
 
 // --- Задача уровня собеседования ---

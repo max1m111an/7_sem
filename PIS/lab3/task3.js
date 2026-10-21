@@ -10,7 +10,8 @@
 // Подсказка: element.style.свойство = "значение" — имя свойства пишется
 // camelCase (backgroundColor), а не через дефис, как в CSS-файле
 // (background-color).
-
+let el = document.getElementById("#js-box");
+el.style.backgroundColor = "orange";
 
 
 // TODO 2: element.style + единицы измерения
@@ -19,6 +20,8 @@
 
 // Подсказка: box.style.width = 150 (число без единиц) просто не сработает —
 // нужна строка с единицей измерения: box.style.width = "150px".
+el.style.width = "150px";
+el.style.height = "80px";
 
 
 
@@ -29,7 +32,8 @@
 
 // Подсказка: просто две отдельные строки кода, каждая — своё свойство style,
 // как в TODO 1 и 2, друг за другом.
-
+el.style.borderRadius = "10px";
+el.style.border = "2px solid black"; 
 
 
 // TODO 4: element.style на элементе со стилями из CSS-класса
@@ -39,7 +43,8 @@
 // Подсказка: element.style показывает ТОЛЬКО инлайн-стили (заданные прямо
 // через JS или атрибут style="..."). Стили из CSS-класса через него не видны —
 // поэтому результат может вас удивить.
-
+let el = document.querySelector("#preset-box");
+el.style.backgroundColor = "transparent";
 
 
 // --- Сложный уровень ---
@@ -51,7 +56,7 @@
 // Подсказка: getComputedStyle(element) — это обычная функция (не метод
 // самого элемента!), вызывается отдельно: getComputedStyle(el), а не
 // el.getComputedStyle().
-
+console.log(getComputedStyle(el).backgroundColor);
 
 
 // TODO 6: getComputedStyle — ширина
