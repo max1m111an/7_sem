@@ -37,6 +37,7 @@
 
     <header>
       <h1>GameZone</h1>
+      <span id="live-clock"></span>
       <nav class="nav">
         <a href="#">Главная</a>
         <a href="#">О нас</a>
@@ -55,28 +56,44 @@
         <div class="feature-card">
           <h3>Качество</h3>
           <p>Мы тщательно следим за каждой деталью.</p>
+          <button class="add-fav-btn">В избранное</button>
         </div>
         <div class="feature-card">
           <h3>Скорость</h3>
           <p>Быстро решаем любые вопросы клиентов.</p>
+          <button class="add-fav-btn">В избранное</button>
         </div>
         <div class="feature-card">
           <h3>Забота о клиенте</h3>
           <p>Индивидуальный подход к каждому.</p>
+          <button class="add-fav-btn">В избранное</button>
         </div>
+      </section>
+
+      <section class="favorites">
+        <h2>Избранное</h2>
+        <p id="favorites-empty">Пока пусто</p>
+        <ul id="favorites-list"></ul>
       </section>
 
       <section class="promo">
         <div class="promo-card">
           <span class="badge">Топ выбор</span>
           <h2>Специальное предложение</h2>
+          <span id="promo-timer">05:00</span>
           <p>Оставьте заявку прямо сейчас — расскажем обо всех деталях.</p>
         </div>
       </section>
 
+      <section class="review">
+        <h2>Отзыв клиента</h2>
+        <div id="review-content">Нажмите кнопку, чтобы загрузить отзыв</div>
+        <button id="load-review-btn" class="btn">Показать отзыв</button>
+      </section>
+
       <section class="form-section">
         <h2>Оставить заявку</h2>
-        <form action="/submit" method="POST">
+        <form id="request-form" action="/submit" method="POST" novalidate>
 
           <!-- Добавьте сюда форму: 4 текстовых поля разных типов
                (текст, email, пароль, телефон) и две radio-группы —
@@ -102,6 +119,7 @@
           <button type="submit" class="btn">Отправить заявку</button>
 
         </form>
+        <div id="form-status"></div>
       </section>
 
     </main>
