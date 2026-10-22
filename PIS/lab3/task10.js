@@ -12,6 +12,12 @@
 // Подсказка: у JSON-строки ключи в кавычках ("name", а не name), и вся
 // структура — это ОДНА строка текста, а не объект.
 
+const person = { name: "Аня", age: 20 };
+console.log(person);
+console.log(JSON.stringify(person));
+// В консоли видно разницу: первый вывод — живой объект (в консоли браузера
+// он раскрывается в сворачиваемое дерево), второй — одна строка
+// '{"name":"Аня","age":20}', где ключи в кавычках.
 
 
 // TODO 2: JSON.parse — строка в объект
@@ -20,6 +26,12 @@
 // консоль и отдельно выведите parsed.name (докажите, что это теперь
 // настоящий объект)
 
+const raw = '{"name":"Аня","age":20}';
+const parsed = JSON.parse(raw);
+console.log(parsed);
+console.log(parsed.name);
+// parsed.name — это строка "Аня": значит, JSON.parse действительно вернул
+// объект, к которому можно обращаться по свойствам.
 
 
 // --- Средний уровень ---
@@ -34,17 +46,44 @@
 // Объект без JSON.stringify не сохранится корректно (см. TODO 5 — там как
 // раз демонстрация этой ошибки).
 
+const nameField = document.querySelector("#name-field");
+const ageField = document.querySelector("#age-field");
+const saveBtn = document.querySelector("#save-btn");
+const output = document.querySelector("#output");
+
+saveBtn.addEventListener("click", function () {
+    const profile = {
+        name: nameField.value,
+        age: ageField.value
+    };
+
+    localStorage.setItem("profile", JSON.stringify(profile));
+    console.log("Сохранено:", localStorage.getItem("profile"));
+});
 
 
 // TODO 4: загрузка из localStorage
 // Получите #load-btn. По клику: localStorage.getItem("profile") достаёт
 // строку, JSON.parse превращает её обратно в объект, запишите в #output
-// что-то вроде "Имя: " + parsed.name + ", возраст: " + parsed.age
+// что-то вродое "Имя: " + parsed.name + ", возраст: " + parsed.age
 
 // Подсказка: если ничего не сохраняли — getItem вернёт null. Проверьте
 // результат через if перед использованием (parsed.name), иначе можно
 // получить ошибку при обращении к свойству null.
 
+const loadBtn = document.querySelector("#load-btn");
+
+loadBtn.addEventListener("click", function () {
+    const saved = localStorage.getItem("profile");
+
+    if (!saved) {                       // ничего не сохраняли — getItem вернул null
+        output.textContent = "Данные ещё не сохранены";
+        return;
+    }
+
+    const data = JSON.parse(saved);
+    output.textContent = "Имя: " + data.name + ", возраст: " + data.age;
+});
 
 
 // --- Сложный уровень ---
@@ -54,6 +93,14 @@
 // JSON.stringify: localStorage.setItem("bad", { foo: "bar" })
 // (да, специально неправильно — это часть задания, чтобы увидеть результат)
 
+const badSaveBtn = document.querySelector("#bad-save-btn");
+
+badSaveBtn.addEventListener("click", function () {
+    // Специально БЕЗ JSON.stringify — так localStorage превратит объект
+    // в строку "[object Object]".
+    localStorage.setItem("bad", { foo: "bar" });
+    console.log("Сохранено:", localStorage.getItem("bad"));
+});
 
 
 // TODO 6: попытка прочитать это же значение
@@ -66,6 +113,20 @@
 // не валидный JSON — вот почему try/catch тут обязателен, если данные могут
 // быть повреждены.
 
+const badLoadBtn = document.querySelector("#bad-load-btn");
+const badOutput = document.querySelector("#bad-output");
+
+badLoadBtn.addEventListener("click", function () {
+    const saved = localStorage.getItem("bad");
+    console.log(saved);                 // это строка "[object Object]"
+
+    try {
+        const data = JSON.parse(saved);
+        badOutput.textContent = "Неожиданно разобралось: " + JSON.stringify(data);
+    } catch (error) {
+        badOutput.textContent = "Не удалось разобрать JSON: испорченные данные";
+    }
+});
 
 
 // --- Задача уровня собеседования ---
@@ -76,4 +137,9 @@
 // напрямую, и почему localStorage в принципе не может хранить "живые"
 // JS-объекты?
 
-
+// Ответ: localStorage хранит только строки, поэтому объект, положенный
+// напрямую, неявно превращается в "[object Object]" — восстановить из этой
+// строки данные уже нельзя. JSON.stringify и JSON.parse — это способ
+// превратить объект в строку и обратно без потери данных (сериализация).
+// «Живые» JS-объекты (ссылки, методы, функции) в localStorage сохранить
+// невозможно: там лежит только текст.

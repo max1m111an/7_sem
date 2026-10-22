@@ -10,8 +10,8 @@
 // Подсказка: element.style.свойство = "значение" — имя свойства пишется
 // camelCase (backgroundColor), а не через дефис, как в CSS-файле
 // (background-color).
-let el = document.getElementById("#js-box");
-el.style.backgroundColor = "orange";
+const jsBox = document.getElementById("js-box");
+jsBox.style.backgroundColor = "orange";
 
 
 // TODO 2: element.style + единицы измерения
@@ -20,8 +20,8 @@ el.style.backgroundColor = "orange";
 
 // Подсказка: box.style.width = 150 (число без единиц) просто не сработает —
 // нужна строка с единицей измерения: box.style.width = "150px".
-el.style.width = "150px";
-el.style.height = "80px";
+jsBox.style.width = "150px";
+jsBox.style.height = "80px";
 
 
 
@@ -32,8 +32,8 @@ el.style.height = "80px";
 
 // Подсказка: просто две отдельные строки кода, каждая — своё свойство style,
 // как в TODO 1 и 2, друг за другом.
-el.style.borderRadius = "10px";
-el.style.border = "2px solid black"; 
+jsBox.style.borderRadius = "10px";
+jsBox.style.border = "2px solid black"; 
 
 
 // TODO 4: element.style на элементе со стилями из CSS-класса
@@ -43,8 +43,14 @@ el.style.border = "2px solid black";
 // Подсказка: element.style показывает ТОЛЬКО инлайн-стили (заданные прямо
 // через JS или атрибут style="..."). Стили из CSS-класса через него не видны —
 // поэтому результат может вас удивить.
-let el = document.querySelector("#preset-box");
-el.style.backgroundColor = "transparent";
+//
+// ВАЖНО: здесь НЕ задаём стиль через JS — иначе в TODO 5 getComputedStyle
+// показал бы уже наш собственный цвет, а не цвет из CSS-класса .preset.
+const presetBox = document.querySelector("#preset-box");
+console.log(presetBox.style.backgroundColor);
+// Вывелась пустая строка (""): у #preset-box нет инлайн-стилей, весь вид
+// задаёт CSS-класс .preset из <style> — в element.style попадают только
+// стили, записанные прямо в атрибуте style="..." или через JS.
 
 
 // --- Сложный уровень ---
@@ -56,7 +62,7 @@ el.style.backgroundColor = "transparent";
 // Подсказка: getComputedStyle(element) — это обычная функция (не метод
 // самого элемента!), вызывается отдельно: getComputedStyle(el), а не
 // el.getComputedStyle().
-console.log(getComputedStyle(el).backgroundColor);
+console.log(getComputedStyle(presetBox).backgroundColor);
 
 
 // TODO 6: getComputedStyle — ширина
@@ -65,7 +71,7 @@ console.log(getComputedStyle(el).backgroundColor);
 // Подсказка: getComputedStyle(element) возвращает объект со ВСЕМИ реальными
 // применёнными стилями, независимо от того, инлайн они, из класса или из
 // стилей браузера по умолчанию.
-
+console.log(getComputedStyle(presetBox).width);
 
 
 // --- Задача уровня собеседования ---
@@ -75,5 +81,13 @@ console.log(getComputedStyle(el).backgroundColor);
 // element.style.backgroundColor вывел пустую строку, а в TODO 5
 // getComputedStyle вывел реальный цвет? В чём принципиальная разница между
 // этими двумя способами?
+
+// Ответ: element.style — это объект ИНЛАЙН-стилей элемента, то есть только
+// того, что задано атрибутом style="..." или через JS (в TODO 4 инлайн-стилей
+// не было — вывод пустой). getComputedStyle(el) возвращает итоговые значения
+// после применения ВСЕХ источников: CSS-классов, наследования, стилей
+// браузера, поэтому в TODO 5 получился реальный teal из класса .preset.
+// Читать реальные значения нужно через getComputedStyle, а записывать —
+// через element.style.
 
 

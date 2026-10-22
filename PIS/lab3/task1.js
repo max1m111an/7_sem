@@ -31,7 +31,8 @@ console.log(document.querySelector(".card"))
 // Подсказка: querySelectorAll возвращает СПИСОК элементов (даже если он один
 // или пустой). У списка есть свойство .length — без скобок, это не метод.
 let cards = document.querySelectorAll(".card");
-console.log(cards)
+console.log(cards);
+console.log(cards.length)
 
 
 // TODO 4: Перебор списка + вложенный поиск
@@ -61,7 +62,10 @@ document.querySelectorAll(".card").forEach(function(card) {
 // Подсказка: querySelector возвращает null, если элемент не найден — это НЕ
 // ошибка, а специальное "пустое" значение. null считается "ложным" (falsy),
 // поэтому if (el) { ... } просто не выполнится, когда el === null.
+const buyBtn = document.querySelector("#buy-btn");
+console.log(buyBtn);
 let el = document.querySelector("#not-exist");
+console.log(el);
 if (el) {
     console.log(el.textContent);
 } else {
@@ -76,7 +80,9 @@ if (el) {
 // Подсказка: тот же паттерн, что и в TODO 4 — сначала querySelectorAll
 // (получаем список), затем forEach (перебираем), внутри — .textContent
 // у текущего элемента цикла.
-document.querySelectorAll(".menu-link").forEach(function(link) {
+const menuLinks = document.querySelectorAll(".menu-link");
+console.log(menuLinks.length);
+menuLinks.forEach(function(link) {
     console.log(link.textContent);
 });
 
@@ -95,5 +101,11 @@ document.querySelectorAll(".menu-link").forEach(function(link) {
 // вы добавили на страницу ещё один <div class="card">. Попадёт ли он в уже
 // полученный список? А если бы список получался через
 // document.getElementsByClassName("card")?
+
+// Ответ: querySelectorAll() возвращает NodeList — это СТАТИЧЕСКИЙ список
+// («снимок» на момент вызова), поэтому новый <div class="card"> в уже
+// полученный список не попадёт. getElementsByClassName() возвращает
+// HTMLCollection — «живую» коллекцию: она всегда отражает текущее состояние
+// страницы и сама обновляется при добавлении/удалении элементов.
 
 

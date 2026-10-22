@@ -14,7 +14,43 @@ const form = document.querySelector("#reg-form");
 // получена в переменную form выше), а не на поле ввода — у полей ввода
 // такого события нет, оно не сработает.
 
+const username = document.querySelector("#username-field");
+const agreeCheckbox = document.querySelector("#agree-checkbox");
+const countrySelect = document.querySelector("#country-select");
+const errorBox = document.querySelector("#error-message");
 
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    // TODO 5: валидация — обязательное поле
+    if (username.value === "") {
+        errorBox.textContent = "Введите имя";
+        return;                       // дальше код выполняться не должен
+    }
+
+    // TODO 6: валидация — согласие с условиями
+    if (!agreeCheckbox.checked) {
+        errorBox.textContent = "Нужно согласиться с условиями";
+        return;
+    }
+    errorBox.textContent = "";       // обе проверки пройдены — ошибок нет
+
+    // TODO 1: текстовое поле
+    console.log(username.value);
+
+    // TODO 2: чекбокс — .checked, а не .value!
+    console.log(agreeCheckbox.checked);
+
+    // TODO 3: радиокнопки — :checked
+    const accountType = document.querySelector('input[name="account-type"]:checked');
+    console.log(accountType ? accountType.value : "ничего не выбрано");
+
+    // TODO 4: select
+    console.log(countrySelect.value);
+});
+
+
+// --- Средний уровень ---
 
 // TODO 2: чекбокс — .checked, а не .value!
 // В ТОМ ЖЕ обработчике получите #agree-checkbox и выведите в консоль его .checked
@@ -22,9 +58,10 @@ const form = document.querySelector("#reg-form");
 // Подсказка: checkbox.value почти всегда просто "on" — бесполезно. Нужно
 // именно .checked (true/false)
 
+// Значение .checked выводится в обработчике выше (console.log(agreeCheckbox.checked)).
+// У чекбокса .value почти всегда равен "on" — это значение атрибута value,
+// а не состояние, поэтому для проверки «отмечен/не отмечен» нужен .checked.
 
-
-// --- Средний уровень ---
 
 // TODO 3: радиокнопки — :checked
 // В ТОМ ЖЕ обработчике получите выбранную радиокнопку через
@@ -35,6 +72,9 @@ const form = document.querySelector("#reg-form");
 // сначала фильтр по атрибуту name, затем псевдокласс :checked (только
 // отмеченный элемент). querySelector найдёт ровно ту радиокнопку, что выбрана.
 
+// Выбор радиокнопки читается в обработчике выше:
+// const accountType = document.querySelector('input[name="account-type"]:checked');
+// console.log(accountType.value);
 
 
 // TODO 4: select
@@ -43,6 +83,7 @@ const form = document.querySelector("#reg-form");
 // Подсказка: у select всё так же просто, как у текстового поля — обычное
 // .value, никаких новых приёмов не нужно.
 
+// Значение select читается в обработчике выше: console.log(countrySelect.value).
 
 
 // --- Сложный уровень ---
@@ -56,6 +97,8 @@ const form = document.querySelector("#reg-form");
 // (пустая строка) верно, выполняем действие и сразу return, чтобы код ниже
 // не выполнился на невалидных данных.
 
+// Проверка стоит первой строкой после event.preventDefault() — поэтому при
+// пустом имени обработчик сразу выходит и остальные проверки не выполняются.
 
 
 // TODO 6: валидация — согласие с условиями
@@ -67,6 +110,8 @@ const form = document.querySelector("#reg-form");
 // Подсказка: проверки идут одна за другой — сначала имя, потом чекбокс.
 // Если первая проверка сработала (return) — до второй дело не дойдёт.
 
+// Вторая проверка — следом за первой (см. обработчик выше). Если обе
+// проверки пройдены, errorBox.textContent = "" очищает старую ошибку.
 
 
 // --- Задача уровня собеседования ---
@@ -77,4 +122,8 @@ const form = document.querySelector("#reg-form");
 // хранится в .value у чекбокса, и почему оно бесполезно для проверки
 // "отмечен/не отмечен"?
 
-
+// Ответ: .value у чекбокса — это значение атрибута value (по умолчанию "on"),
+// оно задаётся разработчиком и не меняется при клике, поэтому о состоянии
+// ничего не говорит. .checked — это как раз текущее состояние (true/false).
+// У текстового поля .value хранит сам введённый текст, поэтому там оно и
+// полезно.

@@ -13,6 +13,12 @@
 // Подсказка: document.createElement("тег") создаёт элемент только в памяти
 // JS — на странице его не видно, пока не вставите через appendChild/prepend.
 
+const sandbox = document.querySelector("#sandbox");
+const newParagraph = document.createElement("p");
+newParagraph.textContent = "Привет!";
+console.log(newParagraph);
+// На странице элемент НЕ появился: он существует только в памяти JS
+// (объект в переменной newParagraph), пока его не вставили в DOM.
 
 
 // TODO 2: appendChild
@@ -22,6 +28,7 @@
 // Подсказка: parent.appendChild(el) добавляет el ПОСЛЕДНИМ ребёнком внутрь
 // parent — только после этого элемент реально появляется на странице.
 
+sandbox.appendChild(newParagraph);
 
 
 // --- Средний уровень ---
@@ -34,6 +41,17 @@
 // Подсказка: рецепт из 3 шагов — создать (createElement) → настроить
 // (textContent/атрибуты) → вставить (appendChild). Все три шага обязательны.
 
+const addTaskBtn = document.querySelector("#add-task-btn");
+const newTaskInput = document.querySelector("#new-task-input");
+const todoList = document.querySelector("#todo-list");
+
+addTaskBtn.addEventListener("click", function () {
+    if (newTaskInput.value !== "") {
+        const li = createTaskItem(newTaskInput.value);   // создать + настроить
+        todoList.appendChild(li);                        // вставить
+        newTaskInput.value = "";                         // TODO 4: очищаем поле
+    }
+});
 
 
 // TODO 4: очистка поля после добавления
@@ -43,6 +61,10 @@
 // Подсказка: если поле пустое (пользователь ничего не ввёл), не стоит
 // добавлять пустой <li> — можно обернуть весь код в if (input.value !== "")
 
+// Очистка поля — последняя строка обработчика из TODO 3
+// (newTaskInput.value = ""), поэтому после добавления записи поле сразу
+// пустое и можно вводить следующую. Пустое поле ничего не добавляет,
+// потому что весь код обёрнут в if (newTaskInput.value !== "").
 
 
 // --- Сложный уровень ---
@@ -55,6 +77,15 @@
 // Подсказка: prepend работает так же, как appendChild, но вставляет элемент
 // ПЕРВЫМ ребёнком, а не последним — остальной код можно скопировать из TODO 3.
 
+const addTaskTopBtn = document.querySelector("#add-task-top-btn");
+
+addTaskTopBtn.addEventListener("click", function () {
+    if (newTaskInput.value !== "") {
+        const li = createTaskItem(newTaskInput.value);
+        todoList.prepend(li);          // новая запись встаёт ПЕРВОЙ
+        newTaskInput.value = "";
+    }
+});
 
 
 // TODO 6: удаление созданного элемента напрямую (без делегирования)
@@ -67,6 +98,24 @@
 // Подсказка: тут делегирование не нужно — вы только что сами создали и
 // кнопку, и li, ссылки на оба элемента уже есть в переменных.
 
+// Функция createTaskItem() описана здесь и используется в TODO 3 и TODO 5.
+// Объявления функций доступны во всём файле (они поднимаются вверх),
+// поэтому вызвать её можно было и раньше.
+function createTaskItem(text) {
+    const li = document.createElement("li");
+    li.textContent = text;
+
+    // Кнопка удаления — свой обработчик, без делегирования:
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "✕";
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.addEventListener("click", function () {
+        li.remove();                    // удаляем сам <li> с кнопкой
+    });
+
+    li.appendChild(deleteBtn);         // кнопка живёт ВНУТРИ <li>
+    return li;
+}
 
 
 // --- Задача уровня собеседования ---
@@ -78,4 +127,8 @@
 // элементов, которые уже есть на странице в большом количестве или
 // добавляются откуда-то ещё?
 
-
+// Ответ: у свежесозданного элемента ссылка на него уже есть в переменной,
+// поэтому повесить обработчик прямо на него проще и понятнее. Делегирование
+// выгоднее, когда элементов много или они появляются со стороны: один
+// обработчик на родителе покрывает их все, включая те, что добавили позже.
+// Выбор зависит от того, откуда берутся элементы и сколько их.
