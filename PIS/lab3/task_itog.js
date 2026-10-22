@@ -51,7 +51,13 @@ featuresSection.addEventListener("click", (event) => {
   const card = favBtn.closest(".feature-card");
   const title = card.querySelector("h3").textContent;
 
+  const isAlreadyAdded = Array.from(favoritesList.children).some(
+    (item) => item.dataset.title === title
+  );
+  if (isAlreadyAdded) return;
+
   const listItem = document.createElement("li");
+  listItem.dataset.title = title;
   listItem.textContent = title;
 
   const removeBtn = document.createElement("button");

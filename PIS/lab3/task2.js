@@ -44,7 +44,7 @@ document.getElementById("notice").innerHTML = "<strong>Внимание!</strong
 // Оба работают с ЛЮБЫМ атрибутом, не только с src/alt.
 const avatar = document.getElementById("avatar");
 console.log(avatar.getAttribute("alt"));
-avatar.setAttribute("src", "photo2.jpg");
+avatar.setAttribute("src", "milk.jpg");
 avatar.setAttribute("alt", "Новое описание");
 
 
