@@ -1,190 +1,189 @@
 // ЛАБОРАТОРНАЯ РАБОТА №4
 // ИТОГОВОЕ ЗАДАНИЕ — Вариант 04
-// Тема варианта: Спортивный клуб «Атлет»
+// Тема варианта: «Игра» — GameZone
 //
-// Здесь собраны все темы 1–9: компоненты и JSX, props, useState, события,
-// условный рендеринг, списки и key, controlled-форма, useEffect и подъём
-// состояния. Файл можно целиком вставить в src/App.jsx проекта.
+// Сайт из ЛР2/ЛР3 пересобран на React-компонентах с той же вёрсткой
+// и тем же CSS. Корневой компонент хранит общее состояние страницы:
+// - переключение главной и страницы «О нас» (state + условный рендеринг);
+// - избранное и выбранные карточки (подъём состояния между соседями);
+// - выдача купона после успешной заявки (форма + промо-блок);
+// - открытие и закрытие модального окна.
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Header from "./components/Header.jsx";
+import Hero from "./components/Hero.jsx";
+import Features from "./components/Features.jsx";
+import Favorites from "./components/Favorites.jsx";
+import Promo from "./components/Promo.jsx";
+import Review from "./components/Review.jsx";
+import RequestForm from "./components/RequestForm.jsx";
+import Footer from "./components/Footer.jsx";
+import Modal from "./components/Modal.jsx";
+import AboutPage from "./components/AboutPage.jsx";
+import "./task_itog.css";
 
-const PRODUCTS = [
-  { id: 1, name: "Абонемент на месяц", price: 2500 },
-  { id: 2, name: "Разовое занятие", price: 500 },
-  { id: 3, name: "Персональная тренировка", price: 1500 },
+const NAV_ITEMS = [
+  { label: "Главная", target: "home" },
+  { label: "О нас", target: "about" },
+  { label: "Услуги", target: "features" },
+  { label: "Контакты", target: "contacts" },
 ];
 
-const NAV_ITEMS = ["Главная", "Расписание", "Тренеры", "Цены"];
-
-// Тема 1 + 2: компонент без состояния, данные получает через props
-function Header({ title, navItems, activeItem, onSelect }) {
-  return (
-    <header>
-      <h1>{title}</h1>
-      <nav>
-        {navItems.map((item) => (
-          <a
-            key={item}
-            href="#"
-            className={item === activeItem ? "active" : ""}
-            onClick={(e) => {
-              e.preventDefault();
-              onSelect(item);
-            }}
-          >
-            {item}
-          </a>
-        ))}
-      </nav>
-    </header>
-  );
-}
-
-// Тема 6 + 9: карточка товара — данные и колбэки приходят сверху
-function ProductCard({ product, isFavorite, onToggleFavorite, onAddToCart }) {
-  return (
-    <li className={isFavorite ? "card card--favorite" : "card"}>
-      <h3>{product.name}</h3>
-      <p>{product.price} ₽</p>
-
-      <button onClick={() => onToggleFavorite(product.id)}>
-        {isFavorite ? "Убрать из избранного" : "В избранное"}
-      </button>
-      <button onClick={() => onAddToCart(product)}>
-        Добавить в корзину
-      </button>
-    </li>
-  );
-}
-
-// Тема 9: счётчик корзины — только отображает значение
-function CartSummary({ count, total }) {
-  return (
-    <p>
-      В корзине: {count} · Сумма: {total} ₽
-    </p>
-  );
-}
+const FEATURES = [
+  {
+    id: "quality",
+    title: "Качество",
+    text: "Мы тщательно следим за каждой деталью.",
+  },
+  {
+    id: "speed",
+    title: "Скорость",
+    text: "Быстро решаем любые вопросы клиентов.",
+  },
+  {
+    id: "care",
+    title: "Забота о клиенте",
+    text: "Индивидуальный подход к каждому.",
+  },
+];
 
 function App() {
-  // Тема 3 + 9: состояние живёт в App
-  const [activeItem, setActiveItem] = useState(NAV_ITEMS[0]);
+  // Тема 3 + 11: текущая страница и активный пункт меню.
+  const [page, setPage] = useState("home");
+  const [activeItem, setActiveItem] = useState(NAV_ITEMS[0].label);
+
+  // Тема 3 + 9: общее состояние карточек и списка избранного.
+  const [selectedFeatureIds, setSelectedFeatureIds] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [cart, setCart] = useState([]);
 
-  // Тема 7: controlled-форма
-  const [customerName, setCustomerName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [status, setStatus] = useState("");
+  // Тема 9 + 12: купон связывает форму и промо-блок, модалка — отдельный state.
+  const [couponGranted, setCouponGranted] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Тема 8: имитация загрузки каталога
-  const [isLoading, setIsLoading] = useState(true);
+  function handleNavigate(item) {
+    setActiveItem(item.label);
 
-  useEffect(() => {
-    const id = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(id);
-  }, []);
+    if (item.target === "about") {
+      setPage("about");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
 
-  // Тема 8: эффект с зависимостью
-  useEffect(() => {
-    console.log("Корзина изменилась: теперь " + cart.length + " товаров");
-  }, [cart]);
+    setPage("home");
 
-  // Тема 5: ранний return
-  if (isLoading) {
-    return <p>Загрузка каталога «Спортивный клуб «Атлет»»...</p>;
+    if (item.target === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    // Секция появится после переключения страницы — прокручиваем следом.
+    setTimeout(() => {
+      document
+        .getElementById(item.target)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 0);
   }
 
-  const total = cart.reduce((sum, product) => sum + product.price, 0);
+  function handleShowAbout() {
+    setActiveItem("О нас");
+    setPage("about");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
-  function toggleFavorite(id) {
-    setFavorites((prev) =>
+  function handleBackHome() {
+    setActiveItem("Главная");
+    setPage("home");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function handleSelectFeature(id) {
+    setSelectedFeatureIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   }
 
-  function addToCart(product) {
-    setCart((prev) => [...prev, product]);
+  function handleAddFavorite(title) {
+    setFavorites((prev) =>
+      prev.includes(title) ? prev : [...prev, title]
+    );
   }
 
-  // Тема 7: проверка перед отправкой
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleRemoveFavorite(title) {
+    setFavorites((prev) => prev.filter((item) => item !== title));
+  }
 
-    if (customerName.trim() === "") {
-      setStatus("Введите имя!");
-      return;
-    }
+  function handleRequestSuccess() {
+    setCouponGranted(true);
+  }
 
-    if (phone.trim() === "") {
-      setStatus("Введите телефон!");
-      return;
-    }
+  function openModal() {
+    setIsModalOpen(true);
+  }
 
-    setStatus(
-      "Заказ от " + customerName + " принят: " + cart.length + " товаров"
-    );
-    setCustomerName("");
-    setPhone("");
+  function closeModal() {
+    setIsModalOpen(false);
   }
 
   return (
-    <div>
+    <>
       <Header
-        title="Спортивный клуб «Атлет»"
+        title="GameZone"
         navItems={NAV_ITEMS}
         activeItem={activeItem}
-        onSelect={setActiveItem}
+        onNavigate={handleNavigate}
       />
 
-      <main>
-        <section>
-          <h2>Каталог</h2>
-          <CartSummary count={cart.length} total={total} />
+      {/* Тема 11: вторая страница через state + условный рендеринг */}
+      {page === "home" ? (
+        <main>
+          <Hero onShowAbout={handleShowAbout} onOpenModal={openModal} />
 
-          <ul>
-            {PRODUCTS.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                isFavorite={favorites.includes(product.id)}
-                onToggleFavorite={toggleFavorite}
-                onAddToCart={addToCart}
-              />
-            ))}
-          </ul>
+          <Features
+            features={FEATURES}
+            selectedIds={selectedFeatureIds}
+            favorites={favorites}
+            onSelect={handleSelectFeature}
+            onAddFavorite={handleAddFavorite}
+          />
 
-          <button onClick={() => setCart([])}>Очистить корзину</button>
-        </section>
+          <Favorites favorites={favorites} onRemove={handleRemoveFavorite} />
 
-        <section>
-          <h2>Оставить заявку</h2>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Имя:
-              <input
-                value={customerName}
-                onChange={(e) => setCustomerName(e.target.value)}
-              />
-            </label>
+          <Promo
+            couponGranted={couponGranted}
+            onOpenModal={openModal}
+          />
 
-            <label>
-              Телефон:
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </label>
+          <Review />
 
-            <button type="submit">Отправить</button>
-          </form>
+          <RequestForm onRequestSuccess={handleRequestSuccess} />
+        </main>
+      ) : (
+        <AboutPage onBack={handleBackHome} onOpenModal={openModal} />
+      )}
 
-          {/* Тема 5: условный рендеринг статуса */}
-          {status && <p className="form-status">{status}</p>}
-        </section>
-      </main>
-    </div>
+      <Footer />
+
+      {/* Тема 12: модальный контейнер поверх сайта */}
+      <Modal
+        isOpen={isModalOpen}
+        title="Правила акции"
+        onClose={closeModal}
+      >
+        <p>
+          Оставьте заявку на главной странице, пока идёт таймер, и получите
+          купон.
+        </p>
+        <ul>
+          <li>Заполните все поля формы заявки.</li>
+          <li>Дождитесь сообщения об успешной отправке.</li>
+          <li>Назовите купон при оформлении заказа.</li>
+        </ul>
+        <p>Одно нажатие на «Понятно» — и можно играть дальше.</p>
+        <button type="button" className="btn" onClick={closeModal}>
+          Понятно
+        </button>
+      </Modal>
+    </>
   );
 }
 
