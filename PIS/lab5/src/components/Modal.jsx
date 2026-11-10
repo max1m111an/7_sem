@@ -1,6 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const CLOSE_MS = 220;
 
 function Modal({ isOpen, title, onClose, children }) {
+  // Модалка остаётся в DOM ещё немного после закрытия — для анимации ухода
+  const [isRendered, setIsRendered] = useState(isOpen);
+  const [isClosing, setIsClosing] = useState(false);
+  const closeRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsRendered(true);
+      setIsClosing(false);
+      return undefined;
+    }
+    if (!isRendered) return undefined;
+
+    setIsClosing(true);
+    const timeoutId = setTimeout(() => {
+      setIsRendered(false);
+      setIsClosing(false);
+    }, CLOSE_MS);
+    return () => clearTimeout(timeoutId);
+  }, [isOpen]);
+
   useEffect(() => {
     if (!isOpen) return undefined;
 
@@ -10,6 +33,7 @@ function Modal({ isOpen, title, onClose, children }) {
 
     document.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
@@ -17,10 +41,13 @@ function Modal({ isOpen, title, onClose, children }) {
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isRendered) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div
+      className={isClosing ? "modal-overlay is-closing" : "modal-overlay"}
+      onClick={onClose}
+    >
       <div
         className="modal"
         role="dialog"
@@ -33,6 +60,7 @@ function Modal({ isOpen, title, onClose, children }) {
           className="modal-close"
           onClick={onClose}
           aria-label="Закрыть"
+          ref={closeRef}
         >
           &times;
         </button>
