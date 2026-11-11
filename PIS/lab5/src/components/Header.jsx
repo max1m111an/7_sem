@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import Icon from "./Icon.jsx";
 
 function Header({
@@ -85,11 +86,10 @@ function Header({
 
   return (
     <header className={headerClass}>
-      <a
-        href="#home"
+      <Link
+        to={navItems[0].to}
         className="brand"
-        onClick={(event) => {
-          event.preventDefault();
+        onClick={() => {
           setIsMenuOpen(false);
           onNavigate(navItems[0]);
         }}
@@ -100,7 +100,7 @@ function Header({
         <h1 className="glitch" data-text={title}>
           {title}
         </h1>
-      </a>
+      </Link>
 
       <span id="live-clock">
         <span className="clock-dot" aria-hidden="true" />
@@ -117,18 +117,17 @@ function Header({
           aria-hidden="true"
         />
         {navItems.map((item) => (
-          <a
+          <Link
             key={item.target}
-            href={`#${item.target}`}
+            to={item.to}
             className={item.label === activeItem ? "active" : ""}
-            onClick={(event) => {
-              event.preventDefault();
+            onClick={() => {
               setIsMenuOpen(false);
               onNavigate(item);
             }}
           >
             {item.label}
-          </a>
+          </Link>
         ))}
       </nav>
 

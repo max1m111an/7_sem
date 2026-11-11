@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import Features from "./components/Features.jsx";
@@ -20,11 +21,11 @@ import useLocalStorage from "./hooks/useLocalStorage.js";
 import "./task_itog.css";
 
 const NAV_ITEMS = [
-  { label: "Главная", target: "home" },
-  { label: "О нас", target: "about" },
-  { label: "Услуги", target: "features" },
-  { label: "Игры", target: "catalog" },
-  { label: "Контакты", target: "contacts" },
+  { label: "Главная", target: "home", to: "/" },
+  { label: "О нас", target: "about", to: "/about" },
+  { label: "Услуги", target: "features", to: "/#features" },
+  { label: "Игры", target: "catalog", to: "/#catalog" },
+  { label: "Контакты", target: "contacts", to: "/#contacts" },
 ];
 
 const SCROLL_TOP = "top";
@@ -60,8 +61,29 @@ const KONAMI = [
 
 const TOAST_MS = 3200;
 
+function NotFoundPage() {
+  return (
+    <main className="page-enter">
+      <section className="hero hero--compact">
+        <div className="hero-glow" aria-hidden="true" />
+        <h2 className="hero-title">
+          404 — <span className="gradient-text">страница не найдена</span>
+        </h2>
+        <p>Похоже, такой страницы в GameZone нет.</p>
+        <div className="hero-actions">
+          <Link to="/" className="btn">
+            Вернуться на главную
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 function App() {
-  const [page, setPage] = useState("home");
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [activeItem, setActiveItem] = useState(NAV_ITEMS[0].label);
 
   const [selectedFeatureIds, setSelectedFeatureIds] = useState([]);
@@ -121,7 +143,7 @@ function App() {
 
   // Подсвечиваем пункт меню той секции, которая сейчас на экране
   useEffect(() => {
-    if (page !== "home" || !("IntersectionObserver" in window)) return undefined;
+    if (location.pathname !== "/" || !("IntersectionObserver" in window)) return undefined;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -142,7 +164,31 @@ function App() {
     });
 
     return () => observer.disconnect();
-  }, [page]);
+  }, [location.pathname]);
+
+  // Синхронизируем активный пункт меню с адресом (прямой заход,
+  // кнопки браузера «назад/вперёд», переход по хэшу).
+  useEffect(() => {
+    if (location.pathname === "/about") {
+      setActiveItem("О нас");
+      return;
+    }
+
+    if (location.pathname === "/") {
+      const hash = location.hash.replace("#", "");
+      const item = NAV_ITEMS.find((nav) => nav.target === hash);
+      setActiveItem(item ? item.label : "Главная");
+    }
+  }, [location.pathname, location.hash]);
+
+  // Если открыли адрес с хэшем (например, /#catalog), прокручиваем к секции.
+  useEffect(() => {
+    if (location.pathname !== "/" || !location.hash) return;
+    const target = location.hash.replace("#", "");
+    if (document.getElementById(target)) {
+      setScrollRequest({ target });
+    }
+  }, [location.pathname, location.hash]);
 
   // ---------- пасхалка: код Konami ----------
   // Общая функция: вызывается и с клавиатуры, и по клику на стрелки в подвале
@@ -190,35 +236,40 @@ function App() {
     setScrollRequest({ target });
   }
 
+  // Ссылки в Header сами меняют маршрут через <Link>; здесь только
+  // обновляем подсветку и прокручиваем к нужной секции.
   function handleNavigate(item) {
     setActiveItem(item.label);
 
     if (item.target === "about") {
-      setPage("about");
       requestScroll(SCROLL_TOP);
       return;
     }
 
-    setPage("home");
     requestScroll(item.target === "home" ? SCROLL_TOP : item.target);
   }
 
   function handleShowAbout() {
     setActiveItem("О нас");
-    setPage("about");
     requestScroll(SCROLL_TOP);
+    navigate("/about");
   }
 
   function handleBackHome() {
     setActiveItem("Главная");
-    setPage("home");
     requestScroll(SCROLL_TOP);
+    navigate("/");
   }
 
   function goToSection(target) {
     const item = NAV_ITEMS.find((nav) => nav.target === target);
     if (item) setActiveItem(item.label);
-    setPage("home");
+
+    if (location.pathname !== "/") {
+      navigate(`/#${target}`);
+      return;
+    }
+
     requestScroll(target);
   }
 
@@ -281,56 +332,71 @@ function App() {
         onFavoritesClick={() => goToSection("favorites")}
       />
 
-      {page === "home" ? (
-        <main className="page-enter" key="home">
-          <Hero
-            onShowAbout={handleShowAbout}
-            onOpenModal={openModal}
-            onExplore={() => goToSection("catalog")}
-          />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <main className="page-enter" key="home">
+              <Hero
+                onShowAbout={handleShowAbout}
+                onOpenModal={openModal}
+                onExplore={() => goToSection("catalog")}
+              />
 
-          <Stats />
+              <Stats />
 
-          <Features
-            features={FEATURES}
-            selectedIds={selectedFeatureIds}
-            favorites={favorites}
-            onSelect={handleSelectFeature}
-            onToggleFavorite={handleToggleFavorite}
-          />
+              <Features
+                features={FEATURES}
+                selectedIds={selectedFeatureIds}
+                favorites={favorites}
+                onSelect={handleSelectFeature}
+                onToggleFavorite={handleToggleFavorite}
+              />
 
-          <Catalog favorites={favorites} onToggleFavorite={handleToggleFavorite} />
+              <Catalog
+                favorites={favorites}
+                onToggleFavorite={handleToggleFavorite}
+              />
 
-          <Favorites
-            favorites={favorites}
-            kinds={favoriteKinds}
-            onRemove={handleRemoveFavorite}
-            onClear={handleClearFavorites}
-          />
+              <Favorites
+                favorites={favorites}
+                kinds={favoriteKinds}
+                onRemove={handleRemoveFavorite}
+                onClear={handleClearFavorites}
+              />
 
-          <Promo
-            couponGranted={couponGranted}
-            onOpenModal={openModal}
-            onNotify={notify}
-            onGoToForm={() => goToSection("contacts")}
-          />
+              <Promo
+                couponGranted={couponGranted}
+                onOpenModal={openModal}
+                onNotify={notify}
+                onGoToForm={() => goToSection("contacts")}
+              />
 
-          <Review />
+              <Review />
 
-          <Faq />
+              <Faq />
 
-          <RequestForm
-            onRequestSuccess={handleRequestSuccess}
-            onNotify={notify}
-          />
-        </main>
-      ) : (
-        <AboutPage
-          key="about"
-          onBack={handleBackHome}
-          onOpenModal={openModal}
+              <RequestForm
+                onRequestSuccess={handleRequestSuccess}
+                onNotify={notify}
+              />
+            </main>
+          }
         />
-      )}
+
+        <Route
+          path="/about"
+          element={
+            <AboutPage
+              key="about"
+              onBack={handleBackHome}
+              onOpenModal={openModal}
+            />
+          }
+        />
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
 
       <Footer onSecret={triggerSecret} />
 
