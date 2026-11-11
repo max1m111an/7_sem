@@ -1,0 +1,37 @@
+/* Стили для лабораторной работы №5 (React Router).
+   Основное требование TODO 12 — правило для класса .active. */
+
+.site-header {
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.menu a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* TODO 12: подсветка активной ссылки NavLink */
+.menu a.active {
+  color: #e63946;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.product-list {
+  display: grid;
+  gap: 0.75rem;
+  padding-left: 1.25rem;
+}
