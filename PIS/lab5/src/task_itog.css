@@ -12,12 +12,13 @@
 
 body {
     margin: 0;
-    padding-top: 80px;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+    padding-top: 76px;
+    font-family: var(--font-body);
     font-size: 17px;
     line-height: 1.5;
     color: #e8ecff;
-    background-color: #0d1020;
+    background-color: var(--bg);
+    overflow-x: hidden;
 }
 
 h1 {
@@ -59,30 +60,32 @@ header {
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    padding: 16px 32px;
-    background-color: #171b31;
-    border-bottom: 2px solid #00e5ff;
+    padding: 14px 32px;
+    background-color: rgba(23, 27, 49, 0.62);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.35);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    transition: padding 0.3s ease, background-color 0.3s ease,
+                box-shadow 0.3s ease;
+    animation: header-in 0.7s var(--ease-out) both;
 }
 
 .nav {
     display: flex;
-    gap: 24px;
+    position: relative;
+    gap: 6px;
 }
 
 .nav a {
+    position: relative;
+    z-index: 1;
     color: #e8ecff;
-    padding: 8px 12px;
-    border: 1px solid transparent;
+    padding: 8px 14px;
+    border: none;
     border-radius: 8px;
+    font-weight: 500;
     transition: color 0.25s ease, background-color 0.25s ease,
                 border-color 0.25s ease, transform 0.25s ease;
-}
-
-.nav a:hover {
-    color: #0d1020;
-    background-color: #00e5ff;
-    border-color: #00e5ff;
-    transform: translateY(-2px);
 }
 
 main {
@@ -92,13 +95,16 @@ main {
 }
 
 .hero {
-    margin: 48px 0;
-    padding: 56px 32px;
+    position: relative;
+    overflow: hidden;
+    margin: 40px 0 32px;
+    padding: 64px 32px 72px;
     text-align: center;
-    background: linear-gradient(135deg, #171b31, #241a4d);
+    background: linear-gradient(135deg, rgba(23, 27, 49, 0.82), rgba(36, 26, 77, 0.82));
     border: 1px solid #2c3566;
     border-radius: 16px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    isolation: isolate;
 }
 
 .hero:hover {
@@ -110,6 +116,8 @@ main {
     font-size: 30px;
     margin: 0;
     color: #cfd6ff;
+    min-height: 1.5em;
+    animation: reveal-up 0.9s var(--ease-out) 0.35s backwards;
 }
 
 .hero p::before {
@@ -130,11 +138,14 @@ main {
 }
 
 .feature-card {
+    position: relative;
+    overflow: hidden;
     padding: 24px;
-    background-color: #171b31;
+    background-color: var(--panel);
     border: 1px solid #2c3566;
     border-top: 4px solid #00e5ff;
     border-radius: 16px;
+    cursor: pointer;
     transition: border-color 0.3s ease, transform 0.3s ease,
                 box-shadow 0.3s ease;
 }
@@ -160,11 +171,13 @@ main {
 
 .promo-card {
     position: relative;
+    overflow: visible;
+    isolation: isolate;
     padding: 40px 32px;
     background: linear-gradient(120deg, #3a1060, #171b31);
     border: 1px solid #ff2e88;
     border-radius: 16px;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, border-color 0.4s ease;
 }
 
 .promo-card:hover {
@@ -183,6 +196,7 @@ main {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: badge-float 3s ease-in-out infinite;
 }
 
 .promo-card:hover .badge {
@@ -191,7 +205,10 @@ main {
 }
 
 .form-section {
+    position: relative;
+    overflow: hidden;
     padding: 32px;
+    margin-bottom: 24px;
     background-color: #171b31;
     border: 1px solid #2c3566;
     border-radius: 16px;
@@ -203,6 +220,8 @@ main {
 
 .form-section h2::after {
     content: " — поля обязательны";
+    display: block;
+    margin-top: 6px;
     font-size: 13px;
     color: #ff2e88;
     letter-spacing: 1px;
@@ -291,11 +310,18 @@ form input[type="radio"] {
 }
 
 .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
     margin-top: 6px;
     padding: 16px 24px;
+    overflow: hidden;
     font-family: inherit;
     font-size: 17px;
+    font-weight: 600;
     color: #0d1020;
     background-color: #00e5ff;
     border: none;
@@ -303,6 +329,7 @@ form input[type="radio"] {
     letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;
+    isolation: isolate;
     transition: color 0.25s ease, background-color 0.25s ease,
                 transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -314,35 +341,45 @@ form input[type="radio"] {
     box-shadow: 0 10px 26px rgba(255, 46, 136, 0.45);
 }
 
-.btn:active {
-    transform: translateY(0);
-}
-
 #form-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     margin-top: 16px;
+    padding: 12px 16px;
     font-size: 14px;
     font-weight: 600;
+    text-align: center;
+    border-radius: 10px;
+    animation: pop-in 0.4s var(--ease-spring);
 }
 
 #form-status.status-success {
     color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.4);
 }
 
 #form-status.status-error {
     color: #f87171;
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.35);
 }
 
 #live-clock {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
     font-size: 15px;
     font-weight: 600;
     color: #00e5ff;
     letter-spacing: 1px;
-}
-
-.nav a.active {
-    color: #0d1020;
-    background-color: #00e5ff;
-    border-color: #00e5ff;
+    font-variant-numeric: tabular-nums;
+    background: rgba(0, 229, 255, 0.07);
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    border-radius: 999px;
 }
 
 .feature-card.selected {
@@ -352,8 +389,12 @@ form input[type="radio"] {
 }
 
 .add-fav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     margin-top: 16px;
     padding: 8px 16px;
+    font-family: inherit;
     font-size: 14px;
     font-weight: 600;
     color: #e8ecff;
@@ -381,6 +422,10 @@ form input[type="radio"] {
 }
 
 #favorites-empty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
     color: #a9b1d9;
 }
 
@@ -398,10 +443,14 @@ form input[type="radio"] {
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    max-height: 90px;
     padding: 12px 16px;
+    overflow: hidden;
     background-color: #0d1020;
     border: 1px solid #2c3566;
     border-radius: 8px;
+    animation: fav-in 0.45s var(--ease-spring);
+    transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
 .remove-fav-btn {
@@ -424,27 +473,41 @@ form input[type="radio"] {
 #promo-timer {
     display: inline-block;
     margin-bottom: 16px;
+    font-family: var(--font-display);
     font-size: 32px;
     font-weight: 700;
     color: #ff2e88;
     letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 18px rgba(255, 46, 136, 0.6);
 }
 
 #promo-coupon {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     margin: 0;
+    margin-top: 8px;
     padding: 14px 18px;
     font-size: 16px;
     font-weight: 700;
     color: #0d1020;
     background: linear-gradient(120deg, #00e5ff, #4ade80);
+    background-size: 200% 100%;
     border-radius: 8px;
     letter-spacing: 0.5px;
+    animation: coupon-in 0.6s var(--ease-spring), gradient-shift 4s linear infinite;
 }
 
 #review-content {
+    position: relative;
+    min-height: 168px;
     margin-bottom: 16px;
     padding: 20px;
-    background-color: #0d1020;
+    overflow: hidden;
+    background-color: rgba(13, 16, 32, 0.75);
     border: 1px solid #2c3566;
     border-radius: 8px;
     color: #cfd6ff;
@@ -464,42 +527,13 @@ form input[type="radio"] {
 }
 
 footer {
-    padding: 24px 32px;
+    position: relative;
+    padding: 32px;
     font-size: 13px;
     text-align: center;
     color: #6b74a8;
-    background-color: #0a0c18;
+    background-color: rgba(10, 12, 24, 0.85);
     border-top: 1px solid #2c3566;
-}
-
-@media (max-width: 560px) {
-    body {
-        padding-top: 150px;
-    }
-
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .features {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 400px) {
-    h1 {
-        font-size: 30px;
-    }
-
-    .hero p {
-        font-size: 23px;
-    }
-
-    .nav {
-        flex-direction: column;
-        gap: 8px;
-    }
 }
 
 /* ============================================================
@@ -521,8 +555,9 @@ footer {
 /* Сброс стилей шаблона Vite, чтобы заголовки выглядели как в ЛР2 */
 h1,
 h2 {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.5px;
     color: #e8ecff;
 }
 
@@ -532,6 +567,7 @@ h2 {
     justify-content: center;
     gap: 16px;
     margin-top: 24px;
+    animation: reveal-up 0.9s var(--ease-out) 0.5s backwards;
 }
 
 .hero-actions .btn {
@@ -606,7 +642,7 @@ h2 {
     border: 1px solid #00e5ff;
     border-radius: 16px;
     box-shadow: 0 24px 60px rgba(0, 229, 255, 0.28);
-    animation: modal-pop 0.25s ease;
+    animation: modal-pop 0.4s var(--ease-spring);
 }
 
 .modal h2 {
@@ -638,12 +674,13 @@ h2 {
     border: 1px solid #2c3566;
     border-radius: 8px;
     cursor: pointer;
-    transition: color 0.25s ease, background-color 0.25s ease;
+    transition: color 0.25s ease, background-color 0.25s ease, transform 0.3s var(--ease-spring);
 }
 
 .modal-close:hover {
     color: #0d1020;
     background-color: #ff2e88;
+    transform: rotate(90deg);
 }
 
 .about-cta p {
@@ -710,20 +747,6 @@ h2 {
 
 html {
     scroll-padding-top: 90px;
-}
-
-body {
-    padding-top: 76px;
-    font-family: var(--font-body);
-    background-color: var(--bg);
-    overflow-x: hidden;
-}
-
-h1,
-h2 {
-    font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: 0.5px;
 }
 
 ::selection {
@@ -886,17 +909,6 @@ h2 {
 
 /* ---------- Шапка ---------- */
 
-header {
-    padding: 14px 32px;
-    background-color: rgba(23, 27, 49, 0.62);
-    border-bottom: 1px solid rgba(0, 229, 255, 0.35);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    transition: padding 0.3s ease, background-color 0.3s ease,
-                box-shadow 0.3s ease;
-    animation: header-in 0.7s var(--ease-out) both;
-}
-
 header.is-scrolled {
     padding-top: 9px;
     padding-bottom: 9px;
@@ -964,17 +976,6 @@ header h1 {
     animation: glitch-b 0.5s steps(2) infinite;
 }
 
-#live-clock {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    font-variant-numeric: tabular-nums;
-    background: rgba(0, 229, 255, 0.07);
-    border: 1px solid rgba(0, 229, 255, 0.25);
-    border-radius: 999px;
-}
-
 .clock-dot {
     width: 8px;
     height: 8px;
@@ -982,19 +983,6 @@ header h1 {
     border-radius: 50%;
     box-shadow: 0 0 8px var(--green);
     animation: pulse 1s ease-in-out infinite alternate;
-}
-
-.nav {
-    position: relative;
-    gap: 6px;
-}
-
-.nav a {
-    position: relative;
-    z-index: 1;
-    padding: 8px 14px;
-    border: none;
-    font-weight: 500;
 }
 
 .nav a:hover {
@@ -1158,17 +1146,6 @@ header.menu-open .burger span:nth-child(3) {
     animation: gradient-shift 6s linear infinite;
 }
 
-.btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    overflow: hidden;
-    font-weight: 600;
-    isolation: isolate;
-}
-
 .btn::after {
     content: "";
     position: absolute;
@@ -1243,15 +1220,6 @@ header.menu-open .burger span:nth-child(3) {
 
 /* ---------- Hero ---------- */
 
-.hero {
-    position: relative;
-    overflow: hidden;
-    margin: 40px 0 32px;
-    padding: 64px 32px 72px;
-    background: linear-gradient(135deg, rgba(23, 27, 49, 0.82), rgba(36, 26, 77, 0.82));
-    isolation: isolate;
-}
-
 .hero--compact {
     padding: 48px 32px;
 }
@@ -1317,11 +1285,6 @@ header.menu-open .burger span:nth-child(3) {
     animation: reveal-up 0.9s var(--ease-out) 0.2s backwards;
 }
 
-.hero p {
-    min-height: 1.5em;
-    animation: reveal-up 0.9s var(--ease-out) 0.35s backwards;
-}
-
 .caret {
     display: inline-block;
     width: 3px;
@@ -1331,10 +1294,6 @@ header.menu-open .burger span:nth-child(3) {
     background: var(--cyan);
     box-shadow: 0 0 10px var(--cyan);
     animation: blink 1s steps(1) infinite;
-}
-
-.hero-actions {
-    animation: reveal-up 0.9s var(--ease-out) 0.5s backwards;
 }
 
 .hero-scroll {
@@ -1425,13 +1384,6 @@ header.menu-open .burger span:nth-child(3) {
 
 /* ---------- Карточки услуг с 3D-наклоном ---------- */
 
-.feature-card {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    background-color: var(--panel);
-}
-
 .feature-card:nth-child(3) {
     border-top-color: var(--violet);
 }
@@ -1514,13 +1466,6 @@ header.menu-open .burger span:nth-child(3) {
     border-radius: 50%;
     box-shadow: 0 0 14px rgba(255, 46, 136, 0.7);
     animation: pop-in 0.4s var(--ease-spring);
-}
-
-.add-fav-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: inherit;
 }
 
 .add-fav-btn.is-active {
@@ -1753,24 +1698,10 @@ header.menu-open .burger span:nth-child(3) {
     border-color: var(--red);
 }
 
-#favorites-empty {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0;
-}
-
 .empty-heart {
     font-size: 26px;
     color: var(--pink);
     animation: heart-beat 1.6s ease-in-out infinite;
-}
-
-#favorites-list li {
-    max-height: 90px;
-    overflow: hidden;
-    animation: fav-in 0.45s var(--ease-spring);
-    transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
 #favorites-list li:hover {
@@ -1807,12 +1738,6 @@ header.menu-open .burger span:nth-child(3) {
 
 /* ---------- Акция ---------- */
 
-.promo-card {
-    overflow: visible;
-    isolation: isolate;
-    transition: box-shadow 0.3s ease, border-color 0.4s ease;
-}
-
 .promo-shine {
     position: absolute;
     inset: 0;
@@ -1833,21 +1758,11 @@ header.menu-open .burger span:nth-child(3) {
     animation: shine 5s ease-in-out infinite;
 }
 
-.badge {
-    animation: badge-float 3s ease-in-out infinite;
-}
-
 .promo-row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 20px;
-}
-
-#promo-timer {
-    font-family: var(--font-display);
-    font-variant-numeric: tabular-nums;
-    text-shadow: 0 0 18px rgba(255, 46, 136, 0.6);
 }
 
 .promo-discount {
@@ -1890,17 +1805,6 @@ header.menu-open .burger span:nth-child(3) {
 
 .promo-actions .promo-btn {
     margin-top: 0;
-}
-
-#promo-coupon {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: 8px;
-    background-size: 200% 100%;
-    animation: coupon-in 0.6s var(--ease-spring), gradient-shift 4s linear infinite;
 }
 
 #promo-coupon strong {
@@ -1994,13 +1898,6 @@ header.menu-open .burger span:nth-child(3) {
     text-align: center;
     color: var(--muted);
     font-variant-numeric: tabular-nums;
-}
-
-#review-content {
-    position: relative;
-    min-height: 168px;
-    overflow: hidden;
-    background-color: rgba(13, 16, 32, 0.75);
 }
 
 .review-placeholder {
@@ -2230,12 +2127,6 @@ header.menu-open .burger span:nth-child(3) {
 
 /* ---------- Форма заявки ---------- */
 
-.form-section {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 24px;
-}
-
 .form-section::before {
     content: "";
     position: absolute;
@@ -2246,11 +2137,6 @@ header.menu-open .burger span:nth-child(3) {
     background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink), var(--cyan));
     background-size: 300% 100%;
     animation: gradient-shift 4s linear infinite;
-}
-
-.form-section h2::after {
-    display: block;
-    margin-top: 6px;
 }
 
 .form-subtitle {
@@ -2443,27 +2329,6 @@ form .field.has-error input {
     outline-offset: 2px;
 }
 
-#form-status {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 16px;
-    text-align: center;
-    border-radius: 10px;
-    animation: pop-in 0.4s var(--ease-spring);
-}
-
-#form-status.status-success {
-    background: rgba(74, 222, 128, 0.1);
-    border: 1px solid rgba(74, 222, 128, 0.4);
-}
-
-#form-status.status-error {
-    background: rgba(248, 113, 113, 0.08);
-    border: 1px solid rgba(248, 113, 113, 0.35);
-}
-
 /* ---------- О нас: история ---------- */
 
 .timeline {
@@ -2496,7 +2361,7 @@ form .field.has-error input {
     content: "";
     position: absolute;
     top: 6px;
-    left: -27px;
+    left: -30px;
     width: 14px;
     height: 14px;
     background: var(--bg);
@@ -2524,18 +2389,6 @@ form .field.has-error input {
 
 .modal-overlay.is-closing .modal {
     animation: modal-out 0.22s ease forwards;
-}
-
-.modal {
-    animation: modal-pop 0.4s var(--ease-spring);
-}
-
-.modal-close {
-    transition: color 0.25s ease, background-color 0.25s ease, transform 0.3s var(--ease-spring);
-}
-
-.modal-close:hover {
-    transform: rotate(90deg);
 }
 
 .modal-steps {
@@ -2639,12 +2492,6 @@ form .field.has-error input {
 }
 
 /* ---------- Подвал ---------- */
-
-footer {
-    position: relative;
-    padding: 32px;
-    background-color: rgba(10, 12, 24, 0.85);
-}
 
 footer::before {
     content: "";
@@ -2823,6 +2670,10 @@ body.party-mode .brand-logo {
         width: 100%;
     }
 
+    .features {
+        grid-template-columns: 1fr;
+    }
+
     .favorites,
     .review,
     .form-section {
@@ -2848,6 +2699,14 @@ body.party-mode .brand-logo {
 }
 
 @media (max-width: 400px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        font-size: 23px;
+    }
+
     .nav {
         gap: 4px;
     }
