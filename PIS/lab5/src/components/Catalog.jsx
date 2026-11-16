@@ -19,9 +19,6 @@ export const GAMES = [
   { id: "tekken8", title: "Tekken 8", genre: "fighting", price: 180, rating: 4.6, format: "1 × 1" },
   { id: "sf6", title: "Street Fighter 6", genre: "fighting", price: 180, rating: 4.5, format: "1 × 1" },
   { id: "forza", title: "Forza Horizon 5", genre: "racing", price: 190, rating: 4.6, format: "до 12" },
-  { id: "f1", title: "F1 24", genre: "racing", price: 200, rating: 4.2, format: "до 20" },
-  { id: "fc", title: "EA SPORTS FC", genre: "sport", price: 170, rating: 4.3, format: "1 × 1", hot: true },
-  { id: "nba", title: "NBA 2K", genre: "sport", price: 170, rating: 4.1, format: "1 × 1" },
 ];
 
 const GENRE_LABEL = Object.fromEntries(GENRES.map((g) => [g.id, g.label]));
