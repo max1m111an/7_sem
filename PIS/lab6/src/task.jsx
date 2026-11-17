@@ -590,14 +590,23 @@ function NotFoundPage() {
 // ДАННЫЕ С СЕРВЕРА (ЛР6): тренировки, тренеры, расписание
 // ============================================================
 
-const API_BASE = 'http://localhost:3000'
+// Same-origin /api is proxied to Express by vite.config.js in dev/preview.
+// VITE_API_BASE can override it for a separate production backend.
+const API_BASE = import.meta.env.VITE_API_BASE || '/api'
 
 async function api(path, options = {}) {
   const { headers, ...rest } = options
-  const response = await fetch(`${API_BASE}${path}`, {
-    ...rest,
-    headers: { 'Content-Type': 'application/json', ...headers },
-  })
+  let response
+  try {
+    response = await fetch(`${API_BASE}${path}`, {
+      ...rest,
+      headers: { 'Content-Type': 'application/json', ...headers },
+    })
+  } catch (err) {
+    throw new Error(
+      `Нет связи с API (${API_BASE}). Запустите сервер БД командой "make api" (или "make all"). ${err.message}`,
+    )
+  }
 
   let data = null
   try {
@@ -607,7 +616,13 @@ async function api(path, options = {}) {
   }
 
   if (!response.ok) {
-    throw new Error(data?.error || `Ошибка запроса: ${response.status}`)
+    if (data?.error) throw new Error(data.error)
+    if (response.status >= 500) {
+      throw new Error(
+        `API недоступен (HTTP ${response.status}). Запустите "make api" (или "make all") — сервер task.js должен слушать порт ${import.meta.env.VITE_API_PORT || 3000}.`,
+      )
+    }
+    throw new Error(`Ошибка запроса: ${response.status}`)
   }
   return data
 }
@@ -1047,7 +1062,7 @@ function AppTopic7() {
 // ============================================================
 
 // Вариант А: приложение темы 7 и есть итоговый вариант.
-function App() {
+export function App() {
   return <AppTopic7 />
 }
 

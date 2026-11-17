@@ -30,7 +30,7 @@ const PORT = Number(process.env.PORT) || 3000;
 const pool = new Pool({
   host: process.env.PGHOST || "localhost",
   port: Number(process.env.PGPORT) || 5432,
-  database: process.env.PGDATABASE || "postgres",
+  database: process.env.PGDATABASE || "mydb",
   user: process.env.PGUSER || "postgres",
   password: process.env.PGPASSWORD || "",
 });

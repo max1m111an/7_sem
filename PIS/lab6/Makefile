@@ -1,16 +1,19 @@
-.PHONY: client server task client-task client-itog
+.PHONY: client server task all-task all-itog client-task client-itog
 
-# Запуск клиентской части по умолчанию
 client:
 	npm run dev
 
-# Запуск Express-сервера
 server:
 	npx nodemon server.js
 
-# Запуск серверной части задания
 task:
 	npx nodemon task.js
+
+all-task:
+	@$(MAKE) -j2 client-task task
+
+all-itog:
+	@$(MAKE) -j2 server client-itog
 
 # Клиентская часть для варианта task
 client-task:

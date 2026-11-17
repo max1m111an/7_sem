@@ -1,7 +1,34 @@
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
+// --mode task  → http://localhost:5173  (lab 5 app: src/task.jsx)
+// --mode itog  → http://localhost:5174  (final app: src/task_itog.jsx)
+// Both dev servers proxy /api → Express (task.js), so the browser never
+// needs a hardcoded "http://localhost:3000" URL.
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  const isItog = mode === 'itog'
+  const apiTarget = env.VITE_API_TARGET || `http://localhost:${env.PORT || 3000}`
+
+  const proxy = {
+    '/api': {
+      target: apiTarget,
+      changeOrigin: true,
+    },
+  }
+
+  return {
+    plugins: [react()],
+    server: {
+      port: isItog ? 5174 : 5173,
+      strictPort: true,
+      proxy,
+    },
+    preview: {
+      port: isItog ? 4174 : 4173,
+      strictPort: true,
+      proxy,
+    },
+  }
 })

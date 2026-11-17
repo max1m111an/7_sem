@@ -80,7 +80,7 @@ function NotFoundPage() {
   );
 }
 
-function App() {
+export function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
