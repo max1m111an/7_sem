@@ -135,8 +135,49 @@ a { color: #2a6f3a; }
 .form-error { margin: 8px 0 0; color: #b4232e; font-size: .9rem; }
 .not-found { text-align: center; }
 
+/* Данные с сервера (ЛР6) */
+
+.menu { flex-wrap: wrap; }
+.admin-card { margin-top: 12px; padding: 20px; border: 1px solid #ddd; }
+.admin-card h2 { margin-bottom: 12px; }
+.admin-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+.admin-field { display: grid; gap: 4px; font-size: .85rem; font-weight: 700; }
+.admin-field input,
+.admin-field select {
+  min-height: 36px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font: inherit;
+}
+.admin-form > .btn { justify-self: start; }
+.admin-table-wrap { overflow-x: auto; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.admin-table th,
+.admin-table td { padding: 8px; border: 1px solid #ddd; text-align: left; vertical-align: top; }
+.admin-table th { background: #f6f6f6; }
+.admin-table .admin-field { min-width: 120px; }
+.admin-actions { display: flex; gap: 6px; white-space: nowrap; }
+.btn--small { padding: 4px 8px; font-size: .85rem; }
+.btn--danger { background: #b4232e; border-color: #b4232e; }
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 @media (max-width: 700px) {
-  .hero, .benefits, .product-list, .perk-list, .about-grid, .signup-form { grid-template-columns: 1fr; }
+  .hero, .benefits, .product-list, .perk-list, .about-grid, .signup-form,
+  .admin-form { grid-template-columns: 1fr; }
   .header-inner { flex-wrap: wrap; gap: 12px; }
   .signup-form label { grid-column: auto; }
   .review-rating { margin-left: 0; }

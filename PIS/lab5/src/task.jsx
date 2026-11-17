@@ -292,6 +292,9 @@ function Header() {
             {({ isActive }) => (isActive ? '→ Услуги и цены' : 'Услуги и цены')}
           </NavLink>
           <NavLink to="/about">О сайте</NavLink>
+          <NavLink to="/trains">Тренировки</NavLink>
+          <NavLink to="/trainers">Тренеры</NavLink>
+          <NavLink to="/schedule">Расписание</NavLink>
         </nav>
       </div>
     </header>
@@ -583,6 +586,438 @@ function NotFoundPage() {
   )
 }
 
+// ============================================================
+// ДАННЫЕ С СЕРВЕРА (ЛР6): тренировки, тренеры, расписание
+// ============================================================
+
+const API_BASE = 'http://localhost:3000'
+
+async function api(path, options = {}) {
+  const { headers, ...rest } = options
+  const response = await fetch(`${API_BASE}${path}`, {
+    ...rest,
+    headers: { 'Content-Type': 'application/json', ...headers },
+  })
+
+  let data = null
+  try {
+    data = await response.json()
+  } catch {
+    // сервер может вернуть пустое тело
+  }
+
+  if (!response.ok) {
+    throw new Error(data?.error || `Ошибка запроса: ${response.status}`)
+  }
+  return data
+}
+
+function useCrud(path) {
+  const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  async function refresh() {
+    setLoading(true)
+    setError('')
+    try {
+      setItems(await api(path))
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    refresh()
+  }, [path])
+
+  async function create(values) {
+    await api(path, { method: 'POST', body: JSON.stringify(values) })
+    await refresh()
+  }
+
+  async function update(id, values) {
+    await api(`${path}/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(values),
+    })
+    await refresh()
+  }
+
+  async function remove(id) {
+    await api(`${path}/${id}`, { method: 'DELETE' })
+    await refresh()
+  }
+
+  return { items, loading, error, refresh, create, update, remove }
+}
+
+function toFormValues(item, fields) {
+  return Object.fromEntries(
+    fields.map(({ name, type }) => {
+      const value = item?.[name]
+      if (value === undefined || value === null) return [name, '']
+      return [name, type === 'time' ? String(value).slice(0, 5) : String(value)]
+    })
+  )
+}
+
+function buildPayload(form, fields) {
+  const payload = {}
+  for (const field of fields) {
+    const raw = String(form[field.name] ?? '').trim()
+    if (!raw) throw new Error(`Заполните поле «${field.label}»`)
+
+    if (field.type === 'number') {
+      const number = Number(raw)
+      if (!Number.isInteger(number)) {
+        throw new Error(`Поле «${field.label}» должно быть целым числом`)
+      }
+      payload[field.name] = number
+    } else {
+      payload[field.name] = raw
+    }
+  }
+  return payload
+}
+
+function FieldInput({ field, value, onChange }) {
+  if (field.type === 'select') {
+    return (
+      <label className="admin-field">
+        <span>{field.label}</span>
+        <select
+          value={value}
+          onChange={(event) => onChange(field.name, event.target.value)}
+          required
+        >
+          <option value="">Выберите...</option>
+          {field.options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+    )
+  }
+
+  const inputType =
+    field.type === 'number' ? 'number' : field.type === 'time' ? 'time' : 'text'
+
+  return (
+    <label className="admin-field">
+      <span>{field.label}</span>
+      <input
+        type={inputType}
+        value={value}
+        onChange={(event) => onChange(field.name, event.target.value)}
+        required
+      />
+    </label>
+  )
+}
+
+function EntityPage({ title, description, path, fields, empty, columns, hint }) {
+  const { items, loading, error, refresh, create, update, remove } = useCrud(path)
+  const [form, setForm] = useState(empty)
+  const [editingId, setEditingId] = useState(null)
+  const [editForm, setEditForm] = useState(empty)
+  const [actionError, setActionError] = useState('')
+
+  function fieldSetter(setter) {
+    return (name, value) => setter((current) => ({ ...current, [name]: value }))
+  }
+
+  const changeForm = fieldSetter(setForm)
+  const changeEditForm = fieldSetter(setEditForm)
+
+  async function handleAdd(event) {
+    event.preventDefault()
+    setActionError('')
+    try {
+      await create(buildPayload(form, fields))
+      setForm(empty)
+    } catch (err) {
+      setActionError(err.message)
+    }
+  }
+
+  function startEdit(item) {
+    setActionError('')
+    setEditingId(item.id)
+    setEditForm(toFormValues(item, fields))
+  }
+
+  async function handleSave(id) {
+    setActionError('')
+    try {
+      await update(id, buildPayload(editForm, fields))
+      setEditingId(null)
+    } catch (err) {
+      setActionError(err.message)
+    }
+  }
+
+  async function handleDelete(id) {
+    setActionError('')
+    try {
+      await remove(id)
+      if (editingId === id) setEditingId(null)
+    } catch (err) {
+      setActionError(err.message)
+    }
+  }
+
+  return (
+    <div className="page">
+      <section className="section-head">
+        <p className="eyebrow">Клуб «Атлет» · база данных</p>
+        <h1>{title}</h1>
+        <p className="section-lead">{description}</p>
+      </section>
+
+      {hint && <p className="empty-note">{hint}</p>}
+
+      <section className="admin-card">
+        <h2>Добавить запись</h2>
+        <form className="admin-form" onSubmit={handleAdd}>
+          {fields.map((field) => (
+            <FieldInput
+              key={field.name}
+              field={field}
+              value={form[field.name]}
+              onChange={changeForm}
+            />
+          ))}
+          <button type="submit" className="btn">Добавить</button>
+        </form>
+        {actionError && <p className="form-error">{actionError}</p>}
+      </section>
+
+      <section className="admin-card">
+        <h2>Список</h2>
+        {loading && <p className="empty-note">Загрузка...</p>}
+        {error && (
+          <p className="form-error">
+            {error}{' '}
+            <button type="button" className="link-button" onClick={refresh}>
+              Повторить
+            </button>
+          </p>
+        )}
+        {!loading && !error && items.length === 0 && (
+          <p className="empty-note">Записей пока нет.</p>
+        )}
+
+        {items.length > 0 && (
+          <div className="admin-table-wrap">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  {columns.map((column) => (
+                    <th key={column.name}>{column.label}</th>
+                  ))}
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody>
+                {items.map((item) =>
+                  editingId === item.id ? (
+                    <tr key={item.id}>
+                      {fields.map((field) => (
+                        <td key={field.name}>
+                          <FieldInput
+                            field={field}
+                            value={editForm[field.name]}
+                            onChange={changeEditForm}
+                          />
+                        </td>
+                      ))}
+                      <td className="admin-actions">
+                        <button
+                          type="button"
+                          className="btn btn--small"
+                          onClick={() => handleSave(item.id)}
+                        >
+                          Сохранить
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn--small btn--ghost"
+                          onClick={() => setEditingId(null)}
+                        >
+                          Отмена
+                        </button>
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr key={item.id}>
+                      {columns.map((column) => (
+                        <td key={column.name}>
+                          {column.format
+                            ? column.format(item[column.name])
+                            : item[column.name]}
+                        </td>
+                      ))}
+                      <td className="admin-actions">
+                        <button
+                          type="button"
+                          className="btn btn--small btn--ghost"
+                          onClick={() => startEdit(item)}
+                        >
+                          Изменить
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn--small btn--danger"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          Удалить
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+    </div>
+  )
+}
+
+const TRAIN_FIELDS = [
+  { name: 'name', label: 'Название' },
+  { name: 'day', label: 'День недели' },
+  { name: 'duration_min', label: 'Длительность, мин', type: 'number' },
+  { name: 'level', label: 'Уровень' },
+  { name: 'max_participants', label: 'Макс. участников', type: 'number' },
+  { name: 'hall', label: 'Зал' },
+]
+const EMPTY_TRAIN = {
+  name: '',
+  day: '',
+  duration_min: '',
+  level: '',
+  max_participants: '',
+  hall: '',
+}
+
+function TrainsPage() {
+  return (
+    <EntityPage
+      title="Тренировки"
+      description="Список тренировок хранится в PostgreSQL. Добавление, редактирование и удаление работают через API."
+      path="/trains"
+      fields={TRAIN_FIELDS}
+      empty={EMPTY_TRAIN}
+      columns={TRAIN_FIELDS}
+    />
+  )
+}
+
+const TRAINER_FIELDS = [
+  { name: 'name', label: 'Имя' },
+  { name: 'specialty', label: 'Специализация' },
+  { name: 'experience_years', label: 'Стаж, лет', type: 'number' },
+  { name: 'phone', label: 'Телефон' },
+  { name: 'rating', label: 'Рейтинг', type: 'number' },
+  { name: 'photo_url', label: 'Ссылка на фото' },
+]
+const EMPTY_TRAINER = {
+  name: '',
+  specialty: '',
+  experience_years: '',
+  phone: '',
+  rating: '',
+  photo_url: '',
+}
+
+function TrainersPage() {
+  return (
+    <EntityPage
+      title="Тренеры"
+      description="Тренеры — независимая таблица. Пара телефон + photo_url уникальна, сервер вернёт ошибку при дубле."
+      path="/trainers"
+      fields={TRAINER_FIELDS}
+      empty={EMPTY_TRAINER}
+      columns={TRAINER_FIELDS}
+    />
+  )
+}
+
+const SCHEDULE_FIELDS = [
+  { name: 'workout_id', label: 'Тренировка', type: 'select' },
+  { name: 'trainer_id', label: 'Тренер', type: 'select' },
+  { name: 'time', label: 'Время', type: 'time' },
+  { name: 'room', label: 'Зал' },
+]
+const EMPTY_SCHEDULE = { workout_id: '', trainer_id: '', time: '', room: '' }
+const SCHEDULE_COLUMNS = [
+  { name: 'workout_name', label: 'Тренировка' },
+  { name: 'trainer_name', label: 'Тренер' },
+  {
+    name: 'time',
+    label: 'Время',
+    format: (value) => (value ? String(value).slice(0, 5) : ''),
+  },
+  { name: 'room', label: 'Зал' },
+]
+
+function SchedulePage() {
+  const trains = useCrud('/trains')
+  const trainers = useCrud('/trainers')
+
+  if (trains.loading || trainers.loading) {
+    return (
+      <div className="page">
+        <p className="empty-note">Загрузка тренировок и тренеров...</p>
+      </div>
+    )
+  }
+
+  if (trains.error || trainers.error) {
+    return (
+      <div className="page">
+        <p className="form-error">
+          Не удалось загрузить справочники: {trains.error || trainers.error}
+        </p>
+      </div>
+    )
+  }
+
+  const fields = SCHEDULE_FIELDS.map((field) => ({
+    ...field,
+    options:
+      field.name === 'workout_id'
+        ? trains.items.map((item) => ({ value: String(item.id), label: item.name }))
+        : field.name === 'trainer_id'
+          ? trainers.items.map((item) => ({ value: String(item.id), label: item.name }))
+          : [],
+  }))
+
+  const hint =
+    trains.items.length === 0 || trainers.items.length === 0
+      ? 'Сначала добавьте хотя бы одну тренировку и одного тренера.'
+      : ''
+
+  return (
+    <EntityPage
+      title="Расписание"
+      description="Связка тренировки и тренера: время и зал. Список приходит с сервера через JOIN."
+      path="/schedule"
+      fields={fields}
+      empty={EMPTY_SCHEDULE}
+      columns={SCHEDULE_COLUMNS}
+      hint={hint}
+    />
+  )
+}
+
 function AppTopic7() {
   // TODO 31. Маршрут path="*" последним в Routes.
   return (
@@ -597,6 +1032,9 @@ function AppTopic7() {
             <Route index element={<ProductDetails />} />
             <Route path="reviews" element={<ProductReviews />} />
           </Route>
+          <Route path="/trains" element={<TrainsPage />} />
+          <Route path="/trainers" element={<TrainersPage />} />
+          <Route path="/schedule" element={<SchedulePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
