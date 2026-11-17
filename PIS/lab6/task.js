@@ -42,6 +42,17 @@
 // (подраздел 3.7) либо модальным окном (подраздел 3.9), кнопка
 // удаления (подраздел 3.6).
 
+//DROP TABLE IF EXISTS trains;
+//CREATE TABLE trains (
+//  id SERIAL PRIMARY KEY,
+//  name varchar(255) NOT NULL,
+//  day varchar(255) NOT NULL,
+//  duration_min integer NOT NULL,
+//  level varchar(255) NOT NULL,
+//  max_participants integer NOT NULL,
+//  hall varchar(255) NOT NULL
+//);
+
 // ============================================================
 // ОБЪЕКТ 2: Тренеры
 // ============================================================
@@ -54,6 +65,22 @@
 //   - phone (телефон)
 //   - rating (рейтинг)
 //   - photo_url (фото)
+// 
+
+// DROP TABLE IF EXISTS trainers;
+// CREATE TABLE trainers (
+//   id SERIAL PRIMARY KEY,
+//   name VARCHAR(50) NOT NULL,
+//   specialty VARCHAR(50) NOT NULL,
+//   experience_years INTEGER NOT NULL,
+//   phone VARCHAR(20) NOT NULL,
+//   rating INTEGER NOT NULL,
+//   photo_url VARCHAR(255) NOT NULL,
+//   CONSTRAINT "phone-photo" UNIQUE (phone, photo_url)
+// );
+// 
+// INSERT INTO trainers (name, specialty, experience_years, phone, rating, photo_url) VALUES
+//   ('', '', 0, '', 0, '');
 //
 // Тот же полный цикл (GET/POST/PUT/DELETE, страница React, форма
 // добавления, редактирование, удаление), что и для объекта 1 — но
@@ -91,3 +118,14 @@
 // текстовых полей. Это полностью необязательный пункт — баллы за
 // него могут компенсировать недочёты по другим критериям раздела 4,
 // но не поднять итог выше максимума за лабораторную работу.
+
+// DROP TABLE IF EXISTS trains_trainers;
+// CREATE TABLE trains_trainers (
+//   id SERIAL PRIMARY KEY,
+//   workout_id INTEGER NOT NULL,
+//   trainer_id INTEGER NOT NULL,
+//   time time NOT NULL,
+//   room VARCHAR(255) NOT NULL,
+//   CONSTRAINT workout_id FOREIGN KEY (workout_id) REFERENCES trains(id),
+//   CONSTRAINT trainer_id FOREIGN KEY (trainer_id) REFERENCES trainers(id)
+// );
