@@ -4,7 +4,7 @@ const app = express();
 
 const PORT = 3000;
 
-app.get("/", function (req, res) {
+app.get("/", function (_, res) {
   res.send("Сервер работает!");
 });
 
