@@ -22,7 +22,7 @@ const pool = new Pool({
   port: 5432,
   database: "postgres",
   user: "postgres",
-  password: "postgres",
+  password: "s31nhl3r",
 });
 
 const app = express();
