@@ -12,17 +12,27 @@
 import express from "express";
 import cors from "cors";
 import pg from "pg";
+import { existsSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+// Загружаем .env из папки с task.js (Node 20.12+ / 21.7+).
+// Переменные, уже заданные в окружении, имеют приоритет над файлом.
+const envPath = resolve(dirname(fileURLToPath(import.meta.url)), ".env");
+if (existsSync(envPath)) {
+  process.loadEnvFile(envPath);
+}
 
 const { Pool } = pg;
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 const pool = new Pool({
-  host: "localhost",
-  port: 5432,
-  database: "postgres",
-  user: "postgres",
-  password: "s31nhl3r",
+  host: process.env.PGHOST || "localhost",
+  port: Number(process.env.PGPORT) || 5432,
+  database: process.env.PGDATABASE || "postgres",
+  user: process.env.PGUSER || "postgres",
+  password: process.env.PGPASSWORD || "",
 });
 
 const app = express();
