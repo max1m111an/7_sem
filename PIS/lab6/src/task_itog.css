@@ -623,6 +623,9 @@ h2 {
     padding: 24px;
     background-color: rgba(13, 16, 32, 0.88);
     animation: overlay-fade 0.25s ease;
+    /* Полноэкранный слой с анимацией прозрачности должен быть готов
+       к композитору заранее, иначе каждый кадр перерисовывает весь экран. */
+    will-change: opacity;
 }
 
 .modal {
@@ -635,8 +638,11 @@ h2 {
     background: linear-gradient(135deg, #171b31, #241a4d);
     border: 1px solid #00e5ff;
     border-radius: 16px;
-    box-shadow: 0 24px 60px rgba(0, 229, 255, 0.28);
-    animation: modal-pop 0.4s var(--ease-spring);
+    /* Небольшое свечение вместо 60px-размытия: большие box-shadow
+       дорого растеризуются на встроенной графике. */
+    box-shadow: 0 12px 24px rgba(0, 229, 255, 0.22);
+    animation: modal-pop 0.3s var(--ease-out);
+    will-change: transform, opacity;
 }
 
 .modal h2 {
@@ -705,11 +711,11 @@ h2 {
 @keyframes modal-pop {
     from {
         opacity: 0;
-        transform: translateY(18px) scale(0.96);
+        transform: translateY(14px);
     }
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
     }
 }
 
@@ -2324,6 +2330,18 @@ form .field.has-error input {
 
 /* ---------- Модальное окно ---------- */
 
+/* Пока открыта модалка, всё остальное спрятано от отрисовки:
+   браузер не тратит кадры на страницу, которую всё равно не видно. */
+body.modal-open main,
+body.modal-open header,
+body.modal-open footer,
+body.modal-open .bg-fx,
+body.modal-open .toasts,
+body.modal-open .scroll-progress,
+body.modal-open .to-top {
+    visibility: hidden;
+}
+
 .modal-overlay.is-closing {
     animation: overlay-fade 0.22s ease reverse forwards;
 }
@@ -2343,11 +2361,7 @@ form .field.has-error input {
     margin-bottom: 10px;
     padding-left: 40px;
     counter-increment: step;
-    animation: reveal-left 0.4s var(--ease-out) backwards;
 }
-
-.modal-steps li:nth-child(2) { animation-delay: 0.08s; }
-.modal-steps li:nth-child(3) { animation-delay: 0.16s; }
 
 .modal-steps li::before {
     content: counter(step);
@@ -2783,7 +2797,7 @@ body.party-mode .brand-logo {
 }
 
 @keyframes modal-out {
-    to { opacity: 0; transform: translateY(18px) scale(0.95); }
+    to { opacity: 0; transform: translateY(14px); }
 }
 
 @keyframes toast-in {
@@ -2805,4 +2819,189 @@ body.party-mode .brand-logo {
     0% { clip-path: inset(60% 0 5% 0); transform: translate(3px, 1px); }
     50% { clip-path: inset(5% 0 70% 0); transform: translate(-3px, -1px); }
     100% { clip-path: inset(40% 0 30% 0); transform: translate(2px, 0); }
+}
+
+/* ===== ЛР6: страницы базы данных и статусы загрузки ===== */
+
+.catalog-note {
+    margin: 0 0 20px;
+    color: var(--muted);
+    text-align: center;
+}
+
+.link-button {
+    padding: 0;
+    color: var(--cyan);
+    font-family: inherit;
+    font-size: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.admin-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px 40px;
+}
+
+.admin-card {
+    margin-bottom: 28px;
+    padding: 24px;
+    background: rgba(13, 16, 32, 0.82);
+    border: 1px solid rgba(0, 229, 255, 0.22);
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.admin-card h3 {
+    margin: 0 0 20px;
+    color: var(--cyan);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.admin-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    max-width: none;
+    margin: 0;
+}
+
+.admin-form > .btn {
+    grid-column: 1 / -1;
+}
+
+.admin-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.admin-field > span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 15px;
+    color: #e8ecff;
+    background-color: #0d1020;
+    border: 1px solid #2c3566;
+    border-radius: 8px;
+    outline: none;
+}
+
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.18);
+}
+
+.admin-field textarea {
+    resize: vertical;
+}
+
+.admin-field--check {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-field--check input {
+    width: 18px;
+    height: 18px;
+    accent-color: #ff2e88;
+}
+
+.admin-table-wrap {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+}
+
+.admin-table th {
+    color: var(--cyan);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.admin-table td {
+    color: #e8ecff;
+}
+
+.admin-table tr:hover td {
+    background: rgba(0, 229, 255, 0.04);
+}
+
+.admin-table .admin-field > span {
+    display: none;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.admin-actions .btn {
+    width: auto;
+    margin: 0;
+    padding: 8px 12px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.btn--ghost {
+    color: var(--cyan);
+    background: transparent;
+    border: 1px solid rgba(0, 229, 255, 0.45);
+}
+
+.btn--ghost:hover {
+    color: #0d1020;
+    background: var(--cyan);
+}
+
+.btn--danger {
+    color: #fff;
+    background: #b91c5c;
+}
+
+.btn--danger:hover {
+    color: #fff;
+    background: #ff2e88;
+}
+
+@media (max-width: 640px) {
+    .admin-page {
+        padding: 60px 14px 30px;
+    }
+
+    .admin-card {
+        padding: 16px;
+    }
 }

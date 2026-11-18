@@ -8,6 +8,9 @@ function Features({
   favorites,
   onSelect,
   onToggleFavorite,
+  loading,
+  error,
+  onRetry,
 }) {
   return (
     <div className="section-block" id="features">
@@ -24,6 +27,21 @@ function Features({
           )}
         </p>
       </Reveal>
+
+      {loading && <p className="catalog-note">Загрузка услуг...</p>}
+
+      {error && (
+        <p className="status-error catalog-note">
+          Не удалось загрузить услуги: {error}{" "}
+          <button type="button" className="link-button" onClick={onRetry}>
+            Повторить
+          </button>
+        </p>
+      )}
+
+      {!loading && !error && features.length === 0 && (
+        <p className="catalog-note">Услуг пока нет. Добавьте их в разделе «Услуги (БД)».</p>
+      )}
 
       <section className="features">
         {features.map((feature, index) => (

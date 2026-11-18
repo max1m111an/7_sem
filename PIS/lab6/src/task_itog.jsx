@@ -3,7 +3,7 @@ import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import Features from "./components/Features.jsx";
-import Catalog, { GAMES } from "./components/Catalog.jsx";
+import Catalog, { GENRES } from "./components/Catalog.jsx";
 import Favorites from "./components/Favorites.jsx";
 import Stats from "./components/Stats.jsx";
 import Promo from "./components/Promo.jsx";
@@ -17,6 +17,7 @@ import Background from "./components/Background.jsx";
 import ScrollUI from "./components/ScrollUI.jsx";
 import Toasts from "./components/Toasts.jsx";
 import Confetti from "./components/Confetti.jsx";
+import Reveal from "./components/Reveal.jsx";
 import useLocalStorage from "./hooks/useLocalStorage.js";
 import "./task_itog.css";
 
@@ -26,6 +27,9 @@ const NAV_ITEMS = [
   { label: "Услуги", target: "features", to: "/#features" },
   { label: "Игры", target: "catalog", to: "/#catalog" },
   { label: "Контакты", target: "contacts", to: "/#contacts" },
+  { label: "Игры (БД)", target: "games", to: "/games" },
+  { label: "Услуги (БД)", target: "services", to: "/services" },
+  { label: "Связки (БД)", target: "game-services", to: "/game-services" },
 ];
 
 const SCROLL_TOP = "top";
@@ -33,33 +37,551 @@ const SCROLL_TOP = "top";
 // Секции главной страницы, за которыми следит «scroll spy»
 const SPY_TARGETS = ["home", "features", "catalog", "contacts"];
 
-const FEATURES = [
-  {
-    id: "quality",
-    icon: "star",
-    title: "Качество",
-    text: "Мы тщательно следим за каждой деталью.",
-  },
-  {
-    id: "speed",
-    icon: "bolt",
-    title: "Скорость",
-    text: "Быстро решаем любые вопросы клиентов.",
-  },
-  {
-    id: "care",
-    icon: "heart",
-    title: "Забота о клиенте",
-    text: "Индивидуальный подход к каждому.",
-  },
-];
-
 const KONAMI = [
   "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
   "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA",
 ];
 
 const TOAST_MS = 3200;
+
+// ============================================================
+// ДАННЫЕ С СЕРВЕРА (ЛР6): /api/games, /api/services,
+// /api/game-services. Vite проксирует /api на Express (server.js).
+// ============================================================
+
+const API_BASE = import.meta.env.VITE_API_BASE || "/api";
+
+async function api(path, options = {}) {
+  const { headers, ...rest } = options;
+  let response;
+
+  try {
+    response = await fetch(`${API_BASE}${path}`, {
+      ...rest,
+      headers: { "Content-Type": "application/json", ...headers },
+    });
+  } catch (err) {
+    throw new Error(
+      `Нет связи с API (${API_BASE}). Запустите "make server" (или "make all-itog"). ${err.message}`
+    );
+  }
+
+  let data = null;
+  try {
+    data = await response.json();
+  } catch {
+    // сервер может вернуть пустое тело
+  }
+
+  if (!response.ok) {
+    if (data?.error) throw new Error(data.error);
+    if (response.status >= 500) {
+      throw new Error(
+        `API недоступен (HTTP ${response.status}). Запустите "make server" — сервер должен слушать порт 3000.`
+      );
+    }
+    throw new Error(`Ошибка запроса: ${response.status}`);
+  }
+  return data;
+}
+
+function useCrud(path) {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const refresh = useCallback(async () => {
+    setLoading(true);
+    setError("");
+    try {
+      setItems(await api(path));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [path]);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  async function create(values) {
+    await api(path, { method: "POST", body: JSON.stringify(values) });
+    await refresh();
+  }
+
+  async function update(id, values) {
+    await api(`${path}/${id}`, { method: "PUT", body: JSON.stringify(values) });
+    await refresh();
+  }
+
+  async function remove(id) {
+    await api(`${path}/${id}`, { method: "DELETE" });
+    await refresh();
+  }
+
+  return { items, loading, error, refresh, create, update, remove };
+}
+
+function toFormValues(item, fields) {
+  return Object.fromEntries(
+    fields.map(({ name, type }) => {
+      const value = item?.[name];
+      if (value === undefined || value === null) {
+        return [name, type === "bool" ? false : ""];
+      }
+      if (type === "bool") return [name, Boolean(value)];
+      if (type === "time") return [name, String(value).slice(0, 5)];
+      return [name, String(value)];
+    })
+  );
+}
+
+function buildPayload(form, fields) {
+  const payload = {};
+
+  for (const field of fields) {
+    const raw = form[field.name];
+
+    if (field.type === "bool") {
+      payload[field.name] = Boolean(raw);
+      continue;
+    }
+
+    const text = String(raw ?? "").trim();
+    if (!text) throw new Error(`Заполните поле «${field.label}»`);
+
+    if (field.type === "int") {
+      const number = Number(text);
+      if (!Number.isInteger(number)) {
+        throw new Error(`Поле «${field.label}» должно быть целым числом`);
+      }
+      payload[field.name] = number;
+    } else if (field.type === "decimal") {
+      const number = Number(text);
+      if (!Number.isFinite(number)) {
+        throw new Error(`Поле «${field.label}» должно быть числом`);
+      }
+      payload[field.name] = number;
+    } else {
+      payload[field.name] = text;
+    }
+  }
+
+  return payload;
+}
+
+function FieldInput({ field, value, onChange }) {
+  if (field.type === "select") {
+    return (
+      <label className="admin-field">
+        <span>{field.label}</span>
+        <select
+          value={value}
+          onChange={(event) => onChange(field.name, event.target.value)}
+          required
+        >
+          <option value="">Выберите...</option>
+          {field.options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+    );
+  }
+
+  if (field.type === "bool") {
+    return (
+      <label className="admin-field admin-field--check">
+        <input
+          type="checkbox"
+          checked={Boolean(value)}
+          onChange={(event) => onChange(field.name, event.target.checked)}
+        />
+        <span>{field.label}</span>
+      </label>
+    );
+  }
+
+  if (field.type === "textarea") {
+    return (
+      <label className="admin-field">
+        <span>{field.label}</span>
+        <textarea
+          rows={3}
+          value={value ?? ""}
+          onChange={(event) => onChange(field.name, event.target.value)}
+          required
+        />
+      </label>
+    );
+  }
+
+  const inputType =
+    field.type === "int" || field.type === "decimal"
+      ? "number"
+      : field.type === "time"
+        ? "time"
+        : "text";
+
+  return (
+    <label className="admin-field">
+      <span>{field.label}</span>
+      <input
+        type={inputType}
+        step={field.type === "decimal" ? "0.1" : undefined}
+        value={value ?? ""}
+        onChange={(event) => onChange(field.name, event.target.value)}
+        required
+      />
+    </label>
+  );
+}
+
+function EntityPage({ title, description, path, fields, empty, columns, hint }) {
+  const { items, loading, error, refresh, create, update, remove } = useCrud(path);
+  const [form, setForm] = useState(empty);
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState(empty);
+  const [actionError, setActionError] = useState("");
+
+  function fieldSetter(setter) {
+    return (name, value) => setter((current) => ({ ...current, [name]: value }));
+  }
+
+  const changeForm = fieldSetter(setForm);
+  const changeEditForm = fieldSetter(setEditForm);
+
+  async function handleAdd(event) {
+    event.preventDefault();
+    setActionError("");
+    try {
+      await create(buildPayload(form, fields));
+      setForm(empty);
+    } catch (err) {
+      setActionError(err.message);
+    }
+  }
+
+  function startEdit(item) {
+    setActionError("");
+    setEditingId(item.id);
+    setEditForm(toFormValues(item, fields));
+  }
+
+  async function handleSave(id) {
+    setActionError("");
+    try {
+      await update(id, buildPayload(editForm, fields));
+      setEditingId(null);
+    } catch (err) {
+      setActionError(err.message);
+    }
+  }
+
+  async function handleDelete(id) {
+    setActionError("");
+    try {
+      await remove(id);
+      if (editingId === id) setEditingId(null);
+    } catch (err) {
+      setActionError(err.message);
+    }
+  }
+
+  return (
+    <div className="section-block admin-page">
+      <Reveal className="section-head">
+        <span className="section-kicker">База данных</span>
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </Reveal>
+
+      {hint && <p className="catalog-note">{hint}</p>}
+
+      <section className="admin-card">
+        <h3>Добавить запись</h3>
+        <form className="admin-form" onSubmit={handleAdd}>
+          {fields.map((field) => (
+            <FieldInput
+              key={field.name}
+              field={field}
+              value={form[field.name]}
+              onChange={changeForm}
+            />
+          ))}
+          <button type="submit" className="btn">
+            Добавить
+          </button>
+        </form>
+        {actionError && <p className="status-error">{actionError}</p>}
+      </section>
+
+      <section className="admin-card">
+        <h3>Список</h3>
+        {loading && <p className="catalog-note">Загрузка...</p>}
+        {error && (
+          <p className="status-error">
+            {error}{" "}
+            <button type="button" className="link-button" onClick={refresh}>
+              Повторить
+            </button>
+          </p>
+        )}
+        {!loading && !error && items.length === 0 && (
+          <p className="catalog-note">Записей пока нет.</p>
+        )}
+
+        {items.length > 0 && (
+          <div className="admin-table-wrap">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  {columns.map((column) => (
+                    <th key={column.name}>{column.label}</th>
+                  ))}
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody>
+                {items.map((item) =>
+                  editingId === item.id ? (
+                    <tr key={item.id}>
+                      {fields.map((field) => (
+                        <td key={field.name}>
+                          <FieldInput
+                            field={field}
+                            value={editForm[field.name]}
+                            onChange={changeEditForm}
+                          />
+                        </td>
+                      ))}
+                      <td className="admin-actions">
+                        <button
+                          type="button"
+                          className="btn btn--small"
+                          onClick={() => handleSave(item.id)}
+                        >
+                          Сохранить
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn--small btn--ghost"
+                          onClick={() => setEditingId(null)}
+                        >
+                          Отмена
+                        </button>
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr key={item.id}>
+                      {columns.map((column) => (
+                        <td key={column.name}>
+                          {column.format
+                            ? column.format(item[column.name])
+                            : item[column.name]}
+                        </td>
+                      ))}
+                      <td className="admin-actions">
+                        <button
+                          type="button"
+                          className="btn btn--small btn--ghost"
+                          onClick={() => startEdit(item)}
+                        >
+                          Изменить
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn--small btn--danger"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          Удалить
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}
+
+const GAME_ADMIN_FIELDS = [
+  { name: "title", label: "Название" },
+  {
+    name: "genre",
+    label: "Жанр",
+    type: "select",
+    options: GENRES.filter((genre) => genre.id !== "all").map((genre) => ({
+      value: genre.id,
+      label: genre.label,
+    })),
+  },
+  { name: "price", label: "Цена, ₽/час", type: "int" },
+  { name: "rating", label: "Рейтинг (0–5)", type: "decimal" },
+  { name: "match_format", label: "Формат матча" },
+  { name: "is_hot", label: "Хит", type: "bool" },
+];
+
+const EMPTY_GAME = {
+  title: "",
+  genre: "",
+  price: "",
+  rating: "",
+  match_format: "",
+  is_hot: false,
+};
+
+const GAME_COLUMNS = [
+  { name: "title", label: "Название" },
+  {
+    name: "genre",
+    label: "Жанр",
+    format: (value) => GENRES.find((genre) => genre.id === value)?.label ?? value,
+  },
+  { name: "price", label: "Цена, ₽" },
+  { name: "rating", label: "Рейтинг", format: (value) => Number(value).toFixed(1) },
+  { name: "match_format", label: "Формат" },
+  { name: "is_hot", label: "Хит", format: (value) => (value ? "Да" : "Нет") },
+];
+
+function GamesAdminPage() {
+  return (
+    <EntityPage
+      title="Игры"
+      description="Каталог игр хранится в PostgreSQL. Добавление, редактирование и удаление идут через API."
+      path="/games"
+      fields={GAME_ADMIN_FIELDS}
+      empty={EMPTY_GAME}
+      columns={GAME_COLUMNS}
+    />
+  );
+}
+
+const SERVICE_ADMIN_FIELDS = [
+  { name: "title", label: "Название" },
+  {
+    name: "icon",
+    label: "Иконка",
+    type: "select",
+    options: [
+      { value: "star", label: "star" },
+      { value: "bolt", label: "bolt" },
+      { value: "heart", label: "heart" },
+    ],
+  },
+  { name: "description", label: "Описание", type: "textarea" },
+  { name: "price", label: "Цена, ₽", type: "int" },
+  { name: "duration_min", label: "Длительность, мин", type: "int" },
+  { name: "is_active", label: "Активна", type: "bool" },
+];
+
+const EMPTY_SERVICE = {
+  title: "",
+  icon: "",
+  description: "",
+  price: "",
+  duration_min: "",
+  is_active: true,
+};
+
+const SERVICE_COLUMNS = [
+  { name: "title", label: "Название" },
+  { name: "icon", label: "Иконка" },
+  { name: "price", label: "Цена, ₽" },
+  { name: "duration_min", label: "Мин." },
+  { name: "is_active", label: "Активна", format: (value) => (value ? "Да" : "Нет") },
+];
+
+function ServicesAdminPage() {
+  return (
+    <EntityPage
+      title="Услуги"
+      description="Услуги — независимая таблица. На главной показываются только активные."
+      path="/services"
+      fields={SERVICE_ADMIN_FIELDS}
+      empty={EMPTY_SERVICE}
+      columns={SERVICE_COLUMNS}
+    />
+  );
+}
+
+const GAME_SERVICE_FIELDS = [
+  { name: "game_id", label: "Игра", type: "select" },
+  { name: "service_id", label: "Услуга", type: "select" },
+  { name: "session_time", label: "Время", type: "time" },
+  { name: "room", label: "Зона" },
+];
+
+const EMPTY_GAME_SERVICE = { game_id: "", service_id: "", session_time: "", room: "" };
+
+const GAME_SERVICE_COLUMNS = [
+  { name: "game_title", label: "Игра" },
+  { name: "service_title", label: "Услуга" },
+  {
+    name: "session_time",
+    label: "Время",
+    format: (value) => (value ? String(value).slice(0, 5) : ""),
+  },
+  { name: "room", label: "Зона" },
+];
+
+function GameServicesAdminPage() {
+  const games = useCrud("/games");
+  const services = useCrud("/services");
+
+  if (games.loading || services.loading) {
+    return (
+      <div className="section-block admin-page">
+        <p className="catalog-note">Загрузка игр и услуг...</p>
+      </div>
+    );
+  }
+
+  if (games.error || services.error) {
+    return (
+      <div className="section-block admin-page">
+        <p className="status-error">
+          Не удалось загрузить справочники: {games.error || services.error}
+        </p>
+      </div>
+    );
+  }
+
+  const fields = GAME_SERVICE_FIELDS.map((field) => ({
+    ...field,
+    options:
+      field.name === "game_id"
+        ? games.items.map((item) => ({ value: String(item.id), label: item.title }))
+        : field.name === "service_id"
+          ? services.items.map((item) => ({ value: String(item.id), label: item.title }))
+          : [],
+  }));
+
+  const hint =
+    games.items.length === 0 || services.items.length === 0
+      ? "Сначала добавьте хотя бы одну игру и одну услугу."
+      : "";
+
+  return (
+    <EntityPage
+      title="Связки игр и услуг"
+      description="Связка игры и услуги: время и зона. Список приходит с сервера через JOIN."
+      path="/game-services"
+      fields={fields}
+      empty={EMPTY_GAME_SERVICE}
+      columns={GAME_SERVICE_COLUMNS}
+      hint={hint}
+    />
+  );
+}
 
 function NotFoundPage() {
   return (
@@ -100,6 +622,38 @@ export function App() {
   const toastId = useRef(0);
   const isAutoScrolling = useRef(false);
   const partyRef = useRef(false);
+
+  // ---------- данные с сервера ----------
+  const gamesCrud = useCrud("/games");
+  const servicesCrud = useCrud("/services");
+
+  // БД хранит match_format / is_hot, а карточки ждут format / hot.
+  const games = useMemo(
+    () =>
+      gamesCrud.items.map((row) => ({
+        id: row.id,
+        title: row.title,
+        genre: row.genre,
+        price: Number(row.price),
+        rating: Number(row.rating),
+        format: row.match_format,
+        hot: Boolean(row.is_hot),
+      })),
+    [gamesCrud.items]
+  );
+
+  const features = useMemo(
+    () =>
+      servicesCrud.items
+        .filter((row) => row.is_active)
+        .map((row) => ({
+          id: String(row.id),
+          icon: row.icon,
+          title: row.title,
+          text: row.description,
+        })),
+    [servicesCrud.items]
+  );
 
   // ---------- уведомления ----------
   const dismissToast = useCallback((id) => {
@@ -169,8 +723,9 @@ export function App() {
   // Синхронизируем активный пункт меню с адресом (прямой заход,
   // кнопки браузера «назад/вперёд», переход по хэшу).
   useEffect(() => {
-    if (location.pathname === "/about") {
-      setActiveItem("О нас");
+    const routeItem = NAV_ITEMS.find((nav) => nav.to === location.pathname);
+    if (routeItem) {
+      setActiveItem(routeItem.label);
       return;
     }
 
@@ -237,15 +792,12 @@ export function App() {
   }, []);
 
   // Ссылки в Header сами меняют маршрут через <Link>; здесь только
-  // обновляем подсветку и прокручиваем к нужной секции.
+  // обновляем подсветку и прокручиваем: к секции — для хэшей,
+  // к верху страницы — для обычных маршрутов (/games, /about и т.д.).
   const handleNavigate = useCallback(
     (item) => {
       setActiveItem(item.label);
-      requestScroll(
-        item.target === "about" || item.target === "home"
-          ? SCROLL_TOP
-          : item.target
-      );
+      requestScroll(item.to.includes("#") ? item.target : SCROLL_TOP);
     },
     [requestScroll]
   );
@@ -315,17 +867,17 @@ export function App() {
     notify("Избранное очищено", "info");
   }, [notify, setFavorites]);
 
-  // Подпись типа элемента в списке избранного
+  // Подпись типа элемента в списке избранного (данные приходят с сервера)
   const favoriteKinds = useMemo(() => {
     const kinds = {};
-    FEATURES.forEach((feature) => {
-      kinds[feature.title] = "услуга";
+    servicesCrud.items.forEach((service) => {
+      kinds[service.title] = "услуга";
     });
-    GAMES.forEach((game) => {
+    games.forEach((game) => {
       kinds[game.title] = "игра";
     });
     return kinds;
-  }, []);
+  }, [games, servicesCrud.items]);
 
   const handleRequestSuccess = useCallback(() => setCouponGranted(true), []);
 
@@ -360,16 +912,23 @@ export function App() {
               <Stats />
 
               <Features
-                features={FEATURES}
+                features={features}
                 selectedIds={selectedFeatureIds}
                 favorites={favorites}
                 onSelect={handleSelectFeature}
                 onToggleFavorite={handleToggleFavorite}
+                loading={servicesCrud.loading}
+                error={servicesCrud.error}
+                onRetry={servicesCrud.refresh}
               />
 
               <Catalog
+                games={games}
                 favorites={favorites}
                 onToggleFavorite={handleToggleFavorite}
+                loading={gamesCrud.loading}
+                error={gamesCrud.error}
+                onRetry={gamesCrud.refresh}
               />
 
               <Favorites
@@ -408,6 +967,10 @@ export function App() {
             />
           }
         />
+
+        <Route path="/games" element={<GamesAdminPage />} />
+        <Route path="/services" element={<ServicesAdminPage />} />
+        <Route path="/game-services" element={<GameServicesAdminPage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

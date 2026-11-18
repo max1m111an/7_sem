@@ -33,13 +33,22 @@ function Modal({ isOpen, title, onClose, children }) {
 
     document.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
+    // Пока модалка открыта, страницу под ней не нужно рисовать:
+    // экономим полный ре-рендер всех карточек на слабом iGPU.
+    document.body.classList.add("modal-open");
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
+      document.body.classList.remove("modal-open");
     };
   }, [isOpen, onClose]);
+
+  // Модалка монтируется только следующим рендером после isOpen,
+  // поэтому фокус нужно наводить уже когда она реально в DOM.
+  useEffect(() => {
+    if (isOpen && isRendered) closeRef.current?.focus();
+  }, [isOpen, isRendered]);
 
   if (!isRendered) return null;
 

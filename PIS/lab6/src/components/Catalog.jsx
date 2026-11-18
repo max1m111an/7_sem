@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import Reveal from "./Reveal.jsx";
 import Icon from "./Icon.jsx";
 
@@ -9,17 +9,6 @@ export const GENRES = [
   { id: "fighting", label: "Файтинги" },
   { id: "racing", label: "Гонки" },
   { id: "sport", label: "Спорт" },
-];
-
-export const GAMES = [
-  { id: "cs2", title: "Counter-Strike 2", genre: "shooter", price: 250, rating: 4.9, format: "5 × 5", hot: true },
-  { id: "dota2", title: "Dota 2", genre: "moba", price: 220, rating: 4.8, format: "5 × 5", hot: true },
-  { id: "valorant", title: "Valorant", genre: "shooter", price: 230, rating: 4.7, format: "5 × 5" },
-  { id: "lol", title: "League of Legends", genre: "moba", price: 200, rating: 4.5, format: "5 × 5" },
-  { id: "apex", title: "Apex Legends", genre: "shooter", price: 210, rating: 4.4, format: "3 × 3" },
-  { id: "tekken8", title: "Tekken 8", genre: "fighting", price: 180, rating: 4.6, format: "1 × 1" },
-  { id: "sf6", title: "Street Fighter 6", genre: "fighting", price: 180, rating: 4.5, format: "1 × 1" },
-  { id: "forza", title: "Forza Horizon 5", genre: "racing", price: 190, rating: 4.6, format: "до 12" },
 ];
 
 const GENRE_LABEL = Object.fromEntries(GENRES.map((g) => [g.id, g.label]));
@@ -55,11 +44,11 @@ function GameCard({ game, index, isFavorite, onToggleFavorite }) {
       </div>
 
       <div className="game-body">
-        <span className="game-genre">{GENRE_LABEL[game.genre]}</span>
+        <span className="game-genre">{GENRE_LABEL[game.genre] ?? game.genre}</span>
         <h3>{game.title}</h3>
         <div className="game-meta">
           <span className="game-rating" title="Рейтинг">
-            <Icon name="star" size={15} /> {game.rating.toFixed(1)}
+            <Icon name="star" size={15} /> {Number(game.rating).toFixed(1)}
           </span>
           <span title="Формат матча">{game.format}</span>
         </div>
@@ -73,10 +62,13 @@ function GameCard({ game, index, isFavorite, onToggleFavorite }) {
   );
 }
 
-// Игры показываем по рейтингу — от самых популярных
-const SORTED_GAMES = [...GAMES].sort((a, b) => b.rating - a.rating);
+// Игры приходят с сервера; сортируем по рейтингу — от самых популярных.
+function Catalog({ games = [], favorites, onToggleFavorite, loading, error, onRetry }) {
+  const sortedGames = useMemo(
+    () => [...games].sort((a, b) => Number(b.rating) - Number(a.rating)),
+    [games]
+  );
 
-function Catalog({ favorites, onToggleFavorite }) {
   return (
     <div className="section-block catalog" id="catalog">
       <Reveal className="section-head">
@@ -85,8 +77,23 @@ function Catalog({ favorites, onToggleFavorite }) {
         <p>Отмечайте сердечком игры, которые хотите попробовать.</p>
       </Reveal>
 
+      {loading && <p className="catalog-note">Загрузка каталога...</p>}
+
+      {error && (
+        <p className="status-error catalog-note">
+          Не удалось загрузить игры: {error}{" "}
+          <button type="button" className="link-button" onClick={onRetry}>
+            Повторить
+          </button>
+        </p>
+      )}
+
+      {!loading && !error && sortedGames.length === 0 && (
+        <p className="catalog-note">В каталоге пока нет игр. Добавьте их в разделе «Игры (БД)».</p>
+      )}
+
       <div className="games-grid">
-        {SORTED_GAMES.map((game, index) => (
+        {sortedGames.map((game, index) => (
           <GameCard
             key={game.id}
             game={game}
