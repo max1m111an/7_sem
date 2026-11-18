@@ -2898,6 +2898,12 @@ body.party-mode .brand-logo {
     border: 1px solid #2c3566;
     border-radius: 8px;
     outline: none;
+    box-sizing: border-box;
+}
+
+.admin-field input,
+.admin-field select {
+    height: 42px;
 }
 
 .admin-field input:focus,
@@ -2961,6 +2967,21 @@ body.party-mode .brand-logo {
     display: none;
 }
 
+/* В строке таблицы все поля и кнопки одинаковой высоты —
+   строка редактирования не распирает таблицу. */
+.admin-table .admin-field input,
+.admin-table .admin-field select {
+    height: 34px;
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.admin-table .admin-field--check input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+}
+
 .admin-actions {
     display: flex;
     gap: 8px;
@@ -2969,8 +2990,9 @@ body.party-mode .brand-logo {
 
 .admin-actions .btn {
     width: auto;
+    height: 34px;
     margin: 0;
-    padding: 8px 12px;
+    padding: 6px 12px;
     font-size: 12px;
     letter-spacing: 0.5px;
 }

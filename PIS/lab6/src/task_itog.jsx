@@ -44,6 +44,37 @@ const KONAMI = [
 
 const TOAST_MS = 3200;
 
+// Как часто переспрашиваем API, чтобы подхватывать изменения в БД
+// без ручного F5 (в том числе сделанные в pgAdmin/psql).
+const REFRESH_MS = 5000;
+
+// Время для связки выбираем из выпадающего списка с шагом 30 минут.
+const TIME_OPTIONS = Array.from({ length: 48 }, (_, index) => {
+  const hours = String(Math.floor(index / 2)).padStart(2, "0");
+  const minutes = index % 2 === 0 ? "00" : "30";
+  return { value: `${hours}:${minutes}`, label: `${hours}:${minutes}` };
+});
+
+// Зоны клуба — фиксированный перечень, а не свободный текст.
+const ZONE_OPTIONS = ["Зона A", "Зона B", "Зона C", "VIP-зона"].map((zone) => ({
+  value: zone,
+  label: zone,
+}));
+
+// Иконки услуг — только те имена, которые реально есть в components/Icon.jsx.
+const SERVICE_ICON_OPTIONS = [
+  { value: "star", label: "★ Звезда" },
+  { value: "bolt", label: "⚡ Молния" },
+  { value: "heart", label: "♥ Сердце" },
+  { value: "gamepad", label: "🎮 Геймпад" },
+  { value: "trophy", label: "🏆 Кубок" },
+  { value: "users", label: "👥 Люди" },
+  { value: "clock", label: "🕐 Часы" },
+  { value: "check", label: "✓ Галочка" },
+  { value: "info", label: "ℹ Информация" },
+  { value: "eye", label: "👁 Глаз" },
+];
+
 // ============================================================
 // ДАННЫЕ С СЕРВЕРА (ЛР6): /api/games, /api/services,
 // /api/game-services. Vite проксирует /api на Express (server.js).
@@ -90,20 +121,36 @@ function useCrud(path) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const refresh = useCallback(async () => {
-    setLoading(true);
+  // silent=true — фоновое обновление: не показываем «Загрузка...»,
+  // чтобы карточки и таблицы не мигали каждые 5 секунд.
+  const refresh = useCallback(async (options = {}) => {
+    const silent = options?.silent === true;
+    if (!silent) setLoading(true);
     setError("");
     try {
       setItems(await api(path));
     } catch (err) {
       setError(err.message);
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
   }, [path]);
 
   useEffect(() => {
     refresh();
+
+    const intervalId = setInterval(() => refresh({ silent: true }), REFRESH_MS);
+
+    // Дополнительно обновляемся, когда пользователь возвращается во вкладку.
+    function handleFocus() {
+      refresh({ silent: true });
+    }
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      clearInterval(intervalId);
+      window.removeEventListener("focus", handleFocus);
+    };
   }, [refresh]);
 
   async function create(values) {
@@ -152,6 +199,16 @@ function buildPayload(form, fields) {
     const text = String(raw ?? "").trim();
     if (!text) throw new Error(`Заполните поле «${field.label}»`);
 
+    if (field.type === "time") {
+      if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(text)) {
+        throw new Error(
+          `Поле «${field.label}» должно быть временем в формате ЧЧ:ММ (00:00–23:59)`
+        );
+      }
+      payload[field.name] = `${text}:00`;
+      continue;
+    }
+
     if (field.type === "int") {
       const number = Number(text);
       if (!Number.isInteger(number)) {
@@ -173,7 +230,15 @@ function buildPayload(form, fields) {
 }
 
 function FieldInput({ field, value, onChange }) {
-  if (field.type === "select") {
+  // Обычный select и время — оба выпадающих списка; время всегда 24-часовое.
+  const options =
+    field.type === "select"
+      ? field.options
+      : field.type === "time"
+        ? TIME_OPTIONS
+        : null;
+
+  if (options) {
     return (
       <label className="admin-field">
         <span>{field.label}</span>
@@ -183,7 +248,7 @@ function FieldInput({ field, value, onChange }) {
           required
         >
           <option value="">Выберите...</option>
-          {field.options.map((option) => (
+          {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
@@ -221,11 +286,7 @@ function FieldInput({ field, value, onChange }) {
   }
 
   const inputType =
-    field.type === "int" || field.type === "decimal"
-      ? "number"
-      : field.type === "time"
-        ? "time"
-        : "text";
+    field.type === "int" || field.type === "decimal" ? "number" : "text";
 
   return (
     <label className="admin-field">
@@ -471,11 +532,7 @@ const SERVICE_ADMIN_FIELDS = [
     name: "icon",
     label: "Иконка",
     type: "select",
-    options: [
-      { value: "star", label: "star" },
-      { value: "bolt", label: "bolt" },
-      { value: "heart", label: "heart" },
-    ],
+    options: SERVICE_ICON_OPTIONS,
   },
   { name: "description", label: "Описание", type: "textarea" },
   { name: "price", label: "Цена, ₽", type: "int" },
@@ -517,7 +574,7 @@ const GAME_SERVICE_FIELDS = [
   { name: "game_id", label: "Игра", type: "select" },
   { name: "service_id", label: "Услуга", type: "select" },
   { name: "session_time", label: "Время", type: "time" },
-  { name: "room", label: "Зона" },
+  { name: "room", label: "Зона", type: "select", options: ZONE_OPTIONS },
 ];
 
 const EMPTY_GAME_SERVICE = { game_id: "", service_id: "", session_time: "", room: "" };
@@ -562,7 +619,7 @@ function GameServicesAdminPage() {
         ? games.items.map((item) => ({ value: String(item.id), label: item.title }))
         : field.name === "service_id"
           ? services.items.map((item) => ({ value: String(item.id), label: item.title }))
-          : [],
+          : field.options ?? [],
   }));
 
   const hint =
