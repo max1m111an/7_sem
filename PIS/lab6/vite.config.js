@@ -21,12 +21,12 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server: {
-      port: isItog ? 5174 : 5173,
+      port: 5173,
       strictPort: true,
       proxy,
     },
     preview: {
-      port: isItog ? 4174 : 4173,
+      port: 4173,
       strictPort: true,
       proxy,
     },
