@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Icon from "./Icon.jsx";
 
 // Полоса прогресса прокрутки сверху и кнопка «Наверх».
@@ -58,4 +58,4 @@ function ScrollUI() {
   );
 }
 
-export default ScrollUI;
+export default memo(ScrollUI);

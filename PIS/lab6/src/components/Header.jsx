@@ -1,6 +1,13 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "./Icon.jsx";
+
+// Часы обновляются раз в секунду — переиспользуем один форматтер.
+const timeFormat = new Intl.DateTimeFormat("ru-RU", {
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+});
 
 function Header({
   title,
@@ -71,11 +78,7 @@ function Header({
     return () => document.removeEventListener("keydown", handleKey);
   }, [isMenuOpen]);
 
-  const time = now.toLocaleTimeString("ru-RU", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
+  const time = timeFormat.format(now);
 
   const headerClass = [
     isScrolled ? "is-scrolled" : "",
@@ -161,4 +164,4 @@ function Header({
   );
 }
 
-export default Header;
+export default memo(Header);

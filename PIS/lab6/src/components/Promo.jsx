@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal.jsx";
 import Confetti from "./Confetti.jsx";
 import Icon from "./Icon.jsx";
@@ -80,7 +80,6 @@ function Promo({ couponGranted, onOpenModal, onNotify, onGoToForm }) {
   return (
     <Reveal as="section" className="promo" variant="zoom">
       <div className={cardClass}>
-        <span className="promo-shine" aria-hidden="true" />
         <span className="badge">{badgeText}</span>
         <h2>Специальное предложение</h2>
 
@@ -146,4 +145,4 @@ function Promo({ couponGranted, onOpenModal, onNotify, onGoToForm }) {
   );
 }
 
-export default Promo;
+export default memo(Promo);

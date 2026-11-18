@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Reveal from "./Reveal.jsx";
 import Icon from "./Icon.jsx";
 
@@ -99,4 +100,4 @@ function Catalog({ favorites, onToggleFavorite }) {
   );
 }
 
-export default Catalog;
+export default memo(Catalog);

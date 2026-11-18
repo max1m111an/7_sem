@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 const PHRASES = [
   "Игры, турниры и мерч для геймеров.",
@@ -106,4 +106,4 @@ function Hero({ onShowAbout, onOpenModal, onExplore }) {
   );
 }
 
-export default Hero;
+export default memo(Hero);

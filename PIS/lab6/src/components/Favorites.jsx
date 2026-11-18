@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal.jsx";
 import Icon from "./Icon.jsx";
 
@@ -85,4 +85,4 @@ function Favorites({ favorites, kinds = {}, onRemove, onClear }) {
   );
 }
 
-export default Favorites;
+export default memo(Favorites);

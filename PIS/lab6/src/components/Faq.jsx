@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import Reveal from "./Reveal.jsx";
 import Icon from "./Icon.jsx";
 
@@ -67,4 +67,4 @@ function Faq() {
   );
 }
 
-export default Faq;
+export default memo(Faq);

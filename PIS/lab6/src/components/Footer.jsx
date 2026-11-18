@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function Footer({ onSecret }) {
   return (
     <footer>
@@ -18,4 +20,4 @@ function Footer({ onSecret }) {
   );
 }
 
-export default Footer;
+export default memo(Footer);

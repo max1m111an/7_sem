@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import useReveal from "../hooks/useReveal.js";
 import Icon from "./Icon.jsx";
+
+// Один экземпляр на модуль: toLocaleString создаёт форматтер заново
+// при каждом вызове, а CountUp вызывает его ~380 раз за анимацию.
+const numberFormat = new Intl.NumberFormat("ru-RU");
 
 const DEFAULT_STATS = [
   { id: "events", icon: "trophy", value: 120, suffix: "+", label: "турниров в год" },
@@ -38,7 +42,7 @@ function CountUp({ value, start, duration = 1600 }) {
     return () => cancelAnimationFrame(frame);
   }, [value, start, duration]);
 
-  return current.toLocaleString("ru-RU");
+  return numberFormat.format(current);
 }
 
 function Stats({ stats = DEFAULT_STATS }) {
@@ -70,4 +74,4 @@ function Stats({ stats = DEFAULT_STATS }) {
   );
 }
 
-export default Stats;
+export default memo(Stats);

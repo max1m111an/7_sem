@@ -1,3 +1,4 @@
+import { memo } from "react";
 import FeatureCard from "./FeatureCard.jsx";
 import Reveal from "./Reveal.jsx";
 import Stats from "./Stats.jsx";
@@ -91,4 +92,4 @@ function AboutPage({ onBack, onOpenModal }) {
   );
 }
 
-export default AboutPage;
+export default memo(AboutPage);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import FeatureCard from "./FeatureCard.jsx";
 import Reveal from "./Reveal.jsx";
 
@@ -41,4 +42,4 @@ function Features({
   );
 }
 
-export default Features;
+export default memo(Features);

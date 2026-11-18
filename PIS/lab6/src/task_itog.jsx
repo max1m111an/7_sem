@@ -232,72 +232,88 @@ export function App() {
     return () => clearTimeout(timeoutId);
   }, [konamiBurst]);
 
-  function requestScroll(target) {
+  const requestScroll = useCallback((target) => {
     setScrollRequest({ target });
-  }
+  }, []);
 
   // Ссылки в Header сами меняют маршрут через <Link>; здесь только
   // обновляем подсветку и прокручиваем к нужной секции.
-  function handleNavigate(item) {
-    setActiveItem(item.label);
+  const handleNavigate = useCallback(
+    (item) => {
+      setActiveItem(item.label);
+      requestScroll(
+        item.target === "about" || item.target === "home"
+          ? SCROLL_TOP
+          : item.target
+      );
+    },
+    [requestScroll]
+  );
 
-    if (item.target === "about") {
-      requestScroll(SCROLL_TOP);
-      return;
-    }
-
-    requestScroll(item.target === "home" ? SCROLL_TOP : item.target);
-  }
-
-  function handleShowAbout() {
+  const handleShowAbout = useCallback(() => {
     setActiveItem("О нас");
     requestScroll(SCROLL_TOP);
     navigate("/about");
-  }
+  }, [navigate, requestScroll]);
 
-  function handleBackHome() {
+  const handleBackHome = useCallback(() => {
     setActiveItem("Главная");
     requestScroll(SCROLL_TOP);
     navigate("/");
-  }
+  }, [navigate, requestScroll]);
 
-  function goToSection(target) {
-    const item = NAV_ITEMS.find((nav) => nav.target === target);
-    if (item) setActiveItem(item.label);
+  const goToSection = useCallback(
+    (target) => {
+      const item = NAV_ITEMS.find((nav) => nav.target === target);
+      if (item) setActiveItem(item.label);
 
-    if (location.pathname !== "/") {
-      navigate(`/#${target}`);
-      return;
-    }
+      if (location.pathname !== "/") {
+        navigate(`/#${target}`);
+        return;
+      }
 
-    requestScroll(target);
-  }
+      requestScroll(target);
+    },
+    [location.pathname, navigate, requestScroll]
+  );
+
+  // Стабильные ссылки на секции: инлайн-стрелки в JSX ломали бы memo
+  // у дочерних компонентов при каждом рендере App.
+  const goToCatalog = useCallback(() => goToSection("catalog"), [goToSection]);
+  const goToFavorites = useCallback(() => goToSection("favorites"), [goToSection]);
+  const goToForm = useCallback(() => goToSection("contacts"), [goToSection]);
 
   // ---------- услуги и избранное ----------
-  function handleSelectFeature(id) {
+  const handleSelectFeature = useCallback((id) => {
     setSelectedFeatureIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
-  }
+  }, []);
 
-  function handleToggleFavorite(title) {
-    if (favorites.includes(title)) {
+  const handleToggleFavorite = useCallback(
+    (title) => {
+      if (favorites.includes(title)) {
+        setFavorites((prev) => prev.filter((item) => item !== title));
+        notify(`«${title}» убрано из избранного`, "info");
+      } else {
+        setFavorites((prev) => (prev.includes(title) ? prev : [...prev, title]));
+        notify(`«${title}» добавлено в избранное`, "fav");
+      }
+    },
+    [favorites, notify, setFavorites]
+  );
+
+  const handleRemoveFavorite = useCallback(
+    (title) => {
       setFavorites((prev) => prev.filter((item) => item !== title));
-      notify(`«${title}» убрано из избранного`, "info");
-    } else {
-      setFavorites((prev) => (prev.includes(title) ? prev : [...prev, title]));
-      notify(`«${title}» добавлено в избранное`, "fav");
-    }
-  }
+    },
+    [setFavorites]
+  );
 
-  function handleRemoveFavorite(title) {
-    setFavorites((prev) => prev.filter((item) => item !== title));
-  }
-
-  function handleClearFavorites() {
+  const handleClearFavorites = useCallback(() => {
     setFavorites([]);
     notify("Избранное очищено", "info");
-  }
+  }, [notify, setFavorites]);
 
   // Подпись типа элемента в списке избранного
   const favoriteKinds = useMemo(() => {
@@ -311,9 +327,7 @@ export function App() {
     return kinds;
   }, []);
 
-  function handleRequestSuccess() {
-    setCouponGranted(true);
-  }
+  const handleRequestSuccess = useCallback(() => setCouponGranted(true), []);
 
   const openModal = useCallback(() => setIsModalOpen(true), []);
   const closeModal = useCallback(() => setIsModalOpen(false), []);
@@ -329,7 +343,7 @@ export function App() {
         activeItem={activeItem}
         onNavigate={handleNavigate}
         favoritesCount={favorites.length}
-        onFavoritesClick={() => goToSection("favorites")}
+        onFavoritesClick={goToFavorites}
       />
 
       <Routes>
@@ -340,7 +354,7 @@ export function App() {
               <Hero
                 onShowAbout={handleShowAbout}
                 onOpenModal={openModal}
-                onExplore={() => goToSection("catalog")}
+                onExplore={goToCatalog}
               />
 
               <Stats />
@@ -369,7 +383,7 @@ export function App() {
                 couponGranted={couponGranted}
                 onOpenModal={openModal}
                 onNotify={notify}
-                onGoToForm={() => goToSection("contacts")}
+                onGoToForm={goToForm}
               />
 
               <Review />

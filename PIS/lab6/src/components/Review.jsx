@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Reveal from "./Reveal.jsx";
 import Icon from "./Icon.jsx";
 
@@ -173,4 +173,4 @@ function Review() {
   );
 }
 
-export default Review;
+export default memo(Review);

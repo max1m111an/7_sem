@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Reveal from "./Reveal.jsx";
 import Icon from "./Icon.jsx";
 
@@ -348,4 +348,4 @@ function RequestForm({ onRequestSuccess, onNotify }) {
   );
 }
 
-export default RequestForm;
+export default memo(RequestForm);

@@ -61,10 +61,8 @@ header {
     justify-content: space-between;
     gap: 24px;
     padding: 14px 32px;
-    background-color: rgba(23, 27, 49, 0.62);
+    background-color: rgba(18, 22, 43, 0.94);
     border-bottom: 1px solid rgba(0, 229, 255, 0.35);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
     transition: padding 0.3s ease, background-color 0.3s ease,
                 box-shadow 0.3s ease;
     animation: header-in 0.7s var(--ease-out) both;
@@ -196,7 +194,6 @@ main {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: badge-float 3s ease-in-out infinite;
 }
 
 .promo-card:hover .badge {
@@ -495,10 +492,9 @@ form input[type="radio"] {
     font-weight: 700;
     color: #0d1020;
     background: linear-gradient(120deg, #00e5ff, #4ade80);
-    background-size: 200% 100%;
     border-radius: 8px;
     letter-spacing: 0.5px;
-    animation: coupon-in 0.6s var(--ease-spring), gradient-shift 4s linear infinite;
+    animation: coupon-in 0.6s var(--ease-spring);
 }
 
 #review-content {
@@ -625,9 +621,7 @@ h2 {
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background-color: rgba(13, 16, 32, 0.72);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background-color: rgba(13, 16, 32, 0.88);
     animation: overlay-fade 0.25s ease;
 }
 
@@ -759,7 +753,7 @@ html {
     outline-offset: 3px;
 }
 
-/* ---------- Анимированный фон ---------- */
+/* ---------- Статичный фон ---------- */
 
 .bg-fx {
     position: fixed;
@@ -767,40 +761,38 @@ html {
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
+    transform: translateZ(0);
 }
 
+/* Статичные градиентные пятна: ни blur, ни движения — слой рисуется
+   один раз и больше не тратит кадры. */
 .bg-orb {
     position: absolute;
-    width: 46vmax;
-    height: 46vmax;
+    width: 42vmax;
+    height: 42vmax;
     border-radius: 50%;
-    filter: blur(90px);
-    opacity: 0.32;
-    animation: orb-float 22s ease-in-out infinite alternate;
+    opacity: 0.4;
 }
 
 .bg-orb--cyan {
-    top: -18vmax;
-    left: -12vmax;
-    background: radial-gradient(circle, var(--cyan), transparent 65%);
+    top: -16vmax;
+    left: -11vmax;
+    background: radial-gradient(circle, var(--cyan) 0%, rgba(0, 229, 255, 0.4) 38%, transparent 72%);
 }
 
 .bg-orb--pink {
-    right: -16vmax;
+    right: -15vmax;
     top: 20vh;
-    background: radial-gradient(circle, var(--pink), transparent 65%);
-    animation-duration: 27s;
-    animation-delay: -8s;
+    background: radial-gradient(circle, var(--pink) 0%, rgba(255, 46, 136, 0.4) 38%, transparent 72%);
 }
 
 .bg-orb--violet {
-    bottom: -22vmax;
+    bottom: -21vmax;
     left: 25vw;
-    background: radial-gradient(circle, var(--violet), transparent 65%);
-    animation-duration: 31s;
-    animation-delay: -14s;
+    background: radial-gradient(circle, var(--violet) 0%, rgba(139, 92, 246, 0.4) 38%, transparent 72%);
 }
 
+/* Статичная сетка: один слой, без анимации и без псевдоэлемента. */
 .bg-grid {
     position: absolute;
     left: -50%;
@@ -815,18 +807,7 @@ html {
     transform-origin: bottom;
     mask-image: linear-gradient(to top, #000 10%, transparent 85%);
     -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 85%);
-    animation: grid-move 6s linear infinite;
     opacity: 0.55;
-}
-
-.bg-spotlight {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        520px circle at var(--cursor-x, 50%) var(--cursor-y, 30%),
-        rgba(0, 229, 255, 0.09),
-        transparent 60%
-    );
 }
 
 .bg-scanlines {
@@ -864,14 +845,13 @@ html {
     width: 52px;
     height: 52px;
     color: var(--cyan);
-    background: rgba(23, 27, 49, 0.85);
+    background: rgba(18, 22, 43, 0.95);
     border: 1px solid var(--line);
     border-radius: 50%;
     cursor: pointer;
     opacity: 0;
     transform: translateY(20px) scale(0.8);
     pointer-events: none;
-    backdrop-filter: blur(8px);
     transition: opacity 0.3s ease, transform 0.35s var(--ease-spring),
                 color 0.25s ease, background-color 0.25s ease;
 }
@@ -982,7 +962,6 @@ header h1 {
     background: var(--green);
     border-radius: 50%;
     box-shadow: 0 0 8px var(--green);
-    animation: pulse 1s ease-in-out infinite alternate;
 }
 
 .nav a:hover {
@@ -1138,12 +1117,10 @@ header.menu-open .burger span:nth-child(3) {
 }
 
 .gradient-text {
-    background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink), var(--cyan));
-    background-size: 300% 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradient-shift 6s linear infinite;
 }
 
 .btn::after {
@@ -1169,9 +1146,8 @@ header.menu-open .burger span:nth-child(3) {
 
 .btn-glow {
     color: var(--bg);
-    background: linear-gradient(110deg, var(--cyan), var(--violet), var(--pink), var(--cyan));
-    background-size: 300% 100%;
-    animation: gradient-shift 6s linear infinite, glow-pulse 2.6s ease-in-out infinite;
+    background: linear-gradient(110deg, var(--cyan), var(--violet), var(--pink));
+    box-shadow: 0 0 18px rgba(0, 229, 255, 0.35);
 }
 
 .btn-glow:hover {
@@ -1213,9 +1189,7 @@ header.menu-open .burger span:nth-child(3) {
 .favorites,
 .review,
 .form-section {
-    background-color: var(--panel);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: var(--panel-solid);
 }
 
 /* ---------- Hero ---------- */
@@ -1226,17 +1200,19 @@ header.menu-open .burger span:nth-child(3) {
 
 .hero-glow {
     position: absolute;
-    inset: -60%;
+    top: -30%;
+    right: -30%;
+    bottom: -30%;
+    left: -30%;
     z-index: -1;
     background: conic-gradient(
         from 0deg,
         transparent 0 20%,
-        rgba(0, 229, 255, 0.16) 30%,
+        rgba(0, 229, 255, 0.18) 30%,
         transparent 40% 60%,
-        rgba(255, 46, 136, 0.16) 70%,
+        rgba(255, 46, 136, 0.18) 70%,
         transparent 80%
     );
-    animation: spin 18s linear infinite;
 }
 
 .hero-kicker {
@@ -1275,7 +1251,7 @@ header.menu-open .burger span:nth-child(3) {
     inset: 0;
     border-radius: 50%;
     background: var(--green);
-    animation: ping 1.6s ease-out infinite;
+    opacity: 0.35;
 }
 
 .hero-title {
@@ -1316,7 +1292,6 @@ header.menu-open .burger span:nth-child(3) {
     margin-left: -2px;
     background: var(--cyan);
     border-radius: 2px;
-    animation: scroll-wheel 1.8s ease-in-out infinite;
 }
 
 /* ---------- Статистика ---------- */
@@ -1382,37 +1357,28 @@ header.menu-open .burger span:nth-child(3) {
     color: var(--muted);
 }
 
-/* ---------- Карточки услуг с 3D-наклоном ---------- */
+/* ---------- Карточки услуг ---------- */
 
 .feature-card:nth-child(3) {
     border-top-color: var(--violet);
 }
 
-.feature-card.tilt {
-    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
-               translateY(var(--lift, 0px));
-    transform-style: preserve-3d;
-    transition: transform 0.18s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature-card.tilt:hover {
-    --lift: -6px;
-}
-
+/* Обычный hover вместо 3D-наклона: не пересчитываем стили на каждое
+   движение мыши и не создаём 3D-слои. */
+.feature-card.tilt,
 .feature-card.tilt.selected {
-    --lift: -6px;
-    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
-               translateY(var(--lift, 0px));
+    transition: transform 0.25s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card.tilt:hover,
+.feature-card.tilt.selected {
+    transform: translateY(-6px);
 }
 
 .tilt-glare {
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-        circle at var(--gx, 50%) var(--gy, 0%),
-        rgba(255, 255, 255, 0.14),
-        transparent 55%
-    );
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 55%);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -1448,7 +1414,7 @@ header.menu-open .burger span:nth-child(3) {
 }
 
 .feature-card:hover .feature-icon {
-    transform: translateZ(30px) rotate(-8deg) scale(1.1);
+    transform: rotate(-8deg) scale(1.1);
 }
 
 .selected-mark {
@@ -1568,11 +1534,10 @@ header.menu-open .burger span:nth-child(3) {
     width: 36px;
     height: 36px;
     color: #fff;
-    background: rgba(13, 16, 32, 0.6);
+    background: rgba(13, 16, 32, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 50%;
     cursor: pointer;
-    backdrop-filter: blur(4px);
     transition: transform 0.3s var(--ease-spring), background-color 0.25s ease;
 }
 
@@ -1701,7 +1666,6 @@ header.menu-open .burger span:nth-child(3) {
 .empty-heart {
     font-size: 26px;
     color: var(--pink);
-    animation: heart-beat 1.6s ease-in-out infinite;
 }
 
 #favorites-list li:hover {
@@ -1738,26 +1702,6 @@ header.menu-open .burger span:nth-child(3) {
 
 /* ---------- Акция ---------- */
 
-.promo-shine {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    overflow: hidden;
-    border-radius: inherit;
-}
-
-.promo-shine::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -30%;
-    width: 30%;
-    height: 200%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-    transform: rotate(20deg);
-    animation: shine 5s ease-in-out infinite;
-}
-
 .promo-row {
     display: flex;
     flex-wrap: wrap;
@@ -1774,12 +1718,11 @@ header.menu-open .burger span:nth-child(3) {
     background: linear-gradient(120deg, var(--yellow), #ff9f43);
     border-radius: 10px;
     transform: rotate(-4deg);
-    animation: wobble 6s ease-in-out infinite;
 }
 
 .promo-card.is-urgent {
     border-color: var(--red);
-    animation: urgent-glow 1s ease-in-out infinite alternate;
+    box-shadow: 0 0 20px rgba(248, 113, 113, 0.35);
 }
 
 .promo-card.is-urgent #promo-timer {
@@ -2134,9 +2077,7 @@ header.menu-open .burger span:nth-child(3) {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink), var(--cyan));
-    background-size: 300% 100%;
-    animation: gradient-shift 4s linear infinite;
+    background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink));
 }
 
 .form-subtitle {
@@ -2451,7 +2392,6 @@ form .field.has-error input {
     border-left: 4px solid var(--cyan);
     border-radius: 12px;
     box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(10px);
     cursor: pointer;
     pointer-events: auto;
     animation: toast-in 0.45s var(--ease-spring);
@@ -2556,16 +2496,13 @@ footer p {
 
 /* ---------- Пасхалка: режим вечеринки ---------- */
 
-body.party-mode .bg-fx {
-    animation: hue-cycle 3s linear infinite;
-}
-
-body.party-mode .bg-grid {
-    animation-duration: 1.2s;
+/* Вместо filter: hue-rotate всего экрана — просто чуть ярче подсветка. */
+body.party-mode .bg-orb {
+    opacity: 0.55;
 }
 
 body.party-mode .brand-logo {
-    animation: spin 1.4s linear infinite;
+    box-shadow: 0 0 24px rgba(255, 46, 136, 0.7);
 }
 
 /* ---------- Адаптивность ---------- */
@@ -2727,24 +2664,9 @@ body.party-mode .brand-logo {
         scroll-behavior: auto !important;
     }
 
-    .bg-grid,
-    .hero-glow {
-        animation: none !important;
-    }
 }
 
 /* ---------- Ключевые кадры ---------- */
-
-@keyframes orb-float {
-    0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(6vw, 4vh) scale(1.12); }
-    100% { transform: translate(-4vw, 8vh) scale(0.95); }
-}
-
-@keyframes grid-move {
-    from { background-position: 0 0; }
-    to { background-position: 0 64px; }
-}
 
 @keyframes header-in {
     from { opacity: 0; transform: translateY(-100%); }
@@ -2776,28 +2698,8 @@ body.party-mode .brand-logo {
     to { opacity: 1; transform: none; }
 }
 
-@keyframes gradient-shift {
-    from { background-position: 0% 50%; }
-    to { background-position: 300% 50%; }
-}
-
-@keyframes glow-pulse {
-    0%, 100% { box-shadow: 0 0 14px rgba(0, 229, 255, 0.35); }
-    50% { box-shadow: 0 0 28px rgba(255, 46, 136, 0.55); }
-}
-
 @keyframes spin {
     to { transform: rotate(360deg); }
-}
-
-@keyframes pulse {
-    from { opacity: 0.4; }
-    to { opacity: 1; }
-}
-
-@keyframes ping {
-    0% { transform: scale(1); opacity: 0.8; }
-    100% { transform: scale(3); opacity: 0; }
 }
 
 @keyframes blink {
@@ -2807,12 +2709,6 @@ body.party-mode .brand-logo {
 @keyframes tick {
     0% { transform: translateY(-30%); opacity: 0.3; }
     100% { transform: none; opacity: 1; }
-}
-
-@keyframes scroll-wheel {
-    0% { transform: translateY(0); opacity: 1; }
-    80% { transform: translateY(12px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 0; }
 }
 
 @keyframes bounce-up {
@@ -2837,11 +2733,6 @@ body.party-mode .brand-logo {
     60% { transform: scale(0.95); }
 }
 
-@keyframes wobble {
-    0%, 100% { transform: rotate(-3deg); }
-    50% { transform: rotate(-1deg); }
-}
-
 @keyframes fav-in {
     from { opacity: 0; transform: translateX(-30px) scale(0.95); }
     to { opacity: 1; transform: none; }
@@ -2851,21 +2742,6 @@ body.party-mode .brand-logo {
     0% { opacity: 1; transform: none; }
     60% { opacity: 0; transform: translateX(40px); max-height: 90px; }
     100% { opacity: 0; transform: translateX(40px); max-height: 0; padding-top: 0; padding-bottom: 0; margin-top: -12px; border-width: 0; }
-}
-
-@keyframes shine {
-    0%, 60% { left: -30%; }
-    100% { left: 130%; }
-}
-
-@keyframes badge-float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-4px) rotate(3deg); }
-}
-
-@keyframes urgent-glow {
-    from { box-shadow: 0 0 10px rgba(248, 113, 113, 0.2); }
-    to { box-shadow: 0 0 36px rgba(248, 113, 113, 0.55); }
 }
 
 @keyframes coupon-in {
@@ -2917,10 +2793,6 @@ body.party-mode .brand-logo {
 
 @keyframes toast-out {
     to { opacity: 0; transform: translateX(110%); margin-top: -60px; }
-}
-
-@keyframes hue-cycle {
-    to { filter: hue-rotate(360deg); }
 }
 
 @keyframes glitch-a {

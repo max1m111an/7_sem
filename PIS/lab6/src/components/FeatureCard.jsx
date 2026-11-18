@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import useReveal from "../hooks/useReveal.js";
 import Icon from "./Icon.jsx";
 
@@ -11,32 +10,6 @@ function FeatureCard({
   onToggleFavorite,
 }) {
   const [revealRef, isVisible] = useReveal();
-  const cardRef = useRef(null);
-
-  function setRefs(node) {
-    cardRef.current = node;
-    revealRef.current = node;
-  }
-
-  // 3D-наклон карточки за курсором
-  function handlePointerMove(event) {
-    const card = cardRef.current;
-    if (!card || event.pointerType === "touch") return;
-    const rect = card.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
-    card.style.setProperty("--rx", `${(0.5 - y) * 10}deg`);
-    card.style.setProperty("--ry", `${(x - 0.5) * 12}deg`);
-    card.style.setProperty("--gx", `${x * 100}%`);
-    card.style.setProperty("--gy", `${y * 100}%`);
-  }
-
-  function handlePointerLeave() {
-    const card = cardRef.current;
-    if (!card) return;
-    card.style.setProperty("--rx", "0deg");
-    card.style.setProperty("--ry", "0deg");
-  }
 
   const classes = [
     "feature-card",
@@ -51,12 +24,10 @@ function FeatureCard({
 
   return (
     <div
-      ref={setRefs}
+      ref={revealRef}
       className={classes}
       style={{ "--reveal-delay": `${index * 120}ms` }}
       onClick={() => onSelect(feature.id)}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
       role="button"
       tabIndex={0}
       aria-pressed={isSelected}
