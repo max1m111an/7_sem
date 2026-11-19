@@ -1,0 +1,1068 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import Header from "./components/Header.jsx";
+import Hero from "./components/Hero.jsx";
+import Features from "./components/Features.jsx";
+import Catalog, { GENRES } from "./components/Catalog.jsx";
+import Favorites from "./components/Favorites.jsx";
+import Stats from "./components/Stats.jsx";
+import Promo from "./components/Promo.jsx";
+import Review from "./components/Review.jsx";
+import Faq from "./components/Faq.jsx";
+import RequestForm from "./components/RequestForm.jsx";
+import Footer from "./components/Footer.jsx";
+import Modal from "./components/Modal.jsx";
+import AboutPage from "./components/AboutPage.jsx";
+import Background from "./components/Background.jsx";
+import ScrollUI from "./components/ScrollUI.jsx";
+import Toasts from "./components/Toasts.jsx";
+import Confetti from "./components/Confetti.jsx";
+import Reveal from "./components/Reveal.jsx";
+import useLocalStorage from "./hooks/useLocalStorage.js";
+import "./task_itog.css";
+
+const NAV_ITEMS = [
+  { label: "Главная", target: "home", to: "/" },
+  { label: "О нас", target: "about", to: "/about" },
+  { label: "Услуги", target: "features", to: "/#features" },
+  { label: "Игры", target: "catalog", to: "/#catalog" },
+  { label: "Контакты", target: "contacts", to: "/#contacts" },
+  { label: "Игры (БД)", target: "games", to: "/games" },
+  { label: "Услуги (БД)", target: "services", to: "/services" },
+  { label: "Связки (БД)", target: "game-services", to: "/game-services" },
+];
+
+const SCROLL_TOP = "top";
+
+// Секции главной страницы, за которыми следит «scroll spy»
+const SPY_TARGETS = ["home", "features", "catalog", "contacts"];
+
+const KONAMI = [
+  "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
+  "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA",
+];
+
+const TOAST_MS = 3200;
+
+// Как часто переспрашиваем API, чтобы подхватывать изменения в БД
+// без ручного F5 (в том числе сделанные в pgAdmin/psql).
+const REFRESH_MS = 5000;
+
+// Время для связки выбираем из выпадающего списка с шагом 30 минут.
+const TIME_OPTIONS = Array.from({ length: 48 }, (_, index) => {
+  const hours = String(Math.floor(index / 2)).padStart(2, "0");
+  const minutes = index % 2 === 0 ? "00" : "30";
+  return { value: `${hours}:${minutes}`, label: `${hours}:${minutes}` };
+});
+
+// Зоны клуба — фиксированный перечень, а не свободный текст.
+const ZONE_OPTIONS = ["Зона A", "Зона B", "Зона C", "VIP-зона"].map((zone) => ({
+  value: zone,
+  label: zone,
+}));
+
+// Иконки услуг — только те имена, которые реально есть в components/Icon.jsx.
+const SERVICE_ICON_OPTIONS = [
+  { value: "star", label: "★ Звезда" },
+  { value: "bolt", label: "⚡ Молния" },
+  { value: "heart", label: "♥ Сердце" },
+  { value: "gamepad", label: "🎮 Геймпад" },
+  { value: "trophy", label: "🏆 Кубок" },
+  { value: "users", label: "👥 Люди" },
+  { value: "clock", label: "🕐 Часы" },
+  { value: "check", label: "✓ Галочка" },
+  { value: "info", label: "ℹ Информация" },
+  { value: "eye", label: "👁 Глаз" },
+];
+
+// ============================================================
+// ДАННЫЕ С СЕРВЕРА (ЛР6): /api/games, /api/services,
+// /api/game-services. Vite проксирует /api на Express (server.js).
+// ============================================================
+
+const API_BASE = import.meta.env.VITE_API_BASE || "/api";
+
+async function api(path, options = {}) {
+  const { headers, ...rest } = options;
+  let response;
+
+  try {
+    response = await fetch(`${API_BASE}${path}`, {
+      ...rest,
+      headers: { "Content-Type": "application/json", ...headers },
+    });
+  } catch (err) {
+    throw new Error(
+      `Нет связи с API (${API_BASE}). Запустите "make server" (или "make all-itog"). ${err.message}`
+    );
+  }
+
+  let data = null;
+  try {
+    data = await response.json();
+  } catch {
+    // сервер может вернуть пустое тело
+  }
+
+  if (!response.ok) {
+    if (data?.error) throw new Error(data.error);
+    if (response.status >= 500) {
+      throw new Error(
+        `API недоступен (HTTP ${response.status}). Запустите "make server" — сервер должен слушать порт 3000.`
+      );
+    }
+    throw new Error(`Ошибка запроса: ${response.status}`);
+  }
+  return data;
+}
+
+function useCrud(path) {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // silent=true — фоновое обновление: не показываем «Загрузка...»,
+  // чтобы карточки и таблицы не мигали каждые 5 секунд.
+  const refresh = useCallback(async (options = {}) => {
+    const silent = options?.silent === true;
+    if (!silent) setLoading(true);
+    setError("");
+    try {
+      setItems(await api(path));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      if (!silent) setLoading(false);
+    }
+  }, [path]);
+
+  useEffect(() => {
+    refresh();
+
+    const intervalId = setInterval(() => refresh({ silent: true }), REFRESH_MS);
+
+    // Дополнительно обновляемся, когда пользователь возвращается во вкладку.
+    function handleFocus() {
+      refresh({ silent: true });
+    }
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      clearInterval(intervalId);
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [refresh]);
+
+  async function create(values) {
+    await api(path, { method: "POST", body: JSON.stringify(values) });
+    await refresh();
+  }
+
+  async function update(id, values) {
+    await api(`${path}/${id}`, { method: "PUT", body: JSON.stringify(values) });
+    await refresh();
+  }
+
+  async function remove(id) {
+    await api(`${path}/${id}`, { method: "DELETE" });
+    await refresh();
+  }
+
+  return { items, loading, error, refresh, create, update, remove };
+}
+
+function toFormValues(item, fields) {
+  return Object.fromEntries(
+    fields.map(({ name, type }) => {
+      const value = item?.[name];
+      if (value === undefined || value === null) {
+        return [name, type === "bool" ? false : ""];
+      }
+      if (type === "bool") return [name, Boolean(value)];
+      if (type === "time") return [name, String(value).slice(0, 5)];
+      return [name, String(value)];
+    })
+  );
+}
+
+function buildPayload(form, fields) {
+  const payload = {};
+
+  for (const field of fields) {
+    const raw = form[field.name];
+
+    if (field.type === "bool") {
+      payload[field.name] = Boolean(raw);
+      continue;
+    }
+
+    const text = String(raw ?? "").trim();
+    if (!text) throw new Error(`Заполните поле «${field.label}»`);
+
+    if (field.type === "time") {
+      if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(text)) {
+        throw new Error(
+          `Поле «${field.label}» должно быть временем в формате ЧЧ:ММ (00:00–23:59)`
+        );
+      }
+      payload[field.name] = `${text}:00`;
+      continue;
+    }
+
+    if (field.type === "int") {
+      const number = Number(text);
+      if (!Number.isInteger(number)) {
+        throw new Error(`Поле «${field.label}» должно быть целым числом`);
+      }
+      payload[field.name] = number;
+    } else if (field.type === "decimal") {
+      const number = Number(text);
+      if (!Number.isFinite(number)) {
+        throw new Error(`Поле «${field.label}» должно быть числом`);
+      }
+      payload[field.name] = number;
+    } else {
+      payload[field.name] = text;
+    }
+  }
+
+  return payload;
+}
+
+function FieldInput({ field, value, onChange }) {
+  // Обычный select и время — оба выпадающих списка; время всегда 24-часовое.
+  const options =
+    field.type === "select"
+      ? field.options
+      : field.type === "time"
+        ? TIME_OPTIONS
+        : null;
+
+  if (options) {
+    return (
+      <label className="admin-field">
+        <span>{field.label}</span>
+        <select
+          value={value}
+          onChange={(event) => onChange(field.name, event.target.value)}
+          required
+        >
+          <option value="">Выберите...</option>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+    );
+  }
+
+  if (field.type === "bool") {
+    return (
+      <label className="admin-field admin-field--check">
+        <input
+          type="checkbox"
+          checked={Boolean(value)}
+          onChange={(event) => onChange(field.name, event.target.checked)}
+        />
+        <span>{field.label}</span>
+      </label>
+    );
+  }
+
+  if (field.type === "textarea") {
+    return (
+      <label className="admin-field">
+        <span>{field.label}</span>
+        <textarea
+          rows={3}
+          value={value ?? ""}
+          onChange={(event) => onChange(field.name, event.target.value)}
+          required
+        />
+      </label>
+    );
+  }
+
+  const inputType =
+    field.type === "int" || field.type === "decimal" ? "number" : "text";
+
+  return (
+    <label className="admin-field">
+      <span>{field.label}</span>
+      <input
+        type={inputType}
+        step={field.type === "decimal" ? "0.1" : undefined}
+        value={value ?? ""}
+        onChange={(event) => onChange(field.name, event.target.value)}
+        required
+      />
+    </label>
+  );
+}
+
+function EntityPage({ title, description, path, fields, empty, columns, hint }) {
+  const { items, loading, error, refresh, create, update, remove } = useCrud(path);
+  const [form, setForm] = useState(empty);
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState(empty);
+  const [actionError, setActionError] = useState("");
+
+  function fieldSetter(setter) {
+    return (name, value) => setter((current) => ({ ...current, [name]: value }));
+  }
+
+  const changeForm = fieldSetter(setForm);
+  const changeEditForm = fieldSetter(setEditForm);
+
+  async function handleAdd(event) {
+    event.preventDefault();
+    setActionError("");
+    try {
+      await create(buildPayload(form, fields));
+      setForm(empty);
+    } catch (err) {
+      setActionError(err.message);
+    }
+  }
+
+  function startEdit(item) {
+    setActionError("");
+    setEditingId(item.id);
+    setEditForm(toFormValues(item, fields));
+  }
+
+  async function handleSave(id) {
+    setActionError("");
+    try {
+      await update(id, buildPayload(editForm, fields));
+      setEditingId(null);
+    } catch (err) {
+      setActionError(err.message);
+    }
+  }
+
+  async function handleDelete(id) {
+    setActionError("");
+    try {
+      await remove(id);
+      if (editingId === id) setEditingId(null);
+    } catch (err) {
+      setActionError(err.message);
+    }
+  }
+
+  return (
+    <div className="section-block admin-page">
+      <Reveal className="section-head">
+        <span className="section-kicker">База данных</span>
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </Reveal>
+
+      {hint && <p className="catalog-note">{hint}</p>}
+
+      <section className="admin-card">
+        <h3>Добавить запись</h3>
+        <form className="admin-form" onSubmit={handleAdd}>
+          {fields.map((field) => (
+            <FieldInput
+              key={field.name}
+              field={field}
+              value={form[field.name]}
+              onChange={changeForm}
+            />
+          ))}
+          <button type="submit" className="btn">
+            Добавить
+          </button>
+        </form>
+        {actionError && <p className="status-error">{actionError}</p>}
+      </section>
+
+      <section className="admin-card">
+        <h3>Список</h3>
+        {loading && <p className="catalog-note">Загрузка...</p>}
+        {error && (
+          <p className="status-error">
+            {error}{" "}
+            <button type="button" className="link-button" onClick={refresh}>
+              Повторить
+            </button>
+          </p>
+        )}
+        {!loading && !error && items.length === 0 && (
+          <p className="catalog-note">Записей пока нет.</p>
+        )}
+
+        {items.length > 0 && (
+          <div className="admin-table-wrap">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  {columns.map((column) => (
+                    <th key={column.name}>{column.label}</th>
+                  ))}
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody>
+                {items.map((item) =>
+                  editingId === item.id ? (
+                    <tr key={item.id}>
+                      {fields.map((field) => (
+                        <td key={field.name}>
+                          <FieldInput
+                            field={field}
+                            value={editForm[field.name]}
+                            onChange={changeEditForm}
+                          />
+                        </td>
+                      ))}
+                      <td className="admin-actions">
+                        <button
+                          type="button"
+                          className="btn btn--small"
+                          onClick={() => handleSave(item.id)}
+                        >
+                          Сохранить
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn--small btn--ghost"
+                          onClick={() => setEditingId(null)}
+                        >
+                          Отмена
+                        </button>
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr key={item.id}>
+                      {columns.map((column) => (
+                        <td key={column.name}>
+                          {column.format
+                            ? column.format(item[column.name])
+                            : item[column.name]}
+                        </td>
+                      ))}
+                      <td className="admin-actions">
+                        <button
+                          type="button"
+                          className="btn btn--small btn--ghost"
+                          onClick={() => startEdit(item)}
+                        >
+                          Изменить
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn--small btn--danger"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          Удалить
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}
+
+const GAME_ADMIN_FIELDS = [
+  { name: "title", label: "Название" },
+  {
+    name: "genre",
+    label: "Жанр",
+    type: "select",
+    options: GENRES.filter((genre) => genre.id !== "all").map((genre) => ({
+      value: genre.id,
+      label: genre.label,
+    })),
+  },
+  { name: "price", label: "Цена, ₽/час", type: "int" },
+  { name: "rating", label: "Рейтинг (0–5)", type: "decimal" },
+  { name: "match_format", label: "Формат матча" },
+  { name: "is_hot", label: "Хит", type: "bool" },
+];
+
+const EMPTY_GAME = {
+  title: "",
+  genre: "",
+  price: "",
+  rating: "",
+  match_format: "",
+  is_hot: false,
+};
+
+const GAME_COLUMNS = [
+  { name: "title", label: "Название" },
+  {
+    name: "genre",
+    label: "Жанр",
+    format: (value) => GENRES.find((genre) => genre.id === value)?.label ?? value,
+  },
+  { name: "price", label: "Цена, ₽" },
+  { name: "rating", label: "Рейтинг", format: (value) => Number(value).toFixed(1) },
+  { name: "match_format", label: "Формат" },
+  { name: "is_hot", label: "Хит", format: (value) => (value ? "Да" : "Нет") },
+];
+
+function GamesAdminPage() {
+  return (
+    <EntityPage
+      title="Игры"
+      description="Каталог игр хранится в PostgreSQL. Добавление, редактирование и удаление идут через API."
+      path="/games"
+      fields={GAME_ADMIN_FIELDS}
+      empty={EMPTY_GAME}
+      columns={GAME_COLUMNS}
+    />
+  );
+}
+
+const SERVICE_ADMIN_FIELDS = [
+  { name: "title", label: "Название" },
+  {
+    name: "icon",
+    label: "Иконка",
+    type: "select",
+    options: SERVICE_ICON_OPTIONS,
+  },
+  { name: "description", label: "Описание", type: "textarea" },
+  { name: "price", label: "Цена, ₽", type: "int" },
+  { name: "duration_min", label: "Длительность, мин", type: "int" },
+  { name: "is_active", label: "Активна", type: "bool" },
+];
+
+const EMPTY_SERVICE = {
+  title: "",
+  icon: "",
+  description: "",
+  price: "",
+  duration_min: "",
+  is_active: true,
+};
+
+const SERVICE_COLUMNS = [
+  { name: "title", label: "Название" },
+  { name: "icon", label: "Иконка" },
+  { name: "price", label: "Цена, ₽" },
+  { name: "duration_min", label: "Мин." },
+  { name: "is_active", label: "Активна", format: (value) => (value ? "Да" : "Нет") },
+];
+
+function ServicesAdminPage() {
+  return (
+    <EntityPage
+      title="Услуги"
+      description="Услуги — независимая таблица. На главной показываются только активные."
+      path="/services"
+      fields={SERVICE_ADMIN_FIELDS}
+      empty={EMPTY_SERVICE}
+      columns={SERVICE_COLUMNS}
+    />
+  );
+}
+
+const GAME_SERVICE_FIELDS = [
+  { name: "game_id", label: "Игра", type: "select" },
+  { name: "service_id", label: "Услуга", type: "select" },
+  { name: "session_time", label: "Время", type: "time" },
+  { name: "room", label: "Зона", type: "select", options: ZONE_OPTIONS },
+];
+
+const EMPTY_GAME_SERVICE = { game_id: "", service_id: "", session_time: "", room: "" };
+
+const GAME_SERVICE_COLUMNS = [
+  { name: "game_title", label: "Игра" },
+  { name: "service_title", label: "Услуга" },
+  {
+    name: "session_time",
+    label: "Время",
+    format: (value) => (value ? String(value).slice(0, 5) : ""),
+  },
+  { name: "room", label: "Зона" },
+];
+
+function GameServicesAdminPage() {
+  const games = useCrud("/games");
+  const services = useCrud("/services");
+
+  if (games.loading || services.loading) {
+    return (
+      <div className="section-block admin-page">
+        <p className="catalog-note">Загрузка игр и услуг...</p>
+      </div>
+    );
+  }
+
+  if (games.error || services.error) {
+    return (
+      <div className="section-block admin-page">
+        <p className="status-error">
+          Не удалось загрузить справочники: {games.error || services.error}
+        </p>
+      </div>
+    );
+  }
+
+  const fields = GAME_SERVICE_FIELDS.map((field) => ({
+    ...field,
+    options:
+      field.name === "game_id"
+        ? games.items.map((item) => ({ value: String(item.id), label: item.title }))
+        : field.name === "service_id"
+          ? services.items.map((item) => ({ value: String(item.id), label: item.title }))
+          : field.options ?? [],
+  }));
+
+  const hint =
+    games.items.length === 0 || services.items.length === 0
+      ? "Сначала добавьте хотя бы одну игру и одну услугу."
+      : "";
+
+  return (
+    <EntityPage
+      title="Связки игр и услуг"
+      description="Связка игры и услуги: время и зона. Список приходит с сервера через JOIN."
+      path="/game-services"
+      fields={fields}
+      empty={EMPTY_GAME_SERVICE}
+      columns={GAME_SERVICE_COLUMNS}
+      hint={hint}
+    />
+  );
+}
+
+function NotFoundPage() {
+  return (
+    <main className="page-enter">
+      <section className="hero hero--compact">
+        <div className="hero-glow" aria-hidden="true" />
+        <h2 className="hero-title">
+          404 — <span className="gradient-text">страница не найдена</span>
+        </h2>
+        <p>Похоже, такой страницы в GameZone нет.</p>
+        <div className="hero-actions">
+          <Link to="/" className="btn">
+            Вернуться на главную
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+export function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [activeItem, setActiveItem] = useState(NAV_ITEMS[0].label);
+
+  const [selectedFeatureIds, setSelectedFeatureIds] = useState([]);
+  const [favorites, setFavorites] = useLocalStorage("gamezone-favorites", []);
+
+  const [couponGranted, setCouponGranted] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [scrollRequest, setScrollRequest] = useState(null);
+  const [toasts, setToasts] = useState([]);
+  const [partyMode, setPartyMode] = useState(false);
+  const [konamiBurst, setKonamiBurst] = useState(0);
+
+  const toastId = useRef(0);
+  const isAutoScrolling = useRef(false);
+  const partyRef = useRef(false);
+
+  // ---------- данные с сервера ----------
+  const gamesCrud = useCrud("/games");
+  const servicesCrud = useCrud("/services");
+
+  // БД хранит match_format / is_hot, а карточки ждут format / hot.
+  const games = useMemo(
+    () =>
+      gamesCrud.items.map((row) => ({
+        id: row.id,
+        title: row.title,
+        genre: row.genre,
+        price: Number(row.price),
+        rating: Number(row.rating),
+        format: row.match_format,
+        hot: Boolean(row.is_hot),
+      })),
+    [gamesCrud.items]
+  );
+
+  const features = useMemo(
+    () =>
+      servicesCrud.items
+        .filter((row) => row.is_active)
+        .map((row) => ({
+          id: String(row.id),
+          icon: row.icon,
+          title: row.title,
+          text: row.description,
+        })),
+    [servicesCrud.items]
+  );
+
+  // ---------- уведомления ----------
+  const dismissToast = useCallback((id) => {
+    setToasts((prev) =>
+      prev.map((toast) => (toast.id === id ? { ...toast, leaving: true } : toast))
+    );
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((toast) => toast.id !== id));
+    }, 300);
+  }, []);
+
+  const notify = useCallback(
+    (message, type = "info") => {
+      toastId.current += 1;
+      const id = toastId.current;
+      setToasts((prev) => [...prev.slice(-3), { id, message, type }]);
+      setTimeout(() => dismissToast(id), TOAST_MS);
+    },
+    [dismissToast]
+  );
+
+  // ---------- прокрутка ----------
+  useEffect(() => {
+    if (!scrollRequest) return undefined;
+
+    isAutoScrolling.current = true;
+    const timeoutId = setTimeout(() => {
+      isAutoScrolling.current = false;
+    }, 900);
+
+    if (scrollRequest.target === SCROLL_TOP) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      document
+        .getElementById(scrollRequest.target)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [scrollRequest]);
+
+  // Подсвечиваем пункт меню той секции, которая сейчас на экране
+  useEffect(() => {
+    if (location.pathname !== "/" || !("IntersectionObserver" in window)) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (isAutoScrolling.current) return;
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        const item = NAV_ITEMS.find((nav) => nav.target === visible.target.id);
+        if (item) setActiveItem(item.label);
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: [0, 0.25, 0.5] }
+    );
+
+    SPY_TARGETS.forEach((id) => {
+      const node = document.getElementById(id);
+      if (node) observer.observe(node);
+    });
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  // Синхронизируем активный пункт меню с адресом (прямой заход,
+  // кнопки браузера «назад/вперёд», переход по хэшу).
+  useEffect(() => {
+    const routeItem = NAV_ITEMS.find((nav) => nav.to === location.pathname);
+    if (routeItem) {
+      setActiveItem(routeItem.label);
+      return;
+    }
+
+    if (location.pathname === "/") {
+      const hash = location.hash.replace("#", "");
+      const item = NAV_ITEMS.find((nav) => nav.target === hash);
+      setActiveItem(item ? item.label : "Главная");
+    }
+  }, [location.pathname, location.hash]);
+
+  // Если открыли адрес с хэшем (например, /#catalog), прокручиваем к секции.
+  useEffect(() => {
+    if (location.pathname !== "/" || !location.hash) return;
+    const target = location.hash.replace("#", "");
+    if (document.getElementById(target)) {
+      setScrollRequest({ target });
+    }
+  }, [location.pathname, location.hash]);
+
+  // ---------- пасхалка: код Konami ----------
+  // Общая функция: вызывается и с клавиатуры, и по клику на стрелки в подвале
+  const triggerSecret = useCallback(() => {
+    setKonamiBurst((prev) => prev + 1);
+    partyRef.current = !partyRef.current;
+    setPartyMode(partyRef.current);
+    notify(
+      partyRef.current ? "🎉 Секретный режим вечеринки!" : "Режим вечеринки выключен",
+      "info"
+    );
+  }, [notify]);
+
+  useEffect(() => {
+    // Последние нажатые клавиши — сравниваем их «хвост» с кодом
+    let history = [];
+
+    function handleKey(event) {
+      // event.code — физическая клавиша, поэтому код работает и на русской раскладке
+      if (event.repeat) return;
+      history = [...history, event.code].slice(-KONAMI.length);
+
+      if (history.join() === KONAMI.join()) {
+        history = [];
+        triggerSecret();
+      }
+    }
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [triggerSecret]);
+
+  useEffect(() => {
+    document.body.classList.toggle("party-mode", partyMode);
+  }, [partyMode]);
+
+  // Конфетти на весь экран после ввода кода — само исчезает через 4 секунды
+  useEffect(() => {
+    if (!konamiBurst) return undefined;
+    const timeoutId = setTimeout(() => setKonamiBurst(0), 4000);
+    return () => clearTimeout(timeoutId);
+  }, [konamiBurst]);
+
+  const requestScroll = useCallback((target) => {
+    setScrollRequest({ target });
+  }, []);
+
+  // Ссылки в Header сами меняют маршрут через <Link>; здесь только
+  // обновляем подсветку и прокручиваем: к секции — для хэшей,
+  // к верху страницы — для обычных маршрутов (/games, /about и т.д.).
+  const handleNavigate = useCallback(
+    (item) => {
+      setActiveItem(item.label);
+      requestScroll(item.to.includes("#") ? item.target : SCROLL_TOP);
+    },
+    [requestScroll]
+  );
+
+  const handleShowAbout = useCallback(() => {
+    setActiveItem("О нас");
+    requestScroll(SCROLL_TOP);
+    navigate("/about");
+  }, [navigate, requestScroll]);
+
+  const handleBackHome = useCallback(() => {
+    setActiveItem("Главная");
+    requestScroll(SCROLL_TOP);
+    navigate("/");
+  }, [navigate, requestScroll]);
+
+  const goToSection = useCallback(
+    (target) => {
+      const item = NAV_ITEMS.find((nav) => nav.target === target);
+      if (item) setActiveItem(item.label);
+
+      if (location.pathname !== "/") {
+        navigate(`/#${target}`);
+        return;
+      }
+
+      requestScroll(target);
+    },
+    [location.pathname, navigate, requestScroll]
+  );
+
+  // Стабильные ссылки на секции: инлайн-стрелки в JSX ломали бы memo
+  // у дочерних компонентов при каждом рендере App.
+  const goToCatalog = useCallback(() => goToSection("catalog"), [goToSection]);
+  const goToFavorites = useCallback(() => goToSection("favorites"), [goToSection]);
+  const goToForm = useCallback(() => goToSection("contacts"), [goToSection]);
+
+  // ---------- услуги и избранное ----------
+  const handleSelectFeature = useCallback((id) => {
+    setSelectedFeatureIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  }, []);
+
+  const handleToggleFavorite = useCallback(
+    (title) => {
+      if (favorites.includes(title)) {
+        setFavorites((prev) => prev.filter((item) => item !== title));
+        notify(`«${title}» убрано из избранного`, "info");
+      } else {
+        setFavorites((prev) => (prev.includes(title) ? prev : [...prev, title]));
+        notify(`«${title}» добавлено в избранное`, "fav");
+      }
+    },
+    [favorites, notify, setFavorites]
+  );
+
+  const handleRemoveFavorite = useCallback(
+    (title) => {
+      setFavorites((prev) => prev.filter((item) => item !== title));
+    },
+    [setFavorites]
+  );
+
+  const handleClearFavorites = useCallback(() => {
+    setFavorites([]);
+    notify("Избранное очищено", "info");
+  }, [notify, setFavorites]);
+
+  // Подпись типа элемента в списке избранного (данные приходят с сервера)
+  const favoriteKinds = useMemo(() => {
+    const kinds = {};
+    servicesCrud.items.forEach((service) => {
+      kinds[service.title] = "услуга";
+    });
+    games.forEach((game) => {
+      kinds[game.title] = "игра";
+    });
+    return kinds;
+  }, [games, servicesCrud.items]);
+
+  const handleRequestSuccess = useCallback(() => setCouponGranted(true), []);
+
+  const openModal = useCallback(() => setIsModalOpen(true), []);
+  const closeModal = useCallback(() => setIsModalOpen(false), []);
+
+  return (
+    <>
+      <Background />
+      <ScrollUI />
+
+      <Header
+        title="GameZone"
+        navItems={NAV_ITEMS}
+        activeItem={activeItem}
+        onNavigate={handleNavigate}
+        favoritesCount={favorites.length}
+        onFavoritesClick={goToFavorites}
+      />
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <main className="page-enter" key="home">
+              <Hero
+                onShowAbout={handleShowAbout}
+                onOpenModal={openModal}
+                onExplore={goToCatalog}
+              />
+
+              <Stats />
+
+              <Features
+                features={features}
+                selectedIds={selectedFeatureIds}
+                favorites={favorites}
+                onSelect={handleSelectFeature}
+                onToggleFavorite={handleToggleFavorite}
+                loading={servicesCrud.loading}
+                error={servicesCrud.error}
+                onRetry={servicesCrud.refresh}
+              />
+
+              <Catalog
+                games={games}
+                favorites={favorites}
+                onToggleFavorite={handleToggleFavorite}
+                loading={gamesCrud.loading}
+                error={gamesCrud.error}
+                onRetry={gamesCrud.refresh}
+              />
+
+              <Favorites
+                favorites={favorites}
+                kinds={favoriteKinds}
+                onRemove={handleRemoveFavorite}
+                onClear={handleClearFavorites}
+              />
+
+              <Promo
+                couponGranted={couponGranted}
+                onOpenModal={openModal}
+                onNotify={notify}
+                onGoToForm={goToForm}
+              />
+
+              <Review />
+
+              <Faq />
+
+              <RequestForm
+                onRequestSuccess={handleRequestSuccess}
+                onNotify={notify}
+              />
+            </main>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            <AboutPage
+              key="about"
+              onBack={handleBackHome}
+              onOpenModal={openModal}
+            />
+          }
+        />
+
+        <Route path="/games" element={<GamesAdminPage />} />
+        <Route path="/services" element={<ServicesAdminPage />} />
+        <Route path="/game-services" element={<GameServicesAdminPage />} />
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+
+      <Footer onSecret={triggerSecret} />
+
+      <Toasts toasts={toasts} onDismiss={dismissToast} />
+
+      {konamiBurst > 0 && (
+        <div className="confetti-screen" aria-hidden="true">
+          <Confetti key={konamiBurst} count={140} />
+        </div>
+      )}
+
+      <Modal
+        isOpen={isModalOpen}
+        title="Правила акции"
+        onClose={closeModal}
+      >
+        <p>
+          Оставьте заявку на главной странице, пока идёт таймер, и получите
+          купон.
+        </p>
+        <ul className="modal-steps">
+          <li>Заполните все поля формы заявки.</li>
+          <li>Дождитесь сообщения об успешной отправке.</li>
+          <li>Назовите купон при оформлении заказа.</li>
+        </ul>
+        <p>Одно нажатие на «Понятно» — и можно играть дальше.</p>
+        <button type="button" className="btn" onClick={closeModal}>
+          Понятно
+        </button>
+      </Modal>
+    </>
+  );
+}
+
+export default App;
